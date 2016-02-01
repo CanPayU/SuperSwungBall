@@ -22,29 +22,34 @@ public class Player : MonoBehaviour
 
     private bool mouseState;
     private GameObject target;
+    private GameObject zone_target;
     private Vector3 screenSpace;
     private Vector3 offset;
     RaycastHit hit;
 
     void Start()
     {
-        #region initialisation
+        #region creation
         clicked = false;
         myTransform = GetComponent<Transform>();
         myCollider = GetComponent<Collider>();
-        //initialisation Menus
+        //creation Menus
         ajouter_menu(0, new Color(1, 0.5f, 0));
         ajouter_menu(1, new Color(0, 0.5f, 0));
         ajouter_menu(2, new Color(1, 0.2f, 0.7f));
         ajouter_menu(3, new Color(0, 0.5f, 1));
-        //initialisation valeurs
+        //creation valeurs
         ajouter_valeur(0);
         ajouter_valeur(1);
         ajouter_valeur(2);
-        //initialisation zones
-        ajouter_zone(0, 10, new Color(0.5f, 1, 1),-0.3f);
-        ajouter_zone(1, 0, new Color(1, 0.5f, 1),-0.28f);
+        //creation zones
+        ajouter_zone(0, 10, new Color(0.5f, 1, 1), -0.3f);
+        ajouter_zone(1, 0, new Color(1, 0.5f, 1), -0.28f);
+        //creation pointeurs
+        ajouter_pointeur(0, new Color(0.3f, 0.8f, 1f));
+        ajouter_pointeur(1, new Color(0.8f, 0.3f, 0.8f));
         #endregion
+
         afficher_menu(false);
     }
     void Update()
@@ -98,10 +103,10 @@ public class Player : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             Physics.Raycast(ray.origin, ray.direction * 10, out hit);
 
-            target.transform.position = new Vector3(hit.point.x, 0.2f, hit.point.z); // position absolue
-            pointeurs[0].transform.LookAt(zones[0].transform);
+            target.transform.position = new Vector3(hit.point.x, zone_target.transform.position.y + 0.05f, hit.point.z); // position absolue
+            target.transform.LookAt(zone_target.transform);
 
-            update_deplacement();
+            update_deplacement(target, zone_target);
         }
     }
     #region initialisation
@@ -125,16 +130,16 @@ public class Player : MonoBehaviour
     void ajouter_zone(int n, int taille, Color c, float y)
 
     {
-        zones[n] = Instantiate(zone, myTransform.position + new Vector3(0,y , 0), Quaternion.identity) as GameObject;
+        zones[n] = Instantiate(zone, myTransform.position + new Vector3(0, y, 0), Quaternion.identity) as GameObject;
         zones[n].transform.parent = myTransform;
         zones[n].transform.localScale = new Vector3(taille, 0.05f, taille);
         zones[n].GetComponent<Renderer>().material.color = c;
         zones[n].name = "zone" + n;
     }
-    void ajouter_pointeur(int n,Color c, Transform parent)
+    void ajouter_pointeur(int n, Color c)
     {
-        pointeurs[n] = Instantiate(zone, myTransform.position + new Vector3(0, -0.28f + 0.02f * n, 0), Quaternion.identity) as GameObject;
-        pointeurs[n].transform.parent = parent;
+        pointeurs[n] = Instantiate(zone, myTransform.position + new Vector3(0, -0.23f + 0.5f*n, 0), Quaternion.identity) as GameObject;
+        pointeurs[n].transform.parent = myTransform;
         pointeurs[n].transform.localScale = new Vector3(1, 0.05f, 1);
         pointeurs[n].GetComponent<Renderer>().material.color = c;
         pointeurs[n].name = "pointeur" + n;
@@ -151,7 +156,8 @@ public class Player : MonoBehaviour
                 myTransform.GetChild(i).GetComponent<Renderer>().enabled = afficher;
             }
         }
-        myTransform.FindChild("zone0").GetComponent<Collider>().enabled = false;
+       // myTransform.FindChild("pointeur0").GetComponent<Collider>().enabled = false;
+        //myTransform.FindChild("pointeur1").GetComponent<Collider>().enabled = false;
     }
     public void changer_valeur(Color c)
     {
@@ -159,7 +165,8 @@ public class Player : MonoBehaviour
         valeurs[1].GetComponent<Renderer>().material.color = valeurs[2].GetComponent<Renderer>().material.color;
         valeurs[2].GetComponent<Renderer>().material.color = c;
         update_menu();
-        update_deplacement();
+        update_deplacement(pointeurs[0], zones[0]);
+        update_deplacement(pointeurs[1], zones[1]);
     }
     private void update_menu()
     {
@@ -188,16 +195,17 @@ public class Player : MonoBehaviour
         else
         {
             ajouter_zone(0, longueur_deplacement, new Color(0.5f, 1, 1), -0.28f);
-            ajouter_zone(1, longueur_passe, new Color(1, 0.5f, 1),-0.3f);
+            ajouter_zone(1, longueur_passe, new Color(1, 0.5f, 1), -0.3f);
         }
     }
 
-    private void update_deplacement() {
-        float distance = Vector3.Distance(pointeurs[0].transform.position, zones[1].transform.position);
-        if (distance > zones[1].transform.localScale.x / 2)
+    private void update_deplacement(GameObject pointeur, GameObject zone)
+    {
+        float distance = Vector3.Distance(pointeur.transform.position, zone.transform.position);
+        if (distance > zone.transform.localScale.x / 2)
         {
-            float angle = zones[0].transform.eulerAngles.y;
-            zones[0].transform.localPosition = new Vector3(-Mathf.Sin(Mathf.Deg2Rad * angle) * zones[1].transform.localScale.x / 2, -0.3f, -Mathf.Cos(Mathf.Deg2Rad * angle) * zones[1].transform.localScale.x / 2);
+            float angle = pointeur.transform.eulerAngles.y;
+            pointeur.transform.localPosition = new Vector3(-Mathf.Sin(Mathf.Deg2Rad * angle) * zone.transform.localScale.x / 2, -0.23f, -Mathf.Cos(Mathf.Deg2Rad * angle) * zone.transform.localScale.x / 2);
         }
     }
     GameObject GetClickedObject(out RaycastHit hit)
@@ -206,13 +214,22 @@ public class Player : MonoBehaviour
         if (Physics.Raycast(ray.origin, ray.direction * 10, out hit))
         {
             var gm = hit.collider.gameObject;
-            if (gm == zones[1])
+            if (gm == zones[0] || gm == pointeurs[0])
             {
-                zones[0].transform.position = hit.point;
-                target = zones[0];
+                target = pointeurs[0];
+                zone_target = zones[0];
             }
             else
-                target = null; mouseState = false;
+            {
+                if (gm == zones[1] || gm == pointeurs[1])
+                {
+                    target = pointeurs[1];
+                    zone_target = zones[1];
+                }
+                else
+                    target = null; mouseState = false;
+            }
+
         }
 
         return target;
