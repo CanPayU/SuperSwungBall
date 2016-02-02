@@ -27,6 +27,9 @@ public class Player : MonoBehaviour
     private Vector3 offset;
     RaycastHit hit;
 
+    bool deplacement = false;
+    Vector3 arrive;
+
     void Start()
     {
         #region creation
@@ -54,59 +57,84 @@ public class Player : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (!deplacement)
         {
-            // s'active une seul fois au clic
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            #region aficher/effacer menu
-            if (Physics.Raycast(ray, out hit, 100))
+            if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                if (hit.collider == myCollider || hit.collider.transform.parent == myTransform)
+                // s'active une seul fois au clic
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                #region aficher/effacer menu
+                if (Physics.Raycast(ray, out hit, 100))
                 {
-                    if (!clicked)
+                    if (hit.collider == myCollider || hit.collider.transform.parent == myTransform)
                     {
-                        afficher_menu(true);
+                        if (!clicked)
+                        {
+                            afficher_menu(true);
+                        }
+                    }
+                    else
+                    {
+                        clicked = false;
+                        afficher_menu(false);
                     }
                 }
-                else
-                {
-                    clicked = false;
-                    afficher_menu(false);
-                }
+                #endregion
             }
-            #endregion
-        }
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            // s'active tant que le clic est enfoncé
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            if (Physics.Raycast(ray, out hit, 100))
+            if (Input.GetMouseButtonDown(0))
             {
-                if (hit.collider == myCollider || hit.collider.transform.parent == myTransform)
+                // s'active tant que le clic est enfoncé
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+                if (Physics.Raycast(ray, out hit, 100))
                 {
-                    target = GetClickedObject(out hit);
-                    if (target != null)
+                    if (hit.collider == myCollider || hit.collider.transform.parent == myTransform)
                     {
-                        mouseState = true;
+                        target = GetClickedObject(out hit);
+                        if (target != null)
+                        {
+                            mouseState = true;
+                        }
                     }
                 }
             }
-        }
-        if (Input.GetMouseButtonUp(0))
-        {
-            mouseState = false;
-        }
-        if (mouseState)
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            Physics.Raycast(ray.origin, ray.direction * 10, out hit);
+            if (Input.GetMouseButtonUp(0))
+            {
+                mouseState = false;
+            }
+            if (mouseState)
+            {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                Physics.Raycast(ray.origin, ray.direction * 10, out hit);
 
-            target.transform.position = new Vector3(hit.point.x, zone_target.transform.position.y + 0.05f, hit.point.z); // position absolue
-            target.transform.LookAt(zone_target.transform);
+                target.transform.position = new Vector3(hit.point.x, zone_target.transform.position.y + 0.05f, hit.point.z); // position absolue
+                target.transform.LookAt(zone_target.transform);
 
-            update_deplacement(target, zone_target);
+                update_deplacement(target, zone_target);
+            }
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                deplacement = true;
+                arrive = myTransform.FindChild("pointeur0").position;
+                myTransform.LookAt(arrive);
+                afficher_menu(false);
+            }
+        }
+        if (deplacement)
+        {
+            if (Vector3.Distance(myTransform.position, arrive) < 1)
+            {
+                deplacement = false;
+                myTransform.rotation = Quaternion.identity;
+                pointeurs[0].transform.localPosition =new Vector3(0, 0, 0);
+                pointeurs[1].transform.localPosition = new Vector3(0, 0, 0);
+            }
+            else
+            {
+                myTransform.Translate(Vector3.forward * Time.deltaTime * 5, Space.Self);
+                myTransform.position = new Vector3(myTransform.position.x, 0.5f, myTransform.position.z);
+            }
         }
     }
     #region initialisation
