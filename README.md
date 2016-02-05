@@ -1,2 +1,2 @@
 # SuperSwungBall
-Strategy Game
+Strategy Game de bg
