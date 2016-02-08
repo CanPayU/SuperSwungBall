@@ -30,6 +30,12 @@ public class Player : MonoBehaviour
     bool deplacement = false;
     Vector3 arrive;
 
+    private Vector3 target_passe;
+
+
+    // Variable pour Passe
+    private GameObject ball;
+
     void Start()
     {
         #region creation
@@ -52,11 +58,19 @@ public class Player : MonoBehaviour
         ajouter_pointeur(0, new Color(0.3f, 0.8f, 1f));
         ajouter_pointeur(1, new Color(0.8f, 0.3f, 0.8f));
         #endregion
+        // recup de la balle
+        ball = GameObject.Find("Ball");
+
+
+
+
 
         afficher_menu(false);
     }
+
     void Update()
     {
+        #region Reflexion
         if (!deplacement)
         {
             if (Input.GetKeyDown(KeyCode.Mouse0))
@@ -85,8 +99,12 @@ public class Player : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0))
             {
+<<<<<<< HEAD
                 // s'active tant que le clic est enfoncé
                 Debug.Log("2");
+=======
+               
+>>>>>>> origin/master
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
                 if (Physics.Raycast(ray, out hit, 100))
@@ -118,24 +136,37 @@ public class Player : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 deplacement = true;
-                arrive = myTransform.FindChild("pointeur0").position;
+                arrive = pointeurs[0].transform.position;
+                target_passe = pointeurs[1].transform.position;
                 myTransform.LookAt(arrive);
                 afficher_menu(false);
             }
         }
+        #endregion
         if (deplacement)
         {
-            if (Vector3.Distance(myTransform.position, arrive) < 1)
+            if (Vector3.Distance(myTransform.position, arrive) < 1) // Fin de l'annim
             {
                 deplacement = false;
                 myTransform.rotation = Quaternion.identity;
                 pointeurs[0].transform.localPosition =new Vector3(0, 0, 0);
                 pointeurs[1].transform.localPosition = new Vector3(0, 0, 0);
             }
-            else
+            else // pendant l'annim
             {
                 myTransform.Translate(Vector3.forward * Time.deltaTime * 5, Space.Self);
                 myTransform.position = new Vector3(myTransform.position.x, 0.5f, myTransform.position.z);
+
+                // Au clic, call BallController et declanche passe
+                if (Input.GetKey(KeyCode.A))
+                {
+                    BallController script = ball.GetComponent<BallController>();
+                    if(script.Holder == gameObject)
+                    {
+                        script.trigger_passe(target_passe); // call function
+                    }
+                }
+
             }
         }
     }
@@ -186,6 +217,10 @@ public class Player : MonoBehaviour
                 myTransform.GetChild(i).GetComponent<Renderer>().enabled = afficher;
             }
         }
+<<<<<<< HEAD
+=======
+      
+>>>>>>> origin/master
     }
     public void changer_valeur(Color c)
     {
