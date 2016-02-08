@@ -61,6 +61,7 @@ public class Player : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
+                Debug.Log("1");
                 // s'active une seul fois au clic
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 #region aficher/effacer menu
@@ -85,6 +86,7 @@ public class Player : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 // s'active tant que le clic est enfoncé
+                Debug.Log("2");
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
                 if (Physics.Raycast(ray, out hit, 100))
@@ -184,8 +186,6 @@ public class Player : MonoBehaviour
                 myTransform.GetChild(i).GetComponent<Renderer>().enabled = afficher;
             }
         }
-       // myTransform.FindChild("pointeur0").GetComponent<Collider>().enabled = false;
-        //myTransform.FindChild("pointeur1").GetComponent<Collider>().enabled = false;
     }
     public void changer_valeur(Color c)
     {
