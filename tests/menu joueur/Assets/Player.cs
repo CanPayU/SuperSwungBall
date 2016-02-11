@@ -1,9 +1,7 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
 
 public class Player : MonoBehaviour
 {
-
     [SerializeField]
     private GameObject menu;
     [SerializeField]
@@ -75,7 +73,6 @@ public class Player : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                Debug.Log("1");
                 // s'active une seul fois au clic
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 #region aficher/effacer menu
@@ -99,12 +96,8 @@ public class Player : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0))
             {
-<<<<<<< HEAD
                 // s'active tant que le clic est enfoncé
-                Debug.Log("2");
-=======
-               
->>>>>>> origin/master
+                
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
                 if (Physics.Raycast(ray, out hit, 100))
@@ -217,10 +210,6 @@ public class Player : MonoBehaviour
                 myTransform.GetChild(i).GetComponent<Renderer>().enabled = afficher;
             }
         }
-<<<<<<< HEAD
-=======
-      
->>>>>>> origin/master
     }
     public void changer_valeur(Color c)
     {
