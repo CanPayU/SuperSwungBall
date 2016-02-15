@@ -12,7 +12,8 @@ namespace Assets
         void Start()
         {
             initialize_components(); //add les composants à "components" et set les couleurs des boutons
-            display(false); // Menu inactif par defaut
+            transform.localPosition = new Vector3(0, -0.5f, 0);
+            display(false);
         }
         void Update()
         {
