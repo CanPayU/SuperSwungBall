@@ -93,11 +93,6 @@ public class Player : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0))
             {
-<<<<<<< HEAD
-                // s'active tant que le clic est enfoncé
-                
-=======
->>>>>>> origin/master
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
                 if (Physics.Raycast(ray, out hit, 100))

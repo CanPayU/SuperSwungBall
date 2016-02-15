@@ -30,7 +30,7 @@ namespace Assets
                 {
                     if (hit.collider == myCollider) // Collision clic
                     {
-                        myMenu.update_Color(myColor); // Change la couleur 
+                        myMenu.update_Color(myColor); // Change la couleur des valeurs
                         myPlayer.updateValuesPlayer(myColor); // Change les stats du perso
                     }
                 }

@@ -9,7 +9,7 @@ namespace Assets
         private Player player; //gere les stats
 
         // Event Click
-        private bool clicked;
+        private bool menuDisplayed;
         private RaycastHit hit;
 
         //Evite le "GetComponent<>"
@@ -20,15 +20,17 @@ namespace Assets
         private bool deplacement;
         private float speed = 0;
 
+        //Pointeur
+        private bool mouseState = false;
+
         void Start()
         {
             //initialisation menu
             Menu = Instantiate(Menu, new Vector3(), Quaternion.identity) as GameObject;
             Menu.transform.parent = transform;
-            transform.position = new Vector3(2, 2, 2);
             menuController = Menu.GetComponent<Menu_controller>();
 
-            player = new Player(5, 5, 8, 5);
+            player = new Player(5, 5, 15, 5); // A changer en fonction des stats initiales du perso
 
             myCollider = GetComponent<Collider>();
         }
@@ -36,25 +38,35 @@ namespace Assets
         {
             if (!deplacement)
             {
-                if (Input.GetKeyDown(KeyCode.Mouse0))//Activation au clic
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                Physics.Raycast(ray, out hit, 100);
+                if (Input.GetMouseButtonDown(0) && !hit.Equals(null)) //s'active au clic
                 {
-                    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                    if (Physics.Raycast(ray, out hit, 100))
+                    if (hit.collider == myCollider || hit.collider.transform.parent == Menu.transform) //Activation au clic sur le player ou sur le menu
                     {
-                        if (hit.collider == myCollider || hit.collider.transform.parent == Menu.transform) //Activation au clic sur le player ou sur le menu
+                        if (!menuDisplayed) //S'active uniquement le premier clic
                         {
-                            if (!clicked) //S'active uniquement le premier clic
-                            {
-                                menuController.display(true);
-                            }
-                            clicked = true;
+                            player.computeStats(); // Calcule les Stats du perso ( obligé avant d'utiliser un getter)
+                            menuController.update_zoneDeplacement(player.ZoneDeplacement, player.ZonePasse); // Change la taille des zones
+                            menuController.display(true);
                         }
-                        else //Activation lors du clic en dehors du player / menu
-                        {
-                            clicked = false;
-                            menuController.display(false);
-                        }
+                        menuDisplayed = true;
+                        mouseState = menuController.set_target(hit);//renvoit true si le joueur clic sur un pointeur et set le 'target' / 'zone_target' aux 'pointeur' / 'zone_du_pointeur' du menu_controller (false et null sinon)
                     }
+                    else //Activation lors du clic en dehors du player / menu
+                    {
+                        menuDisplayed = false;
+                        menuController.display(false);
+                        mouseState = false; // pas obligé, mais on sait jamais
+                    }
+                }
+                if (Input.GetMouseButtonUp(0))// Clic relache
+                {
+                    mouseState = false;
+                }
+                if (mouseState)// s'active tant que le joueur drag and drop un pointeur
+                {
+                    menuController.move_target(hit);//bouge le pointeur 'target' du menu. Si le target sort de la 'zone_target', replace le 'target'
                 }
             }
             else// phase d'animation
@@ -65,7 +77,7 @@ namespace Assets
         public void updateValuesPlayer(Color c) //Activation clic boutton
         {
             player.updateValues(convertColorToValue(c)); // Change les Stats du player 
-            menuController.update_zoneDeplacement(player.ZoneDeplacement, player.ZonePasse);
+            menuController.update_zoneDeplacement(player.ZoneDeplacement, player.ZonePasse); // Change la tailles des zones
         }
 
         private string convertColorToValue(Color c)
