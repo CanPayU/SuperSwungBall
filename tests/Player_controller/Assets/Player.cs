@@ -28,6 +28,14 @@ namespace Assets
             finalStats["course"] = defaultStats["course"] + 10;
         }
 
+        public void reset() // reinitialises valeurs des boutons et les stats finales
+        {
+            buttonsValues[0] = "esquive";
+            buttonsValues[1] = "esquive";
+            buttonsValues[2] = "esquive";
+            computeStats();
+        }
+
         public void updateValues(string value) // Change la valeur des boutons
         {
             buttonsValues.Add(value);

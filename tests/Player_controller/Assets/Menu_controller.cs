@@ -9,6 +9,22 @@ namespace Assets
         private List<Color> buttonsColor = new List<Color>(); // Facilite l'accès des couleurs des boutons depuis le player_controller
         private GameObject target; // pointeur selectionné
         private GameObject zone_target; // zone du pointeur sélectionné
+
+        #region getters
+        public float[] Get_Coordsdeplacement //renvoit les coordonnées du pointeur déplacement
+        {
+            get { return new float[2] { components["pointeurs"][0].transform.position.x, components["pointeurs"][0].transform.position.z }; }
+        }
+        public float[] Get_CoordsPasse //renvoit les coordonnées du pointeur passe
+        {
+            get { return new float[2] { components["pointeurs"][1].transform.position.x, components["pointeurs"][1].transform.position.z }; }
+        }
+        public List<Color> GetButtonsColor
+        {
+            get { return buttonsColor; }
+        }
+        #endregion
+
         void Start()
         {
             initialize_components(); //add les composants à "components" et set les couleurs des boutons
@@ -19,6 +35,8 @@ namespace Assets
         {
 
         }
+
+        # region menu
         public void display(bool afficher)//affiche/cache le menu
         {
             int nb_Child = transform.childCount;
@@ -28,7 +46,6 @@ namespace Assets
                 transform.GetChild(i).GetComponent<Renderer>().enabled = afficher;
             }
         }
-
         private void initialize_components()//add les composants à "components" et set les couleurs des boutons
         {
             add_components("buttons", 0, 4);
@@ -55,7 +72,6 @@ namespace Assets
             components["pointeurs"][0].GetComponent<Renderer>().material.color = new Color(0.2f, 0.7f, 0.7f); // deplacement
             components["pointeurs"][1].GetComponent<Renderer>().material.color = new Color(0.7f, 0.2f, 0.7f); // passe
         }
-
         private void add_components(string key, int min, int max) // recupere les gameObject enfant du menu de "min" (compris) à "max" (exclu) et les ajoute au dictionnaire "components"
         {
             GameObject[] component = new GameObject[max - min];
@@ -69,11 +85,19 @@ namespace Assets
             components["valeurs"][1].GetComponent<Renderer>().material.color = components["valeurs"][0].GetComponent<Renderer>().material.color;
             components["valeurs"][0].GetComponent<Renderer>().material.color = c;
         }
-        public List<Color> GetButtonsColor()
+        public void reset()
         {
-            return buttonsColor;
+            components["zones"][0].transform.localScale = new Vector3(0, components["zones"][0].transform.localScale.y, 0);
+            components["zones"][1].transform.localScale = new Vector3(0, components["zones"][1].transform.localScale.y, 0);
+            components["pointeurs"][0].transform.localPosition = new Vector3(0,components["pointeurs"][0].transform.localPosition.y, 0);
+            components["pointeurs"][1].transform.localPosition = new Vector3(0, components["pointeurs"][1].transform.localPosition.y, 0);
+            foreach (GameObject valeur in components["valeurs"])
+            {
+                valeur.GetComponent<Renderer>().material.color = Color.white;
+            }
         }
-
+        #endregion
+        #region pointeurs
         public void update_zoneDeplacement(float zone_deplacement, float zone_passe) // Modifie la taille des zones
         {
             components["zones"][0].transform.localScale = new Vector3(zone_deplacement, 0.005f, zone_deplacement);
@@ -90,7 +114,6 @@ namespace Assets
             }
             replace_pointeur();
         }
-
         public bool set_target(RaycastHit hit)//renvoit true si le joueur clic sur un pointeur et set le 'target' / 'zone_target'
         {
             if (hit.collider == components["pointeurs"][0].GetComponent<Collider>() || hit.collider == components["zones"][0].GetComponent<Collider>())
@@ -109,7 +132,6 @@ namespace Assets
             zone_target = null;
             return false;
         }
-
         public void reset_target()
         {
             target = null;
@@ -126,7 +148,6 @@ namespace Assets
                 }
             }
         }
-
         private void replace_pointeur() // replace le pointeur de déplacement dans sa zone si il y sort
         {
             components["pointeurs"][0].transform.LookAt(components["zones"][0].transform);
@@ -135,17 +156,8 @@ namespace Assets
             {
                 float angle = components["pointeurs"][0].transform.eulerAngles.y;
                 components["pointeurs"][0].transform.localPosition = new Vector3(-Mathf.Sin(Mathf.Deg2Rad * angle) * components["zones"][0].transform.localScale.x / 2, components["pointeurs"][0].transform.localPosition.y, -Mathf.Cos(Mathf.Deg2Rad * angle) * components["zones"][0].transform.localScale.x / 2);
-                Debug.Log(components["pointeurs"][0].transform);
             }
         }
-
-        public float[] Get_Coordsdeplacement //renvoit les coordonnées du pointeur déplacement
-        {
-            get { return new float[2] { components["pointeurs"][0].transform.position.x, components["pointeurs"][0].transform.position.z }; }
-        }
-        public float[] Get_CoordsPasse //renvoit les coordonnées du pointeur passe
-        {
-            get { return new float[2] { components["pointeurs"][1].transform.position.x, components["pointeurs"][1].transform.position.z }; }
-        }
+        #endregion
     }
 }

@@ -19,6 +19,7 @@ namespace Assets
         //deplacement
         private bool deplacement;
         private float speed = 0;
+        private Vector3 arrivalPoint;
 
         //Pointeur
         private bool mouseState = false;
@@ -71,8 +72,23 @@ namespace Assets
             }
             else// phase d'animation
             {
-
+                transform.position = Vector3.Lerp(transform.position, arrivalPoint, speed * Time.deltaTime); // à changer pour une vitesse constante
             }
+
+            #region switch animation / à suppr
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                if (!deplacement)
+                {
+                    start_Anim();
+                }
+                else
+                {
+                    end_Anim();
+                }
+            }
+            #endregion
+
         }
         public void updateValuesPlayer(Color c) //Activation clic boutton
         {
@@ -82,7 +98,7 @@ namespace Assets
 
         private string convertColorToValue(Color c)
         {
-            List<Color> colors = menuController.GetButtonsColor();
+            List<Color> colors = menuController.GetButtonsColor;
             if (c == colors[0])
                 return "tacle";
             if (c == colors[1])
@@ -95,11 +111,17 @@ namespace Assets
         public void start_Anim() // debut de l'animation
         {
             deplacement = true;
+            menuController.display(false);
+            menuDisplayed = false;
             player.computeStats();
             speed = player.Speed;
+            arrivalPoint = new Vector3(menuController.Get_Coordsdeplacement[0], transform.position.y, menuController.Get_Coordsdeplacement[1]);
         }
         public void end_Anim() // fin de l'animation
         {
+            menuController.reset();
+            player.reset();
+            menuController.update_zoneDeplacement(player.ZoneDeplacement, player.ZonePasse);
             deplacement = false;
             speed = 0;
         }
