@@ -248,4 +248,3 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
-tests/menu joueur/Assets/Player.cs
