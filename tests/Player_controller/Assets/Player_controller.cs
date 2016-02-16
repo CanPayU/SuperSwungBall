@@ -24,6 +24,9 @@ namespace Assets
         //Pointeur
         private bool mouseState = false;
 
+        //passe
+        private Vector3 arrivalPointPasse;
+
         void Start()
         {
             //initialisation menu
@@ -70,9 +73,9 @@ namespace Assets
                     menuController.move_target(hit);//bouge le pointeur 'target' du menu. Si le target sort de la 'zone_target', replace le 'target'
                 }
             }
-            else// phase d'animation
+            else
             {
-                transform.position = Vector3.Lerp(transform.position, arrivalPoint, speed * Time.deltaTime); // à changer pour une vitesse constante
+                transform.position = Vector3.MoveTowards(transform.position, arrivalPoint, speed * Time.deltaTime);
             }
 
             #region switch animation / à suppr
@@ -90,12 +93,26 @@ namespace Assets
             #endregion
 
         }
+        public void OnTriggerEnter(Collider other) //event collison
+        {
+            if (deplacement)
+            {
+                Debug.Log(other.transform.parent);
+                Debug.Log(other.name);
+                Debug.Log(player.ZonePasse);
+                if (other.transform.parent == null && other.name == "Ball" && player.ZonePasse != 0 && other.GetComponent<Ball_controller>().interceptable(gameObject)) // ramasse/intercepte la balle uniquement si le perso a au moins un élément "passe"
+                {
+                    other.transform.parent = transform;
+                    other.transform.localPosition = new Vector3(1, 0, 0);
+                }
+            }
+        }
+
         public void updateValuesPlayer(Color c) //Activation clic boutton
         {
             player.updateValues(convertColorToValue(c)); // Change les Stats du player 
             menuController.update_zoneDeplacement(player.ZoneDeplacement, player.ZonePasse); // Change la tailles des zones
         }
-
         private string convertColorToValue(Color c)
         {
             List<Color> colors = menuController.GetButtonsColor;
@@ -108,14 +125,21 @@ namespace Assets
             return "course";
         }
 
+        public bool passe(ref Vector3 pointPasse) // Passe
+        {
+            pointPasse = arrivalPointPasse;
+            return (deplacement && Vector3.Distance(arrivalPointPasse, transform.position) < player.ZonePasse * 5);
+        }
+
         public void start_Anim() // debut de l'animation
         {
             deplacement = true;
             menuController.display(false);
             menuDisplayed = false;
             player.computeStats();
-            speed = player.Speed;
-            arrivalPoint = new Vector3(menuController.Get_Coordsdeplacement[0], transform.position.y, menuController.Get_Coordsdeplacement[1]);
+            speed = player.Speed; // vitesse du joueur
+            arrivalPoint = new Vector3(menuController.Get_Coordsdeplacement[0], transform.position.y, menuController.Get_Coordsdeplacement[1]); // point d'arrivé du déplacement
+            arrivalPointPasse = new Vector3(menuController.Get_CoordsPasse[0], 0.2f, menuController.Get_CoordsPasse[1]); // point d'arrivé de la passe
         }
         public void end_Anim() // fin de l'animation
         {
