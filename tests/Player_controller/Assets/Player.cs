@@ -8,17 +8,20 @@ namespace Assets
 {
     class Player
     {
+		private GameObject gm;
+
         private Dictionary<string, int> defaultStats = new Dictionary<string, int>(); // Stats initiales (unique au joueur)
         private List<string> buttonsValues = new List<string> { "esquive","esquive","esquive" }; // Valeurs des boutons
         private Dictionary<string, int> finalStats = new Dictionary<string, int> { { "esquive", 0 }, { "tacle", 0 }, { "passe", 0 }, { "course", 0 } }; // Stats après selection des actions dans le menu
 
-        public Player(int tacle, int esquive, int passe, int course)
+		public Player(int tacle, int esquive, int passe, int course, GameObject gm_)
         {
             defaultStats.Add("esquive", esquive);
             defaultStats.Add("tacle", tacle);
             defaultStats.Add("passe", passe);
             defaultStats.Add("course", course);
             initialize_finaleStats();
+			gm = gm_;
         }
         private void initialize_finaleStats() // Initialises les stats finales
         {

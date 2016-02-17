@@ -34,7 +34,7 @@ namespace Assets
             Menu.transform.parent = transform;
             menuController = Menu.GetComponent<Menu_controller>();
 
-            player = new Player(5, 5, 15, 5); // A changer en fonction des stats initiales du perso
+			player = new Player(5, 5, 15, 5, gameObject); // A changer en fonction des stats initiales du perso
 
             myCollider = GetComponent<Collider>();
         }
