@@ -2,10 +2,11 @@
 using  System.Collections.Generic;
 using UnityEngine;
 using Assets;
+using System.Reflection;
 
 public class Team {
 	
-	private List<Player_controller> players;
+	private List<Player> players;
 	private string name;
 	private int points;
 
@@ -16,22 +17,23 @@ public class Team {
 		name = name_;
 		points = 0;
 		nb_player = 5;
-		players = new List<Player_controller>();
+		players = new List<Player>();
 	}
 
 	public void start_move_players(){
-		foreach (Player_controller player in players) {
-			player.start_Anim();
+		foreach (Player player in players) {
+			Player_controller controller = player.Gm.GetComponent<Player_controller>();
+			controller.start_Anim();
 		}
 	}
 	public void end_move_players(){
-		foreach (Player_controller player in players) {
-			player.end_Anim();
+		foreach (Player player in players) {
+			Player_controller controller = player.Gm.GetComponent<Player_controller>();
+			controller.end_Anim();
 		}
 	}
 
-	public bool add_player(GameObject prefab){
-		Player_controller player = prefab.GetComponent<Player_controller> ();
+	public bool add_player(Player player){
 		if (players.Count < nb_player) {
 			players.Add (player);
 			return true;

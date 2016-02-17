@@ -6,7 +6,9 @@ namespace Assets
     {
         [SerializeField]
         private GameObject Menu;
-        private Player player; //gere les stats
+		[SerializeField]
+		private int team_id;
+		private Player player; //gere les stats
 
         // Event Click
         private bool menuDisplayed;
@@ -34,8 +36,10 @@ namespace Assets
             Menu.transform.parent = transform;
             menuController = Menu.GetComponent<Menu_controller>();
 
-			player = new Player(5, 5, 15, 5, gameObject); // A changer en fonction des stats initiales du perso
+			player = new Player(5, 5, 15, 5, gameObject.name, team_id); // A changer en fonction des stats initiales du perso
 
+			Team t_ = Game.Instance.Teams [team_id];
+			t_.add_player (player);
             myCollider = GetComponent<Collider>();
         }
         void Update()
@@ -85,10 +89,6 @@ namespace Assets
                 {
                     start_Anim();
                 }
-                else
-                {
-                    end_Anim();
-                }
             }
             #endregion
 
@@ -97,9 +97,6 @@ namespace Assets
         {
             if (deplacement)
             {
-                Debug.Log(other.transform.parent);
-                Debug.Log(other.name);
-                Debug.Log(player.ZonePasse);
                 if (other.transform.parent == null && other.name == "Ball" && player.ZonePasse != 0 && other.GetComponent<Ball_controller>().interceptable(gameObject)) // ramasse/intercepte la balle uniquement si le perso a au moins un élément "passe"
                 {
                     other.transform.parent = transform;
@@ -132,7 +129,7 @@ namespace Assets
         }
 
         public void start_Anim() // debut de l'animation
-        {
+		{
             deplacement = true;
             menuController.display(false);
             menuDisplayed = false;
@@ -149,5 +146,17 @@ namespace Assets
             deplacement = false;
             speed = 0;
         }
+
+
+
+
+		public Player Player {
+			get { 
+				return player; 
+			}
+		}
+
+
+
     }
 }

@@ -11,6 +11,7 @@ namespace Assets
         void Start()
         {
             deplacement = false;
+			passeur = transform.parent.gameObject;
         }
 
         void Update()
@@ -38,10 +39,29 @@ namespace Assets
                     transform.position = Vector3.MoveTowards(transform.position, arrivalPoint, Time.deltaTime * 20);// mouvement de la passe
                 }
             }
+
+
         }
         public bool interceptable(GameObject player) // evite le passeur d'intercepter sa propre balle, renvoit false si l'intercepteur est le lanceur
         {
             return player != passeur || !deplacement;
         }
+
+		void OnTriggerEnter(Collider other)
+		{
+			GameObject gmCol = other.gameObject; // gm touche
+			/*if (gmCol.CompareTag("Player"))
+			{
+				passed = false;
+				holder = gmCol; // devient le parent
+				gameObject.transform.SetParent(holder.transform);
+				transform.localPosition = new Vector3(0, 0.8f,0); // se met sur lui
+			}else */
+			if (gmCol.CompareTag("Goal") && passeur != null)
+			{
+				GoalController g_controller = gmCol.GetComponent<GoalController> ();
+				g_controller.goal ();
+			}
+		}
     }
 }

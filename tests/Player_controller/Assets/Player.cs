@@ -6,22 +6,27 @@ using UnityEngine;
 
 namespace Assets
 {
-    class Player
+	public class Player
     {
-		private GameObject gm;
+		private string player_name;
+		public string Name {
+			get { return player_name; }
+		}
+		private int team_id;
 
         private Dictionary<string, int> defaultStats = new Dictionary<string, int>(); // Stats initiales (unique au joueur)
         private List<string> buttonsValues = new List<string> { "esquive","esquive","esquive" }; // Valeurs des boutons
         private Dictionary<string, int> finalStats = new Dictionary<string, int> { { "esquive", 0 }, { "tacle", 0 }, { "passe", 0 }, { "course", 0 } }; // Stats après selection des actions dans le menu
 
-		public Player(int tacle, int esquive, int passe, int course, GameObject gm_)
+		public Player(int tacle, int esquive, int passe, int course, string player_name_, int Team_Id)
         {
             defaultStats.Add("esquive", esquive);
             defaultStats.Add("tacle", tacle);
             defaultStats.Add("passe", passe);
             defaultStats.Add("course", course);
             initialize_finaleStats();
-			gm = gm_;
+			player_name = player_name_;
+			team_id = Team_Id;
         }
         private void initialize_finaleStats() // Initialises les stats finales
         {
@@ -67,7 +72,11 @@ namespace Assets
         public float ZonePasse
         {
             get { return (float)finalStats["passe"] / 10; }
-        }
+		}
+		public GameObject Gm
+		{
+			get { return GameObject.Find (player_name); }
+		}
         #endregion
     }
 }
