@@ -23,9 +23,9 @@ public class MainController : MonoBehaviour {
     
     
     IEnumerator ChangeLevel()
-{
-    float fadeTime = GameObject.Find("GM").GetComponent<Fading>().BeginFade(1);
-    yield return new WaitForSeconds(fadeTime);
-    SceneManager.LoadScene(scene);
-}
+    {
+        float fadeTime = GameObject.Find("GM_Fade").GetComponent<Fading>().BeginFade(1);
+        yield return new WaitForSeconds(fadeTime);
+        SceneManager.LoadScene(scene);
+    }
 }
