@@ -128,9 +128,10 @@ namespace GameScene
             int nb_player = Game.Instance.Teams[0].Nb_Player;
             for (int i = 0; i < nb_player; i++)
             {
-                GameObject play1 = Instantiate(player1_prefab, new Vector3((float)i * 2, (float)0.5, 7), Quaternion.identity) as GameObject;
+				GameObject test = PhotonNetwork.Instantiate (player1_prefab.name, new Vector3 ((float)i * 2, (float)0.5, 7), Quaternion.identity, 0) as GameObject;
+                //GameObject play1 = Instantiate(player1_prefab, new Vector3((float)i * 2, (float)0.5, 7), Quaternion.identity) as GameObject;
                 GameObject play2 = Instantiate(player2_prefab, new Vector3((float)i * 2, (float)0.5, -7), Quaternion.identity) as GameObject;
-                play1.name = "team1-" + i;
+				//test.name = "team1-" + i;
                 play2.name = "team2-" + i;
             }
         }
