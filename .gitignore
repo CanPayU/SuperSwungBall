@@ -250,3 +250,4 @@ sysinfo.txt
 *.unitypackage
 tests/Player_controller/test run_Data/Mono/etc/mono/2.0/web.config
 tests/Timer&CollisionEvemt/test_Data
+tests/Timer&CollisionEvemt/test_Data/output_log.txt
