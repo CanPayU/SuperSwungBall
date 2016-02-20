@@ -30,6 +30,9 @@ namespace GameScene
         //passe
         private Vector3 arrivalPointPasse;
 
+		//Network
+		private PhotonView view;
+
         void Start()
         {
             //initialisation menu
@@ -37,22 +40,41 @@ namespace GameScene
             Menu.transform.parent = transform;
             menuController = Menu.GetComponent<Menu_controller>();
 
+			view = GetComponent<PhotonView> ();
+
 			player = new Player(5, 5, 15, 5, gameObject.name, team_id); // A changer en fonction des stats initiales du perso
 
-			Team t_ = Game.Instance.Teams [team_id];
+			Team t_ = Game.Instance.Teams [PhotonNetwork.player.ID]; // team_id
 			t_.add_player (player);
             myCollider = GetComponent<Collider>();
         }
         void Update()
         {
+			/*
+			if (!view.isMine)
+				return;
+*/
+			if (Input.GetKeyDown(KeyCode.Z)) {
+				Debug.Log ("Z pressed on viewId:" + view.viewID + " - isMine:" + view.isMine);
+			}
+			if (Input.GetMouseButtonDown(0))
+			{
+				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+				Physics.Raycast(ray, out hit, 100);
+				Debug.Log ("Input 0 pressed : " + deplacement + " - point:" + hit);
+			}
+
+
             if (!deplacement)
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 Physics.Raycast(ray, out hit, 100);
                 if (Input.GetMouseButtonDown(0) && !hit.Equals(null)) //s'active au clic
                 {
+					Debug.Log ("Input 0 pressed : " + deplacement + " - point:" + hit);
                     if (hit.collider == myCollider || hit.collider.transform.parent == Menu.transform) //Activation au clic sur le player ou sur le menu
                     {
+						Debug.Log (view.viewID + " - Mine:" + view.isMine);
                         if (!menuDisplayed) //S'active uniquement le premier clic
                         {
                             player.computeStats(); // Calcule les Stats du perso ( obligé avant d'utiliser un getter)
@@ -88,7 +110,7 @@ namespace GameScene
             {
                 if (!deplacement)
                 {
-                    start_Anim();
+                    //start_Anim();
                 }
             }
             #endregion

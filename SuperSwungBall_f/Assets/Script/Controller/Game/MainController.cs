@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.UI;
 
 namespace GameScene
@@ -17,13 +18,15 @@ namespace GameScene
         private Text score;
 
         Text myGuiText;
-
         Timer time;
+
+		private PhotonPlayer local_player;
 
         // Use this for initialization
         void Start()
         {
-            time = new Timer(5.0F, end_time);
+			time = new Timer(5.0F, end_time);
+			local_player = PhotonNetwork.player;
             instantiate_team();
             //update_score ();
         }
@@ -75,10 +78,10 @@ namespace GameScene
 
             if (annim_started)
             {
-                Team[] teams = Game.Instance.Teams;
-                foreach (Team team in teams)
+				Dictionary<int, Team> teams = Game.Instance.Teams;
+				foreach (KeyValuePair<int,Team> team in teams)
                 {
-                    team.end_move_players();
+					team.Value.end_move_players();
                 }
                 annim_started = false;
                 time.start();
@@ -96,10 +99,10 @@ namespace GameScene
             annim_started = true;
             time.start();
 
-            Team[] teams = Game.Instance.Teams;
-            foreach (Team team in teams)
+			Dictionary<int, Team> teams = Game.Instance.Teams;
+			foreach (KeyValuePair<int,Team> team in teams)
             {
-                team.start_move_players();
+				team.Value.start_move_players();
             }
         }
 
@@ -117,22 +120,23 @@ namespace GameScene
 
         public void update_score()
         {
-            Team t_a = Game.Instance.Teams[0];
-            Team t_b = Game.Instance.Teams[1];
+			int other_id = PhotonNetwork.otherPlayers [0].ID;
+			Team t_a = Game.Instance.Teams[local_player.ID];
+            Team t_b = Game.Instance.Teams[other_id];
             score.text = t_a.Points + " : " + t_b.Points;
         }
 
 
         private void instantiate_team()
         {
-            int nb_player = Game.Instance.Teams[0].Nb_Player;
+			int nb_player = Game.Instance.Teams[local_player.ID].Nb_Player;
             for (int i = 0; i < nb_player; i++)
             {
-				GameObject test = PhotonNetwork.Instantiate (player1_prefab.name, new Vector3 ((float)i * 2, (float)0.5, 7), Quaternion.identity, 0) as GameObject;
+				GameObject play1 = PhotonNetwork.Instantiate (player2_prefab.name, new Vector3 ((float)i * 2, (float)0.5, -7), Quaternion.identity, 0) as GameObject;
                 //GameObject play1 = Instantiate(player1_prefab, new Vector3((float)i * 2, (float)0.5, 7), Quaternion.identity) as GameObject;
-                GameObject play2 = Instantiate(player2_prefab, new Vector3((float)i * 2, (float)0.5, -7), Quaternion.identity) as GameObject;
-				//test.name = "team1-" + i;
-                play2.name = "team2-" + i;
+				//GameObject play2 = PhotonNetwork.Instantiate(player2_prefab.name, new Vector3((float)i * 2, (float)0.5, -7), Quaternion.identity, 0) as GameObject;
+				play1.name = local_player.name + i;
+                //play2.name = "team2-" + i;
             }
         }
     }

@@ -60,8 +60,6 @@ namespace GameScene
                                                      transform.localPosition = new Vector3(0, 0.8f,0); // se met sur lui
                                                  }else */
 
-            Debug.Log("Gtag" + gmCol.tag);
-
 			if (gmCol.CompareTag("Goal"))
 			{
                 

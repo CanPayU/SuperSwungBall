@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Game {
 
@@ -10,17 +11,22 @@ public class Game {
 		}
 	}
 
-	private Team[] teams;
-	public Team[] Teams {
+	private Dictionary<int, Team> teams;
+	public Dictionary<int, Team> Teams {
 		get {
 			return teams;
 		}
 	}
 
 	public Game (){
-		teams = new Team[2];
-		teams [0] = new Team ("SuperTeam1");
-		teams [1] = new Team ("SuperTeamMega2");
+		teams = new Dictionary<int, Team>();
+		Debug.Log ("MyID :" + PhotonNetwork.player.ID);
+		foreach (PhotonPlayer player in PhotonNetwork.playerList) {
+			Debug.Log ("New team :" + player.ID);
+			teams [player.ID] = new Team (player.name);
+		}
+		//teams [0] = new Team ("SuperTeam1");
+		//teams [1] = new Team ("SuperTeamMega2");
 	}
 
 	public void goal(int team_id){
