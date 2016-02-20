@@ -50,10 +50,11 @@ namespace GameScene
 
 			status.color = status_color;
 			panel.SetActive (true);
+
+			PhotonNetwork.LeaveRoom ();
 		}
 
 		private void on_abandon(PhotonPlayer player) {
-			
 			status_text = "Victoire";
 			content_text = local_player.name + "\n VS \n" + player.name + " - Abandon";
 			points_text += "calculate";

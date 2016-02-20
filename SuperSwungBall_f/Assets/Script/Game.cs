@@ -44,4 +44,9 @@ public class Game {
 			return teams;
 		}
 	}
+	public bool isFinish {
+		get {
+			return finished;
+		}
+	}
 }

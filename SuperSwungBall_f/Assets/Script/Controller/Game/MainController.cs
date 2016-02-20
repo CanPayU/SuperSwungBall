@@ -41,31 +41,6 @@ namespace GameScene
 				pv.RPC ("start_annim", PhotonTargets.All);
             }
             time.update();
-
-            if (Input.GetKeyDown(KeyCode.S) && !annim_started)
-            {
-                int score = 15;
-                Debug.Log(User.Instance.score);
-                HttpController controller = gameObject.GetComponent<HttpController>();
-                controller.sync_score(score, (success) => {
-                    Debug.Log(success);
-                    Debug.Log(User.Instance.score);
-                });
-                Debug.Log("sended");
-            }
-
-            if (Input.GetKeyDown(KeyCode.C) && !annim_started)
-            {
-                // localhost
-                string username = "antoine"; // id = 1
-                string password = "mdp"; // OK
-                Debug.Log("isConnected ? " + User.Instance.is_connected);
-                HttpController controller = gameObject.GetComponent<HttpController>();
-                controller.connect(username, password, (success) => {
-                    Debug.Log("isConnected ? " + User.Instance.is_connected + " - Success ?" + success);
-                });
-                Debug.Log("sended");
-            }
         }
 
 		[PunRPC] private void end_time()
@@ -164,8 +139,8 @@ namespace GameScene
 			
 		void OnPhotonPlayerDisconnected(PhotonPlayer otherPlayer)
 		{
-			GetComponent<EndController> ().on_end (End.ABANDON, otherPlayer);
-			Debug.Log (otherPlayer.name + " a quitté");
+			if(!Game.Instance.isFinish)
+				GetComponent<EndController> ().on_end (End.ABANDON, otherPlayer);
 		}
     }
 
