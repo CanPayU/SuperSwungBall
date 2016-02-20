@@ -2,36 +2,46 @@
 using System.Collections;
 using System.Collections.Generic;
 
+using GameScene;
+
 public class Game {
 
 	private static Game game_instance = new Game ();
-	public static Game Instance {
-		get{
-			return game_instance;
-		}
-	}
 
 	private Dictionary<int, Team> teams;
-	public Dictionary<int, Team> Teams {
-		get {
-			return teams;
-		}
-	}
+	private bool finished;
+	private int max_point = 1;
 
 	public Game (){
+		finished = false;
 		teams = new Dictionary<int, Team>();
-		Debug.Log ("MyID :" + PhotonNetwork.player.ID);
 		foreach (PhotonPlayer player in PhotonNetwork.playerList) {
-			Debug.Log ("New team :" + player.ID);
 			teams [player.ID] = new Team (player.name);
 		}
-		//teams [0] = new Team ("SuperTeam1");
-		//teams [1] = new Team ("SuperTeamMega2");
 	}
 
 	public void goal(int team_id){
 		Team team = teams [team_id];
 		team.Points = 1;
-		//Debug.Log (team.Name + " :"+ team.Points);
+		if (team.Points >= max_point) {
+			finished = true;
+			end_game ();
+		}
+	}
+
+	private void end_game(){
+		GameObject main = GameObject.Find ("Main");
+		main.GetComponent<EndController> ().on_end (End.TIME);
+	}
+
+	public static Game Instance {
+		get{
+			return game_instance;
+		}
+	}
+	public Dictionary<int, Team> Teams {
+		get {
+			return teams;
+		}
 	}
 }
