@@ -18,6 +18,9 @@ namespace GameScene
 
         void Update()
         {
+			if (Input.GetKeyDown (KeyCode.Z)) {
+				Debug.Log ("Info ball : passeur:" + passeur + " - parent:" + transform.parent);
+			}
             if (!deplacement)
             {
                 if (Input.GetKeyDown(KeyCode.A) && transform.parent != null)
@@ -25,13 +28,14 @@ namespace GameScene
                     deplacement = transform.parent.GetComponent<Player_controller>().passe(ref arrivalPoint); //Renvoit true si la passe est possible
                     if (deplacement)//debut de la passe
                     {
-                        passeur = transform.parent.gameObject;
-                        transform.parent = null; // Detache la balle du joueur
+						PhotonView pv = PhotonView.Get (this);
+						pv.RPC ("unattached_ball", PhotonTargets.All);
                     }
                 }
             }
             else
             {
+				passeur = null;
                 if (transform.position == arrivalPoint || transform.parent != null)// fin de la passe ou interception
                 {
                     deplacement = false;
@@ -49,16 +53,14 @@ namespace GameScene
             return player != passeur || !deplacement;
         }
 
+		[PunRPC] private void unattached_ball(){
+			passeur = transform.parent.gameObject;
+			transform.parent = null; // Detache la balle du joueur
+		}
+
 		void OnTriggerEnter(Collider other)
 		{
-			GameObject gmCol = other.gameObject; // gm touche
-                                                 /*if (gmCol.CompareTag("Player"))
-                                                 {
-                                                     passed = false;
-                                                     holder = gmCol; // devient le parent
-                                                     gameObject.transform.SetParent(holder.transform);
-                                                     transform.localPosition = new Vector3(0, 0.8f,0); // se met sur lui
-                                                 }else */
+			GameObject gmCol = other.gameObject;
 
 			if (gmCol.CompareTag("Goal"))
 			{

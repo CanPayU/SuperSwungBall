@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
@@ -28,7 +29,6 @@ namespace GameScene
 			time = new Timer(5.0F, end_time);
 			local_player = PhotonNetwork.player;
             instantiate_team();
-            //update_score ();
         }
 
         // Update is called once per frame
@@ -37,7 +37,8 @@ namespace GameScene
 
             if (Input.GetKeyDown(KeyCode.Space) && !annim_started)
             {
-                start_annim();
+				PhotonView pv = PhotonView.Get (this);
+				pv.RPC ("start_annim", PhotonTargets.All);
             }
             time.update();
 
@@ -67,12 +68,7 @@ namespace GameScene
             }
         }
 
-        private void suc(bool success)
-        {
-            Debug.Log(success);
-        }
-
-        private void end_time()
+		[PunRPC] private void end_time()
         {
             time.reset();
 
@@ -90,11 +86,12 @@ namespace GameScene
             else
             {
                 annim_started = true;
-                start_annim();
+				PhotonView pv = PhotonView.Get (this);
+				pv.RPC ("start_annim", PhotonTargets.All);
             }
         }
 
-        private void start_annim()
+		[PunRPC] private void start_annim()
         {
             annim_started = true;
             time.start();
@@ -130,7 +127,9 @@ namespace GameScene
         private void instantiate_team()
         {
 			int nb_player = Game.Instance.Teams[local_player.ID].Nb_Player;
-            for (int i = 0; i < nb_player; i++)
+			bool b = local_player.isMasterClient;
+			int nb_instance = nb_player - (Convert.ToInt16 (b));
+			for (int i = 0; i < nb_instance; i++)
             {
 				GameObject play1 = PhotonNetwork.Instantiate (player2_prefab.name, new Vector3 ((float)i * 2, (float)0.5, -7), Quaternion.identity, 0) as GameObject;
                 //GameObject play1 = Instantiate(player1_prefab, new Vector3((float)i * 2, (float)0.5, 7), Quaternion.identity) as GameObject;
@@ -138,6 +137,10 @@ namespace GameScene
 				play1.name = local_player.name + i;
                 //play2.name = "team2-" + i;
             }
+			if (b) {
+				GameObject play1 = PhotonNetwork.Instantiate ("Captain", new Vector3 ((float)nb_instance * 2, (float)0.5, -7), Quaternion.identity, 0) as GameObject;
+				play1.name = local_player.name + "_Captain";
+			}
         }
     }
 

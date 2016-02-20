@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class NetworkController : MonoBehaviour {
 
 
-	private string game_version_ = "0.1";
+	private string game_version_ = "0.3";
 	private bool room_joined = false;
 	private string room_name;
 
