@@ -13,7 +13,11 @@ namespace Standing
         // Use this for initialization
         void Start()
         {
-
+			bool b = SaveLoad.load_user ();
+			Debug.Log("Succes Load User :"+b);
+			if (b) {
+				Debug.Log ("Username : "+User.Instance.username);
+			}
         }
 
         // Update is called once per frame

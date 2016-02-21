@@ -31,12 +31,16 @@ public class Game {
 
 	private void end_game(){
 		GameObject main = GameObject.Find ("Main");
+		main.GetComponent<MainController> ().update_score ();
 		main.GetComponent<EndController> ().on_end (End.TIME);
 	}
 
 	public static Game Instance {
 		get{
 			return game_instance;
+		}
+		set {
+			game_instance = value;
 		}
 	}
 	public Dictionary<int, Team> Teams {
@@ -47,6 +51,9 @@ public class Game {
 	public bool isFinish {
 		get {
 			return finished;
+		}
+		set {
+			finished = value;
 		}
 	}
 }

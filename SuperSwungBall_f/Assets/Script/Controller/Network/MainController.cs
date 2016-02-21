@@ -49,6 +49,7 @@ namespace Network {
 				if(success) {
 					this.connection_panel.SetActive(false);
 					this.loading_panel.SetActive(true);
+					SaveLoad.save_user();
 					this.connection();
 				}else {
 					ColorBlock color = connect.colors;

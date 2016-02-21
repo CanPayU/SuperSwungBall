@@ -19,14 +19,20 @@ namespace GameScene
 
         Text myGuiText;
         Timer time;
+		public Timer Time{
+			get{ return Time; }
+		}
 
 		private PhotonPlayer local_player;
+		private PhotonPlayer other_player;
 
         // Use this for initialization
         void Start()
         {
+			Game.Instance = new Game ();
 			time = new Timer(5.0F, end_time);
 			local_player = PhotonNetwork.player;
+			other_player = PhotonNetwork.otherPlayers [0];
             instantiate_team();
 			config_goal ();
         }
@@ -92,9 +98,8 @@ namespace GameScene
 
         public void update_score()
         {
-			int other_id = PhotonNetwork.otherPlayers [0].ID;
 			Team t_a = Game.Instance.Teams[local_player.ID];
-            Team t_b = Game.Instance.Teams[other_id];
+			Team t_b = Game.Instance.Teams[other_player.ID];
             score.text = t_a.Points + " : " + t_b.Points;
         }
 
@@ -108,10 +113,7 @@ namespace GameScene
 			for (int i = 0; i < nb_instance; i++)
             {
 				GameObject play1 = PhotonNetwork.Instantiate (player2_prefab.name, new Vector3 ((float)i * 2, (float)0.5, pos), Quaternion.identity, 0) as GameObject;
-                //GameObject play1 = Instantiate(player1_prefab, new Vector3((float)i * 2, (float)0.5, 7), Quaternion.identity) as GameObject;
-				//GameObject play2 = PhotonNetwork.Instantiate(player2_prefab.name, new Vector3((float)i * 2, (float)0.5, -7), Quaternion.identity, 0) as GameObject;
-				play1.name = local_player.name + i;
-                //play2.name = "team2-" + i;
+               	play1.name = local_player.name + i;
             }
 			if (b) {
 				GameObject play1 = PhotonNetwork.Instantiate ("Captain", new Vector3 ((float)nb_instance * 2, (float)0.5, pos), Quaternion.identity, 0) as GameObject;
@@ -135,12 +137,6 @@ namespace GameScene
 			goal_master.Team = result;
 			goal_enemy.Team = PhotonNetwork.masterClient.ID;
 
-		}
-			
-		void OnPhotonPlayerDisconnected(PhotonPlayer otherPlayer)
-		{
-			if(!Game.Instance.isFinish)
-				GetComponent<EndController> ().on_end (End.ABANDON, otherPlayer);
 		}
     }
 

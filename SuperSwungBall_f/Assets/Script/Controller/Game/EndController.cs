@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -16,6 +17,8 @@ namespace GameScene
 		private Text content;
 		[SerializeField]
 		private GameObject panel;
+		[SerializeField]
+		private string scene;
 
 
 		private string status_text = "";
@@ -35,6 +38,7 @@ namespace GameScene
 		
 		public void on_end (End type, object value = null) {
 
+			Game.Instance.isFinish = true;
 			switch (type) {
 			case End.ABANDON:
 				on_abandon (value as PhotonPlayer);
@@ -51,13 +55,28 @@ namespace GameScene
 			status.color = status_color;
 			panel.SetActive (true);
 
+			StartCoroutine(Diconnect());
+		}
+
+		IEnumerator Diconnect()
+		{
+			yield return new WaitForSeconds(2);
 			PhotonNetwork.LeaveRoom ();
+			PhotonNetwork.Disconnect ();
+		}
+
+		void OnPhotonPlayerDisconnected(PhotonPlayer otherPlayer)
+		{
+			if (!Game.Instance.isFinish) {
+				on_end(End.ABANDON, otherPlayer);
+			}
 		}
 
 		private void on_abandon(PhotonPlayer player) {
 			status_text = "Victoire";
+			status_color = new Color (92f / 255f, 184f / 255f, 92f / 255f);
 			content_text = local_player.name + "\n VS \n" + player.name + " - Abandon";
-			points_text += "calculate";
+			points_text += "ab";
 		}
 
 		private void on_time() {
@@ -72,7 +91,20 @@ namespace GameScene
 			}
 
 			content_text = local_player.name + "\n VS \n" + other_player.name;
-			points_text += "calculate";
+			points_text += "time";
+		}
+		public void exit()
+		{
+			StartCoroutine(ChangeLevel());
+
+			PhotonNetwork.LeaveRoom ();
+			PhotonNetwork.Disconnect ();
+		}
+		IEnumerator ChangeLevel()
+		{
+			float fadeTime = GameObject.Find("GM_Fade").GetComponent<Fading>().BeginFade(1);
+			yield return new WaitForSeconds(fadeTime);
+			SceneManager.LoadScene(scene);
 		}
 	}
 }
