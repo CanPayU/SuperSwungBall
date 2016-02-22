@@ -10,14 +10,19 @@ namespace Standing
         [SerializeField]
         private string scene;
 
+		// a supp
+		[SerializeField]
+		private GameObject music;
+
         // Use this for initialization
         void Start()
         {
-			bool b = SaveLoad.load_user ();
-			Debug.Log("Succes Load User :"+b);
-			if (b) {
-				Debug.Log ("Username : "+User.Instance.username);
-			}
+			SaveLoad.save_setting ();
+			//SaveLoad.load_settings ();
+			SaveLoad.load_user ();
+
+
+
         }
 
         // Update is called once per frame

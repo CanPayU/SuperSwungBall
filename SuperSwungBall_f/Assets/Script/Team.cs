@@ -4,17 +4,20 @@ using UnityEngine;
 using System.Reflection;
 using GameScene;
 
+[System.Serializable]
 public class Team {
 	
 	private List<Player> players;
+	private string[] sounds;
 	private string name;
 	private int points;
 
 	private int nb_player;
 
 
-	public Team(string name_){
+	public Team(string name_, string[] sounds_ = null){
 		name = name_;
+		sounds = (sounds_ != null) ? sounds_ : new string[0];
 		points = 0;
 		nb_player = 5;
 		players = new List<Player>();
@@ -42,21 +45,16 @@ public class Team {
 	}
 
 	public int Points {
-		get {
-			return points;
-		}
-		set {
-			points += value;
-		}
+		get { return points; }
+		set { points += value; }
 	}
 	public string Name {
-		get {
-			return name;
-		}
+		get { return name; }
 	}
 	public int Nb_Player {
-		get {
-			return nb_player;
-		}
+		get { return nb_player; }
+	}
+	public string[] Sounds {
+		get { return sounds; }
 	}
 }

@@ -8,7 +8,6 @@ namespace GameScene
 {
 	public class EndController : MonoBehaviour {
 
-
 		[SerializeField]
 		private Text status;
 		[SerializeField]
@@ -18,13 +17,16 @@ namespace GameScene
 		[SerializeField]
 		private GameObject panel;
 		[SerializeField]
+		private GameObject btn_quit;
+		[SerializeField]
 		private string scene;
-
 
 		private string status_text = "";
 		private string points_text = "points : ";
 		private string content_text = "";
 		private Color status_color;
+		private bool win = false;
+		private int score = 0;
 
 		private PhotonPlayer local_player;
 		private PhotonPlayer other_player;
@@ -48,6 +50,14 @@ namespace GameScene
 				break;
 			}
 
+
+			if (PhotonNetwork.room.visible) {
+				calculate_point ();
+				points_text += "" + score;
+			} else {
+				points_text = "Partie privee";
+			}
+
 			status.text = status_text;
 			points.text = points_text;
 			content.text = content_text;
@@ -58,9 +68,24 @@ namespace GameScene
 			StartCoroutine(Diconnect());
 		}
 
+		void calculate_point(){
+			if (!win) {
+				score = 0;
+			} else {
+				score = 10;
+			}
+
+			HttpController controller = gameObject.GetComponent<HttpController>();
+			controller.sync_score(score, (success) => {
+				if(!success)
+					Notification.danger("Erreur de synchronisation");
+				btn_quit.SetActive(true);
+			});
+		}
+
 		IEnumerator Diconnect()
 		{
-			yield return new WaitForSeconds(2);
+			yield return new WaitForSeconds(5);
 			PhotonNetwork.LeaveRoom ();
 			PhotonNetwork.Disconnect ();
 		}
@@ -73,16 +98,17 @@ namespace GameScene
 		}
 
 		private void on_abandon(PhotonPlayer player) {
+			win = true;
 			status_text = "Victoire";
 			status_color = new Color (92f / 255f, 184f / 255f, 92f / 255f);
 			content_text = local_player.name + "\n VS \n" + player.name + " - Abandon";
-			points_text += "ab";
 		}
 
 		private void on_time() {
 			int myScore = Game.Instance.Teams [local_player.ID].Points;
 			int otherScore = Game.Instance.Teams [other_player.ID].Points;
 			if (myScore > otherScore) {
+				win = true;
 				status_text = "Victoire";
 				status_color = new Color (92f / 255f, 184f / 255f, 92f / 255f);
 			} else {
@@ -91,7 +117,6 @@ namespace GameScene
 			}
 
 			content_text = local_player.name + "\n VS \n" + other_player.name;
-			points_text += "time";
 		}
 		public void exit()
 		{

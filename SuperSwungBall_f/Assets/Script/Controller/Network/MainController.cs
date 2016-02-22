@@ -5,64 +5,50 @@ using System.Collections;
 namespace Network {
 	public class MainController : MonoBehaviour {
 
+		// a supp
 		[SerializeField]
 		private InputField username;
 		[SerializeField]
 		private InputField password;
 		[SerializeField]
 		private Button connect;
+		// ----
+
 		[SerializeField]
 		private GameObject connection_panel;
 		[SerializeField]
 		private GameObject loading_panel;
+		[SerializeField]
+		private GameObject private_panel;
 
 		// Use this for initialization
 		void Start () {
-			if (!User.Instance.is_connected)
-				loading_panel.SetActive (false);
-			else
-				connection_panel.SetActive (false);
-			/*
-			 // sync Score with WebSite
-				int score = 15;
-				Debug.Log(User.Instance.score);
-				HttpController controller = gameObject.GetComponent<HttpController>();
-				controller.sync_score(score, (success) => {
-					Debug.Log(success);
-					Debug.Log(User.Instance.score);
-				});
 
-
-				// localhost
-				string username = "antoine"; // id = 1
-				string password = "mdp"; // OK
-			*/
-				
-
+			//SaveLoad.save_setting ();
+			Debug.Log (Application.persistentDataPath);
+			if (!SaveLoad.load_user ()) {// a echanger
+				//if (!User.Instance.is_connected) 
+				//connection();
+				connection_panel.SetActive (true);
+			} else {
+				SaveLoad.load_settings (); // a supprimer
+				loading_panel.SetActive (true);
+			}
 		}
 
-		public void check_login(){
-			connect.enabled = false;
-			HttpController controller = gameObject.GetComponent<HttpController>();
-			controller.connect(username.text, password.text, (success) => {
-				Debug.Log("isConnected ? " + User.Instance.is_connected + " - Success ?" + success);
-				if(success) {
-					this.connection_panel.SetActive(false);
-					this.loading_panel.SetActive(true);
-					SaveLoad.save_user();
-					this.connection();
-				}else {
-					ColorBlock color = connect.colors;
-					color.normalColor = new Color (212f / 255f, 85f / 255f, 83f / 255f);
-					connect.image.color = new Color (212f / 255f, 85f / 255f, 83f / 255f);
-					connect.enabled = true;
-				}
-			});
+		public void private_game(){
+			PhotonNetwork.Disconnect ();
+			private_panel.SetActive (true);
+			loading_panel.SetActive (false);
+			connection_panel.SetActive (false);
 		}
 
-		public void connection(){
-			
-			GameObject.Find ("Network").GetComponent<NetworkController>().connect();
+
+		public void connect_network(){
+			loading_panel.SetActive (true);
+			private_panel.SetActive (false);
+			connection_panel.SetActive (false);
 		}
+
 	}
 }

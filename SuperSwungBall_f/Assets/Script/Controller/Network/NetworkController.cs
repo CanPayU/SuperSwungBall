@@ -6,9 +6,10 @@ using UnityEngine.SceneManagement;
 namespace Network {
 	public class NetworkController : MonoBehaviour {
 
-		private string game_version_ = "0.6";
+		private string game_version_ = "0.7";
 		private bool room_joined = false;
 		private string room_name;
+		private User user;
 
 		[SerializeField]
 		private Text info_network;
@@ -20,19 +21,11 @@ namespace Network {
 		private System.Random rand = new System.Random();
 
 		void Start () {
-			if (User.Instance.is_connected) {
-				PhotonNetwork.playerName = "Guest-" + rand.Next (100);
-				PhotonNetwork.ConnectUsingSettings (game_version_);
-				room_name = "myusername-" + rand.Next (1000);
-			}
-		}
-
-		public void connect(){
-			User user = User.Instance;
+			user = User.Instance;
 			if (user.is_connected) {
 				PhotonNetwork.playerName = user.username;
 				PhotonNetwork.ConnectUsingSettings (game_version_);
-				room_name = user.username + "_Room" + rand.Next (1000);
+				room_name = user.username + "-" + rand.Next (1000);
 			}
 		}
 
@@ -64,7 +57,7 @@ namespace Network {
 				info += " - " + room_name;
 			info_network.text = info;
 
-			info = "";
+			info = "Connection";
 			if (room_joined) {
 				info = "Joueur trouve : " + (PhotonNetwork.room.playerCount - 1) + "\n";
 				if (PhotonNetwork.playerList.Length > 1) {
