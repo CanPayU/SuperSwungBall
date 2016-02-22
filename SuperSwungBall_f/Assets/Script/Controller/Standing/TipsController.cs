@@ -17,10 +17,8 @@ namespace Standing
         // Use this for initialization
         void Start()
         {
-			TextAsset ta = Resources.Load ("tips", typeof(TextAsset)) as TextAsset;
-			string[] tips = ta.text.Split (new[] { '\r', '\n' }, System.StringSplitOptions.RemoveEmptyEntries);
-            
-			rand = new System.Random();
+            tips = File.ReadAllLines("Assets/Resources/tips.txt");
+            rand = new System.Random();
             r_ = rand.Next(tips.Length);
             tip_text.text = tips[r_];
         }

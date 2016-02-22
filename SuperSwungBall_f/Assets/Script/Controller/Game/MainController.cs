@@ -1,13 +1,12 @@
 ﻿using UnityEngine;
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine.UI;
 
 namespace GameScene
 {
     public class MainController : MonoBehaviour
     {
+
         private bool annim_started = false;
 
         [SerializeField]
@@ -18,23 +17,15 @@ namespace GameScene
         private Text score;
 
         Text myGuiText;
-        Timer time;
-		public Timer Time{
-			get{ return Time; }
-		}
 
-		private PhotonPlayer local_player;
-		private PhotonPlayer other_player;
+        Timer time;
 
         // Use this for initialization
         void Start()
         {
-			Game.Instance = new Game ();
-			time = new Timer(5.0F, end_time);
-			local_player = PhotonNetwork.player;
-			other_player = PhotonNetwork.otherPlayers [0];
+            time = new Timer(5.0F, end_time);
             instantiate_team();
-			config_goal ();
+            //update_score ();
         }
 
         // Update is called once per frame
@@ -43,22 +34,51 @@ namespace GameScene
 
             if (Input.GetKeyDown(KeyCode.Space) && !annim_started)
             {
-				PhotonView pv = PhotonView.Get (this);
-				pv.RPC ("start_annim", PhotonTargets.All);
+                start_annim();
             }
             time.update();
+
+            if (Input.GetKeyDown(KeyCode.S) && !annim_started)
+            {
+                int score = 15;
+                Debug.Log(User.Instance.score);
+                HttpController controller = gameObject.GetComponent<HttpController>();
+                controller.sync_score(score, (success) => {
+                    Debug.Log(success);
+                    Debug.Log(User.Instance.score);
+                });
+                Debug.Log("sended");
+            }
+
+            if (Input.GetKeyDown(KeyCode.C) && !annim_started)
+            {
+                // localhost
+                string username = "antoine"; // id = 1
+                string password = "mdp"; // OK
+                Debug.Log("isConnected ? " + User.Instance.is_connected);
+                HttpController controller = gameObject.GetComponent<HttpController>();
+                controller.connect(username, password, (success) => {
+                    Debug.Log("isConnected ? " + User.Instance.is_connected + " - Success ?" + success);
+                });
+                Debug.Log("sended");
+            }
         }
 
-		[PunRPC] private void end_time()
+        private void suc(bool success)
+        {
+            Debug.Log(success);
+        }
+
+        private void end_time()
         {
             time.reset();
 
             if (annim_started)
             {
-				Dictionary<int, Team> teams = Game.Instance.Teams;
-				foreach (KeyValuePair<int,Team> team in teams)
+                Team[] teams = Game.Instance.Teams;
+                foreach (Team team in teams)
                 {
-					team.Value.end_move_players();
+                    team.end_move_players();
                 }
                 annim_started = false;
                 time.start();
@@ -67,20 +87,19 @@ namespace GameScene
             else
             {
                 annim_started = true;
-				PhotonView pv = PhotonView.Get (this);
-				pv.RPC ("start_annim", PhotonTargets.All);
+                start_annim();
             }
         }
 
-		[PunRPC] private void start_annim()
+        private void start_annim()
         {
             annim_started = true;
             time.start();
 
-			Dictionary<int, Team> teams = Game.Instance.Teams;
-			foreach (KeyValuePair<int,Team> team in teams)
+            Team[] teams = Game.Instance.Teams;
+            foreach (Team team in teams)
             {
-				team.Value.start_move_players();
+                team.start_move_players();
             }
         }
 
@@ -98,52 +117,23 @@ namespace GameScene
 
         public void update_score()
         {
-			Team t_a = Game.Instance.Teams[local_player.ID];
-			Team t_b = Game.Instance.Teams[other_player.ID];
+            Team t_a = Game.Instance.Teams[0];
+            Team t_b = Game.Instance.Teams[1];
             score.text = t_a.Points + " : " + t_b.Points;
         }
 
 
         private void instantiate_team()
         {
-			float pos = ((local_player.isMasterClient) ? -1 : 1) * 9;
-			int nb_player = Game.Instance.Teams[local_player.ID].Nb_Player;
-			bool b = local_player.isMasterClient;
-			int nb_instance = nb_player - (Convert.ToInt16 (b));
-			for (int i = 0; i < nb_instance; i++)
+            int nb_player = Game.Instance.Teams[0].Nb_Player;
+            for (int i = 0; i < nb_player; i++)
             {
-				GameObject play1 = PhotonNetwork.Instantiate (player2_prefab.name, new Vector3 ((float)i * 2, (float)0.5, pos), Quaternion.identity, 0) as GameObject;
-               	play1.name = local_player.name + i;
+                GameObject play1 = Instantiate(player1_prefab, new Vector3((float)i * 2, (float)0.5, 7), Quaternion.identity) as GameObject;
+                GameObject play2 = Instantiate(player2_prefab, new Vector3((float)i * 2, (float)0.5, -7), Quaternion.identity) as GameObject;
+                play1.name = "team1-" + i;
+                play2.name = "team2-" + i;
             }
-			if (b) {
-				GameObject play1 = PhotonNetwork.Instantiate ("Captain", new Vector3 ((float)nb_instance * 2, (float)0.5, pos), Quaternion.identity, 0) as GameObject;
-				play1.name = local_player.name + "_Captain";
-			}
         }
-
-		private void config_goal(){
-			GoalController goal_master = GameObject.Find ("Goal_masterClient").GetComponent<GoalController>();
-			GoalController goal_enemy = GameObject.Find ("Goal_enemy").GetComponent<GoalController>();
-
-			int result = -1;
-			for (int i = 0; i < PhotonNetwork.playerList.Length && result < 0; i++) {
-				PhotonPlayer pp = PhotonNetwork.playerList[i];
-				if (!pp.isMasterClient) {
-					result = pp.ID;
-				}
-			}
-
-			// inversé car on ne marque pas dans son but mais l'autre
-			goal_master.Team = result;
-			goal_enemy.Team = PhotonNetwork.masterClient.ID;
-
-		}
     }
-
-	public enum End {
-		ABANDON,
-		TIME
-	}
-		
 
 }

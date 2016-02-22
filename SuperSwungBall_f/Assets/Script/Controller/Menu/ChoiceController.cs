@@ -5,11 +5,21 @@ namespace Menu
 {
     public class ChoiceController : MonoBehaviour
     {
+
+
+
         private Transform trans;
         private GameObject ball;
         public RaycastHit hitP;
 
         private GameObject current_player;
+
+
+
+
+
+
+
 
         public float journeyTime = 1.0F;
         private float startTime;
@@ -24,6 +34,9 @@ namespace Menu
         // Use this for initialization
         void Start()
         {
+
+
+
             startTime = Time.time;
 
             center = Vector3.zero;
@@ -39,6 +52,7 @@ namespace Menu
         // Update is called once per frame
         void Update()
         {
+
             Vector3 translation = new Vector3(0, 0);
 
             if (Input.GetButton("Horizontal"))
@@ -57,8 +71,15 @@ namespace Menu
             moovingToPoint();
         }
 
+
+
+
+
+
         private void moovingToPoint()
         {
+
+
             if (Input.GetKeyDown(KeyCode.Mouse0)) // clic droit
             {
                 RaycastHit hit;
@@ -69,6 +90,7 @@ namespace Menu
 
                     if (gm.tag == "Play" && gm != current_player) // sur un boutton Menu ? (ici Play)
                     {
+                        Debug.Log("Clic on player");
                         trans.LookAt(hit.point);
                         hitP = hit;
                         current_player = gm;
@@ -84,11 +106,15 @@ namespace Menu
             }
             float fracComplete = (Time.time - startTime) / journeyTime;
             transform.position = Vector3.Slerp(riseRelCenter, setRelCenter, fracComplete);
+
         }
 
 
         void moveCurve()
         {
+
+
+
             float fracComplete = (Time.time - startTime) / journeyTime;
             transform.position = Vector3.Slerp(riseRelCenter, setRelCenter, fracComplete);
         }
