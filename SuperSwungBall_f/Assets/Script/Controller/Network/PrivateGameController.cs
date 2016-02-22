@@ -61,6 +61,8 @@ public class PrivateGameController : MonoBehaviour {
 		if (PhotonNetwork.inRoom) {
 			info = "Joueur trouve : " + (PhotonNetwork.room.playerCount - 1);
 			room_name_text.text = "Room name : " + room_name;
+		} else {
+			room_name_text.text = "Room name : _";
 		}
 		info_network_text.text = info;
 	}

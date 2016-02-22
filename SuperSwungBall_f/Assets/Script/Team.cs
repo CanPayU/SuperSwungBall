@@ -25,13 +25,13 @@ public class Team {
 
 	public void start_move_players(){
 		foreach (Player player in players) {
-			Player_controller controller = player.Gm.GetComponent<Player_controller>();
+			PlayerController controller = player.Gm.GetComponent<PlayerController>();
 			controller.start_Anim();
 		}
 	}
 	public void end_move_players(){
 		foreach (Player player in players) {
-			Player_controller controller = player.Gm.GetComponent<Player_controller>();
+			PlayerController controller = player.Gm.GetComponent<PlayerController>();
 			controller.end_Anim();
 		}
 	}

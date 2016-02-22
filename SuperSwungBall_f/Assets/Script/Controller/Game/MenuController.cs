@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace GameScene
 {
-    public class Menu_controller : MonoBehaviour
+    public class MenuController : MonoBehaviour
     {
         private Dictionary<string, GameObject[]> components = new Dictionary<string, GameObject[]>(); // permet de faciliter l'accès aux composants du menu ex : components["buttons"][0]
         private List<Color> buttonsColor = new List<Color>(); // Facilite l'accès des couleurs des boutons depuis le player_controller

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace GameScene
 {
-    public class Player_controller : MonoBehaviour
+    public class PlayerController : MonoBehaviour
     {
         [SerializeField]
         private GameObject Menu;
@@ -17,7 +17,7 @@ namespace GameScene
 
         //Evite le "GetComponent<>"
         private Collider myCollider;
-        private Menu_controller menuController;
+		private MenuController menuController;
 
         //deplacement
         private bool deplacement;
@@ -38,7 +38,7 @@ namespace GameScene
             //initialisation menu
             Menu = Instantiate(Menu, new Vector3(), Quaternion.identity) as GameObject;
             Menu.transform.parent = transform;
-            menuController = Menu.GetComponent<Menu_controller>();
+			menuController = Menu.GetComponent<MenuController>();
 
 			view = GetComponent<PhotonView> ();
 
@@ -107,7 +107,7 @@ namespace GameScene
             if (deplacement)
             {
 				Debug.Log ("Triger enter :" + other.name);
-                if (other.transform.parent == null && other.name == "Ball" && player.ZonePasse != 0 && other.GetComponent<Ball_controller>().interceptable(gameObject)) // ramasse/intercepte la balle uniquement si le perso a au moins un élément "passe"
+				if (other.transform.parent == null && other.name == "Ball" && player.ZonePasse != 0 && other.GetComponent<BallController>().interceptable(gameObject)) // ramasse/intercepte la balle uniquement si le perso a au moins un élément "passe"
 				{
 					Debug.Log ("Send request for :" + other.name);
 					PhotonView ph = other.gameObject.GetComponent <PhotonView> ();

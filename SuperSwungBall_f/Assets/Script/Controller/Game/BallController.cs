@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace GameScene
 {
-    public class Ball_controller : MonoBehaviour
+    public class BallController : MonoBehaviour
     {
         private GameObject passeur; //joueur possédant la balle juste avant la passe
         private Vector3 arrivalPoint; // point d'arrivée de la passe
@@ -25,7 +25,7 @@ namespace GameScene
             {
                 if (Input.GetKeyDown(KeyCode.A) && transform.parent != null)
                 {
-                    deplacement = transform.parent.GetComponent<Player_controller>().passe(ref arrivalPoint); //Renvoit true si la passe est possible
+					deplacement = transform.parent.GetComponent<PlayerController>().passe(ref arrivalPoint); //Renvoit true si la passe est possible
                     if (deplacement)//debut de la passe
                     {
 						PhotonView pv = PhotonView.Get (this);

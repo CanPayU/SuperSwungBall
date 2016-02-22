@@ -3,20 +3,20 @@ using System.Collections;
 
 namespace GameScene
 {
-    public class Button_controller : MonoBehaviour
+    public class ButtonController : MonoBehaviour
     {
         //evite les "GetComponent<>"
         Color myColor;
         Collider myCollider;
-        Menu_controller myMenu;
-        Player_controller myPlayer;
+		MenuController myMenu;
+		PlayerController myPlayer;
 
         void Start()
         {
             myColor = GetComponent<Renderer>().material.color;
             myCollider = GetComponent<Collider>();
-            myMenu = GetComponent<Transform>().parent.gameObject.GetComponent<Menu_controller>();
-            myPlayer = GetComponent<Transform>().parent.parent.gameObject.GetComponent<Player_controller>();
+			myMenu = GetComponent<Transform>().parent.gameObject.GetComponent<MenuController>();
+			myPlayer = GetComponent<Transform>().parent.parent.gameObject.GetComponent<PlayerController>();
         }
 
         void Update()
