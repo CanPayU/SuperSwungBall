@@ -2,6 +2,8 @@
 using System.Collections;
 using Boomlagoon.JSON;
 
+
+[System.Serializable]
 public sealed class User {
 
 	private static User _instance = new User ();
@@ -10,6 +12,9 @@ public sealed class User {
 		get
 		{
 			return _instance;
+		}
+		set {
+			_instance = value;
 		}
 	}
 
