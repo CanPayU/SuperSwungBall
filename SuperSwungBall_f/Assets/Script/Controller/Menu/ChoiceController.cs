@@ -39,7 +39,7 @@ namespace Menu
         // Update is called once per frame
         void Update()
         {
-            Vector3 translation = new Vector3(0, 0);
+            Vector3 translation = new Vector3(0,0);
 
             if (Input.GetButton("Horizontal"))
             {
@@ -76,14 +76,14 @@ namespace Menu
                         startTime = Time.time;
                         center = (hitP.point + trans.position) * 0.5F;
                         center -= new Vector3(0, 1, 0);
-                        setRelCenter = hitP.point;
+                        setRelCenter = hitP.point - center;
                         riseRelCenter = trans.position - center;
-                        setRelCenter.y = hitP.point.y;
                     }
                 }
             }
             float fracComplete = (Time.time - startTime) / journeyTime;
             transform.position = Vector3.Slerp(riseRelCenter, setRelCenter, fracComplete);
+            transform.position += center;
         }
 
 
