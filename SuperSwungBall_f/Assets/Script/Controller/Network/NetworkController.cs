@@ -57,7 +57,7 @@ namespace Network {
 				info += " - " + room_name;
 			info_network.text = info;
 
-			info = "Connection";
+			info = "Connexion";
 			if (room_joined) {
 				info = "Joueur trouve : " + (PhotonNetwork.room.playerCount - 1) + "\n";
 				if (PhotonNetwork.playerList.Length > 1) {

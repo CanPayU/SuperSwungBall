@@ -4,16 +4,7 @@ using System.Collections;
 
 namespace Network {
 	public class MainController : MonoBehaviour {
-
-		// a supp
-		[SerializeField]
-		private InputField username;
-		[SerializeField]
-		private InputField password;
-		[SerializeField]
-		private Button connect;
-		// ----
-
+		
 		[SerializeField]
 		private GameObject connection_panel;
 		[SerializeField]
@@ -23,17 +14,19 @@ namespace Network {
 
 		// Use this for initialization
 		void Start () {
+	
 
 			//SaveLoad.save_setting ();
-			Debug.Log (Application.persistentDataPath);
-			if (!SaveLoad.load_user ()) {// a echanger
-				//if (!User.Instance.is_connected) 
+			//Debug.Log (Application.persistentDataPath);
+			//if (!SaveLoad.load_user ()) {// a echanger
+			if (!User.Instance.is_connected) { 
 				//connection();
 				connection_panel.SetActive (true);
 			} else {
 				SaveLoad.load_settings (); // a supprimer
 				loading_panel.SetActive (true);
 			}
+
 		}
 
 		public void private_game(){
