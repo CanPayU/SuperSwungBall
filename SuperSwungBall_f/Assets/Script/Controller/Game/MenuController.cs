@@ -8,7 +8,7 @@ namespace GameScene
         private Dictionary<string, GameObject[]> components = new Dictionary<string, GameObject[]>(); // permet de faciliter l'accès aux composants du menu ex : components["buttons"][0]
         private List<Color> buttonsColor = new List<Color>(); // Facilite l'accès des couleurs des boutons depuis le player_controller
         private GameObject target; // pointeur selectionné
-        private GameObject zone_target; // zone du pointeur sélectionné
+        private GameObject zone_target; // zone du pointeur sélectionné, not used ?
 
         #region getters
         public float[] Get_Coordsdeplacement //renvoit les coordonnées du pointeur déplacement

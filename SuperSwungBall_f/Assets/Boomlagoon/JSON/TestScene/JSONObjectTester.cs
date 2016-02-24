@@ -2,11 +2,12 @@ using System.Collections.Generic;
 using Boomlagoon.JSON;
 using UnityEngine;
 
-public class JSONObjectTester : MonoBehaviour {
+public class JSONObjectTester : MonoBehaviour
+{
 
-	public GUIText infoText;
+    public GUIText infoText;
 
-	private string stringToEvaluate = @"{""web-app"": {
+    private string stringToEvaluate = @"{""web-app"": {
   ""servlet"": [   
     {
       ""servlet-name"": ""cofaxCDS"",
@@ -95,80 +96,89 @@ public class JSONObjectTester : MonoBehaviour {
     ""taglib-uri"": ""cofax.tld"",
     ""taglib-location"": ""/WEB-INF/tlds/cofax.tld""}}}";
 
-	void Start() {
-		infoText.gameObject.active = false;
+    void Start()
+    {
+        infoText.gameObject.SetActive(false);
 
-		//JSONObject usage example:
+        //JSONObject usage example:
 
-		//Parse string into a JSONObject:
-		JSONObject jsonObject = JSONObject.Parse(stringToEvaluate);
-		if (jsonObject == null) { //Just to shut up Unity's 'unused variable' warning
-		}
+        //Parse string into a JSONObject:
+        JSONObject jsonObject = JSONObject.Parse(stringToEvaluate);
+        if (jsonObject == null)
+        { //Just to shut up Unity's 'unused variable' warning
+        }
 
-		//You can also create an "empty" JSONObject
-		JSONObject emptyObject = new JSONObject();
+        //You can also create an "empty" JSONObject
+        JSONObject emptyObject = new JSONObject();
 
-		//Adding values is easy (values are implicitly converted to JSONValues):
-		emptyObject.Add("key", "value");
-		emptyObject.Add("otherKey", 123);
-		emptyObject.Add("thirdKey", false);
-		emptyObject.Add("fourthKey", new JSONValue(JSONValueType.Null));
+        //Adding values is easy (values are implicitly converted to JSONValues):
+        emptyObject.Add("key", "value");
+        emptyObject.Add("otherKey", 123);
+        emptyObject.Add("thirdKey", false);
+        emptyObject.Add("fourthKey", new JSONValue(JSONValueType.Null));
 
-		//You can iterate through all values with a simple for-each loop
-		foreach (KeyValuePair<string, JSONValue> pair in emptyObject) {
-			Debug.Log("key : value -> " + pair.Key + " : " + pair.Value);
-			
-			//Each JSONValue has a JSONValueType that tells you what type of value it is. Valid values are: String, Number, Object, Array, Boolean or Null.
-			Debug.Log("pair.Value.Type.ToString() -> " + pair.Value.Type.ToString());
+        //You can iterate through all values with a simple for-each loop
+        foreach (KeyValuePair<string, JSONValue> pair in emptyObject)
+        {
+            Debug.Log("key : value -> " + pair.Key + " : " + pair.Value);
 
-			if (pair.Value.Type == JSONValueType.Number) {
-				//You can access values with the properties Str, Number, Obj, Array and Boolean
-				Debug.Log("Value is a number: " + pair.Value.Number);
-			}
-		}
+            //Each JSONValue has a JSONValueType that tells you what type of value it is. Valid values are: String, Number, Object, Array, Boolean or Null.
+            Debug.Log("pair.Value.Type.ToString() -> " + pair.Value.Type.ToString());
 
-		//JSONObject's can also be created using this syntax:
-		JSONObject newObject = new JSONObject {
-			{"key", "value"},
-			{"otherKey", 123},
-			{"thirdKey", false}
-		};
+            if (pair.Value.Type == JSONValueType.Number)
+            {
+                //You can access values with the properties Str, Number, Obj, Array and Boolean
+                Debug.Log("Value is a number: " + pair.Value.Number);
+            }
+        }
 
-		//JSONObject overrides ToString() and outputs valid JSON
-		Debug.Log("newObject.ToString() -> " + newObject.ToString());
+        //JSONObject's can also be created using this syntax:
+        JSONObject newObject = new JSONObject {
+            {"key", "value"},
+            {"otherKey", 123},
+            {"thirdKey", false}
+        };
 
-		//JSONObjects support array accessors
-		Debug.Log("newObject[\"key\"].Str -> " + newObject["key"].Str);
+        //JSONObject overrides ToString() and outputs valid JSON
+        Debug.Log("newObject.ToString() -> " + newObject.ToString());
 
-		//It also has a method to do the same
-		Debug.Log("newObject.GetValue(\"otherKey\").ToString() -> " + newObject.GetValue("otherKey").ToString());
+        //JSONObjects support array accessors
+        Debug.Log("newObject[\"key\"].Str -> " + newObject["key"].Str);
 
-		//As well as a method to determine whether a key exists or not
-		Debug.Log("newObject.ContainsKey(\"NotAKey\") -> " + newObject.ContainsKey("NotAKey"));
+        //It also has a method to do the same
+        Debug.Log("newObject.GetValue(\"otherKey\").ToString() -> " + newObject.GetValue("otherKey").ToString());
 
-		//Elements can removed with Remove() and the whole object emptied with Clear()
-		newObject.Remove("key");
-		Debug.Log("newObject with \"key\" removed: " + newObject.ToString());
-		
-		newObject.Clear();
-		Debug.Log("newObject cleared: " + newObject.ToString());
-	}
-	
-	void OnGUI() {
-		stringToEvaluate = GUI.TextArea(new Rect(0, 0, Screen.width - 300, Screen.height - 5), stringToEvaluate);
+        //As well as a method to determine whether a key exists or not
+        Debug.Log("newObject.ContainsKey(\"NotAKey\") -> " + newObject.ContainsKey("NotAKey"));
 
-		if (GUI.Button(new Rect(Screen.width - 150, 10, 145, 75), "Evaluate JSON")) {
-			var jsonObject = JSONObject.Parse(stringToEvaluate);
-			if (jsonObject == null) {
-				Debug.LogError("Failed to parse string, JSONObject == null");
-			} else {
-				Debug.Log("Succesfully created JSONObject");
-				Debug.Log(jsonObject.ToString());
-			}
-		}
+        //Elements can removed with Remove() and the whole object emptied with Clear()
+        newObject.Remove("key");
+        Debug.Log("newObject with \"key\" removed: " + newObject.ToString());
 
-		if (GUI.Button(new Rect(Screen.width - 150, 95, 145, 75), "Clear textbox")) {
-			stringToEvaluate = string.Empty;
-		}
-	}
+        newObject.Clear();
+        Debug.Log("newObject cleared: " + newObject.ToString());
+    }
+
+    void OnGUI()
+    {
+        stringToEvaluate = GUI.TextArea(new Rect(0, 0, Screen.width - 300, Screen.height - 5), stringToEvaluate);
+
+        if (GUI.Button(new Rect(Screen.width - 150, 10, 145, 75), "Evaluate JSON"))
+        {
+            var jsonObject = JSONObject.Parse(stringToEvaluate);
+            if (jsonObject == null)
+            {
+                Debug.LogError("Failed to parse string, JSONObject == null");
+            }
+            else {
+                Debug.Log("Succesfully created JSONObject");
+                Debug.Log(jsonObject.ToString());
+            }
+        }
+
+        if (GUI.Button(new Rect(Screen.width - 150, 95, 145, 75), "Clear textbox"))
+        {
+            stringToEvaluate = string.Empty;
+        }
+    }
 }
