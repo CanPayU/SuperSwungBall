@@ -17,8 +17,8 @@ namespace Standing
         // Use this for initialization
         void Start()
         {
-			SaveLoad.save_setting ();
-			//SaveLoad.load_settings ();
+			//SaveLoad.save_setting ();
+			SaveLoad.load_settings ();
 			SaveLoad.load_user ();
 
 

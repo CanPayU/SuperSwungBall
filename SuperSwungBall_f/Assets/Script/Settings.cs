@@ -14,7 +14,7 @@ public class Settings {
 	private Dictionary<string, Team> default_team;
 	private Dictionary<string, Player> default_player;
 
-	public Settings (){
+	public Settings (){/*
 		default_team = new Dictionary<string, Team> ();
 		default_player = new Dictionary<string, Player> ();
 
@@ -24,11 +24,13 @@ public class Settings {
 		Player gpdn = new Player (7, 4, 5, 5, "GPasDNom", 0);
 		Player pwc = new Player (3, 2, 9, 2, "PlayWithCube", 0);
 		Player ept = new Player (1, 1, 1, 1, "Epitechien", 0);
+		Player epta = new Player (8, 7, 5, 7, "Epiteen", 0);
 		default_player.Add ("lombrix", lombrix);
 		default_player.Add ("itec", itec);
 		default_player.Add ("gpdn", gpdn);
 		default_player.Add ("pwc", pwc);
 		default_player.Add ("ept", ept);
+		default_player.Add ("epta", epta);
 		// --------------------
 
 		// ----- Default Team
@@ -36,14 +38,20 @@ public class Settings {
 		Team psg = new Team ("PSG", def_sound, "psg");
 		psg.add_player(lombrix);
 		psg.add_player(gpdn);
+		psg.add_player(epta);
+		psg.add_player(pwc);
+		psg.add_player(itec);
 		default_team.Add("psg", psg);
 
 		Team fr = new Team ("France", def_sound, "fr");
 		fr.add_player(itec);
 		fr.add_player(pwc);
 		fr.add_player(ept);
+		fr.add_player(gpdn);
+		fr.add_player(lombrix);
 		default_team.Add("fr", fr);
 		// ------------------
+		*/
 	}
 
 	public void AddOrUpdate_Team(Team t){

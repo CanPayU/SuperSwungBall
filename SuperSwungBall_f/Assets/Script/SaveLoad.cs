@@ -34,7 +34,7 @@ public static class SaveLoad {
 	}
 
 	public static void save_setting(){
-		SaveLoad.setting = new Settings(); // contient PSG & France
+		SaveLoad.setting = Settings.Instance; // contient PSG & France
 		BinaryFormatter bf = new BinaryFormatter();
 		Debug.Log (Application.persistentDataPath);
 		FileStream file = File.Create (Application.persistentDataPath + "/settings.txt");

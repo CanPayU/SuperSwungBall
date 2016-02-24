@@ -39,7 +39,7 @@ namespace Create_Team {
 			Instantiate_Team ();
 		}
 
-		private void Get_Teams_Array(){
+		public void Get_Teams_Array(){ // puilc car appelé dans le MainController
 			Dictionary<string,Team> teams_dict = Settings.Instance.Default_Team;
 			teams = new Team[teams_dict.Count];
 			int i = 0;
@@ -87,6 +87,7 @@ namespace Create_Team {
 				index++;
 			else
 				index = 0;
+			
 			actual_team = teams [index];
 			players = actual_team.Players;
 			team_name.text = actual_team.Name;
@@ -99,6 +100,7 @@ namespace Create_Team {
 				index--;
 			else
 				index = teams.Length - 1;
+			
 			actual_team = teams [index];
 			players = actual_team.Players;
 			team_name.text = actual_team.Name;
