@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -8,6 +10,8 @@ namespace Create_Team {
 
 	public class TeamController : MonoBehaviour {
 
+		[SerializeField]
+		private GameObject btn_player;
 		[SerializeField]
 		private Text team_name;
 		[SerializeField]
@@ -27,6 +31,12 @@ namespace Create_Team {
 		void Start () {
 			game_panel = GameObject.Find ("Game");
 			Get_Teams_Array ();
+			actual_team = teams [index];
+			players = actual_team.Players;
+			team_name.text = actual_team.Name;
+			not_selected.SetActive (true);
+			player_panel.SetActive (false);
+			Instantiate_Team ();
 		}
 
 		private void Get_Teams_Array(){
@@ -41,15 +51,30 @@ namespace Create_Team {
 		private void UpdateColor(int? index_ = null){
 			foreach (Transform child in game_panel.transform)
 				child.GetComponent<Image> ().color = new Color (1, 1, 1);
-			if (index_ != null) {
+			if (index_ != null) {Debug.Log ("Player-" + index_);
 				Transform btn = game_panel.transform.Find ("Player-" + index_);
 				btn.GetComponent<Image> ().color = new Color (0, 0, 0);
+			}
+		}
+		private void Instantiate_Team(){
+			foreach (Transform child in game_panel.transform)
+				Destroy (child.gameObject);
+			int i = 0;
+			foreach (Player p in players) {
+				GameObject btn = Instantiate (btn_player);
+				btn.transform.parent = game_panel.transform;
+				btn.name = "Player-" + i;
+				btn.GetComponent<Button>().onClick.AddListener(() => { Select();}); 
+				RectTransform rt = btn.GetComponent<RectTransform> ();
+				rt.anchoredPosition = new Vector2(-120, 70 - (i * 60));
+				i++;
 			}
 		}
 
 		public void Save_Team(){
 			actual_team.Players = players;
 			Settings.Instance.AddOrUpdate_Team (actual_team);
+			SaveLoad.save_setting();
 			Get_Teams_Array ();
 		}
 
@@ -67,7 +92,7 @@ namespace Create_Team {
 			team_name.text = actual_team.Name;
 			not_selected.SetActive (true);
 			player_panel.SetActive (false);
-			UpdateColor ();
+			Instantiate_Team ();
 		}
 		public void Previous(){
 			if (index > 0)
@@ -79,9 +104,13 @@ namespace Create_Team {
 			team_name.text = actual_team.Name;
 			not_selected.SetActive (true);
 			player_panel.SetActive (false);
-			UpdateColor ();
+			Instantiate_Team ();
 		}
-		public void Select(int player_id){
+		public void Select(){
+			string name = EventSystem.current.currentSelectedGameObject.name;
+			int index = name.IndexOf("-");
+			int player_id = int.Parse(name.Substring(index+1));
+
 			actual_player_id = player_id;
 			UpdateColor (player_id);
 			Player p = players [player_id];

@@ -6,7 +6,8 @@ public class Fading : MonoBehaviour {
 
 
     public Texture2D fadeOutTexture;
-    public float fadeSpeed = 0.8f;
+	public float fadeSpeed = 0.8f;
+	public string scene = "menu";
 
     private int drawDepth = -1000;
     private float alpha = 1.0f;
@@ -38,4 +39,17 @@ public class Fading : MonoBehaviour {
         float fadeTime = GameObject.Find("GM_Fade").GetComponent<Fading>().BeginFade(-1);
         yield return new WaitForSeconds(fadeTime);
     }
+
+	public void Fade()
+	{
+		StartCoroutine(ChangeScene());
+	}
+
+
+	IEnumerator ChangeScene()
+	{
+		float fadeTime = BeginFade(1);
+		yield return new WaitForSeconds(fadeTime);
+		SceneManager.LoadScene(scene);
+	}
 }

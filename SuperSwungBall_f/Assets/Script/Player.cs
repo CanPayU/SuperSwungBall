@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
+[Serializable]
 public class Player
 {
 	private string player_name;
