@@ -13,6 +13,8 @@ namespace Menu
 		[SerializeField]
 		private Text account_score;
 
+		private Timer time;
+
 		// Use this for initialization
 		void Start () {
 			if (User.Instance.is_connected) {
@@ -20,11 +22,21 @@ namespace Menu
 				account_username.text = User.Instance.username;
 				account_score.text = "Score : " + User.Instance.score;
 			}
+			time = new Timer (60.0F, Inactive);
+			time.start ();
 		}
 
 		// Update is called once per frame
 		void Update () {
-		
+			time.update ();
+			if (Input.anyKey || Input.GetAxis("Mouse X") != 0 ||  Input.GetAxis("Mouse Y") != 0) {
+				time.reset ();
+				time.start ();
+			}
+		}
+
+		void Inactive(){
+			FadingManager.I.Fade ("standing");
 		}
 
 		public void deconnect(){

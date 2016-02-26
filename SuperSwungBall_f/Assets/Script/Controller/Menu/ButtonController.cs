@@ -25,18 +25,10 @@ namespace Menu
 
             if (other.gameObject.name == "Choice")
             {
-                StartCoroutine(ChangeLevel());
+				FadingManager.I.Fade (scene);
+                //StartCoroutine(ChangeLevel());
             }
         }
-        
-
-        IEnumerator ChangeLevel()
-        {
-            float fadeTime = GameObject.Find("GM_Fade").GetComponent<Fading>().BeginFade(1);
-            yield return new WaitForSeconds(fadeTime);
-            SceneManager.LoadScene(scene);
-        }
-        
     }
 
 }

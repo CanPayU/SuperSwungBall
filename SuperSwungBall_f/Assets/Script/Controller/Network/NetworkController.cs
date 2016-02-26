@@ -39,13 +39,13 @@ namespace Network {
 		void OnJoinedRoom(){
 			room_joined = true;
 			if (PhotonNetwork.playerList.Length > 1) {
-				StartCoroutine(ChangeLevel());
+				FadingManager.I.Fade (scene);
 			}
 		}
 		void OnPhotonPlayerConnected(PhotonPlayer other )
 		{
 			if (PhotonNetwork.playerList.Length > 1) {
-				StartCoroutine(ChangeLevel());
+				FadingManager.I.Fade (scene);
 			}
 
 		}
@@ -66,13 +66,13 @@ namespace Network {
 			}
 			info_users.text = info;
 		}
-
+		/*
 		IEnumerator ChangeLevel()
 		{
 			float fadeTime = GameObject.Find("GM_Fade").GetComponent<Fading>().BeginFade(1);
 			yield return new WaitForSeconds(fadeTime);
 			SceneManager.LoadScene(scene);
 		}
-
+*/
 	}
 }

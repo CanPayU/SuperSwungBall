@@ -43,13 +43,13 @@ public class PrivateGameController : MonoBehaviour {
 	}
 	void OnJoinedRoom(){
 		if (PhotonNetwork.playerList.Length > 1) {
-			StartCoroutine(ChangeLevel());
+			FadingManager.I.Fade (scene);
 		}
 	}
 	void OnPhotonPlayerConnected(PhotonPlayer other )
 	{
 		if (PhotonNetwork.playerList.Length > 1) {
-			StartCoroutine(ChangeLevel());
+			FadingManager.I.Fade (scene);
 		}
 
 	}
@@ -66,14 +66,14 @@ public class PrivateGameController : MonoBehaviour {
 		}
 		info_network_text.text = info;
 	}
-
+	/*
 	IEnumerator ChangeLevel()
 	{
 		float fadeTime = GameObject.Find("GM_Fade").GetComponent<Fading>().BeginFade(1);
 		yield return new WaitForSeconds(fadeTime);
 		SceneManager.LoadScene(scene);
 	}
-
+*/
 	public void join_game(){
 		Debug.Log ("On player want join game");
 		PhotonNetwork.LeaveRoom ();

@@ -120,16 +120,19 @@ namespace GameScene
 		}
 		public void exit()
 		{
-			StartCoroutine(ChangeLevel());
+			FadingManager.I.Fade (scene);
+			//StartCoroutine(ChangeLevel());
 
 			PhotonNetwork.LeaveRoom ();
 			PhotonNetwork.Disconnect ();
 		}
+		/*
 		IEnumerator ChangeLevel()
 		{
 			float fadeTime = GameObject.Find("GM_Fade").GetComponent<Fading>().BeginFade(1);
 			yield return new WaitForSeconds(fadeTime);
 			SceneManager.LoadScene(scene);
 		}
+		*/
 	}
 }

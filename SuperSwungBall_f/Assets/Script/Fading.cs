@@ -5,6 +5,33 @@ using UnityEngine.SceneManagement;
 public class Fading : MonoBehaviour {
 
 
+
+
+	/*
+	 * 
+	 * 			CE SCRIPT A ÉTÉ MIS À JOUR DANS FadingManager.cs
+	 * 
+	 * 	==> Script/Controller/Standing/FadingManager.cs
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	*/
+
+
+
+
+
+
+
+
+
+
+
     public Texture2D fadeOutTexture;
 	public float fadeSpeed = 0.8f;
 	public string scene = "menu";

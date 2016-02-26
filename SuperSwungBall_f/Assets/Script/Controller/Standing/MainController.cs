@@ -6,7 +6,6 @@ namespace Standing
 {
     public class MainController : MonoBehaviour
     {
-
         [SerializeField]
         private string scene;
 
@@ -20,27 +19,13 @@ namespace Standing
 			//SaveLoad.save_setting ();
 			SaveLoad.load_settings ();
 			SaveLoad.load_user ();
-
-
-
         }
 
         // Update is called once per frame
         void Update()
         {
-
             if (Input.anyKey)
-            {
-                StartCoroutine(ChangeLevel());
-            }
-        }
-
-
-        IEnumerator ChangeLevel()
-        {
-            float fadeTime = GameObject.Find("GM_Fade").GetComponent<Fading>().BeginFade(1);
-            yield return new WaitForSeconds(fadeTime);
-            SceneManager.LoadScene(scene);
+	            FadingManager.I.Fade ();
         }
     }
 }
