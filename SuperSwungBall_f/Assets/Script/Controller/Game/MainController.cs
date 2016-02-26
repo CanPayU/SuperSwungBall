@@ -144,6 +144,4 @@ namespace GameScene
 		ABANDON,
 		TIME
 	}
-		
-
 }

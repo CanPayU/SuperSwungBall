@@ -60,13 +60,24 @@ namespace Create_Team {
 			foreach (Transform child in game_panel.transform)
 				Destroy (child.gameObject);
 			int i = 0;
+			Debug.Log (actual_team.Compo.Name);
 			foreach (Player p in players) {
 				GameObject btn = Instantiate (btn_player);
 				btn.transform.parent = game_panel.transform;
 				btn.name = "Player-" + i;
 				btn.GetComponent<Button>().onClick.AddListener(() => { Select();}); 
 				RectTransform rt = btn.GetComponent<RectTransform> ();
-				rt.anchoredPosition = new Vector2(-120, 70 - (i * 60));
+
+				// --- Calcule des coordonnées
+				int x = actual_team.Compo.GetPosition (i) [0];
+				int y = actual_team.Compo.GetPosition (i) [1];
+				int w = Screen.width; int h = Screen.height;
+
+				float cst_x = (x+0.5F) * (0.075f * w); // Proportion
+				float cst_y = (y+0.5F) * (0.145f * h); // Proportion
+				rt.anchoredPosition = new Vector2( w * 0.05F + cst_x,-(h * 0.066F + cst_y));
+				// ---
+
 				i++;
 			}
 		}
@@ -119,6 +130,14 @@ namespace Create_Team {
 			player_panel.GetComponent<PlayerController> ().Selected(p);
 			not_selected.SetActive (false);
 			player_panel.SetActive (true);
+		}
+
+
+		public Composition Compo {
+			set { actual_team.Compo = value; 
+				Instantiate_Team ();
+				Save_Team ();
+			}
 		}
 	}
 

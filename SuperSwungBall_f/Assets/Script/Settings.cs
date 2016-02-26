@@ -13,10 +13,13 @@ public class Settings {
 
 	private Dictionary<string, Team> default_team;
 	private Dictionary<string, Player> default_player;
+	private Dictionary<string, Composition> default_compo;
 
-	public Settings (){/*
+	public Settings (){
+		// /*
 		default_team = new Dictionary<string, Team> ();
 		default_player = new Dictionary<string, Player> ();
+		default_compo = new Dictionary<string, Composition> ();
 
 		// ----- Default Player
 		Player lombrix = new Player (4, 6, 7, 1, "Lombrix", 0);
@@ -33,9 +36,27 @@ public class Settings {
 		default_player.Add ("epta", epta);
 		// --------------------
 
+		// ----- Default Compo
+		Composition compo_psg = new Composition("psg");
+		compo_psg.SetPosition (0, 0, 0);
+		compo_psg.SetPosition (1, 1, 1);
+		compo_psg.SetPosition (2, 2, 2);
+		compo_psg.SetPosition (3, 3, 3);
+		compo_psg.SetPosition (4, 5, 5);
+		Default_compo.Add ("psg",compo_psg);
+
+		Composition compo_fr = new Composition("fr");
+		compo_fr.SetPosition (0, 3, 3);
+		compo_fr.SetPosition (1, 1, 3);
+		compo_fr.SetPosition (2, 2, 5);
+		compo_fr.SetPosition (3, 1, 2);
+		compo_fr.SetPosition (4, 5, 4);
+		Default_compo.Add ("fr",compo_fr);
+		// -------------------
+
 		// ----- Default Team
 		string[] def_sound= new string[] { "Musics/Team/PSG/Allez Paris [classic]" };
-		Team psg = new Team ("PSG", def_sound, "psg");
+		Team psg = new Team ("PSG", compo_psg, def_sound, "psg");
 		psg.add_player(lombrix);
 		psg.add_player(gpdn);
 		psg.add_player(epta);
@@ -43,7 +64,7 @@ public class Settings {
 		psg.add_player(itec);
 		default_team.Add("psg", psg);
 
-		Team fr = new Team ("France", def_sound, "fr");
+		Team fr = new Team ("France", compo_fr, def_sound, "fr");
 		fr.add_player(itec);
 		fr.add_player(pwc);
 		fr.add_player(ept);
@@ -51,7 +72,7 @@ public class Settings {
 		fr.add_player(lombrix);
 		default_team.Add("fr", fr);
 		// ------------------
-		*/
+		// */
 	}
 
 	public void AddOrUpdate_Team(Team t){
@@ -66,5 +87,8 @@ public class Settings {
 	}
 	public Dictionary<string, Player> Default_player {
 		get { return default_player; }
+	}
+	public Dictionary<string, Composition> Default_compo {
+		get { return default_compo; }
 	}
 }
