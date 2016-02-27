@@ -16,7 +16,10 @@ public class Game {
 		finished = false;
 		teams = new Dictionary<int, Team>();
 		foreach (PhotonPlayer player in PhotonNetwork.playerList) {
-			teams [player.ID] = new Team (player.name);
+			// teams [player.ID] = new Team (player.name); // Ancien
+			Debug.Log(Settings.Instance.Selected_Team);
+			teams [player.ID] = Settings.Instance.Selected_Team; // Ancien
+			//teams [player.ID].Name = player.name;
 		}
 	}
 

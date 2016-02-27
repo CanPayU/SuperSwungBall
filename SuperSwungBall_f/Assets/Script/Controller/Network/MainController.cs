@@ -14,19 +14,13 @@ namespace Network {
 
 		// Use this for initialization
 		void Start () {
-	
-
-			//SaveLoad.save_setting ();
-			//Debug.Log (Application.persistentDataPath);
-			//if (!SaveLoad.load_user ()) {// a echanger
 			if (!User.Instance.is_connected) { 
 				//connection();
 				connection_panel.SetActive (true);
 			} else {
-				SaveLoad.load_settings (); // a supprimer
+				//SaveLoad.load_settings (); // a supprimer
 				loading_panel.SetActive (true);
 			}
-
 		}
 
 		public void private_game(){

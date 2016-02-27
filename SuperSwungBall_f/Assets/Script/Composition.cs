@@ -11,10 +11,12 @@ public class Composition {
 	/// </summary>
 	private Dictionary<int, int[]> data;
 	private string name;
+	private string code;
 
-	public Composition(string name_){
+	public Composition(string name_, string code_){
 		data = new Dictionary<int, int[]> ();
 		name = name_;
+		code = code_;
 	}
 
 	public bool SetPosition(int p, int x, int y){
@@ -34,5 +36,8 @@ public class Composition {
 
 	public string Name {
 		get { return name; }
+	}
+	public string Code {
+		get { return code; }
 	}
 }

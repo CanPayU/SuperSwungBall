@@ -10,6 +10,7 @@ public static class SaveLoad {
 	public static Settings setting;
 
 	public static void save_user() {
+		Debug.Log ("save_user");
 		SaveLoad.savedUser = User.Instance;
 		BinaryFormatter bf = new BinaryFormatter();
 		FileStream file = File.Create (Application.persistentDataPath + "/user.gd");
@@ -18,10 +19,12 @@ public static class SaveLoad {
 	}  
 
 	public static void reset_user(){
+		Debug.Log ("reset_user");
 		File.Delete (Application.persistentDataPath + "/user.gd");
 	}
 
 	public static bool load_user() {
+		Debug.Log ("load_user");
 		if(File.Exists(Application.persistentDataPath + "/user.gd")) {
 			BinaryFormatter bf = new BinaryFormatter();
 			FileStream file = File.Open(Application.persistentDataPath + "/user.gd", FileMode.Open);
@@ -34,14 +37,15 @@ public static class SaveLoad {
 	}
 
 	public static void save_setting(){
+		Debug.Log ("save_setting");
 		SaveLoad.setting = Settings.Instance; // contient PSG & France
 		BinaryFormatter bf = new BinaryFormatter();
-		Debug.Log (Application.persistentDataPath);
 		FileStream file = File.Create (Application.persistentDataPath + "/settings.txt");
 		bf.Serialize(file, SaveLoad.setting);
 		file.Close();
 	}
 	public static void load_settings() {
+		Debug.Log ("load_settings");
 		if (File.Exists (Application.persistentDataPath + "/settings.txt")) {
 			BinaryFormatter bf = new BinaryFormatter ();
 			FileStream file = File.Open (Application.persistentDataPath + "/settings.txt", FileMode.Open);

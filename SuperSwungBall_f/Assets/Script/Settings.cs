@@ -15,6 +15,8 @@ public class Settings {
 	private Dictionary<string, Player> default_player;
 	private Dictionary<string, Composition> default_compo;
 
+	private Team selected_team;
+
 	public Settings (){
 		// /*
 		default_team = new Dictionary<string, Team> ();
@@ -37,7 +39,7 @@ public class Settings {
 		// --------------------
 
 		// ----- Default Compo
-		Composition compo_psg = new Composition("psg");
+		Composition compo_psg = new Composition("PSG","psg");
 		compo_psg.SetPosition (0, 0, 0);
 		compo_psg.SetPosition (1, 1, 1);
 		compo_psg.SetPosition (2, 2, 2);
@@ -45,7 +47,7 @@ public class Settings {
 		compo_psg.SetPosition (4, 5, 5);
 		Default_compo.Add ("psg",compo_psg);
 
-		Composition compo_fr = new Composition("fr");
+		Composition compo_fr = new Composition("FRANCE", "fr");
 		compo_fr.SetPosition (0, 3, 3);
 		compo_fr.SetPosition (1, 1, 3);
 		compo_fr.SetPosition (2, 2, 5);
@@ -73,6 +75,8 @@ public class Settings {
 		default_team.Add("fr", fr);
 		// ------------------
 		// */
+
+		selected_team = fr;
 	}
 
 	public void AddOrUpdate_Team(Team t){
@@ -90,5 +94,9 @@ public class Settings {
 	}
 	public Dictionary<string, Composition> Default_compo {
 		get { return default_compo; }
+	}
+	public Team Selected_Team {
+		get { return selected_team; }
+		set { Instance.selected_team = value; }
 	}
 }

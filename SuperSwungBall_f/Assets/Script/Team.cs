@@ -21,7 +21,7 @@ public class Team {
 		name = name_;
 		code = code_;
 		sounds = (sounds_ != null) ? sounds_ : new string[0];
-		compo = (compo_ != null) ? compo_ : new Composition("_");
+		compo = (compo_ != null) ? compo_ : new Composition("_","_");
 		points = 0;
 		nb_player = 5;
 		players = new Dictionary<int,Player>();

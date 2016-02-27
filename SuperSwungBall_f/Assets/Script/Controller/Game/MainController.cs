@@ -106,18 +106,37 @@ namespace GameScene
 
         private void instantiate_team()
         {
-			float pos = ((local_player.isMasterClient) ? -1 : 1) * 9;
-			int nb_player = Game.Instance.Teams[local_player.ID].Nb_Player;
+			int cote = ((local_player.isMasterClient) ? -1 : 1); // coté de l'instanciation
+
+			Team team = Game.Instance.Teams [local_player.ID];
+
+			int nb_player = team.Nb_Player;
 			bool b = local_player.isMasterClient;
 			int nb_instance = nb_player - (Convert.ToInt16 (b));
 			for (int i = 0; i < nb_instance; i++)
             {
-				GameObject play1 = PhotonNetwork.Instantiate (player2_prefab.name, new Vector3 ((float)i * 2, (float)0.5, pos), Quaternion.identity, 0) as GameObject;
-               	play1.name = local_player.name + i;
+				// --- Calcule des coordonnées
+				int x = team.Compo.GetPosition (i) [0];
+				int y = team.Compo.GetPosition (i) [1];
+
+				float posX = (-12) + x * 5;
+				float posY = cote * 20 + (y * 3 * -cote);
+				// ---
+
+				GameObject player = PhotonNetwork.Instantiate (player2_prefab.name, new Vector3 (posX, 0.5F, posY), Quaternion.identity, 0) as GameObject;
+				//GameObject play1 = PhotonNetwork.Instantiate (player2_prefab.name, new Vector3 ((float)i * 2, (float)0.5, pos), Quaternion.identity, 0) as GameObject;
+               	player.name = local_player.name + i;
             }
 			if (b) {
-				GameObject play1 = PhotonNetwork.Instantiate ("Captain", new Vector3 ((float)nb_instance * 2, (float)0.5, pos), Quaternion.identity, 0) as GameObject;
-				play1.name = local_player.name + "_Captain";
+				// --- Calcule des coordonnées
+				int x = team.Compo.GetPosition (nb_instance) [0];
+				int y = team.Compo.GetPosition (nb_instance) [1];
+
+				float posX = (-12) + x * 5;
+				float posY = cote * 20 + (y * 3 * -cote);
+				// ---
+				GameObject player = PhotonNetwork.Instantiate ("Captain", new Vector3 (posX, 0.5F, posY), Quaternion.identity, 0) as GameObject;
+				player.name = local_player.name + "_Captain";
 			}
         }
 
