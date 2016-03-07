@@ -61,10 +61,7 @@ public class Player : MonoBehaviour
         // recup de la balle
         ball = GameObject.Find("Ball");
 
-
-
-
-
+        
         afficher_menu(false);
     }
 
@@ -75,7 +72,6 @@ public class Player : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                Debug.Log("1");
                 // s'active une seul fois au clic
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 #region aficher/effacer menu
@@ -99,12 +95,6 @@ public class Player : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0))
             {
-<<<<<<< HEAD
-                // s'active tant que le clic est enfoncé
-                Debug.Log("2");
-=======
-               
->>>>>>> origin/master
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
                 if (Physics.Raycast(ray, out hit, 100))
@@ -133,32 +123,19 @@ public class Player : MonoBehaviour
 
                 update_deplacement(target, zone_target);
             }
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                deplacement = true;
-                arrive = pointeurs[0].transform.position;
-                target_passe = pointeurs[1].transform.position;
-                myTransform.LookAt(arrive);
-                afficher_menu(false);
-            }
         }
         #endregion
         if (deplacement)
-        {
-            if (Vector3.Distance(myTransform.position, arrive) < 1) // Fin de l'annim
-            {
-                deplacement = false;
-                myTransform.rotation = Quaternion.identity;
-                pointeurs[0].transform.localPosition =new Vector3(0, 0, 0);
-                pointeurs[1].transform.localPosition = new Vector3(0, 0, 0);
-            }
-            else // pendant l'annim
-            {
+        {/*
                 myTransform.Translate(Vector3.forward * Time.deltaTime * 5, Space.Self);
                 myTransform.position = new Vector3(myTransform.position.x, 0.5f, myTransform.position.z);
+                */
+                float step = 2.0f * Time.deltaTime;
+            Vector3 depart = new Vector3(transform.position.x, 0.5f, transform.position.z); // suppression du bug de hauteur
+                transform.position = Vector3.MoveTowards(depart, arrive, step);
 
-                // Au clic, call BallController et declanche passe
-                if (Input.GetKey(KeyCode.A))
+            // Au clic, call BallController et declanche passe
+            if (Input.GetKey(KeyCode.A))
                 {
                     BallController script = ball.GetComponent<BallController>();
                     if(script.Holder == gameObject)
@@ -167,7 +144,7 @@ public class Player : MonoBehaviour
                     }
                 }
 
-            }
+            
         }
     }
     #region initialisation
@@ -207,6 +184,23 @@ public class Player : MonoBehaviour
     }
     #endregion
 
+    public void start_move()
+    {
+        deplacement = true;
+        arrive = pointeurs[0].transform.position;
+        target_passe = pointeurs[1].transform.position;
+        myTransform.LookAt(arrive);
+        afficher_menu(false);
+    }
+
+    public void end_move()
+    {
+        deplacement = false;
+        myTransform.rotation = Quaternion.identity;
+        pointeurs[0].transform.localPosition = new Vector3(0, 0, 0);
+        pointeurs[1].transform.localPosition = new Vector3(0, 0, 0);
+    }
+
     private void afficher_menu(bool afficher)
     {
         for (int i = 0; i < myTransform.childCount; ++i)
@@ -217,10 +211,6 @@ public class Player : MonoBehaviour
                 myTransform.GetChild(i).GetComponent<Renderer>().enabled = afficher;
             }
         }
-<<<<<<< HEAD
-=======
-      
->>>>>>> origin/master
     }
     public void changer_valeur(Color c)
     {
