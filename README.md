@@ -1,3 +1,3 @@
 # SuperSwungBall
 Strategy Game
-Modif Hugo
+Modif Hugo-2
