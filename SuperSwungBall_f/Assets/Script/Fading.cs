@@ -35,7 +35,7 @@ public class Fading : MonoBehaviour {
 
     IEnumerator ChangeLevel()
     {
-        float fadeTime = GameObject.Find("GM").GetComponent<Fading>().BeginFade(-1);
+        float fadeTime = GameObject.Find("GM_Fade").GetComponent<Fading>().BeginFade(-1);
         yield return new WaitForSeconds(fadeTime);
     }
 }
