@@ -56,7 +56,7 @@ public class Settings {
 		compo_fr.SetPosition (4, 5, 4);
 		Default_compo.Add ("fr",compo_fr);
 		// -------------------
-
+		/*
 		// ----- Default Team
 		string[] def_sound= new string[] { "Musics/Team/PSG/Allez Paris [classic]" };
 		Team psg = new Team ("PSG", compo_psg, def_sound, "psg");
@@ -75,7 +75,25 @@ public class Settings {
 		fr.add_player(lombrix);
 		default_team.Add("fr", fr);
 		// ------------------
-		// */
+		*/
+		// ----- Default Team FOR DEBUG
+		string[] def_sound= new string[] { "Musics/Team/PSG/Allez Paris [classic]" };
+		Team psg = new Team ("PSG", compo_psg, def_sound, "psg");
+		psg.add_player(new Player (4, 6, 7, 1, "Lombrix", 0));
+		psg.add_player(new Player (7, 4, 5, 5, "GPasDNom", 0));
+		psg.add_player(new Player (1, 1, 1, 1, "Epitechien", 0));
+		psg.add_player(new Player (3, 2, 9, 2, "PlayWithCube", 0));
+		psg.add_player(new Player (1, 4, 2, 9, "Itectori", 0));
+		default_team.Add("psg", psg);
+
+		Team fr = new Team ("France", compo_fr, def_sound, "fr");
+		fr.add_player(new Player (1, 4, 2, 9, "Itectori", 0));
+		fr.add_player(new Player (3, 2, 9, 2, "PlayWithCube", 0));
+		fr.add_player(new Player (8, 7, 5, 7, "Epiteen", 0));
+		fr.add_player(new Player (7, 4, 5, 5, "GPasDNom", 0));
+		fr.add_player(new Player (4, 6, 7, 1, "Lombrix", 0));
+		default_team.Add("fr", fr);
+		// ------------------
 
 		selected_team = fr;
 	}
@@ -102,11 +120,11 @@ public class Settings {
 	}
 	public Team Random_Team {
 		get { 
-			Debug.Log (rand);
-			Debug.Log (default_team);
-			int alea = rand.Next (default_team.Count);
+			var teams = default_team;
+			teams.Remove (selected_team.Code);
+			int alea = rand.Next (teams.Count);
 			int i = 0;
-			foreach (var team in default_team) {
+			foreach (var team in teams) {
 				if (i == alea)
 					return team.Value;
 				i++;

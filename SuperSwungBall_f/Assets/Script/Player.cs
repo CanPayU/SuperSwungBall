@@ -90,6 +90,7 @@ public class Player
 	}
 	public int Team_id {
 		get { return team_id; }
+		set { team_id = value; }
 	}
     #endregion
 }

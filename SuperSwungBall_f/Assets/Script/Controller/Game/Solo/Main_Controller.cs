@@ -132,17 +132,19 @@ namespace GameScene.Solo
 
         private void instantiate_team()
         {
-            int nb_player = Game.Instance.Teams[0].Nb_Player;
+			int nb_player = Game.Instance.Teams[0].Nb_Player;
 
 			int i = 0;
 			foreach (var player in Game.Instance.Teams[0].Players) {
 				GameObject play1 = Instantiate(player1_prefab, new Vector3((float)(++i) * 2, 1, 7), Quaternion.identity) as GameObject;
-				play1.name = player.Name+"-0";
+				player.Team_id = 0;
+				play1.name = player.Name+"-"+player.Team_id;
 			}
 			i = 0;
-			foreach (var player in Game.Instance.Teams[1].Players) {
+			foreach (var player_t2 in Game.Instance.Teams[1].Players) {
 				GameObject play2 = Instantiate(player2_prefab, new Vector3((float)(++i) * 2, 1, -7), Quaternion.identity) as GameObject;
-				play2.name = player.Name+"-1";
+				player_t2.Team_id = 1;
+				play2.name = player_t2.Name+"-"+player_t2.Team_id;
 			}
         }
     }
