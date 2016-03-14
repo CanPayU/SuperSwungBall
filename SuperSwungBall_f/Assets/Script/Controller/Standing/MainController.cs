@@ -2,9 +2,9 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-namespace Menu
+namespace Standing
 {
-    public class ButtonController : MonoBehaviour
+    public class MainController : MonoBehaviour
     {
 
         [SerializeField]
@@ -13,22 +13,19 @@ namespace Menu
         // Use this for initialization
         void Start()
         {
+
         }
 
         // Update is called once per frame
         void Update()
         {
-        }
 
-        void OnTriggerEnter(Collider other)
-        {
-
-            if (other.gameObject.name == "Choice")
+            if (Input.anyKey)
             {
                 StartCoroutine(ChangeLevel());
             }
         }
-        
+
 
         IEnumerator ChangeLevel()
         {
@@ -36,7 +33,6 @@ namespace Menu
             yield return new WaitForSeconds(fadeTime);
             SceneManager.LoadScene(scene);
         }
-        
     }
-
 }
+

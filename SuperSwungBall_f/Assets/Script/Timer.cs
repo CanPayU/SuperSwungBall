@@ -2,9 +2,8 @@
 using System.Collections;
 using System;
 
-public class Timer {
-
-
+public class Timer
+{
     private bool started;
     private float max_time;
     private float time_remaining;
@@ -33,15 +32,20 @@ public class Timer {
         {
             started = false;
             end_time();
-            time_remaining = 0;
+           // time_remaining = 0;
         }
     }
 
     public float Time_remaining
     {
-        get {    return time_remaining; }
+        get { return time_remaining; }
     }
 
+    public void reset()
+    {
+        time_remaining = max_time;
+        started = false;
+    }
 
 
 }
