@@ -19,6 +19,7 @@ namespace Standing
 			//SaveLoad.save_setting ();
 			SaveLoad.load_settings ();
 			SaveLoad.load_user ();
+			Debug.Log (Settings.Instance.Default_Team);
         }
 
         // Update is called once per frame

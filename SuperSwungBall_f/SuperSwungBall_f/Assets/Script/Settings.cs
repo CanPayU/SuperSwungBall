@@ -102,6 +102,8 @@ public class Settings {
 	}
 	public Team Random_Team {
 		get { 
+			Debug.Log (rand);
+			Debug.Log (default_team);
 			int alea = rand.Next (default_team.Count);
 			int i = 0;
 			foreach (var team in default_team) {
