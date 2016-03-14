@@ -12,7 +12,7 @@ namespace Menu
         private GameObject ball;
         public RaycastHit hitP;
 
-        private GameObject actual_player;
+        private GameObject current_player;
 
 
 
@@ -45,7 +45,7 @@ namespace Menu
 
             ball = gameObject;
             trans = ball.GetComponent<Transform>();
-            actual_player = null;
+            current_player = null;
             hitP.point = transform.position;
         }
 
@@ -88,12 +88,12 @@ namespace Menu
                 {
                     GameObject gm = hit.transform.gameObject;
 
-                    if (gm.tag == "Play" && gm != actual_player) // sur un boutton Menu ? (ici Play)
+                    if (gm.tag == "Play" && gm != current_player) // sur un boutton Menu ? (ici Play)
                     {
                         Debug.Log("Clic on player");
                         trans.LookAt(hit.point);
                         hitP = hit;
-                        actual_player = gm;
+                        current_player = gm;
 
                         startTime = Time.time;
                         center = (hitP.point + trans.position) * 0.5F;
