@@ -12,7 +12,7 @@ public class Game {
 
 	private Dictionary<int, Team> teams;
 	private bool finished;
-	private int max_point = 1;
+	private int max_point = 3;
 
 	public Game (){
 		finished = false;
@@ -41,8 +41,12 @@ public class Game {
 
 	private void end_game(){
 		GameObject main = GameObject.Find ("Main");
-		main.GetComponent<MainController> ().update_score ();
-		main.GetComponent<EndController> ().on_end (End.TIME);
+		if (PhotonNetwork.inRoom) {
+			main.GetComponent<MainController> ().update_score ();
+			main.GetComponent<EndController> ().on_end (End.TIME);
+		} else {
+			main.GetComponent<Main_Controller> ().update_score ();
+		}
 	}
 
 	public static Game Instance {

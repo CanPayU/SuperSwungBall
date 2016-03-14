@@ -1,11 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
+using GameScene.Multi;
+using GameScene.Solo;
 
-namespace GameScene.Multi
+namespace GameScene
 {
     public class GoalController : MonoBehaviour
     {
-        private int team_id;
+
+		[SerializeField]
+		private int team_id;
 		public int Team {
 			set {
 				team_id = value;
@@ -22,9 +26,15 @@ namespace GameScene.Multi
 
         public void goal()
         {
+            Debug.Log("GOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAL");
             Game.Instance.goal(team_id);
-            MainController controller = main.GetComponent<MainController>();
-            controller.update_score();
+
+			if (PhotonNetwork.inRoom) {
+				main.GetComponent<MainController>().update_score();
+			} else {
+				main.GetComponent<Main_Controller>().update_score();
+			}
+
         }
     }
 }

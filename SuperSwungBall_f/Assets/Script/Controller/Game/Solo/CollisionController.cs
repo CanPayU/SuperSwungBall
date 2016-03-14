@@ -25,7 +25,7 @@ namespace GameScene.Solo
                 {
                     transform.FindChild("perso").GetComponent<Animator>().Play("TouchDown");
                     GetComponent<Player_controller>().Pause = 10f;
-                    GoalController g_controller = other.GetComponent<GoalController>();
+					GoalController g_controller = other.GetComponent<GoalController>();
                     g_controller.goal();
                 }
 

@@ -38,7 +38,6 @@ namespace Network {
 		}
 		void OnJoinedRoom(){
 			room_joined = true;
-			FadingManager.I.Fade (scene); // A supp
 			if (PhotonNetwork.playerList.Length > 1) {
 				FadingManager.I.Fade (scene);
 			}

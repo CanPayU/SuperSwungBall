@@ -16,7 +16,7 @@ namespace Standing
         // Use this for initialization
         void Start()
         {
-			//SaveLoad.save_setting ();
+			SaveLoad.save_setting ();
 			SaveLoad.load_settings ();
 			SaveLoad.load_user ();
 			Debug.Log (Settings.Instance.Default_Team);
