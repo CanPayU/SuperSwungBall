@@ -32,6 +32,13 @@ namespace GameScene.Multi
 				if (other.tag == "Player")
 				{
 					Player adversaire = other.GetComponent<PlayerController>().Player;
+
+					Debug.Log (adversaire.Team_id);
+					Debug.Log (adversaire.Tacle);
+					Debug.Log (player);
+					Debug.Log (player.Team_id);
+					Debug.Log (player.Tacle);
+
 					if (adversaire.Team_id != player.Team_id && (adversaire.Tacle != 0 || player.Tacle != 0)) // collision adversaire et déclechement combat
 					{
 						transform.FindChild("perso").transform.LookAt(new Vector3(other.transform.position.x, transform.FindChild("perso").position.y, other.transform.position.z)); // rotation des joueurs ( face à face)

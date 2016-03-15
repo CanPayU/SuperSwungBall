@@ -64,6 +64,7 @@ namespace GameScene.Multi
         {
 			if (!view.isMine)
 				return;
+			
 
             if (!deplacement)
             {
@@ -132,17 +133,6 @@ namespace GameScene.Multi
                     }
                 }
             }
-
-            #region switch animation / à suppr
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                if (!deplacement)
-                {
-                    //start_Anim();
-                }
-            }
-            #endregion
-
         }
         /*
         public void OnTriggerEnter(Collider other) //event collison
@@ -193,6 +183,8 @@ namespace GameScene.Multi
 
         public void start_Anim() // debut de l'animation
 		{
+			Debug.Log ("Start anim of :"+name+" gm:"+gameObject.name);
+
             mouseState = false;
             deplacement = true;
             menuController.display(false);
@@ -207,7 +199,7 @@ namespace GameScene.Multi
             if (arrivalPoint != transform.position)
             {
                 transform.FindChild("perso").LookAt(new Vector3(arrivalPoint.x, transform.FindChild("perso").position.y, arrivalPoint.z));
-                transform.FindChild("perso").GetComponent<Animator>().Play("Course");
+				playAnnimation("Course");
                 movement = true;
             }
         }
@@ -224,5 +216,40 @@ namespace GameScene.Multi
             transform.FindChild("perso").GetComponent<Animator>().Play("Repos");
             movement = false;
         }
+
+		/*
+        public void OnTriggerEnter(Collider other) //event collison
+        {
+            if (deplacement)
+            {
+				Debug.Log ("Triger enter :" + other.name);
+				if (other.transform.parent == null && other.name == "Ball" && player.ZonePasse != 0 && other.GetComponent<BallController>().interceptable(gameObject)) // ramasse/intercepte la balle uniquement si le perso a au moins un élément "passe"
+				{
+					Debug.Log ("Send request for :" + other.name);
+					PhotonView ph = other.gameObject.GetComponent <PhotonView> ();
+					ph.RequestOwnership ();
+
+
+					PhotonView pv = PhotonView.Get (this);
+					pv.RPC ("attached_ball", PhotonTargets.All, ph.viewID);
+                }
+            }
+        }
+		[PunRPC] private void attached_ball(int viewID){
+			GameObject other = PhotonView.Find (viewID).gameObject;
+			other.transform.parent = transform;
+			other.transform.localPosition = new Vector3(1, 0, 0);
+		}*/
+		private void playAnnimation(string name){
+			PhotonView ph = gameObject.GetComponent <PhotonView> (); // View sur laquelle on fait l'annim
+			ph.RequestOwnership ();
+			PhotonView pv = PhotonView.Get (this);
+			pv.RPC ("playAnnimation", PhotonTargets.All, ph.viewID); // sync
+		}
+		[PunRPC] private void playAnnimation(int viewID, string name){
+			GameObject other = PhotonView.Find (viewID).gameObject;
+			other.transform.FindChild("perso").GetComponent<Animator>().Play("Course");
+		}
+
     }
 }
