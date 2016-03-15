@@ -31,7 +31,7 @@ public class Team {
 	public void start_move_players(){
 		foreach (KeyValuePair<int,Player> player in players) {
 			if (PhotonNetwork.inRoom) {
-				player.Value.Gm.GetComponent<PlayerController> ().start_Anim ();
+				player.Value.Gm.GetComponent<PlayerController> ().start_Anim();
 			} else {
 				player.Value.Gm.GetComponent<Player_controller> ().start_Anim ();
 			}

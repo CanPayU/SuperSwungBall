@@ -24,8 +24,7 @@ namespace GameScene.Multi
 
 				if (other.tag == "Goal" && transform.FindChild("perso").transform.FindChild("Ball") != null) // GOAL
 				{
-					playAnnimation("TouchDown");
-					GetComponent<PlayerController>().Pause = 10f;
+					playAnnimation("TouchDown", 10f);
 					GoalController g_controller = other.GetComponent<GoalController>();
 					g_controller.goal();
 				}
@@ -53,8 +52,7 @@ namespace GameScene.Multi
 							if (player.Tacle > attaqueAdverse)
 							{
 								//animation Attaque
-								playAnnimation("Attaque");
-								GetComponent<PlayerController>().Pause = 1f;
+								playAnnimation("Attaque", 1f);
 								Debug.Log(name + " réussit son tacle");
 							}
 							else
@@ -88,8 +86,7 @@ namespace GameScene.Multi
 		private void combatPerdu(bool porteurDeBall)
 		{
 			//animation Chute
-			playAnnimation("Chute");
-			GetComponent<PlayerController>().Pause = 4f;
+			playAnnimation("Chute", 4f);
 
 			if (porteurDeBall)
 			{
@@ -101,15 +98,23 @@ namespace GameScene.Multi
 			}
 		}
 
-		private void playAnnimation(string name){
+		private void playAnnimation(string name, float pause){
 			PhotonView ph = gameObject.GetComponent <PhotonView> (); // View sur laquelle on fait l'annim
 			ph.RequestOwnership ();
 			PhotonView pv = PhotonView.Get (this);
-			pv.RPC ("playAnnimationRPC", PhotonTargets.All, ph.viewID, name); // sync
+			object[] param = new object[3];
+			param [0] = ph.viewID; param [1] = name; param [2] = pause * 10;
+			pv.RPC ("playAnnimationRPC", PhotonTargets.All, param); // sync
 		}
-		[PunRPC] private void playAnnimationRPC(int viewID, string name){
+		[PunRPC] private void playAnnimationRPC(object[] param){
+
+			string name = param [0] as string;
+			float pause = (float)((int)(param [2]) / 10f);
+			int viewID = (int)param [1];
+
 			GameObject other = PhotonView.Find (viewID).gameObject;
 			other.transform.FindChild("perso").GetComponent<Animator>().Play(name);
+			other.GetComponent<PlayerController>().Pause = pause;
 		}
 	}
 }
