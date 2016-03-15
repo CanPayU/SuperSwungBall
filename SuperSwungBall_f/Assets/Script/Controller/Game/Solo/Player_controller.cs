@@ -54,7 +54,7 @@ namespace GameScene.Solo
             player = new Player(5, 5, 15, 5, gameObject.name, team_id); // A changer en fonction des stats initiales du perso
 
             Team t_ = Game.Instance.Teams[team_id];
-            t_.add_player(player);
+            t_.add_player(player);  
             myCollider = GetComponent<Collider>();
 
             phaseAnimation = false;

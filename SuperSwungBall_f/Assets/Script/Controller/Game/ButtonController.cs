@@ -27,7 +27,7 @@ namespace GameScene
         void OnMouseEnter() // event souris entre
         {
             //transform.
-            transform.localScale = new Vector3(0.22f, 0.22f, 0.22f);
+            transform.localScale += new Vector3(0.02f, 0.02f, 0.02f);
         }
 
         void OnMouseOver() // event souris dessus
@@ -47,19 +47,19 @@ namespace GameScene
 						} else {
 							GetComponent<Transform>().parent.parent.gameObject.GetComponent<Player_controller>().updateValuesPlayer(myColor);
 						}
-                        transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+                        transform.localScale -= new Vector3(0.02f, 0.02f, 0.02f);
                     }
                 }
             }
             if(Input.GetKeyUp(KeyCode.Mouse0))
             {
-                transform.localScale = new Vector3(0.22f, 0.22f, 0.22f);
+                transform.localScale += new Vector3(0.02f, 0.02f, 0.02f);
             }
         }
 
         void OnMouseExit() // event souris quitte
         {
-           transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+           transform.localScale -= new Vector3(0.02f, 0.02f, 0.02f);
         }
     }
 }
