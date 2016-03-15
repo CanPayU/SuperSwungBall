@@ -30,7 +30,7 @@ namespace GameScene.Multi
         void Start()
         {
 			Game.Instance = new Game ();
-			time = new Timer(5.0F, end_time);
+			time = new Timer(10.0F, end_time);
 			local_player = PhotonNetwork.player;
 			other_player = PhotonNetwork.otherPlayers [0];
             instantiate_team();
