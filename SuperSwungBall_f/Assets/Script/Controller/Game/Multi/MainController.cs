@@ -13,7 +13,9 @@ namespace GameScene.Multi
         [SerializeField]
         private GameObject player1_prefab;
         [SerializeField]
-        private GameObject player2_prefab;
+		private GameObject player2_prefab;
+		[SerializeField]
+		private GameObject ball_prefab;
         [SerializeField]
         private Text score;
 
@@ -122,7 +124,7 @@ namespace GameScene.Multi
 				namePrefab = player2_prefab.name;
 			}
 
-			for (int i = 0; i < nb_instance; i++)
+			for (int i = 0; i < nb_player; i++)
             {
 				// --- Calcule des coordonnées
 				int x = team.Compo.GetPosition (i) [0];
@@ -136,7 +138,11 @@ namespace GameScene.Multi
 				Player pl = team.Players [i];
 				pl.Name += "-" + i;
 				player.name = pl.Name+"-"+pl.Team_id;
-            }
+			}
+			if (b) {
+				GameObject player = PhotonNetwork.Instantiate (ball_prefab.name, new Vector3 (5F, 0.5F, 0F), Quaternion.identity, 0) as GameObject;
+			}
+			/*
 			if (b) {
 				// --- Calcule des coordonnées
 				int x = team.Compo.GetPosition (nb_instance) [0];
@@ -149,7 +155,7 @@ namespace GameScene.Multi
 				Player pl = team.Players [nb_instance];
 				pl.Name += "-" + nb_instance;
 				player.name = pl.Name+"-"+pl.Team_id;
-			}
+			}*/
         }
 
 		private void config_goal(){
