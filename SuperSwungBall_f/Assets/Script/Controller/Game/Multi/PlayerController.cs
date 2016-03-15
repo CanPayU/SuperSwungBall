@@ -110,7 +110,7 @@ namespace GameScene.Multi
                         if (transform.position == arrivalPoint)
                         {
                             //arret du personnage ( a atteint son point d'arrivé)
-                            transform.FindChild("perso").GetComponent<Animator>().Play("Repos");
+							playAnnimation("Repos");
                             movement = false;
                         }
                     }
@@ -124,11 +124,11 @@ namespace GameScene.Multi
                         if(movement) // play precedente animation
                         {
                             transform.FindChild("perso").LookAt(new Vector3(arrivalPoint.x, transform.FindChild("perso").position.y, arrivalPoint.z));
-                            transform.FindChild("perso").GetComponent<Animator>().Play("Course");
+							playAnnimation("Course");
                         }
                         else
                         {
-                            transform.FindChild("perso").GetComponent<Animator>().Play("Repos");
+							playAnnimation("Repos");
                         }
                     }
                 }
@@ -211,7 +211,7 @@ namespace GameScene.Multi
             pause = 0;
 
             //animation repos
-            transform.FindChild("perso").GetComponent<Animator>().Play("Repos");
+			playAnnimation("Repos");
             movement = false;
         }
 
@@ -246,7 +246,7 @@ namespace GameScene.Multi
 		}
 		[PunRPC] private void playAnnimation(int viewID, string name){
 			GameObject other = PhotonView.Find (viewID).gameObject;
-			other.transform.FindChild("perso").GetComponent<Animator>().Play("Course");
+			other.transform.FindChild("perso").GetComponent<Animator>().Play(name);
 		}
 
     }
