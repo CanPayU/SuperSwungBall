@@ -141,6 +141,7 @@ namespace GameScene.Multi
 			}
 			if (b) {
 				GameObject player = PhotonNetwork.Instantiate (ball_prefab.name, new Vector3 (5F, 0.5F, 0F), Quaternion.identity, 0) as GameObject;
+				player.name = "Ball";
 			}
 			/*
 			if (b) {

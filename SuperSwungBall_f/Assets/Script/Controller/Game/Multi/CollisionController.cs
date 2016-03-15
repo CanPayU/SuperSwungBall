@@ -14,6 +14,7 @@ namespace GameScene.Multi
 
 		[PunRPC] private void attached_ball(int viewID){
 			GameObject other = PhotonView.Find (viewID).gameObject;
+			Debug.Log ("Container ball : " + other.name);
 			other.transform.parent = transform.FindChild("perso").transform;
 			other.GetComponent<Collider>().enabled = false;
 			other.transform.localPosition = new Vector3(1.3f, 3, 0);
@@ -24,7 +25,8 @@ namespace GameScene.Multi
 		{
 			if (GetComponent<PlayerController>().Deplacement)
 			{
-				if (other.transform.parent == null && other.name == "Ball" && player.ZonePasse != 0 && other.GetComponent<BallController>().interceptable(gameObject)) // ramasse/intercepte la balle uniquement si le perso a au moins un élément "passe"
+				player = GetComponent<PlayerController> ().Player;
+				if (other.transform.parent == null && (other.name.Contains("Ball")) && player.ZonePasse != 0 && other.GetComponent<BallController>().interceptable(gameObject)) // ramasse/intercepte la balle uniquement si le perso a au moins un élément "passe"
 				{
 					PhotonView ph = other.gameObject.GetComponent<PhotonView> ();
 					ph.RequestOwnership ();
@@ -32,8 +34,10 @@ namespace GameScene.Multi
 					pv.RPC ("attached_ball", PhotonTargets.All, ph.viewID);
 				}
 
+				Debug.Log ("OTRIGGER AND DEPLACEMENT");
 				if (other.tag == "Goal" && transform.FindChild("perso").transform.FindChild("Ball") != null) // GOAL
 				{
+					Debug.Log ("GOAL");
 					playAnnimation("TouchDown", 10f);
 					GoalController g_controller = other.GetComponent<GoalController>();
 					g_controller.goal();
