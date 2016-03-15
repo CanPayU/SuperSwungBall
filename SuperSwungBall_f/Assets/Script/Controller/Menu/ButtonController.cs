@@ -25,6 +25,7 @@ namespace Menu
 
             if (other.gameObject.name == "Choice")
             {
+                Debug.Log(scene);
 				FadingManager.I.Fade (scene);
                 //StartCoroutine(ChangeLevel());
             }
