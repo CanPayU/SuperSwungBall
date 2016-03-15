@@ -58,15 +58,8 @@ namespace GameScene.Multi
 				Dictionary<int, Team> teams = Game.Instance.Teams;
 				foreach (KeyValuePair<int,Team> team in teams)
                 {
-					//team.Value.end_move_players();
+					team.Value.end_move_players();
                 }
-
-				foreach(var gameObj in GameObject.FindGameObjectsWithTag("Player"))
-				{
-					PlayerController controller = gameObj.GetComponent<PlayerController>();
-					if(controller != null)
-						controller.start_Anim();
-				}
 
                 annim_started = false;
                 time.start();

@@ -9,6 +9,7 @@ namespace GameScene.Multi
 		void Start()
 		{
 			player = GetComponent<PlayerController>().Player;
+			Debug.Log (name + " PL:"+player.Name);
 		}
 		public void OnTriggerEnter(Collider other) //event collison
 		{
@@ -33,9 +34,9 @@ namespace GameScene.Multi
 				{
 					Player adversaire = other.GetComponent<PlayerController>().Player;
 
-					Debug.Log (adversaire.Team_id);
-					Debug.Log (adversaire.Tacle);
-					Debug.Log (player);
+					// Debug.Log (adversaire.Team_id); OK
+					// Debug.Log (adversaire.Tacle); OK
+					Debug.Log (player); // NULL
 					Debug.Log (player.Team_id);
 					Debug.Log (player.Tacle);
 

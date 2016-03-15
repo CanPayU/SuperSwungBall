@@ -183,8 +183,6 @@ namespace GameScene.Multi
 
         public void start_Anim() // debut de l'animation
 		{
-			Debug.Log ("Start anim of :"+name+" gm:"+gameObject.name);
-
             mouseState = false;
             deplacement = true;
             menuController.display(false);
