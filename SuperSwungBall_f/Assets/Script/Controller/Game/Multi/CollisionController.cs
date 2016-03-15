@@ -104,14 +104,18 @@ namespace GameScene.Multi
 			PhotonView pv = PhotonView.Get (this);
 			object[] param = new object[3];
 			param [0] = ph.viewID; param [1] = name; param [2] = pause * 10;
-			pv.RPC ("playAnnimationRPC", PhotonTargets.All, param); // sync
+			pv.RPC ("playAnnimationRPC", PhotonTargets.All, ph.viewID, name, pause); // sync
 		}
-		[PunRPC] private void playAnnimationRPC(object[] param){
-
+		[PunRPC] private void playAnnimationRPC(int viewID, string name, float pause){
+			/*
+			Debug.Log (param.Length);
 			string name = param [0] as string;
-			float pause = (float)((int)(param [2]) / 10f);
 			int viewID = (int)param [1];
 
+			Debug.Log (name + " - " + viewID);
+
+			float pause = (float)((int)(param [2]) / 10f);
+*/
 			GameObject other = PhotonView.Find (viewID).gameObject;
 			other.transform.FindChild("perso").GetComponent<Animator>().Play(name);
 			other.GetComponent<PlayerController>().Pause = pause;
