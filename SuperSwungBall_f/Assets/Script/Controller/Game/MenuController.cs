@@ -45,6 +45,8 @@ namespace GameScene
                 transform.GetChild(i).GetComponent<Collider>().enabled = afficher;
                 transform.GetChild(i).GetComponent<Renderer>().enabled = afficher;
             }
+            transform.LookAt(new Vector3(GameObject.Find("Main Camera").transform.position.x, transform.position.y, GameObject.Find("Main Camera").transform.position.z));
+            transform.eulerAngles -= new Vector3(0, 180, 0);
         }
         private void initialize_components()//add les composants à "components" et set les couleurs des boutons
         {

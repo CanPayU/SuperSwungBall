@@ -1,0 +1,783 @@
+fileFormatVersion: 2
+guid: 6e165143e09332142bd2e2d860f94ba4
+timeCreated: 1458040709
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Armatu princ
+    100002: Armature
+    100004: Armature - P
+    100006: Armature Pla
+    100008: Armature pla
+    100010: Armature Pla.000
+    100012: Armature Pla.001
+    100014: Armature Pla.002
+    100016: Armature Pla.003
+    100018: Armature Pla.004
+    100020: Armature pri
+    100022: Armature pri.000
+    100024: Armature pri.001
+    100026: Armature pri.002
+    100028: Armature pri.003
+    100030: Armature pri.004
+    100032: Armature pri.005
+    100034: Armature pri.006
+    100036: Armature.001
+    100038: ArmatureBett
+    100040: Athl?tisme
+    100042: Athl?tisme -
+    100044: Athl?tisme L
+    100046: Athl?tisme L.000
+    100048: Escalier
+    100050: Escalier Gra
+    100052: Escalier Gra.000
+    100054: Escalier Gra.001
+    100056: Escalier Gra.002
+    100058: Escalier Gra.003
+    100060: Escalier Gra.004
+    100062: Escalier.001
+    100064: Escalier.002
+    100066: Escalier.003
+    100068: Escalier.004
+    100070: Escalier.005
+    100072: Escalier.006
+    100074: Escalier.007
+    100076: Escalier.008
+    100078: Escalier.009
+    100080: Escalier.010
+    100082: Escalier.011
+    100084: Escalier.012
+    100086: Escalier.013
+    100088: Escalier.014
+    100090: Escalier.015
+    100092: Escalier.016
+    100094: Escalier.017
+    100096: Escalier.018
+    100098: Escalier.019
+    100100: Escalier.020
+    100102: Escalier.021
+    100104: Escalier.022
+    100106: Escalier.023
+    100108: Escalier.024
+    100110: Escalier.025
+    100112: Escalier.026
+    100114: Escalier.027
+    100116: Escalier.028
+    100118: Escalier.029
+    100120: Escalier.030
+    100122: Escalier.031
+    100124: Escalier.032
+    100126: Escalier.033
+    100128: Escalier.034
+    100130: Escalier.035
+    100132: Escalier.036
+    100134: Escalier.037
+    100136: Escalier.038
+    100138: Escalier.039
+    100140: Escalier.040
+    100142: Escalier.041
+    100144: Escalier.042
+    100146: Escalier.043
+    100148: Escalier.044
+    100150: Escalier.045
+    100152: Escalier.046
+    100154: Escalier.047
+    100156: Escalier.048
+    100158: Escalier.049
+    100160: Escalier.050
+    100162: Escalier.051
+    100164: Escalier.052
+    100166: Escalier.053
+    100168: Escalier.054
+    100170: Escalier.055
+    100172: Escalier.056
+    100174: Escalier.057
+    100176: Escalier.058
+    100178: Escalier.059
+    100180: Pilier
+    100182: Pilier Autou
+    100184: Pilier Score
+    100186: 'Pilier toit '
+    100188: Pilier toit .000
+    100190: Pilier.001
+    100192: Score Bloc
+    100194: Score Toit
+    100196: Score Toit.0
+    100198: //RootNode
+    100200: Terrain
+    100202: Terrain Bord
+    100204: Terrain Bord.000
+    100206: Terrain Brod
+    100208: Terrain Line
+    100210: Toit Armatur
+    100212: Toit armatur
+    100214: toit armatur
+    100216: Toit armatur.000
+    100218: Toit Droit
+    100220: Toit Gauche
+    100222: Trbune Entre
+    100224: Tribune
+    100226: Tribune Entr
+    100228: Tribune Entr.000
+    100230: Tribune Entr.001
+    100232: Tribune Entr.002
+    100234: Tribune Entr.003
+    100236: Tribune Entr.004
+    100238: Tribune Entr.005
+    100240: Tribune Entr.006
+    100242: Tribune Entr.007
+    100244: Tribune Entr.008
+    100246: Tribune Entr.009
+    100248: Tribune Entr.010
+    100250: Tribune Entr.011
+    100252: Tribune Entr.012
+    100254: Tribune Entr.013
+    100256: Tribune Entr.014
+    100258: Tribune Entr.015
+    100260: Tribune Entr.016
+    100262: Tribune Entr.017
+    100264: Tribune Entr.018
+    100266: Tribune Entr.019
+    100268: Tribune Entr.020
+    100270: Tribune Entr.021
+    100272: Tribune Jour
+    100274: Tribune jour
+    100276: Tribune Jour.000
+    100278: Tribune jour.000
+    100280: Tribune jour.001
+    100282: Tribune jour.002
+    100284: Tribune Sepa
+    400000: Armatu princ
+    400002: Armature
+    400004: Armature - P
+    400006: Armature Pla
+    400008: Armature pla
+    400010: Armature Pla.000
+    400012: Armature Pla.001
+    400014: Armature Pla.002
+    400016: Armature Pla.003
+    400018: Armature Pla.004
+    400020: Armature pri
+    400022: Armature pri.000
+    400024: Armature pri.001
+    400026: Armature pri.002
+    400028: Armature pri.003
+    400030: Armature pri.004
+    400032: Armature pri.005
+    400034: Armature pri.006
+    400036: Armature.001
+    400038: ArmatureBett
+    400040: Athl?tisme
+    400042: Athl?tisme -
+    400044: Athl?tisme L
+    400046: Athl?tisme L.000
+    400048: Escalier
+    400050: Escalier Gra
+    400052: Escalier Gra.000
+    400054: Escalier Gra.001
+    400056: Escalier Gra.002
+    400058: Escalier Gra.003
+    400060: Escalier Gra.004
+    400062: Escalier.001
+    400064: Escalier.002
+    400066: Escalier.003
+    400068: Escalier.004
+    400070: Escalier.005
+    400072: Escalier.006
+    400074: Escalier.007
+    400076: Escalier.008
+    400078: Escalier.009
+    400080: Escalier.010
+    400082: Escalier.011
+    400084: Escalier.012
+    400086: Escalier.013
+    400088: Escalier.014
+    400090: Escalier.015
+    400092: Escalier.016
+    400094: Escalier.017
+    400096: Escalier.018
+    400098: Escalier.019
+    400100: Escalier.020
+    400102: Escalier.021
+    400104: Escalier.022
+    400106: Escalier.023
+    400108: Escalier.024
+    400110: Escalier.025
+    400112: Escalier.026
+    400114: Escalier.027
+    400116: Escalier.028
+    400118: Escalier.029
+    400120: Escalier.030
+    400122: Escalier.031
+    400124: Escalier.032
+    400126: Escalier.033
+    400128: Escalier.034
+    400130: Escalier.035
+    400132: Escalier.036
+    400134: Escalier.037
+    400136: Escalier.038
+    400138: Escalier.039
+    400140: Escalier.040
+    400142: Escalier.041
+    400144: Escalier.042
+    400146: Escalier.043
+    400148: Escalier.044
+    400150: Escalier.045
+    400152: Escalier.046
+    400154: Escalier.047
+    400156: Escalier.048
+    400158: Escalier.049
+    400160: Escalier.050
+    400162: Escalier.051
+    400164: Escalier.052
+    400166: Escalier.053
+    400168: Escalier.054
+    400170: Escalier.055
+    400172: Escalier.056
+    400174: Escalier.057
+    400176: Escalier.058
+    400178: Escalier.059
+    400180: Pilier
+    400182: Pilier Autou
+    400184: Pilier Score
+    400186: 'Pilier toit '
+    400188: Pilier toit .000
+    400190: Pilier.001
+    400192: Score Bloc
+    400194: Score Toit
+    400196: Score Toit.0
+    400198: //RootNode
+    400200: Terrain
+    400202: Terrain Bord
+    400204: Terrain Bord.000
+    400206: Terrain Brod
+    400208: Terrain Line
+    400210: Toit Armatur
+    400212: Toit armatur
+    400214: toit armatur
+    400216: Toit armatur.000
+    400218: Toit Droit
+    400220: Toit Gauche
+    400222: Trbune Entre
+    400224: Tribune
+    400226: Tribune Entr
+    400228: Tribune Entr.000
+    400230: Tribune Entr.001
+    400232: Tribune Entr.002
+    400234: Tribune Entr.003
+    400236: Tribune Entr.004
+    400238: Tribune Entr.005
+    400240: Tribune Entr.006
+    400242: Tribune Entr.007
+    400244: Tribune Entr.008
+    400246: Tribune Entr.009
+    400248: Tribune Entr.010
+    400250: Tribune Entr.011
+    400252: Tribune Entr.012
+    400254: Tribune Entr.013
+    400256: Tribune Entr.014
+    400258: Tribune Entr.015
+    400260: Tribune Entr.016
+    400262: Tribune Entr.017
+    400264: Tribune Entr.018
+    400266: Tribune Entr.019
+    400268: Tribune Entr.020
+    400270: Tribune Entr.021
+    400272: Tribune Jour
+    400274: Tribune jour
+    400276: Tribune Jour.000
+    400278: Tribune jour.000
+    400280: Tribune jour.001
+    400282: Tribune jour.002
+    400284: Tribune Sepa
+    2300000: Armatu princ
+    2300002: Armature
+    2300004: Armature - P
+    2300006: Armature Pla
+    2300008: Armature pla
+    2300010: Armature Pla.000
+    2300012: Armature Pla.001
+    2300014: Armature Pla.002
+    2300016: Armature Pla.003
+    2300018: Armature Pla.004
+    2300020: Armature pri
+    2300022: Armature pri.000
+    2300024: Armature pri.001
+    2300026: Armature pri.002
+    2300028: Armature pri.003
+    2300030: Armature pri.004
+    2300032: Armature pri.005
+    2300034: Armature pri.006
+    2300036: Armature.001
+    2300038: ArmatureBett
+    2300040: Athl?tisme
+    2300042: Athl?tisme -
+    2300044: Athl?tisme L
+    2300046: Athl?tisme L.000
+    2300048: Escalier
+    2300050: Escalier Gra
+    2300052: Escalier Gra.000
+    2300054: Escalier Gra.001
+    2300056: Escalier Gra.002
+    2300058: Escalier Gra.003
+    2300060: Escalier Gra.004
+    2300062: Escalier.001
+    2300064: Escalier.002
+    2300066: Escalier.003
+    2300068: Escalier.004
+    2300070: Escalier.005
+    2300072: Escalier.006
+    2300074: Escalier.007
+    2300076: Escalier.008
+    2300078: Escalier.009
+    2300080: Escalier.010
+    2300082: Escalier.011
+    2300084: Escalier.012
+    2300086: Escalier.013
+    2300088: Escalier.014
+    2300090: Escalier.015
+    2300092: Escalier.016
+    2300094: Escalier.017
+    2300096: Escalier.018
+    2300098: Escalier.019
+    2300100: Escalier.020
+    2300102: Escalier.021
+    2300104: Escalier.022
+    2300106: Escalier.023
+    2300108: Escalier.024
+    2300110: Escalier.025
+    2300112: Escalier.026
+    2300114: Escalier.027
+    2300116: Escalier.028
+    2300118: Escalier.029
+    2300120: Escalier.030
+    2300122: Escalier.031
+    2300124: Escalier.032
+    2300126: Escalier.033
+    2300128: Escalier.034
+    2300130: Escalier.035
+    2300132: Escalier.036
+    2300134: Escalier.037
+    2300136: Escalier.038
+    2300138: Escalier.039
+    2300140: Escalier.040
+    2300142: Escalier.041
+    2300144: Escalier.042
+    2300146: Escalier.043
+    2300148: Escalier.044
+    2300150: Escalier.045
+    2300152: Escalier.046
+    2300154: Escalier.047
+    2300156: Escalier.048
+    2300158: Escalier.049
+    2300160: Escalier.050
+    2300162: Escalier.051
+    2300164: Escalier.052
+    2300166: Escalier.053
+    2300168: Escalier.054
+    2300170: Escalier.055
+    2300172: Escalier.056
+    2300174: Escalier.057
+    2300176: Escalier.058
+    2300178: Escalier.059
+    2300180: Pilier
+    2300182: Pilier Autou
+    2300184: Pilier Score
+    2300186: 'Pilier toit '
+    2300188: Pilier toit .000
+    2300190: Pilier.001
+    2300192: Score Bloc
+    2300194: Score Toit
+    2300196: Score Toit.0
+    2300198: Terrain
+    2300200: Terrain Bord
+    2300202: Terrain Bord.000
+    2300204: Terrain Brod
+    2300206: Terrain Line
+    2300208: Toit Armatur
+    2300210: Toit armatur
+    2300212: toit armatur
+    2300214: Toit armatur.000
+    2300216: Toit Droit
+    2300218: Toit Gauche
+    2300220: Trbune Entre
+    2300222: Tribune
+    2300224: Tribune Entr
+    2300226: Tribune Entr.000
+    2300228: Tribune Entr.001
+    2300230: Tribune Entr.002
+    2300232: Tribune Entr.003
+    2300234: Tribune Entr.004
+    2300236: Tribune Entr.005
+    2300238: Tribune Entr.006
+    2300240: Tribune Entr.007
+    2300242: Tribune Entr.008
+    2300244: Tribune Entr.009
+    2300246: Tribune Entr.010
+    2300248: Tribune Entr.011
+    2300250: Tribune Entr.012
+    2300252: Tribune Entr.013
+    2300254: Tribune Entr.014
+    2300256: Tribune Entr.015
+    2300258: Tribune Entr.016
+    2300260: Tribune Entr.017
+    2300262: Tribune Entr.018
+    2300264: Tribune Entr.019
+    2300266: Tribune Entr.020
+    2300268: Tribune Entr.021
+    2300270: Tribune Jour
+    2300272: Tribune jour
+    2300274: Tribune Jour.000
+    2300276: Tribune jour.000
+    2300278: Tribune jour.001
+    2300280: Tribune jour.002
+    2300282: Tribune Sepa
+    3300000: Armatu princ
+    3300002: Armature
+    3300004: Armature - P
+    3300006: Armature Pla
+    3300008: Armature pla
+    3300010: Armature Pla.000
+    3300012: Armature Pla.001
+    3300014: Armature Pla.002
+    3300016: Armature Pla.003
+    3300018: Armature Pla.004
+    3300020: Armature pri
+    3300022: Armature pri.000
+    3300024: Armature pri.001
+    3300026: Armature pri.002
+    3300028: Armature pri.003
+    3300030: Armature pri.004
+    3300032: Armature pri.005
+    3300034: Armature pri.006
+    3300036: Armature.001
+    3300038: ArmatureBett
+    3300040: Athl?tisme
+    3300042: Athl?tisme -
+    3300044: Athl?tisme L
+    3300046: Athl?tisme L.000
+    3300048: Escalier
+    3300050: Escalier Gra
+    3300052: Escalier Gra.000
+    3300054: Escalier Gra.001
+    3300056: Escalier Gra.002
+    3300058: Escalier Gra.003
+    3300060: Escalier Gra.004
+    3300062: Escalier.001
+    3300064: Escalier.002
+    3300066: Escalier.003
+    3300068: Escalier.004
+    3300070: Escalier.005
+    3300072: Escalier.006
+    3300074: Escalier.007
+    3300076: Escalier.008
+    3300078: Escalier.009
+    3300080: Escalier.010
+    3300082: Escalier.011
+    3300084: Escalier.012
+    3300086: Escalier.013
+    3300088: Escalier.014
+    3300090: Escalier.015
+    3300092: Escalier.016
+    3300094: Escalier.017
+    3300096: Escalier.018
+    3300098: Escalier.019
+    3300100: Escalier.020
+    3300102: Escalier.021
+    3300104: Escalier.022
+    3300106: Escalier.023
+    3300108: Escalier.024
+    3300110: Escalier.025
+    3300112: Escalier.026
+    3300114: Escalier.027
+    3300116: Escalier.028
+    3300118: Escalier.029
+    3300120: Escalier.030
+    3300122: Escalier.031
+    3300124: Escalier.032
+    3300126: Escalier.033
+    3300128: Escalier.034
+    3300130: Escalier.035
+    3300132: Escalier.036
+    3300134: Escalier.037
+    3300136: Escalier.038
+    3300138: Escalier.039
+    3300140: Escalier.040
+    3300142: Escalier.041
+    3300144: Escalier.042
+    3300146: Escalier.043
+    3300148: Escalier.044
+    3300150: Escalier.045
+    3300152: Escalier.046
+    3300154: Escalier.047
+    3300156: Escalier.048
+    3300158: Escalier.049
+    3300160: Escalier.050
+    3300162: Escalier.051
+    3300164: Escalier.052
+    3300166: Escalier.053
+    3300168: Escalier.054
+    3300170: Escalier.055
+    3300172: Escalier.056
+    3300174: Escalier.057
+    3300176: Escalier.058
+    3300178: Escalier.059
+    3300180: Pilier
+    3300182: Pilier Autou
+    3300184: Pilier Score
+    3300186: 'Pilier toit '
+    3300188: Pilier toit .000
+    3300190: Pilier.001
+    3300192: Score Bloc
+    3300194: Score Toit
+    3300196: Score Toit.0
+    3300198: Terrain
+    3300200: Terrain Bord
+    3300202: Terrain Bord.000
+    3300204: Terrain Brod
+    3300206: Terrain Line
+    3300208: Toit Armatur
+    3300210: Toit armatur
+    3300212: toit armatur
+    3300214: Toit armatur.000
+    3300216: Toit Droit
+    3300218: Toit Gauche
+    3300220: Trbune Entre
+    3300222: Tribune
+    3300224: Tribune Entr
+    3300226: Tribune Entr.000
+    3300228: Tribune Entr.001
+    3300230: Tribune Entr.002
+    3300232: Tribune Entr.003
+    3300234: Tribune Entr.004
+    3300236: Tribune Entr.005
+    3300238: Tribune Entr.006
+    3300240: Tribune Entr.007
+    3300242: Tribune Entr.008
+    3300244: Tribune Entr.009
+    3300246: Tribune Entr.010
+    3300248: Tribune Entr.011
+    3300250: Tribune Entr.012
+    3300252: Tribune Entr.013
+    3300254: Tribune Entr.014
+    3300256: Tribune Entr.015
+    3300258: Tribune Entr.016
+    3300260: Tribune Entr.017
+    3300262: Tribune Entr.018
+    3300264: Tribune Entr.019
+    3300266: Tribune Entr.020
+    3300268: Tribune Entr.021
+    3300270: Tribune Jour
+    3300272: Tribune jour
+    3300274: Tribune Jour.000
+    3300276: Tribune jour.000
+    3300278: Tribune jour.001
+    3300280: Tribune jour.002
+    3300282: Tribune Sepa
+    4300000: 'Pilier toit '
+    4300002: Toit Armatur
+    4300004: Pilier Autou
+    4300006: Tribune Sepa
+    4300008: Armatu princ
+    4300010: Athl?tisme L
+    4300012: Athl?tisme -
+    4300014: Escalier.024
+    4300016: Armature pri
+    4300018: Armature pri.000
+    4300020: Escalier.022
+    4300022: Escalier.023
+    4300024: Escalier.021
+    4300026: Escalier.019
+    4300028: Escalier.015
+    4300030: Escalier.016
+    4300032: Escalier Gra
+    4300034: Escalier.017
+    4300036: Escalier.018
+    4300038: Escalier.020
+    4300040: Escalier.014
+    4300042: Escalier.012
+    4300044: Escalier.013
+    4300046: Escalier.011
+    4300048: Escalier Gra.000
+    4300050: Armature pri.001
+    4300052: Armature pri.002
+    4300054: Escalier.010
+    4300056: Escalier.009
+    4300058: Escalier.008
+    4300060: Escalier.007
+    4300062: Escalier.006
+    4300064: Escalier.005
+    4300066: Escalier.004
+    4300068: Escalier.003
+    4300070: Escalier.002
+    4300072: Escalier.001
+    4300074: Escalier
+    4300076: Escalier.055
+    4300078: Escalier.056
+    4300080: Escalier.057
+    4300082: Escalier.058
+    4300084: Escalier Gra.001
+    4300086: Escalier.059
+    4300088: Armature pla
+    4300090: Armature Pla
+    4300092: Escalier.054
+    4300094: Escalier.039
+    4300096: Escalier.040
+    4300098: Escalier.041
+    4300100: Escalier.042
+    4300102: Escalier.043
+    4300104: Armature Pla.000
+    4300106: Escalier.044
+    4300108: Escalier.045
+    4300110: Escalier.046
+    4300112: Escalier.047
+    4300114: Escalier.048
+    4300116: Escalier.049
+    4300118: Escalier.050
+    4300120: Escalier.051
+    4300122: Escalier Gra.002
+    4300124: Armature Pla.001
+    4300126: Armature pri.003
+    4300128: Escalier.052
+    4300130: Escalier Gra.003
+    4300132: Escalier.053
+    4300134: Armature Pla.002
+    4300136: Armature Pla.003
+    4300138: Escalier.038
+    4300140: Escalier.031
+    4300142: Escalier.032
+    4300144: Escalier.033
+    4300146: Escalier.034
+    4300148: Escalier.035
+    4300150: Escalier.028
+    4300152: Escalier.036
+    4300154: Escalier.037
+    4300156: Escalier.025
+    4300158: Escalier.030
+    4300160: Escalier.029
+    4300162: Escalier.026
+    4300164: Escalier.027
+    4300166: Escalier Gra.004
+    4300168: Armature Pla.004
+    4300170: Armature pri.004
+    4300172: Armature - P
+    4300174: Armature
+    4300176: Pilier Score
+    4300178: Armature.001
+    4300180: ArmatureBett
+    4300182: Score Toit
+    4300184: Score Bloc
+    4300186: Terrain Line
+    4300188: Terrain Brod
+    4300190: Terrain
+    4300192: Athl?tisme L.000
+    4300194: Athl?tisme
+    4300196: Tribune jour
+    4300198: Tribune jour.000
+    4300200: Tribune jour.001
+    4300202: Pilier.001
+    4300204: toit armatur
+    4300206: Pilier toit .000
+    4300208: Toit armatur
+    4300210: Toit Droit
+    4300212: Tribune Jour
+    4300214: Tribune Jour.000
+    4300216: Tribune jour.002
+    4300218: Pilier
+    4300220: Toit armatur.000
+    4300222: Toit Gauche
+    4300224: Tribune Entr
+    4300226: Tribune Entr.000
+    4300228: Tribune Entr.001
+    4300230: Tribune Entr.002
+    4300232: Tribune Entr.003
+    4300234: Tribune Entr.004
+    4300236: Tribune Entr.005
+    4300238: Tribune Entr.006
+    4300240: Tribune Entr.007
+    4300242: Tribune Entr.008
+    4300244: Tribune Entr.009
+    4300246: Tribune Entr.010
+    4300248: Tribune Entr.011
+    4300250: Tribune Entr.012
+    4300252: Trbune Entre
+    4300254: Tribune Entr.013
+    4300256: Tribune Entr.014
+    4300258: Tribune Entr.015
+    4300260: Tribune Entr.016
+    4300262: Tribune Entr.017
+    4300264: Tribune Entr.018
+    4300266: Tribune Entr.019
+    4300268: Tribune Entr.020
+    4300270: Tribune Entr.021
+    4300272: Score Toit.0
+    4300274: Terrain Bord
+    4300276: Terrain Bord.000
+    4300278: Armature pri.005
+    4300280: Tribune
+    4300282: Armature pri.006
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
