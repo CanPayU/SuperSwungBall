@@ -10,6 +10,7 @@ public class Player
 	private string player_name;
 	public string Name {
 		get { return player_name; }
+		set { player_name = value; }
 	}
 	private int team_id;
 

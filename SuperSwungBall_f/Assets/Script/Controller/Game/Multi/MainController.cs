@@ -113,6 +113,14 @@ namespace GameScene.Multi
 			int nb_player = team.Nb_Player;
 			bool b = local_player.isMasterClient;
 			int nb_instance = nb_player - (Convert.ToInt16 (b));
+
+			string namePrefab = "";
+			if (b) {
+				namePrefab = player1_prefab.name;
+			}else{
+				namePrefab = player2_prefab.name;
+			}
+
 			for (int i = 0; i < nb_instance; i++)
             {
 				// --- Calcule des coordonnées
@@ -123,9 +131,10 @@ namespace GameScene.Multi
 				float posY = cote * 20 + (y * 3 * -cote);
 				// ---
 
-				GameObject player = PhotonNetwork.Instantiate (player2_prefab.name, new Vector3 (posX, 0.5F, posY), Quaternion.identity, 0) as GameObject;
-				//GameObject play1 = PhotonNetwork.Instantiate (player2_prefab.name, new Vector3 ((float)i * 2, (float)0.5, pos), Quaternion.identity, 0) as GameObject;
-               	player.name = local_player.name + i;
+				GameObject player = PhotonNetwork.Instantiate (namePrefab, new Vector3 (posX, 0.5F, posY), Quaternion.identity, 0) as GameObject;
+				Player pl = team.Players [i];
+				pl.Name += "-" + i;
+				player.name = pl.Name+"-"+pl.Team_id;
             }
 			if (b) {
 				// --- Calcule des coordonnées
@@ -136,7 +145,9 @@ namespace GameScene.Multi
 				float posY = cote * 20 + (y * 3 * -cote);
 				// ---
 				GameObject player = PhotonNetwork.Instantiate ("Captain", new Vector3 (posX, 0.5F, posY), Quaternion.identity, 0) as GameObject;
-				player.name = local_player.name + "_Captain";
+				Player pl = team.Players [nb_instance];
+				pl.Name += "-" + nb_instance;
+				player.name = pl.Name+"-"+pl.Team_id;
 			}
         }
 

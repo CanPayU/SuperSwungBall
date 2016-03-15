@@ -36,7 +36,7 @@ namespace GameScene.Multi
         void Start()
         {
             //initialisation menu
-            Menu = Instantiate(Menu, new Vector3(), Quaternion.identity) as GameObject;
+			Menu = Instantiate(Menu, new Vector3(), Quaternion.Euler(0,-90,0)) as GameObject;
             Menu.transform.parent = transform;
 			menuController = Menu.GetComponent<MenuController>();
 

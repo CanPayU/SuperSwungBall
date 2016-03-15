@@ -27,8 +27,6 @@ public class SoundController : MonoBehaviour {
 
 	}
 
-
-
 	IEnumerator trigger_audio() {
 		int alea = rand.Next (paths.Length);
 		AudioSource audio = GetComponent<AudioSource>();
@@ -38,10 +36,5 @@ public class SoundController : MonoBehaviour {
 		audio.Play();
 		yield return new WaitForSeconds(audio.clip.length);
 		StartCoroutine(trigger_audio ());
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
 	}
 }

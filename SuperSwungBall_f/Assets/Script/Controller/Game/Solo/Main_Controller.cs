@@ -138,29 +138,31 @@ namespace GameScene.Solo
 			foreach (var player_t0 in team_0.Players) {
 				// --- Calcule des coordonnées
 				int x = team_0.Compo.GetPosition (i) [0];
-				int y = team_0.Compo.GetPosition (++i) [1];
+				int y = team_0.Compo.GetPosition (i) [1];
 
 				float posX = ((-6) + x * 5) / 1.3f;
 				float posY = (cote * 22 + (y * 3 * -cote)) / 1.3f;
 				// ---
 
-				GameObject play1 = Instantiate(player1_prefab, new Vector3 (posX, 1F, posY), Quaternion.identity) as GameObject;
+				GameObject play0 = Instantiate(player1_prefab, new Vector3 (posX, 1F, posY), Quaternion.identity) as GameObject;
 				player_t0.Team_id = 0;
-				play1.name = player_t0.Name+"-"+player_t0.Team_id;
+				player_t0.Name += "-" + (++i);
+				play0.name = player_t0.Name+"-"+player_t0.Team_id;
 			}
 			Team team_1 = Game.Instance.Teams [1];
 			i = 0;
 			foreach (var player_t1 in team_1.Players) {
 				// --- Calcule des coordonnées
 				int x = team_1.Compo.GetPosition (i) [0];
-				int y = team_1.Compo.GetPosition (++i) [1];
+				int y = team_1.Compo.GetPosition (i) [1];
 
 				float posX = ((-6) + x * 5) / 1.3f;
 				float posY = (cote * 22 + (y * 3 * -cote)) / 1.3f;
 				// ---
-				GameObject play2 = Instantiate(player2_prefab, new Vector3 (posX, 1F, -posY), Quaternion.identity) as GameObject;
+				GameObject play1 = Instantiate(player2_prefab, new Vector3 (posX, 1F, -posY), Quaternion.identity) as GameObject;
 				player_t1.Team_id = 1;
-				play2.name = player_t1.Name+"-"+player_t1.Team_id;
+				player_t1.Name += "-" + (++i);
+				play1.name = player_t1.Name+"-"+player_t1.Team_id;
 			}
 
 			Debug.Log ("Tname : "+Game.Instance.Teams [0].Name + "-"+Game.Instance.Teams [1].Name);
