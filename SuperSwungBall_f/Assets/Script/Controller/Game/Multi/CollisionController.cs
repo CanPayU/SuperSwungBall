@@ -24,7 +24,7 @@ namespace GameScene.Multi
 
 				if (other.tag == "Goal" && transform.FindChild("perso").transform.FindChild("Ball") != null) // GOAL
 				{
-					transform.FindChild("perso").GetComponent<Animator>().Play("TouchDown");
+					playAnnimation("TouchDown");
 					GetComponent<PlayerController>().Pause = 10f;
 					GoalController g_controller = other.GetComponent<GoalController>();
 					g_controller.goal();
@@ -37,9 +37,9 @@ namespace GameScene.Multi
 					// Debug.Log (adversaire.Team_id); OK
 					// Debug.Log (adversaire.Tacle); OK
 					player = GetComponent<PlayerController>().Player; // NULL
-					Debug.Log (player); // NULL
-					Debug.Log (player.Team_id);
-					Debug.Log (player.Tacle);
+					bool b = adversaire.Team_id != player.Team_id && (adversaire.Tacle != 0 || player.Tacle != 0);
+					Debug.Log(adversaire.Team_id+"-"+player.Team_id+" - "+adversaire.Tacle+"-"+player.Tacle+" b:"+b);
+					Debug.Log(adversaire.Team_id != player.Team_id && (adversaire.Tacle != 0 || player.Tacle != 0));
 
 					if (adversaire.Team_id != player.Team_id && (adversaire.Tacle != 0 || player.Tacle != 0)) // collision adversaire et déclechement combat
 					{
@@ -53,7 +53,7 @@ namespace GameScene.Multi
 							if (player.Tacle > attaqueAdverse)
 							{
 								//animation Attaque
-								transform.FindChild("perso").GetComponent<Animator>().Play("Attaque");
+								playAnnimation("Attaque");
 								GetComponent<PlayerController>().Pause = 1f;
 								Debug.Log(name + " réussit son tacle");
 							}
@@ -88,7 +88,7 @@ namespace GameScene.Multi
 		private void combatPerdu(bool porteurDeBall)
 		{
 			//animation Chute
-			transform.FindChild("perso").GetComponent<Animator>().Play("Chute");
+			playAnnimation("Chute");
 			GetComponent<PlayerController>().Pause = 4f;
 
 			if (porteurDeBall)
@@ -99,6 +99,17 @@ namespace GameScene.Multi
 				ball.GetComponent<Collider>().enabled = true;
 				ball.transform.parent = null;
 			}
+		}
+
+		private void playAnnimation(string name){
+			PhotonView ph = gameObject.GetComponent <PhotonView> (); // View sur laquelle on fait l'annim
+			ph.RequestOwnership ();
+			PhotonView pv = PhotonView.Get (this);
+			pv.RPC ("playAnnimation", PhotonTargets.All, ph.viewID, name); // sync
+		}
+		[PunRPC] private void playAnnimation(int viewID, string name){
+			GameObject other = PhotonView.Find (viewID).gameObject;
+			other.transform.FindChild("perso").GetComponent<Animator>().Play(name);
 		}
 	}
 }
