@@ -59,7 +59,6 @@ namespace GameScene.Multi
 							{
 								combatPerdu(porteurDeBall);
 								Debug.Log(name + " rate son tacle");
-
 							}
 						}
 						else
@@ -107,15 +106,6 @@ namespace GameScene.Multi
 			pv.RPC ("playAnnimationRPC", PhotonTargets.All, ph.viewID, name, pause); // sync
 		}
 		[PunRPC] private void playAnnimationRPC(int viewID, string name, float pause){
-			/*
-			Debug.Log (param.Length);
-			string name = param [0] as string;
-			int viewID = (int)param [1];
-
-			Debug.Log (name + " - " + viewID);
-
-			float pause = (float)((int)(param [2]) / 10f);
-*/
 			GameObject other = PhotonView.Find (viewID).gameObject;
 			other.transform.FindChild("perso").GetComponent<Animator>().Play(name);
 			other.GetComponent<PlayerController>().Pause = pause;
