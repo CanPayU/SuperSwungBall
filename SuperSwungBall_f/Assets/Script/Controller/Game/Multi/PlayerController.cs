@@ -23,6 +23,8 @@ namespace GameScene.Multi
         private bool deplacement;
         private float speed = 0;
         private Vector3 arrivalPoint;
+        private bool movement;
+        private float pause = 0; // temps de pause du deplacement (en s), quand le player se fait plaquer par exemple
 
         //Pointeur
         private bool mouseState = false;
@@ -32,6 +34,13 @@ namespace GameScene.Multi
 
 		//Network
 		private PhotonView view;
+
+		public bool Deplacement // = phase d'annim en solo
+		{ get { return deplacement; } }
+        public float Pause
+        { set { pause = value; } }
+        public Player Player 
+        { get {  return player; } }
 
         void Start()
         {
@@ -47,6 +56,9 @@ namespace GameScene.Multi
 			Team t_ = Game.Instance.Teams [PhotonNetwork.player.ID]; // team_id
 			t_.add_player (player);
             myCollider = GetComponent<Collider>();
+
+			deplacement = false;
+            movement = false;
         }
         void Update()
         {
@@ -88,7 +100,37 @@ namespace GameScene.Multi
             }
             else
             {
-                transform.position = Vector3.MoveTowards(transform.position, arrivalPoint, speed * Time.deltaTime);
+                // Phase D'animation
+                if (pause == 0)
+                {
+                    if (movement)
+                    {
+                        transform.position = Vector3.MoveTowards(transform.position, arrivalPoint, speed * Time.deltaTime);
+                        if (transform.position == arrivalPoint)
+                        {
+                            //arret du personnage ( a atteint son point d'arrivé)
+                            transform.FindChild("perso").GetComponent<Animator>().Play("Repos");
+                            movement = false;
+                        }
+                    }
+                }
+                else
+                {
+                    pause -= Time.deltaTime;
+                    if(pause < 0) // pause terminée
+                    {
+                        pause = 0;
+                        if(movement) // play precedente animation
+                        {
+                            transform.FindChild("perso").LookAt(new Vector3(arrivalPoint.x, transform.FindChild("perso").position.y, arrivalPoint.z));
+                            transform.FindChild("perso").GetComponent<Animator>().Play("Course");
+                        }
+                        else
+                        {
+                            transform.FindChild("perso").GetComponent<Animator>().Play("Repos");
+                        }
+                    }
+                }
             }
 
             #region switch animation / à suppr
@@ -102,6 +144,7 @@ namespace GameScene.Multi
             #endregion
 
         }
+        /*
         public void OnTriggerEnter(Collider other) //event collison
         {
             if (deplacement)
@@ -123,7 +166,7 @@ namespace GameScene.Multi
 			GameObject other = PhotonView.Find (viewID).gameObject;
 			other.transform.parent = transform;
 			other.transform.localPosition = new Vector3(1, 0, 0);
-		}
+		}*/
 
         public void updateValuesPlayer(Color c) //Activation clic boutton
         {
@@ -150,6 +193,7 @@ namespace GameScene.Multi
 
         public void start_Anim() // debut de l'animation
 		{
+            mouseState = false;
             deplacement = true;
             menuController.display(false);
             menuDisplayed = false;
@@ -157,6 +201,15 @@ namespace GameScene.Multi
             speed = player.Speed; // vitesse du joueur
             arrivalPoint = new Vector3(menuController.Get_Coordsdeplacement[0], transform.position.y, menuController.Get_Coordsdeplacement[1]); // point d'arrivé du déplacement
             arrivalPointPasse = new Vector3(menuController.Get_CoordsPasse[0], 0.2f, menuController.Get_CoordsPasse[1]); // point d'arrivé de la passe
+            pause = 0;
+
+            //animation course
+            if (arrivalPoint != transform.position)
+            {
+                transform.FindChild("perso").LookAt(new Vector3(arrivalPoint.x, transform.FindChild("perso").position.y, arrivalPoint.z));
+                transform.FindChild("perso").GetComponent<Animator>().Play("Course");
+                movement = true;
+            }
         }
         public void end_Anim() // fin de l'animation
         {
@@ -165,12 +218,11 @@ namespace GameScene.Multi
             menuController.update_zoneDeplacement(player.ZoneDeplacement, player.ZonePasse);
             deplacement = false;
             speed = 0;
-        }
+            pause = 0;
 
-		public Player Player {
-			get { 
-				return player; 
-			}
-		}
+            //animation repos
+            transform.FindChild("perso").GetComponent<Animator>().Play("Repos");
+            movement = false;
+        }
     }
 }
