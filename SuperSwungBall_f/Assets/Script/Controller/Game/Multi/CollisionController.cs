@@ -105,9 +105,9 @@ namespace GameScene.Multi
 			PhotonView ph = gameObject.GetComponent <PhotonView> (); // View sur laquelle on fait l'annim
 			ph.RequestOwnership ();
 			PhotonView pv = PhotonView.Get (this);
-			pv.RPC ("playAnnimation", PhotonTargets.All, ph.viewID, name); // sync
+			pv.RPC ("playAnnimationRPC", PhotonTargets.All, ph.viewID, name); // sync
 		}
-		[PunRPC] private void playAnnimation(int viewID, string name){
+		[PunRPC] private void playAnnimationRPC(int viewID, string name){
 			GameObject other = PhotonView.Find (viewID).gameObject;
 			other.transform.FindChild("perso").GetComponent<Animator>().Play(name);
 		}
