@@ -34,13 +34,17 @@ namespace GameScene.Multi
 					pv.RPC ("attached_ball", PhotonTargets.All, ph.viewID);
 				}
 
-				Debug.Log ("OTRIGGER AND DEPLACEMENT");
-				if (other.tag == "Goal" && transform.FindChild("perso").transform.FindChild("Ball") != null) // GOAL
+				if (other.tag == "Goal") // GOAL
 				{
-					Debug.Log ("GOAL");
-					playAnnimation("TouchDown", 10f);
-					GoalController g_controller = other.GetComponent<GoalController>();
-					g_controller.goal();
+					Transform ball = transform.FindChild ("perso").transform.FindChild ("Ball");
+					if(ball == null)
+						ball = transform.FindChild ("perso").transform.FindChild ("Ball(Clone)");
+					if (ball != null) {
+						Debug.Log ("GOAL");
+						playAnnimation("TouchDown", 10f);
+						GoalController g_controller = other.GetComponent<GoalController>();
+						g_controller.goal();
+					}
 				}
 
 				if (other.tag == "Player")

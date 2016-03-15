@@ -26,16 +26,26 @@ namespace GameScene
 
         public void goal()
         {
-            Debug.Log("GOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAL");
-            Game.Instance.goal(team_id);
+            
 
+			Debug.Log("GOAAL RPC");
 			if (PhotonNetwork.inRoom) {
-				main.GetComponent<MainController>().update_score();
+				PhotonView pv = PhotonView.Get (this);
+				pv.RPC ("Goal_RPC", PhotonTargets.All, team_id);
 			} else {
+				Game.Instance.goal(team_id);
 				main.GetComponent<Main_Controller>().update_score();
 			}
 
+
         }
+
+		[PunRPC]private void Goal_RPC(int teamID) //event collison
+		{
+			Debug.Log("GOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAL");
+			Game.Instance.goal(team_id);
+			main.GetComponent<MainController>().update_score();
+		}
     }
 }
 

@@ -106,7 +106,6 @@ namespace GameScene.Multi
             score.text = t_a.Points + " : " + t_b.Points;
         }
 
-
         private void instantiate_team()
         {
 			int cote = ((local_player.isMasterClient) ? -1 : 1); // coté de l'instanciation
@@ -143,20 +142,6 @@ namespace GameScene.Multi
 				GameObject player = PhotonNetwork.Instantiate (ball_prefab.name, new Vector3 (5F, 0.5F, 0F), Quaternion.identity, 0) as GameObject;
 				player.name = "Ball";
 			}
-			/*
-			if (b) {
-				// --- Calcule des coordonnées
-				int x = team.Compo.GetPosition (nb_instance) [0];
-				int y = team.Compo.GetPosition (nb_instance) [1];
-
-				float posX = (-12) + x * 5;
-				float posY = cote * 20 + (y * 3 * -cote);
-				// ---
-				GameObject player = PhotonNetwork.Instantiate ("Captain", new Vector3 (posX, 1F, posY), Quaternion.identity, 0) as GameObject;
-				Player pl = team.Players [nb_instance];
-				pl.Name += "-" + nb_instance;
-				player.name = pl.Name+"-"+pl.Team_id;
-			}*/
         }
 
 		private void config_goal(){
