@@ -30,7 +30,9 @@ namespace GameScene
 
 			Debug.Log("GOAAL RPC");
 			if (PhotonNetwork.inRoom) {
-				PhotonView pv = PhotonView.Get (this);
+				PhotonView pv = PhotonView.Get (this); // Impossible car GoalController n'a pas de PhotonView
+				Debug.Log (pv);
+				Debug.Log (team_id);
 				pv.RPC ("Goal_RPC", PhotonTargets.All, team_id);
 			} else {
 				Game.Instance.goal(team_id);
