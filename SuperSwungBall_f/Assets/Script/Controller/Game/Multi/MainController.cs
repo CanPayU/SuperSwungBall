@@ -131,7 +131,7 @@ namespace GameScene.Multi
 				float posY = cote * 20 + (y * 3 * -cote);
 				// ---
 
-				GameObject player = PhotonNetwork.Instantiate (namePrefab, new Vector3 (posX, 0.5F, posY), Quaternion.identity, 0) as GameObject;
+				GameObject player = PhotonNetwork.Instantiate (namePrefab, new Vector3 (posX, 1F, posY), Quaternion.identity, 0) as GameObject;
 				Player pl = team.Players [i];
 				pl.Name += "-" + i;
 				player.name = pl.Name+"-"+pl.Team_id;
@@ -144,7 +144,7 @@ namespace GameScene.Multi
 				float posX = (-12) + x * 5;
 				float posY = cote * 20 + (y * 3 * -cote);
 				// ---
-				GameObject player = PhotonNetwork.Instantiate ("Captain", new Vector3 (posX, 0.5F, posY), Quaternion.identity, 0) as GameObject;
+				GameObject player = PhotonNetwork.Instantiate ("Captain", new Vector3 (posX, 1F, posY), Quaternion.identity, 0) as GameObject;
 				Player pl = team.Players [nb_instance];
 				pl.Name += "-" + nb_instance;
 				player.name = pl.Name+"-"+pl.Team_id;
