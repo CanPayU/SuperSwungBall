@@ -44,5 +44,9 @@ namespace Menu
 			SaveLoad.reset_user ();
 			account.SetActive (false);
 		}
+
+		public void SaveParameters(){
+			Debug.Log ("A FAIRE : SAVE SETTINGS");
+		}
 	}
 }
