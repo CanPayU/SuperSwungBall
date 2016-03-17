@@ -126,15 +126,23 @@ public class Settings {
 	}
 	public Team Random_Team {
 		get { 
-			var teams = default_team;
-			teams.Remove (selected_team.Code);
-			int alea = rand.Next (teams.Count);
+			string buffer = "";
+			string selected_code = Settings.Instance.selected_team.Code;
+			int len = default_team.Count;
+			float prob = 1;
+			int alea = rand.Next (len - 1);
+
 			int i = 0;
-			foreach (var team in teams) {
-				if (i == alea)
-					return team.Value;
-				i++;
+			foreach (var item in default_team) {
+				if (item.Value.Code != selected_code) {
+					buffer = item.Key;
+					if (i == alea) {
+						return item.Value;
+					}
+					i++;
+				}
 			}
-			return selected_team; }
+			return default_team[buffer];
+		}
 	}
 }

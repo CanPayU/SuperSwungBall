@@ -12,11 +12,22 @@ public class StadiumSwitchController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
 		stadiums = Resources.LoadAll<GameObject>("Prefabs/Stadium");
 		len = stadiums.Length;
-		actual_stadium = stadiums [index];
-		//instanciate_actual_stadium ();
+
+		string act_name = Settings.Instance.Selected_Stadium; int i = 0;
+		foreach (var stadium in stadiums) {
+			if (stadium.name == act_name) {
+				actual_stadium = stadium; index = i; break;
+			} i++;
+		}
+
+		// -- Instaciate stadium
+		Vector3 pos = actual_stadium.transform.position;
+		Quaternion rot = actual_stadium.transform.rotation;
+		GameObject gm = Instantiate (actual_stadium, pos, rot) as GameObject;
+		gm.name = "Stadium_"+index;
+		// --
 	}
 	
 	public void SwitchLeft(){
@@ -39,8 +50,10 @@ public class StadiumSwitchController : MonoBehaviour {
 	}
 
 	private void instanciate_actual_stadium(){
-		Debug.Log ("Instanciate:" + actual_stadium.name);
-		StartCoroutine(Exit(GameObject.FindGameObjectWithTag ("Stadium")));
+		Debug.Log ("Instanciate : " + actual_stadium.name);
+		GameObject stadium = GameObject.FindGameObjectWithTag ("Stadium");
+		if(stadium != null)
+			StartCoroutine(Exit(stadium));
 
 		Vector3 pos = actual_stadium.transform.position;
 		Quaternion rot = actual_stadium.transform.rotation;
@@ -49,12 +62,11 @@ public class StadiumSwitchController : MonoBehaviour {
 		gm.name = "Stadium_"+index;
 		gm.GetComponent<Animator> ().Play ("Enter_"+gm.name);
 		Settings.Instance.Selected_Stadium = gm.name;
-
 	}
 
 	private IEnumerator Exit(GameObject gm)
 	{
-		Debug.Log("Play : "+"Exit_"+gm.name);
+		Debug.Log ("exit : " + gm.name);
 		gm.GetComponent<Animator> ().Play ("Exit_"+gm.name);
 		yield return new WaitForSeconds(1);
 		Destroy(gm);

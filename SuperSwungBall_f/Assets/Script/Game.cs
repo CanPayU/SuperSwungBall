@@ -23,6 +23,7 @@ public class Game {
 				//teams [player.ID].Name = player.name;
 			}
 		} else {
+			Debug.Log ("Mach : " + Settings.Instance.Selected_Team.Name + " VS " + Settings.Instance.Random_Team.Name);
 			teams [0] = Settings.Instance.Selected_Team;
 			teams [1] = Settings.Instance.Random_Team;
 		}

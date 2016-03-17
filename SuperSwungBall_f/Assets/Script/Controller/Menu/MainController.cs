@@ -50,7 +50,8 @@ namespace Menu
 		}
 
 		public void SaveParameters(){
-			Debug.Log ("A FAIRE : SAVE SETTINGS");
+			SaveLoad.save_setting ();
+			Notification.success ("Enregistre !");
 		}
 	}
 }

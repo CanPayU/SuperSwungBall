@@ -25,7 +25,8 @@ namespace GameScene.Solo
 
         // Use this for initialization
         void Start()
-        {
+		{
+			Game.Instance = new Game();
             cameraController = GameObject.Find("Main Camera").GetComponent<CameraController>();
             time = new Timer(10.0F, end_time);
             instantiate_team();
@@ -164,10 +165,6 @@ namespace GameScene.Solo
 				player_t1.Name += "-" + (++i);
 				play1.name = player_t1.Name+"-"+player_t1.Team_id;
 			}
-
-			Debug.Log ("Tname : "+Game.Instance.Teams [0].Name + "-"+Game.Instance.Teams [1].Name);
-
-
         }
     }
 
