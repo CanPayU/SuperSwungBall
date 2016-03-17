@@ -8,7 +8,7 @@ namespace GameScene.Solo
 
         private Vector3 POSITION_INITIALE = new Vector3(15, 40, 0); // constante position phase de reflexion
 
-        private bool animation;
+        private new bool animation;
 
         // mouvement camera
         private Vector3 moveTo;
