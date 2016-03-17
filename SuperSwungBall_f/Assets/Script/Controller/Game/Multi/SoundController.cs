@@ -7,8 +7,8 @@ public class SoundController : MonoBehaviour {
 	private Team team;
 	private string[] paths;
 
-	private AudioSource audio;
-	private AudioClip clip;
+    private new AudioSource audio;
+    private AudioClip clip;
 
 	private System.Random rand = new System.Random();
 

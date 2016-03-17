@@ -116,28 +116,24 @@ namespace GameScene
             }
             replace_pointeur();
         }
-        public bool set_target(RaycastHit hit)//renvoit true si le joueur clic sur un pointeur et set le 'target' / 'zone_target'
+        public bool set_target(RaycastHit hit)//renvoit true si le joueur clic sur un pointeur et set le 'target'
         {
             if (hit.collider == components["pointeurs"][0].GetComponent<Collider>() || hit.collider == components["zones"][0].GetComponent<Collider>())
             {
                 target = components["pointeurs"][0];
-                zone_target = components["zones"][0];
                 return true;
             }
             if (hit.collider == components["pointeurs"][1].GetComponent<Collider>() || hit.collider == components["zones"][1].GetComponent<Collider>())
             {
                 target = components["pointeurs"][1];
-                zone_target = null;
                 return true;
             }
             target = null;
-            zone_target = null;
             return false;
         }
         public void reset_target()
         {
             target = null;
-            zone_target = null;
         }
         public void move_target(RaycastHit hit) // Deplace le target en fonction de la position de la souris
         {

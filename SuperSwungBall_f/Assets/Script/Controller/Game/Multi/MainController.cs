@@ -13,30 +13,31 @@ namespace GameScene.Multi
         [SerializeField]
         private GameObject player1_prefab;
         [SerializeField]
-		private GameObject player2_prefab;
-		[SerializeField]
-		private GameObject ball_prefab;
+        private GameObject player2_prefab;
+        [SerializeField]
+        private GameObject ball_prefab;
         [SerializeField]
         private Text score;
 
         Text myGuiText;
         Timer time;
-		public Timer Time{
-			get{ return Time; }
-		}
+        public Timer Time
+        {
+            get { return Time; }
+        }
 
-		private PhotonPlayer local_player;
-		private PhotonPlayer other_player;
+        private PhotonPlayer local_player;
+        private PhotonPlayer other_player;
 
         // Use this for initialization
         void Start()
         {
-			Game.Instance = new Game ();
-			time = new Timer(10.0F, end_time);
-			local_player = PhotonNetwork.player;
-			other_player = PhotonNetwork.otherPlayers [0];
+            Game.Instance = new Game();
+            time = new Timer(10.0F, end_time);
+            local_player = PhotonNetwork.player;
+            other_player = PhotonNetwork.otherPlayers[0];
             instantiate_team();
-			config_goal ();
+            config_goal();
         }
 
         // Update is called once per frame
@@ -45,22 +46,23 @@ namespace GameScene.Multi
 
             if (Input.GetKeyDown(KeyCode.Space) && !annim_started)
             {
-				PhotonView pv = PhotonView.Get (this);
-				pv.RPC ("start_annim", PhotonTargets.All);
+                PhotonView pv = PhotonView.Get(this);
+                pv.RPC("start_annim", PhotonTargets.All);
             }
             time.update();
         }
 
-		[PunRPC] private void end_time()
+        [PunRPC]
+        private void end_time()
         {
             time.reset();
 
             if (annim_started)
             {
-				Dictionary<int, Team> teams = Game.Instance.Teams;
-				foreach (KeyValuePair<int,Team> team in teams)
+                Dictionary<int, Team> teams = Game.Instance.Teams;
+                foreach (KeyValuePair<int, Team> team in teams)
                 {
-					team.Value.end_move_players();
+                    team.Value.end_move_players();
                 }
 
                 annim_started = false;
@@ -70,20 +72,21 @@ namespace GameScene.Multi
             else
             {
                 annim_started = true;
-				PhotonView pv = PhotonView.Get (this);
-				pv.RPC ("start_annim", PhotonTargets.All);
+                PhotonView pv = PhotonView.Get(this);
+                pv.RPC("start_annim", PhotonTargets.All);
             }
         }
 
-		[PunRPC] private void start_annim()
+        [PunRPC]
+        private void start_annim()
         {
             annim_started = true;
             time.start();
 
-			Dictionary<int, Team> teams = Game.Instance.Teams;
-			foreach (KeyValuePair<int,Team> team in teams)
+            Dictionary<int, Team> teams = Game.Instance.Teams;
+            foreach (KeyValuePair<int, Team> team in teams)
             {
-				team.Value.start_move_players();
+                team.Value.start_move_players();
             }
         }
 
@@ -101,70 +104,75 @@ namespace GameScene.Multi
 
         public void update_score()
         {
-			Team t_a = Game.Instance.Teams[local_player.ID];
-			Team t_b = Game.Instance.Teams[other_player.ID];
+            Team t_a = Game.Instance.Teams[local_player.ID];
+            Team t_b = Game.Instance.Teams[other_player.ID];
             score.text = t_a.Points + " : " + t_b.Points;
         }
 
         private void instantiate_team()
         {
-			int cote = ((local_player.isMasterClient) ? -1 : 1); // coté de l'instanciation
+            int cote = ((local_player.isMasterClient) ? -1 : 1); // coté de l'instanciation
 
-			Team team = Game.Instance.Teams [local_player.ID];
+            Team team = Game.Instance.Teams[local_player.ID];
 
-			int nb_player = team.Nb_Player;
-			bool b = local_player.isMasterClient;
-			int nb_instance = nb_player - (Convert.ToInt16 (b));
+            int nb_player = team.Nb_Player;
+            bool b = local_player.isMasterClient;
+            int nb_instance = nb_player - (Convert.ToInt16(b));
 
-			string namePrefab = "";
-			if (b) {
-				namePrefab = player1_prefab.name;
-			}else{
-				namePrefab = player2_prefab.name;
-			}
+            string namePrefab = "";
+            if (b)
+                namePrefab = player1_prefab.name;
 
-			for (int i = 0; i < nb_player; i++)
+            else
+                namePrefab = player2_prefab.name;
+            
+            for (int i = 0; i < nb_player; i++)
             {
-				// --- Calcule des coordonnées
-				int x = team.Compo.GetPosition (i) [0];
-				int y = team.Compo.GetPosition (i) [1];
+                // --- Calcule des coordonnées
+                int x = team.Compo.GetPosition(i)[0];
+                int y = team.Compo.GetPosition(i)[1];
 
-				float posX = (-12) + x * 5;
-				float posY = cote * 20 + (y * 3 * -cote);
-				// ---
+                float posX = (-12) + x * 5;
+                float posY = cote * 20 + (y * 3 * -cote);
+                // ---
 
-				GameObject player = PhotonNetwork.Instantiate (namePrefab, new Vector3 (posX, 1F, posY), Quaternion.identity, 0) as GameObject;
-				Player pl = team.Players [i];
-				pl.Name += "-" + i;
-				player.name = pl.Name+"-"+pl.Team_id;
-			}
-			if (b) {
-				GameObject player = PhotonNetwork.Instantiate (ball_prefab.name, new Vector3 (5F, 0.5F, 0F), Quaternion.identity, 0) as GameObject;
-				player.name = "Ball";
-			}
+                GameObject player = PhotonNetwork.Instantiate(namePrefab, new Vector3(posX, 1F, posY), Quaternion.identity, 0) as GameObject;
+                Player pl = team.Players[i];
+                pl.Name += "-" + i;
+                player.name = pl.Name + "-" + pl.Team_id;
+            }
+            if (b)
+            {
+                GameObject player = PhotonNetwork.Instantiate(ball_prefab.name, new Vector3(5F, 0.5F, 0F), Quaternion.identity, 0) as GameObject;
+                player.name = "Ball";
+            }
         }
 
-		private void config_goal(){
-			GoalController goal_master = GameObject.Find ("Goal_masterClient").GetComponent<GoalController>();
-			GoalController goal_enemy = GameObject.Find ("Goal_enemy").GetComponent<GoalController>();
+        private void config_goal()
+        {
+            GoalController goal_master = GameObject.Find("Goal_masterClient").GetComponent<GoalController>();
+            GoalController goal_enemy = GameObject.Find("Goal_enemy").GetComponent<GoalController>();
 
-			int result = -1;
-			for (int i = 0; i < PhotonNetwork.playerList.Length && result < 0; i++) {
-				PhotonPlayer pp = PhotonNetwork.playerList[i];
-				if (!pp.isMasterClient) {
-					result = pp.ID;
-				}
-			}
+            int result = -1;
+            for (int i = 0; i < PhotonNetwork.playerList.Length && result < 0; i++)
+            {
+                PhotonPlayer pp = PhotonNetwork.playerList[i];
+                if (!pp.isMasterClient)
+                {
+                    result = pp.ID;
+                }
+            }
 
-			// inversé car on ne marque pas dans son but mais l'autre
-			goal_master.Team = result;
-			goal_enemy.Team = PhotonNetwork.masterClient.ID;
+            // inversé car on ne marque pas dans son but mais l'autre
+            goal_master.Team = result;
+            goal_enemy.Team = PhotonNetwork.masterClient.ID;
 
-		}
+        }
     }
 
-	public enum End {
-		ABANDON,
-		TIME
-	}
+    public enum End
+    {
+        ABANDON,
+        TIME
+    }
 }
