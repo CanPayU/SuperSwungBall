@@ -16,6 +16,7 @@ public class Settings {
 	private Dictionary<string, Composition> default_compo;
 
 	private Team selected_team;
+	private string selected_stadium_name;
 	private System.Random rand = new System.Random();
 
 	public Settings (){
@@ -23,6 +24,7 @@ public class Settings {
 		default_team = new Dictionary<string, Team> ();
 		default_player = new Dictionary<string, Player> ();
 		default_compo = new Dictionary<string, Composition> ();
+		selected_stadium_name = "Stadium_0";
 
 		// ----- Default Player
 		Player lombrix = new Player (4, 6, 7, 1, "Lombrix", 0);
@@ -114,6 +116,10 @@ public class Settings {
 	public Dictionary<string, Composition> Default_compo {
 		get { return default_compo; }
 	}
+	public string Selected_Stadium {
+		get { return selected_stadium_name; }
+		set { Instance.selected_stadium_name = value; }
+	}
 	public Team Selected_Team {
 		get { return selected_team; }
 		set { Instance.selected_team = value; }
@@ -129,7 +135,6 @@ public class Settings {
 					return team.Value;
 				i++;
 			}
-
 			return selected_team; }
 	}
 }
