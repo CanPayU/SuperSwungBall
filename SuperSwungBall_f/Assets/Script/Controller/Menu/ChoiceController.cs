@@ -90,7 +90,7 @@ namespace Menu
         void moveCurve()
         {
             float fracComplete = (Time.time - startTime) / journeyTime;
-            transform.position = Vector3.Slerp(riseRelCenter, setRelCenter, fracComplete) + center;
+            transform.position = Vector3.Slerp(riseRelCenter, setRelCenter, fracComplete);
         }
     }
 

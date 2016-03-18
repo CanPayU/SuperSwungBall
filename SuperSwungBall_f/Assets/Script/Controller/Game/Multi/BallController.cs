@@ -13,30 +13,29 @@ namespace GameScene.Multi
         {
             deplacement = false;
             if (transform.parent != null)
-                passeur = transform.parent.gameObject;
+			    passeur = transform.parent.gameObject;
         }
 
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Z))
-            {
-                Debug.Log("Info ball : passeur:" + passeur + " - parent:" + transform.parent);
-            }
+			if (Input.GetKeyDown (KeyCode.Z)) {
+				Debug.Log ("Info ball : passeur:" + passeur + " - parent:" + transform.parent);
+			}
             if (!deplacement)
             {
                 if (Input.GetKeyDown(KeyCode.A) && transform.parent != null)
                 {
-                    deplacement = transform.parent.GetComponent<PlayerController>().passe(ref arrivalPoint); //Renvoit true si la passe est possible
+					deplacement = transform.parent.GetComponent<PlayerController>().passe(ref arrivalPoint); //Renvoit true si la passe est possible
                     if (deplacement)//debut de la passe
                     {
-                        PhotonView pv = PhotonView.Get(this);
-                        pv.RPC("unattached_ball", PhotonTargets.All);
+						PhotonView pv = PhotonView.Get (this);
+						pv.RPC ("unattached_ball", PhotonTargets.All);
                     }
                 }
             }
             else
             {
-                passeur = null;
+				passeur = null;
                 if (transform.position == arrivalPoint || transform.parent != null)// fin de la passe ou interception
                 {
                     deplacement = false;
@@ -54,22 +53,20 @@ namespace GameScene.Multi
             return player != passeur || !deplacement;
         }
 
-        [PunRPC]
-        private void unattached_ball()
-        {
-            passeur = transform.parent.gameObject;
-            transform.parent = null; // Detache la balle du joueur
-        }
+		[PunRPC] private void unattached_ball(){
+			passeur = transform.parent.gameObject;
+			transform.parent = null; // Detache la balle du joueur
+		}
 
-        void OnTriggerEnter(Collider other)
-        {
-            GameObject gmCol = other.gameObject;
+		void OnTriggerEnter(Collider other)
+		{
+			GameObject gmCol = other.gameObject;
 
-            if (gmCol.CompareTag("Goal"))
-            {
-                GoalController g_controller = gmCol.GetComponent<GoalController>();
-                g_controller.goal();
-            }
-        }
+			if (gmCol.CompareTag("Goal"))
+			{
+				GoalController g_controller = gmCol.GetComponent<GoalController> ();
+				g_controller.goal ();
+			}
+		}
     }
 }
