@@ -4,18 +4,21 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using System;
 
-namespace Didactitiel
+namespace Didacticiel
 {
     public class MainController : MonoBehaviour
     {
         [SerializeField]
         private Text screentext;
 
-        /*   private string screentext_text;
-           private float startTime; */
+        /*   
+        private string screentext_text;
+        private float startTime;
+        */
         private float current_time;
         private string[,] tableau;
         private int place;
+        int actions = 1;
 
         // Use this for initialization
         void Start()
@@ -28,24 +31,32 @@ namespace Didactitiel
             {"Le but du jeu est de marquer 3 points", "3" },
             {"Chaque joueur contrôle son équipe", "3" },
             {"Commençons par bouger un Swungman", "3" }};
-            screentext.text = phrase();
+            phrase(tableau[place, 0]);
         }
 
         // Update is called once per frame
         void Update()
         {
-            if (current_time < time())
-                current_time += Time.deltaTime;
-            else
+            if (actions == 1)
             {
-                current_time = 0;
-                place += 1;
-                screentext.text = phrase();
+                if (current_time < time())
+                    current_time += Time.deltaTime;
+                else if (place == 4)
+                {
+                    ++actions;
+                    phrase();
+                }
+                else {
+
+                    current_time = 0;
+                    ++place;
+                    phrase(tableau[place, 0]);
+                }
             }
         }
 
-        string phrase()
-        { return screentext.text = tableau[place, 0]; }
+        void phrase(string s = "")
+        { screentext.text = s; }
         float time()
         { return float.Parse(tableau[place, 1]); }
 
