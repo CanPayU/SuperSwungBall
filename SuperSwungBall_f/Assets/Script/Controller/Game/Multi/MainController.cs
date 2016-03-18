@@ -125,7 +125,7 @@ namespace GameScene.Multi
 
             else
                 namePrefab = player2_prefab.name;
-            
+
             for (int i = 0; i < nb_player; i++)
             {
                 // --- Calcule des coordonnées

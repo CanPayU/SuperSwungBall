@@ -47,14 +47,14 @@ namespace GameScene.Solo
         void Start()
         {
             //initialisation menu
-            Menu = Instantiate(Menu, new Vector3(), Quaternion.Euler(0,-90,0)) as GameObject;
+            Menu = Instantiate(Menu, new Vector3(), Quaternion.Euler(0, -90, 0)) as GameObject;
             Menu.transform.parent = transform;
-			menuController = Menu.GetComponent<MenuController>();
+            menuController = Menu.GetComponent<MenuController>();
 
             player = new Player(5, 5, 15, 5, gameObject.name, team_id); // A changer en fonction des stats initiales du perso
 
             Team t_ = Game.Instance.Teams[team_id];
-            t_.add_player(player);  
+            t_.add_player(player);
             myCollider = GetComponent<Collider>();
 
             phaseAnimation = false;
@@ -115,10 +115,10 @@ namespace GameScene.Solo
                 else
                 {
                     pause -= Time.deltaTime;
-                    if(pause < 0) // pause terminée
+                    if (pause < 0) // pause terminée
                     {
                         pause = 0;
-                        if(movement) // play precedente animation
+                        if (movement) // play precedente animation
                         {
                             transform.FindChild("perso").LookAt(new Vector3(arrivalPoint.x, transform.FindChild("perso").position.y, arrivalPoint.z));
                             transform.FindChild("perso").GetComponent<Animator>().Play("Course");
