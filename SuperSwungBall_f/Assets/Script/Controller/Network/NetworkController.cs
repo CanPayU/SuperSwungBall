@@ -1,22 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using PhotonHastable = ExitGames.Client.Photon.Hashtable;
+using ExitGames.Client.Photon;
 
 namespace Network {
 	public class NetworkController : MonoBehaviour {
 
-		private string game_version_ = "0.7";
+		private string game_version_ = "2.0";
 		private bool room_joined = false;
 		private string room_name;
 		private User user;
 
-		[SerializeField]
-		private Text info_network;
-		[SerializeField]
-		private Text info_users;
-		[SerializeField]
-		private string scene;
+		[SerializeField] private Text info_network;
+		[SerializeField] private Text info_users;
+		[SerializeField] private string scene;
 
 		private System.Random rand = new System.Random();
 
@@ -24,6 +26,20 @@ namespace Network {
 			user = User.Instance;
 			if (user.is_connected) {
 				PhotonNetwork.playerName = user.username;
+
+				PhotonPeer.RegisterType(typeof(Team), (byte)'T', ObjectToByteArray, ByteToTeam);
+				PhotonPeer.RegisterType(typeof(Composition), (byte)'C', ObjectToByteArray, ByteToComposition);
+				PhotonPeer.RegisterType(typeof(Player), (byte)'P', ObjectToByteArray, ByteToPlayer);
+				PhotonPeer.RegisterType(typeof(User), (byte)'U', ObjectToByteArray, ByteToUser);
+				PhotonPeer.RegisterType(typeof(List<string>), (byte)'L', ObjectToByteArray, ByteToLS);
+
+				PhotonHastable props = new PhotonHastable();
+
+				props.Add( "Team", Settings.Instance.Selected_Team);
+				props.Add( "User", user);
+
+				PhotonNetwork.player.SetCustomProperties( props );
+
 				PhotonNetwork.ConnectUsingSettings (game_version_);
 				room_name = user.username + "-" + rand.Next (1000);
 			}
@@ -47,7 +63,6 @@ namespace Network {
 			if (PhotonNetwork.playerList.Length > 1) {
 				FadingManager.I.Fade (scene);
 			}
-
 		}
 
 		void OnGUI(){
@@ -66,13 +81,75 @@ namespace Network {
 			}
 			info_users.text = info;
 		}
-		/*
-		IEnumerator ChangeLevel()
+
+
+
+		private byte[] ObjectToByteArray(object obj)
 		{
-			float fadeTime = GameObject.Find("GM_Fade").GetComponent<Fading>().BeginFade(1);
-			yield return new WaitForSeconds(fadeTime);
-			SceneManager.LoadScene(scene);
+			if(obj == null)
+				return null;
+			BinaryFormatter bf = new BinaryFormatter();
+			using (MemoryStream ms = new MemoryStream())
+			{
+				bf.Serialize(ms, obj);
+				return ms.ToArray();
+			}
 		}
-*/
+		private Team ByteToTeam(byte[] arrBytes)
+		{
+
+			MemoryStream memStream = new MemoryStream();
+			BinaryFormatter binForm = new BinaryFormatter();
+			memStream.Write(arrBytes, 0, arrBytes.Length);
+			memStream.Seek(0, SeekOrigin.Begin);
+			Team obj = (Team) binForm.Deserialize(memStream);
+
+			return obj;
+		}
+		private Composition ByteToComposition(byte[] arrBytes)
+		{
+
+			MemoryStream memStream = new MemoryStream();
+			BinaryFormatter binForm = new BinaryFormatter();
+			memStream.Write(arrBytes, 0, arrBytes.Length);
+			memStream.Seek(0, SeekOrigin.Begin);
+			Composition obj = (Composition) binForm.Deserialize(memStream);
+
+			return obj;
+		}
+		private Player ByteToPlayer(byte[] arrBytes)
+		{
+
+			MemoryStream memStream = new MemoryStream();
+			BinaryFormatter binForm = new BinaryFormatter();
+			memStream.Write(arrBytes, 0, arrBytes.Length);
+			memStream.Seek(0, SeekOrigin.Begin);
+			Player obj = (Player) binForm.Deserialize(memStream);
+
+			return obj;
+		}
+
+		private User ByteToUser(byte[] arrBytes)
+		{
+
+			MemoryStream memStream = new MemoryStream();
+			BinaryFormatter binForm = new BinaryFormatter();
+			memStream.Write(arrBytes, 0, arrBytes.Length);
+			memStream.Seek(0, SeekOrigin.Begin);
+			User obj = (User) binForm.Deserialize(memStream);
+
+			return obj;
+		}
+		private List<string> ByteToLS(byte[] arrBytes)
+		{
+
+			MemoryStream memStream = new MemoryStream();
+			BinaryFormatter binForm = new BinaryFormatter();
+			memStream.Write(arrBytes, 0, arrBytes.Length);
+			memStream.Seek(0, SeekOrigin.Begin);
+			List<string> obj = (List<string>) binForm.Deserialize(memStream);
+
+			return obj;
+		}
 	}
 }

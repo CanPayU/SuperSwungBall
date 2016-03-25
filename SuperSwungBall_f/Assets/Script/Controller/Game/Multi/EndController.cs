@@ -8,18 +8,12 @@ namespace GameScene.Multi
 {
 	public class EndController : MonoBehaviour {
 
-		[SerializeField]
-		private Text status;
-		[SerializeField]
-		private Text points;
-		[SerializeField]
-		private Text content;
-		[SerializeField]
-		private GameObject panel;
-		[SerializeField]
-		private GameObject btn_quit;
-		[SerializeField]
-		private string scene;
+		[SerializeField] private Text status;
+		[SerializeField] private Text points;
+		[SerializeField] private Text content;
+		[SerializeField] private GameObject panel;
+		[SerializeField] private GameObject btn_quit;
+		[SerializeField] private string scene;
 
 		private string status_text = "";
 		private string points_text = "points : ";
@@ -49,7 +43,6 @@ namespace GameScene.Multi
 				on_time ();
 				break;
 			}
-
 
 			if (PhotonNetwork.room.visible) {
 				calculate_point ();
@@ -85,7 +78,8 @@ namespace GameScene.Multi
 
 		IEnumerator Diconnect()
 		{
-			yield return new WaitForSeconds(5);
+			yield return new WaitForSeconds(1);
+			DestroyPlayers ();
 			PhotonNetwork.LeaveRoom ();
 			PhotonNetwork.Disconnect ();
 		}
@@ -101,12 +95,16 @@ namespace GameScene.Multi
 			win = true;
 			status_text = "Victoire";
 			status_color = new Color (92f / 255f, 184f / 255f, 92f / 255f);
-			content_text = local_player.name + "\n VS \n" + player.name + " - Abandon";
+
+			User player_user = (User)player.allProperties ["User"];
+
+			content_text = local_player.name + "\n VS \n" + player_user.username + " - " + player_user.score + " - Abandon";
 		}
 
 		private void on_time() {
-			int myScore = Game.Instance.Teams [local_player.ID].Points;
-			int otherScore = Game.Instance.Teams [other_player.ID].Points;
+
+			int myScore = Game.Instance.MyTeam.Points;
+			int otherScore = Game.Instance.EnnemyTeam.Points;
 			if (myScore > otherScore) {
 				win = true;
 				status_text = "Victoire";
@@ -116,23 +114,21 @@ namespace GameScene.Multi
 				status_color = new Color (212f / 255f, 85f / 255f, 83f / 255f);
 			}
 
-			content_text = local_player.name + "\n VS \n" + other_player.name;
+			User player_user = (User)other_player.allProperties ["User"];
+
+			content_text = local_player.name + "\n VS \n" + player_user.username + " - " + player_user.score;
+		}
+		private void DestroyPlayers(){
+			foreach (var item in GameObject.FindGameObjectsWithTag("Player")) {
+				Destroy (item);
+			}
 		}
 		public void exit()
 		{
 			FadingManager.I.Fade (scene);
-			//StartCoroutine(ChangeLevel());
 
 			PhotonNetwork.LeaveRoom ();
 			PhotonNetwork.Disconnect ();
 		}
-		/*
-		IEnumerator ChangeLevel()
-		{
-			float fadeTime = GameObject.Find("GM_Fade").GetComponent<Fading>().BeginFade(1);
-			yield return new WaitForSeconds(fadeTime);
-			SceneManager.LoadScene(scene);
-		}
-		*/
 	}
 }

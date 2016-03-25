@@ -13,25 +13,30 @@ public class Game
 
     private Dictionary<int, Team> teams;
     private bool finished;
-    private int max_point = 3;
+    private int max_point = 1;
 
     public Game()
     {
         finished = false;
         teams = new Dictionary<int, Team>();
-        if (PhotonNetwork.inRoom)
-        {
-            foreach (PhotonPlayer player in PhotonNetwork.playerList)
-            {
-                teams[player.ID] = Settings.Instance.Selected_Team; // Ancien
-                                                                    //teams [player.ID].Name = player.name;
-            }
-        }
-        else {
-            teams[0] = Settings.Instance.Selected_Team;
-            teams[1] = Settings.Instance.Random_Team;
-        }
+        
+        teams[0] = Settings.Instance.Selected_Team;
+        teams[1] = Settings.Instance.Random_Team;
     }
+	public Game(Team ennemy_t)
+	{
+		finished = false;
+		teams = new Dictionary<int, Team>();
+
+		if (PhotonNetwork.isMasterClient) {
+			teams [0] = Settings.Instance.Selected_Team;
+			teams [1] = ennemy_t;
+		} else {
+			teams [0] = ennemy_t;
+			teams [1] = Settings.Instance.Selected_Team;
+		}
+
+	}
 
     public void goal(int team_id)
     {
@@ -58,32 +63,30 @@ public class Game
     }
 
     public static Game Instance
-    {
-        get
-        {
-            return game_instance;
-        }
-        set
-        {
-            game_instance = value;
-        }
+    {	get {  return game_instance; }
+        set { game_instance = value; }
     }
     public Dictionary<int, Team> Teams
-    {
-        get
-        {
-            return teams;
-        }
+    {	get { return teams; }
     }
     public bool isFinish
-    {
-        get
-        {
-            return finished;
-        }
-        set
-        {
-            finished = value;
-        }
+    {	get { return finished; }
+        set { finished = value; }
     }
+	public Team MyTeam {
+		get {
+			if (!PhotonNetwork.inRoom)
+				return teams [0];
+			int myID = (PhotonNetwork.isMasterClient) ? 0 : 1;
+			return teams [myID];
+		}
+	}
+	public Team EnnemyTeam {
+		get {
+			if (!PhotonNetwork.inRoom)
+				return teams [1];
+			int EnnemyID = (PhotonNetwork.isMasterClient) ? 1 : 0;
+			return teams [EnnemyID];
+		}
+	}
 }

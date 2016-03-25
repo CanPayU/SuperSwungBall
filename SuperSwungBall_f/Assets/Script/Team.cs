@@ -2,6 +2,7 @@
 using  System.Collections.Generic;
 using UnityEngine;
 using System.Reflection;
+using GameScene;
 using GameScene.Solo;
 using GameScene.Multi;
 
@@ -30,10 +31,11 @@ public class Team {
 
 	public void start_move_players(){
 		foreach (KeyValuePair<int,Player> player in players) {
+			PlayerController controller = player.Value.Gm.GetComponent<PlayerController> ();
 			if (PhotonNetwork.inRoom) {
-				player.Value.Gm.GetComponent<PlayerController> ().start_Anim();
+				controller.SyncValues ();
 			} else {
-				player.Value.Gm.GetComponent<Player_controller> ().start_Anim ();
+				controller.start_Anim ();
 			}
 		}
 	}
@@ -42,7 +44,7 @@ public class Team {
 			if (PhotonNetwork.inRoom) {
 				player.Value.Gm.GetComponent<PlayerController> ().end_Anim ();
 			} else {
-				player.Value.Gm.GetComponent<Player_controller> ().end_Anim ();
+				player.Value.Gm.GetComponent<PlayerController> ().end_Anim ();
 			}
 		}
 	}

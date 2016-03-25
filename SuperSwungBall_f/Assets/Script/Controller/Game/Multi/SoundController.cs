@@ -15,16 +15,18 @@ public class SoundController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		/*
 		local_player = PhotonNetwork.player;
 		team = Game.Instance.Teams [local_player.ID];
 		//team = Settings.Instance.Default_Team["psg"];
 		paths = team.Sounds;
 		audio = GetComponent<AudioSource> ();
 
-		if(paths.Length > 0)
-			StartCoroutine(trigger_audio ());
+		if (paths.Length > 0) {
+		}
+			//StartCoroutine(trigger_audio ());
 
-
+*/
 	}
 
 	IEnumerator trigger_audio() {

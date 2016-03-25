@@ -40,4 +40,7 @@ public class Composition {
 	public string Code {
 		get { return code; }
 	}
+	public Dictionary<int, int[]> Data {
+		get { return data; }
+	}
 }
