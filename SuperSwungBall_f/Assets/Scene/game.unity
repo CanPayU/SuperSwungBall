@@ -1321,7 +1321,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scroll_view: {fileID: 1520201211}
   content_scroll_view: {fileID: 1520201215}
-  panel_message: {fileID: 183738, guid: a7e7bdfb8f5d74fcd89444faa4c8ed86, type: 2}
+  panel_my_message: {fileID: 180610, guid: a7e7bdfb8f5d74fcd89444faa4c8ed86, type: 2}
+  panel_other_message: {fileID: 101642, guid: 237fb5b90881d4065be84a46a7b199d8, type: 2}
   panel_event: {fileID: 190696, guid: 71ebcbc97eb7f4ad0b0da8b882bbc1f1, type: 2}
 --- !u!114 &688016394
 MonoBehaviour:

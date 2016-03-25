@@ -16,6 +16,7 @@ public class ChatController : MonoBehaviour, IChatClientListener {
 
 	private PhotonPlayer photon_enemy;
 	private User user_enemy;
+	private System.Random rand = new Random();
 
 	// -- Rect
 	private float actual_position = 0;
@@ -25,7 +26,7 @@ public class ChatController : MonoBehaviour, IChatClientListener {
 	// -- Chat
 	private ChatClient chatClient;
 	private const string APP_ID = "36f3dfb1-5ab7-4277-8d95-176d0bae98ff";
-	private const string APP_VERSION = "1.0";
+	private const string APP_VERSION = "1.6";
 	private string UserName;
 	private string channel_name;
 
@@ -44,8 +45,10 @@ public class ChatController : MonoBehaviour, IChatClientListener {
 		channel_name = PhotonNetwork.room.name;
 		UserName = User.Instance.username;
 
+		int alea = rand.Next (1000);
+
 		chatClient = new ChatClient (this);
-		chatClient.Connect( APP_ID, APP_VERSION, new AuthValues (UserName));
+		chatClient.Connect( APP_ID, APP_VERSION, new AuthValues (UserName + alea.ToString()));
 
 
 	}
