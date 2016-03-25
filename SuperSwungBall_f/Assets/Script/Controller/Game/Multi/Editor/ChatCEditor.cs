@@ -37,6 +37,20 @@ namespace GameScene.Multi {
 			{
 				myTarget.InstanciateMessage(value, type);
 			}
+
+
+			EditorGUILayout.Separator ();
+
+			GUILayout.BeginHorizontal();
+			{
+				EditorGUILayout.PrefixLabel("Content");
+				value = EditorGUILayout.TextField (value);
+			}
+			GUILayout.EndHorizontal();
+			if(GUILayout.Button("Send Message Chat"))
+			{
+				myTarget.SendMessage (value);
+			}
 		}
 	}
 }
