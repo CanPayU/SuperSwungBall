@@ -17,60 +17,85 @@ public class ChatController : MonoBehaviour, IChatClientListener {
 	private PhotonPlayer photon_enemy;
 	private User user_enemy;
 
-	// Rect
+	// -- Rect
 	private float actual_position = 0;
 	private int nb_message = 0;
 	private float scroll_view_heigth;
 
+	// -- Chat
+	private ChatClient chatClient;
+	private const string APP_ID = "36f3dfb1-5ab7-4277-8d95-176d0bae98ff";
+	private const string APP_VERSION = "1.0";
+	private string channel_name;
+
 	// Use this for initialization
 	void Start () {
+
+		Application.runInBackground = true;
+
 		pv = PhotonView.Get (this);
-		photon_enemy = PhotonNetwork.otherPlayers [0];
-		user_enemy = (User)photon_enemy.allProperties ["User"];
+		//photon_enemy = PhotonNetwork.otherPlayers [0];
+		//user_enemy = (User)photon_enemy.allProperties ["User"];
 
 		scroll_view_heigth = ((RectTransform)this.scroll_view.transform).sizeDelta.y;
 
-		/*
-		ChatClient chatClient = new ChatClient (this);
 
-		AuthValues authvalues = new AuthValues ();
-		authvalues.UserId = "MyUserName";//User.Instance.username;
-		chatClient.Connect( "36f3dfb1-5ab7-4277-8d95-176d0bae98ff", "1.0", authvalues);
+		chatClient = new ChatClient (this);
+		chatClient.Connect( APP_ID, APP_VERSION, new AuthValues ("MyUserName"));
 
-		chatClient.Subscribe( new string[] { "MyNameRoom" } );
-		chatClient.Service();*/
+		channel_name = "MyNameRoom";
+
+	}
+
+	void Update(){
+		this.chatClient.Service ();
+	}
+	void OnGUI(){
+		if (this.chatClient == null || this.chatClient.State != ChatState.ConnectedToFrontEnd)
+			GUILayout.Label ("Not in chat yet");
 	}
 
 	public void SendMessage(string message){
-		pv.RPC ("ReceiveMessage", PhotonTargets.All, pv.viewID, message);
+		this.chatClient.PublishMessage(this.channel_name, message);
 	}
 
 	public void OnDisconnected(){
 		Debug.Log ("OnDisconnected");
 	}
 	public void OnConnected(){
-		Debug.Log ("OnConnected");
+		this.chatClient.Subscribe( new string[] { channel_name } );
+		this.chatClient.AddFriends(new string[] {"tobi"});          // Add some users to the server-list to get their status updates
+		this.chatClient.SetOnlineStatus(ChatUserStatus.Online);
+		InstanciateMessage ("Connected", Chat.EVENT);
 	}
 	public void OnGetMessages(string channelName, string[] senders, object[] messages){
-		Debug.Log ("OnGetMessages");
+		foreach (var message in messages) {
+			InstanciateMessage ((string)message, Chat.SERVER_MESSAGE);
+		}
+
 	}
 	public void OnPrivateMessage(string sender, object message, string channelName){
 		Debug.Log ("OnPrivateMessage:" + sender + " - " + message + " - " + channelName);
 	}
 	public void OnSubscribed(string[] channels, bool[] results){
-		Debug.Log ("OnSubscribed:" + channels + " - " + results);
+		for (int i = 0; i < channels.Length; i++) {
+			if (!results[i])
+				InstanciateMessage ("Impossible de rejoindre " + channels[i], Chat.EVENT);
+		}
 	}
 	public void OnUnsubscribed(string[] channels){
-		Debug.Log ("OnUnsubscribed");
+		foreach (var channel in channels) {
+			InstanciateMessage ("Vous avez quitté " + channel, Chat.EVENT);
+		}
 	}
 	public void OnStatusUpdate(string user, int status, bool gotMessage, object message){
 		Debug.Log ("OnStatusUpdate");
 	}
 	public void OnChatStateChange(ChatState state){
-		Debug.Log ("OnChatStateChange");
+		Debug.Log ("ChatState - " + state);
 	}
 	public void DebugReturn(DebugLevel level, string message){
-		Debug.Log ("DebugReturn: " + level + " - " + message);
+		Debug.Log ("DebugReturn: " + level + " - " + message + " - " + chatClient.State);
 	}
 
 	[PunRPC] public void ReceiveMessage(int viewID, string message){
