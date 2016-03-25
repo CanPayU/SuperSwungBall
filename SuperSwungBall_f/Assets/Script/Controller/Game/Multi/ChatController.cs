@@ -16,7 +16,7 @@ public class ChatController : MonoBehaviour, IChatClientListener {
 
 	private PhotonPlayer photon_enemy;
 	private User user_enemy;
-	private System.Random rand = new Random();
+	private System.Random rand = new System.Random();
 
 	// -- Rect
 	private float actual_position = 0;
