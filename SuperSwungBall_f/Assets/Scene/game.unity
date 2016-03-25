@@ -1219,6 +1219,7 @@ GameObject:
   - 114: {fileID: 688016391}
   - 114: {fileID: 688016392}
   - 114: {fileID: 688016393}
+  - 114: {fileID: 688016394}
   m_Layer: 0
   m_Name: Main
   m_TagString: Untagged
@@ -1322,6 +1323,36 @@ MonoBehaviour:
   content_scroll_view: {fileID: 1520201215}
   panel_message: {fileID: 183738, guid: a7e7bdfb8f5d74fcd89444faa4c8ed86, type: 2}
   panel_event: {fileID: 190696, guid: 71ebcbc97eb7f4ad0b0da8b882bbc1f1, type: 2}
+--- !u!114 &688016394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 688016387}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9c33275a129349af90de87a458276e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ChatAppId: 33366633646662312d356162372d343237372d386439352d313736643062616539386666
+  ChannelsToJoinOnConnect: []
+  HistoryLengthToFetch: 0
+  DemoPublishOnSubscribe: 0
+  selectedChannelName: 
+  selectedChannelIndex: 0
+  doingPrivateChat: 0
+  GuiRect:
+    x: 0
+    y: 0
+    width: 250
+    height: 300
+  IsVisible: 1
+  AlignBottom: 0
+  FullScreen: 0
+  inputLine: 
+  userIdInput: 
+  scrollPos: {x: 0, y: 0}
+  <UserName>k__BackingField: 
 --- !u!1 &712726265
 GameObject:
   m_ObjectHideFlags: 0

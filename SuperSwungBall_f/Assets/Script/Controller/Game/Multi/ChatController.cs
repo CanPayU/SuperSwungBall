@@ -10,10 +10,10 @@ public class ChatController : MonoBehaviour, IChatClientListener {
 
 	[SerializeField] private GameObject scroll_view;
 	[SerializeField] private ScrollRect content_scroll_view;
-	[SerializeField] private GameObject panel_message;
+	[SerializeField] private GameObject panel_my_message;
+	[SerializeField] private GameObject panel_other_message;
 	[SerializeField] private GameObject panel_event;
 
-	private PhotonView pv;
 	private PhotonPlayer photon_enemy;
 	private User user_enemy;
 
@@ -26,24 +26,27 @@ public class ChatController : MonoBehaviour, IChatClientListener {
 	private ChatClient chatClient;
 	private const string APP_ID = "36f3dfb1-5ab7-4277-8d95-176d0bae98ff";
 	private const string APP_VERSION = "1.0";
+	private string UserName;
 	private string channel_name;
 
 	// Use this for initialization
 	void Start () {
 
 		Application.runInBackground = true;
-
-		pv = PhotonView.Get (this);
-		//photon_enemy = PhotonNetwork.otherPlayers [0];
-		//user_enemy = (User)photon_enemy.allProperties ["User"];
-
 		scroll_view_heigth = ((RectTransform)this.scroll_view.transform).sizeDelta.y;
 
+		photon_enemy = PhotonNetwork.otherPlayers [0];
+		user_enemy = (User)photon_enemy.allProperties ["User"];
+		string txt_chat = "Vous jouez contre : " + user_enemy.username;
+		InstanciateMessage (txt_chat, Chat.EVENT);
+
+
+		channel_name = PhotonNetwork.room.name;
+		UserName = User.Instance.username;
 
 		chatClient = new ChatClient (this);
-		chatClient.Connect( APP_ID, APP_VERSION, new AuthValues ("MyUserName"));
+		chatClient.Connect( APP_ID, APP_VERSION, new AuthValues (UserName));
 
-		channel_name = "MyNameRoom";
 
 	}
 
@@ -69,8 +72,11 @@ public class ChatController : MonoBehaviour, IChatClientListener {
 		InstanciateMessage ("Connected", Chat.EVENT);
 	}
 	public void OnGetMessages(string channelName, string[] senders, object[] messages){
-		foreach (var message in messages) {
-			InstanciateMessage ((string)message, Chat.SERVER_MESSAGE);
+		for (int i = 0; i < messages.Length; i++) {
+			if (senders[i] != UserName)
+				InstanciateMessage ((string)messages[i], Chat.SERVER_MESSAGE);
+			else
+				InstanciateMessage ((string)messages[i], Chat.LOCAL_MESSAGE);
 		}
 
 	}
@@ -98,14 +104,6 @@ public class ChatController : MonoBehaviour, IChatClientListener {
 		Debug.Log ("DebugReturn: " + level + " - " + message + " - " + chatClient.State);
 	}
 
-	[PunRPC] public void ReceiveMessage(int viewID, string message){
-		if (pv.viewID != pv.viewID)
-			Debug.Log ("Enemy "+ user_enemy.username + " send : " + message);
-		else
-			Debug.Log ("I send : " + message);
-	}
-
-
 	public void InstanciateMessage(string text, Chat type){
 		GameObject instance = new GameObject();
 		switch (type) {
@@ -113,10 +111,10 @@ public class ChatController : MonoBehaviour, IChatClientListener {
 			instance = this.panel_event;
 			break;
 		case Chat.LOCAL_MESSAGE:
-			instance = this.panel_message;
+			instance = this.panel_my_message;
 			break;
 		case Chat.SERVER_MESSAGE:
-			instance = this.panel_message;
+			instance = this.panel_other_message;
 			break;
 		default:
 			break;
