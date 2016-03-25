@@ -43,14 +43,12 @@ public class ChatController : MonoBehaviour, IChatClientListener {
 
 
 		channel_name = PhotonNetwork.room.name;
-		UserName = User.Instance.username;
-
 		int alea = rand.Next (1000);
+		UserName = User.Instance.username + alea.ToString();
+
 
 		chatClient = new ChatClient (this);
-		chatClient.Connect( APP_ID, APP_VERSION, new AuthValues (UserName + alea.ToString()));
-
-
+		chatClient.Connect( APP_ID, APP_VERSION, new AuthValues (UserName));
 	}
 
 	void Update(){
