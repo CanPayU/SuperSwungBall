@@ -19,8 +19,6 @@ namespace Menu
         private Vector3 setRelCenter;
 
 
-
-
         // Use this for initialization
         void Start()
         {

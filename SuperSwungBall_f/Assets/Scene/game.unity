@@ -1466,6 +1466,7 @@ MonoBehaviour:
   panel_my_message: {fileID: 161656, guid: a7e7bdfb8f5d74fcd89444faa4c8ed86, type: 2}
   panel_other_message: {fileID: 107700, guid: 237fb5b90881d4065be84a46a7b199d8, type: 2}
   panel_event: {fileID: 190696, guid: 71ebcbc97eb7f4ad0b0da8b882bbc1f1, type: 2}
+  inputField: {fileID: 888112583}
 --- !u!114 &688016394
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1703,18 +1704,7 @@ MonoBehaviour:
   m_CharacterLimit: 0
   m_OnEndEdit:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 688016393}
-        m_MethodName: SendMessage
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.InputField+SubmitEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_OnValueChanged:
