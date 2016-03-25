@@ -13,6 +13,7 @@ public class ChatController : MonoBehaviour, IChatClientListener {
 	[SerializeField] private GameObject panel_my_message;
 	[SerializeField] private GameObject panel_other_message;
 	[SerializeField] private GameObject panel_event;
+	[SerializeField] private InputField inputField;
 
 	private PhotonPlayer photon_enemy;
 	private User user_enemy;
@@ -41,14 +42,20 @@ public class ChatController : MonoBehaviour, IChatClientListener {
 		string txt_chat = "Vous jouez contre : " + user_enemy.username;
 		InstanciateMessage (txt_chat, Chat.EVENT);
 
-
 		channel_name = PhotonNetwork.room.name;
 		int alea = rand.Next (1000);
 		UserName = User.Instance.username + alea.ToString();
 
-
 		chatClient = new ChatClient (this);
 		chatClient.Connect( APP_ID, APP_VERSION, new AuthValues (UserName));
+
+		inputField.onEndEdit.AddListener(val =>
+			{
+				if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter)) {
+					SendMessage (inputField.text);
+					inputField.text = "";
+				}
+			});
 	}
 
 	void Update(){
@@ -57,9 +64,11 @@ public class ChatController : MonoBehaviour, IChatClientListener {
 	void OnGUI(){
 		if (this.chatClient == null || this.chatClient.State != ChatState.ConnectedToFrontEnd)
 			GUILayout.Label ("Not in chat yet");
+		
 	}
 
 	public void SendMessage(string message){
+		Debug.Log ("send : " + message);
 		this.chatClient.PublishMessage(this.channel_name, message);
 	}
 
