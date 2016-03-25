@@ -10,7 +10,7 @@ namespace GameScene
 
         [SerializeField] private int team_id;
         public int Team
-        {	set { team_id = value; } }
+        { set { team_id = value; } }
 
         private GameObject main;
 
@@ -22,8 +22,6 @@ namespace GameScene
 
         public void goal()
         {
-
-
 			Debug.Log("GOAAL RPC of " + team_id);
             if (PhotonNetwork.inRoom)
 			{
@@ -37,4 +35,3 @@ namespace GameScene
         }
     }
 }
-

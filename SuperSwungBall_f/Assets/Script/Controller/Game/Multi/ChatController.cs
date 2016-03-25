@@ -25,12 +25,12 @@ public class ChatController : MonoBehaviour, IChatClientListener {
 	// Use this for initialization
 	void Start () {
 		pv = PhotonView.Get (this);
-		//photon_enemy = PhotonNetwork.otherPlayers [0];
-		//user_enemy = (User)photon_enemy.allProperties ["User"];
+		photon_enemy = PhotonNetwork.otherPlayers [0];
+		user_enemy = (User)photon_enemy.allProperties ["User"];
 
 		scroll_view_heigth = ((RectTransform)this.scroll_view.transform).sizeDelta.y;
 
-
+		/*
 		ChatClient chatClient = new ChatClient (this);
 
 		AuthValues authvalues = new AuthValues ();
@@ -38,7 +38,7 @@ public class ChatController : MonoBehaviour, IChatClientListener {
 		chatClient.Connect( "36f3dfb1-5ab7-4277-8d95-176d0bae98ff", "1.0", authvalues);
 
 		chatClient.Subscribe( new string[] { "MyNameRoom" } );
-		chatClient.Service();
+		chatClient.Service();*/
 	}
 
 	public void SendMessage(string message){
