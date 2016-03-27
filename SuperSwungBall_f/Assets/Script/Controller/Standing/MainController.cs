@@ -25,8 +25,8 @@ namespace Standing
         // Update is called once per frame
         void Update()
         {
-            if (Input.anyKey)
-	            FadingManager.I.Fade ();
+			//if (Input.anyKey)
+			//	FadingManager.I.Fade ();
         }
     }
 }
