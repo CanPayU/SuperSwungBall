@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 namespace GameScene
 {
@@ -7,6 +7,7 @@ namespace GameScene
     {
         Player player;
         PlayerController playerController; // évite le GetComponent<>()
+        List<Collider> playerMet; // joueurs rencontré (uniquement ceux combattus) lors du tour. Un player de peut pas tacler 2 fois le même adversaire en 1 seul tour.
         bool goal;
         int premiereFrames;
         void Start()
@@ -15,6 +16,7 @@ namespace GameScene
             player = playerController.Player;
             premiereFrames = 5;
             goal = false;
+            playerMet = new List<Collider>();
         }
 
         public void OnTriggerStay(Collider other)
@@ -75,9 +77,10 @@ namespace GameScene
         {
             Player adversaire = adversaireCollider.GetComponent<PlayerController>().Player;
             // collision adversaire et déclenchement combat
-            if (adversaire.Team_id != player.Team_id && (adversaire.Tacle != 0 || player.Tacle != 0))
+            if (adversaire.Team_id != player.Team_id && (adversaire.Tacle != 0 || player.Tacle != 0) && !playerMet.Contains(adversaireCollider))
             {
                 // rotation des joueurs ( face à face)
+                playerMet.Add(adversaireCollider);
                 transform.FindChild("perso").transform.LookAt(new Vector3(adversaireCollider.transform.position.x, transform.FindChild("perso").position.y, adversaireCollider.transform.position.z));
 
                 float attaqueAdverse = Mathf.Max(adversaire.Tacle, adversaire.Esquive);
@@ -122,6 +125,7 @@ namespace GameScene
         {
             goal = false;
             premiereFrames = 5;
+            playerMet.Clear();
         }
     }
 }
