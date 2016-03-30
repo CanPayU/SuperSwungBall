@@ -43,8 +43,7 @@ namespace GameScene.Solo
             {
                 int score = 15;
                 Debug.Log(User.Instance.score);
-                HttpController controller = gameObject.GetComponent<HttpController>();
-                controller.sync_score(score, (success) => {
+				HTTP.SyncScore(score, (success) => {
                     Debug.Log(success);
                     Debug.Log(User.Instance.score);
                 });
@@ -57,8 +56,7 @@ namespace GameScene.Solo
                 string username = "antoine"; // id = 1
                 string password = "mdp"; // OK
                 Debug.Log("isConnected ? " + User.Instance.is_connected);
-                HttpController controller = gameObject.GetComponent<HttpController>();
-                controller.connect(username, password, (success) => {
+				HTTP.Authenticate(username, password, (success) => {
                     Debug.Log("isConnected ? " + User.Instance.is_connected + " - Success ?" + success);
                 });
                 Debug.Log("sended");

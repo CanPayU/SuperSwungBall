@@ -68,8 +68,7 @@ namespace GameScene.Multi
 				score = 10;
 			}
 
-			HttpController controller = gameObject.GetComponent<HttpController>();
-			controller.sync_score(score, (success) => {
+			HTTP.SyncScore(score, (success) => {
 				if(!success)
 					Notification.danger("Erreur de synchronisation");
 				btn_quit.SetActive(true);

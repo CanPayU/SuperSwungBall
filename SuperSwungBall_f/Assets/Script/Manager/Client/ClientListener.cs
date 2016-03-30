@@ -3,7 +3,6 @@ using System.Collections;
 
 public interface ClientListener {
 
-
 	/// <summary>
 	/// Confirmation de l'authentification par le serveur
 	/// </summary>

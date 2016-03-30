@@ -1,17 +1,18 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 using System.Collections;
 
 public class ClientManager : MonoBehaviour, ClientListener {
 
 	private Client client;
-
+	private rslideController SlideController;
 
 	public Client Client {
 		get { return client; }
 	}
 
 	void Start () {
-		client = new Client (this);
+		this.client = new Client (this);
 	}
 
 	// Update is called once per frame
@@ -31,11 +32,14 @@ public class ClientManager : MonoBehaviour, ClientListener {
 
 	}
 
+	// -- Pour + d'info voir ClientListener.cs
 	public void OnFriendDisconnected(string username, int id){
-		Debug.Log ("In Socket Controller : Friend " + username + " - " + id + " is now Disconnected");
+		Debug.Log ("Friend " + username + " - " + id + " is now Disconnected");
+		User.Instance.Friends.IsOnline (username, false);
 	}
 	public void OnFriendConnected(string username, int id){
-		Debug.Log ("In Socket Controller : Friend " + username + " - " + id + " is now Connected");
+		Debug.Log ("Friend " + username + " - " + id + " is now Connected");
+		User.Instance.Friends.IsOnline (username);
 	}
 	public void OnReceiveMessage(string message){
 		Debug.Log ("Receive undefined method : " + message);

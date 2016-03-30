@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using Boomlagoon.JSON;
 
 
@@ -18,27 +19,42 @@ public sealed class User {
 		}
 	}
 
+
+
 	public int id;
 	public string username;
 	public string email;
 	public int score;
 	public string[] roles;
+	private Friends friends;
 	public bool is_connected;
 
 	public User() {
+		is_connected = false;
 		id = 0;
 		username = null;
 		email = null;
 		score = 0;
 		roles = null;
-		is_connected = false;
+		friends = null;
 	}
 
 	public void update(JSONObject json){
+		is_connected = true;
 		id = (int)json.GetNumber ("id");
 		username = json.GetString ("username");
 		email = json.GetString ("email");
 		score = (int)json.GetNumber ("score");
-		is_connected = true;
+
+		if (!json.ContainsKey ("friends"))
+			return;
+		
+		// -- Friends
+		JSONArray friends = json.GetArray ("friends");
+		this.friends = new Friends (friends);
+	}
+
+	public Friends Friends{
+		get { return friends; }
 	}
 }
