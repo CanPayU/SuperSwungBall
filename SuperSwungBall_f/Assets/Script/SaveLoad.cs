@@ -30,7 +30,7 @@ public static class SaveLoad {
 			FileStream file = File.Open(Application.persistentDataPath + "/user.txt", FileMode.Open);
 			try {
 				SaveLoad.savedUser = (User)bf.Deserialize(file);
-			} catch (System.Exception ex) {
+			} catch (System.Exception) {
 				Debug.LogError ("-- MàJ sur la classe User disponible. -- V" + User.VERSION);
 				return false;
 			}
@@ -59,7 +59,7 @@ public static class SaveLoad {
 			FileStream file = File.Open (Application.persistentDataPath + "/settings.txt", FileMode.Open);
 			try {
 				SaveLoad.setting = (Settings)bf.Deserialize(file);
-			} catch (System.Exception ex) {
+			} catch (System.Exception) {
 				Debug.LogError ("-- MàJ sur la classe Settings disponible. -- V" + Settings.VERSION);
 				return;
 			}

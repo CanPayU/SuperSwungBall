@@ -6,22 +6,18 @@ namespace Standing
 {
     public class MainController : MonoBehaviour
     {
-        [SerializeField] private string scene;
+		[SerializeField] private GameObject Press_To_Start;
+		[SerializeField] private GameObject Authentication;
+
+		private bool authenticate;
 
         // Use this for initialization
         void Start()
         {
-			HTTP.Authenticate("antoine","mdp", (success) => {
-				Debug.Log(success);
-			});
-
 			//SaveLoad.save_user ();
 			//SaveLoad.save_setting ();
 			SaveLoad.load_settings ();
-			SaveLoad.load_user ();
-
-			Debug.Log(Settings.Instance.version);
-			Debug.Log(Settings.VERSION);
+			authenticate = SaveLoad.load_user ();
         }
 
         // Update is called once per frame
@@ -41,8 +37,14 @@ namespace Standing
 				}
 			}
 			#endif
-			if (Input.anyKey)
-				FadingManager.I.Fade ();
+			if (Input.anyKey) {
+				if (authenticate)
+					FadingManager.I.Fade ();
+				else {
+					Press_To_Start.SetActive (false);
+					Authentication.SetActive (true);
+				}
+			}
         }
     }
 }
