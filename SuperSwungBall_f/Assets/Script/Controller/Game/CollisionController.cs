@@ -6,18 +6,20 @@ namespace GameScene
     public class CollisionController : MonoBehaviour
     {
         Player player;
+        PlayerController playerController; // évite le GetComponent<>()
         bool goal;
         int premiereFrames;
         void Start()
         {
-            player = GetComponent<PlayerController>().Player;
+            playerController = GetComponent<PlayerController>();
+            player = playerController.Player;
             premiereFrames = 5;
             goal = false;
         }
 
         public void OnTriggerStay(Collider other)
         {
-            if (GetComponent<PlayerController>().PhaseAnimation)
+            if (playerController.PhaseAnimation)
             {
                 if (premiereFrames > 0)
                 {
@@ -37,8 +39,7 @@ namespace GameScene
         }
         public void OnTriggerEnter(Collider other)
         {
-            player = GetComponent<PlayerController>().Player;
-            if (GetComponent<PlayerController>().PhaseAnimation)
+            if (playerController.PhaseAnimation)
             {
                 interception(other);
                 if (other.tag == "Player")
@@ -64,7 +65,7 @@ namespace GameScene
             if (goalCollider.tag == "Goal" && transform.FindChild("perso").transform.FindChild("Ball") != null)
             {
                 transform.FindChild("perso").GetComponent<Animator>().Play("TouchDown");
-                GetComponent<PlayerController>().Pause = 10f;
+                playerController.Pause = 10f;
                 GoalController g_controller = goalCollider.GetComponent<GoalController>();
                 g_controller.goal();
                 goal = true;
@@ -87,15 +88,13 @@ namespace GameScene
                     if (player.Tacle > attaqueAdverse)
                     {
                         //Attaque réussit
-                        transform.FindChild("perso").GetComponent<Animator>().Play("Attaque Reussit");
-                        GetComponent<PlayerController>().Pause = 1f;
+                        playerController.Animation("Attaque Reussit", 2);
                         Debug.Log(name + " réussit son tacle");
                     }
                     else
                     {
                         //Attaque ratée
-                        transform.FindChild("perso").GetComponent<Animator>().Play("Attaque Echec");
-                        GetComponent<PlayerController>().Pause = 1f;
+                        playerController.Animation("Attaque Echec", 4);
                         Debug.Log(name + " rate son tacle");
 
                     }
@@ -106,22 +105,20 @@ namespace GameScene
                     if (player.Esquive > attaqueAdverse)
                     {
                         //Esquive Réussit
-                        transform.FindChild("perso").GetComponent<Animator>().Play("Esquive Reussit");
-                        GetComponent<PlayerController>().Pause = 2f;
+                        playerController.Animation("Esquive Reussit", 1);
                         Debug.Log(name + " réussit son esquive");
                     }
                     else
                     {
                         //Esquive ratée
-                        transform.FindChild("perso").GetComponent<Animator>().Play("Esquive Echec");
-                        GetComponent<PlayerController>().Pause = 2f;
+                        playerController.Animation("Esquive Echec", 4);
                         Debug.Log(name + " rate son esquive");
                     }
                 }
             }
         }
 
-        public void Start_anim()
+        public void start_anim()
         {
             goal = false;
             premiereFrames = 5;
