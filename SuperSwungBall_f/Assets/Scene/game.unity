@@ -259,8 +259,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 462564127}
   m_HandleRect: {fileID: 462564126}
   m_Direction: 0
-  m_Value: 1
-  m_Size: 0
+  m_Value: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1172,7 +1172,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 658773685}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1417,8 +1417,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef9c967b26fd9a84ba00703b76302b81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player1_prefab: {fileID: 111640, guid: 0a96ed169fff146e1b977e39c5b0689e, type: 2}
-  player2_prefab: {fileID: 141314, guid: a0257696f402d427a990238964a4192f, type: 2}
+  player1_prefab: {fileID: 173626, guid: 19d96c7425c5512499c243ffa6f4af60, type: 2}
+  player2_prefab: {fileID: 172884, guid: 60ff10c0bdba0fb48806d156e928b6e5, type: 2}
   ball_prefab: {fileID: 132026, guid: 1cb4de539f61142409a8341ccf935429, type: 2}
   score: {fileID: 1720524803}
   skin: {fileID: 0}
@@ -2145,7 +2145,7 @@ Transform:
   m_GameObject: {fileID: 1122352625}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -2251,7 +2251,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:

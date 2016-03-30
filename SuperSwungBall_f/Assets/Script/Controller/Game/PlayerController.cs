@@ -18,7 +18,7 @@ namespace GameScene
         // Event Click
         private bool menuDisplayed;
         private RaycastHit hit;
-        private Renderer selection; // cercle de sélection lors du passage de la sourie
+        private Renderer selection; // cercle de sélection lors du passage de la souris
 
         //Evite le "GetComponent<>"
         private Collider myCollider;
