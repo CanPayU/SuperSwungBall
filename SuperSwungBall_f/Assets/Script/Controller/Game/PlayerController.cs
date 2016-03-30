@@ -20,6 +20,7 @@ namespace GameScene
 		//Evite le "GetComponent<>"
 		private Collider myCollider;
 		private MenuController menuController;
+        private CollisionController myCollisionController;
 
 		//phaseAnimation
 		private bool phaseAnimation;
@@ -68,6 +69,7 @@ namespace GameScene
 			Menu.transform.parent = transform;
 
 			menuController = Menu.GetComponent<MenuController>();
+            myCollisionController = GetComponent<CollisionController>();
 
 			view = GetComponent<PhotonView> ();
 
@@ -140,6 +142,7 @@ namespace GameScene
 					pause -= Time.deltaTime;
 					if(pause < 0) // pause terminée
 					{
+                        myCollider.enabled = true;
 						pause = 0;
 						if(movement) // play precedente animation
 						{
@@ -178,9 +181,16 @@ namespace GameScene
 			pointPasse = arrivalPointPasse;
 			return (phaseAnimation && Vector3.Distance(arrivalPointPasse, transform.position) < player.ZonePasse * 5);
 		}
+        public void Animation(string animation, float tempsAnimation)
+        {
+            myCollider.enabled = false;
+            pause = tempsAnimation;
+            transform.FindChild("perso").GetComponent<Animator>().Play(animation);
+        }
 
 		public void start_Anim(bool setPoint = true) // debut de l'animation
 		{
+            myCollisionController.start_anim();
 			mouseState = false;
 			phaseAnimation = true;
 			menuController.display(false);
@@ -194,7 +204,6 @@ namespace GameScene
 				arrivalPoint = new Vector3(menuController.Get_Coordsdeplacement[0], transform.position.y, menuController.Get_Coordsdeplacement[1]); // point d'arrivé du déplacement
 				arrivalPointPasse = new Vector3(menuController.Get_CoordsPasse[0], 0.2f, menuController.Get_CoordsPasse[1]); // point d'arrivé de la passe
 			}
-
 
 			//animation course
 			if (arrivalPoint != transform.position)
