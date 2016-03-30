@@ -21,7 +21,6 @@ public class TeamButtonController : MonoBehaviour {
 		GetTeams ();
 		// -- Nb bouton en fonction Nb team
 		int len = Settings.Instance.Default_Team.Count;
-		Debug.Log (len);
 		if (len < 3 && state == State.ENABLED)
 			gameObject.SetActive (false);
 		else if (len < 3 && ((state == State.LEFT && index == (len-1)) || (state == State.RIGHT && index == (0))))

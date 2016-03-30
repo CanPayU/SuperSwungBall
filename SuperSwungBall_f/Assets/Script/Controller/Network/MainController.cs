@@ -20,7 +20,7 @@ namespace Network {
 			#endif
 
 
-			Debug.Log(HttpController.GET("antoine","mdp"));
+			//Debug.Log(HTTP.GET("antoine","mdp"));
 
 
 

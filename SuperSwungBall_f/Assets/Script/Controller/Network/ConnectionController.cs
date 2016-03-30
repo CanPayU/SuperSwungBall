@@ -20,8 +20,7 @@ namespace Network {
 		
 		public void check_login(){
 			connect.enabled = false;
-			HttpController controller = gameObject.GetComponent<HttpController>();
-			controller.connect(username.text, password.text, (success) => {
+			HTTP.Authenticate(username.text, password.text, (success) => {
 				if(success) {
 					//this.connection_panel.SetActive(false);
 					//this.loading_panel.SetActive(true);
