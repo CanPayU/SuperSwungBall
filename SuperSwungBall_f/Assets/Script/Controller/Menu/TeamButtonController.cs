@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 public class TeamButtonController : MonoBehaviour {
 
-
 	[SerializeField] private State state;
 	[SerializeField] private TextMesh team_name;
 

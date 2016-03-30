@@ -8,18 +8,13 @@ using Boomlagoon.JSON;
 public sealed class User {
 
 	private static User _instance = new User ();
-	public static User Instance
-	{
-		get
-		{
-			return _instance;
-		}
-		set {
-			_instance = value;
-		}
+	public static User Instance { 	
+		get { return _instance; }
+		set { _instance = value; }
 	}
 
-
+	public const string VERSION = "1.04"; // Version actuelle
+	public string version; // Version de l'instance (sauvegarder sur l'ordi)
 
 	public int id;
 	public string username;
@@ -37,6 +32,7 @@ public sealed class User {
 		score = 0;
 		roles = null;
 		friends = null;
+		version = VERSION;
 	}
 
 	public void update(JSONObject json){
