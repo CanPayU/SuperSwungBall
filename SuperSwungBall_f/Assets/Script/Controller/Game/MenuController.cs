@@ -67,8 +67,8 @@ namespace GameScene
             buttonsColor.Add(new Color(0, 0.5f, 1));
 
             //Couleur zones
-            components["zones"][0].GetComponent<Renderer>().material.color = new Color(0.6f, 1, 1); // deplacement
-            components["zones"][1].GetComponent<Renderer>().material.color = new Color(1, 0.6f, 1); // passe
+            //components["zones"][0].GetComponent<Renderer>().material.color = new Color(0.6f, 1, 1); // deplacement
+            //components["zones"][1].GetComponent<Renderer>().material.color = new Color(1, 0.6f, 1); // passe
 
             //Couleur pointeurs
             components["pointeurs"][0].GetComponent<Renderer>().material.color = new Color(0.2f, 0.7f, 0.7f); // deplacement
