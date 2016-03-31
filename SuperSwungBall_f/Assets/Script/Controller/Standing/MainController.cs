@@ -17,7 +17,7 @@ namespace Standing
 			//SaveLoad.save_user ();
 			//SaveLoad.save_setting ();
 			SaveLoad.load_settings ();
-			authenticate = SaveLoad.load_user ();
+			this.authenticate = SaveLoad.load_user ();
         }
 
         // Update is called once per frame

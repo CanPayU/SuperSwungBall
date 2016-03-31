@@ -21,7 +21,6 @@ public class ChatController : MonoBehaviour, IChatClientListener {
 
 	// -- Rect
 	private float actual_position = 0;
-	private int nb_message = 0;
 	private float scroll_view_heigth;
 
 	// -- Chat
