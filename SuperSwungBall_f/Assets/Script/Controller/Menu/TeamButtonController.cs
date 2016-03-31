@@ -12,6 +12,7 @@ public class TeamButtonController : MonoBehaviour {
 	RaycastHit hit;
 	// --
 
+	private int len;
 	private int index;
 	private Team[] teams_;
 
@@ -19,7 +20,7 @@ public class TeamButtonController : MonoBehaviour {
 	{
 		GetTeams ();
 		// -- Nb bouton en fonction Nb team
-		int len = Settings.Instance.Default_Team.Count;
+		this.len = Settings.Instance.Default_Team.Count;
 		if (len < 3 && state == State.ENABLED)
 			gameObject.SetActive (false);
 		else if (len < 3 && ((state == State.LEFT && index == (len-1)) || (state == State.RIGHT && index == (0))))
@@ -69,7 +70,7 @@ public class TeamButtonController : MonoBehaviour {
 		case State.UP:
 			break;//return;
 		case State.LEFT:
-			index++;
+			Update_Index (1); //index++;
 			if (this.state == State.LEFT) {
 				GetComponent<Animator> ().Play ("LeftToUp");
 				this.state = State.UP;
@@ -85,7 +86,7 @@ public class TeamButtonController : MonoBehaviour {
 			}
 			break;
 		case State.RIGHT:
-			index--;
+			Update_Index (-1); //index--;
 			if (this.state == State.LEFT){
 				GetComponent<Animator> ().Play ("LeftToEnabled");
 				this.state = State.ENABLED;
@@ -106,6 +107,20 @@ public class TeamButtonController : MonoBehaviour {
 			var selected_t = teams_ [index];
 			Settings.Instance.Selected_Team = selected_t;
 			team_name.text = selected_t.Name;
+		}
+	}
+
+	/// <summary>
+	/// Updates the index.
+	/// </summary>
+	/// <param name="increment">Increment of index</param>
+	private void Update_Index(int increment){
+		this.index += increment;
+
+		if (this.index < 0) {
+			this.index = this.len - 1;
+		} else if (this.index > this.len - 1) {
+			this.index = 0;
 		}
 	}
 
