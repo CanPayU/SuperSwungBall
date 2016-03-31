@@ -20,14 +20,14 @@ public class Client {
 	private Socket _sock;
 	private byte[] _buffer = new byte[BUFFER_SIZE];
 
-	private readonly List<ClientListener> listeners = null;
+	private readonly List<IClientListener> listeners = null;
 
 	private bool isAuthenticate = false;
 	private string username;
 	private int id;
 
-	public Client(ClientListener listener){
-		this.listeners = new List<ClientListener> ();
+	public Client(IClientListener listener){
+		this.listeners = new List<IClientListener> ();
 		this.listeners.Add(listener);
 		this.username = "hugo_082";
 		this.id = 1;
@@ -155,10 +155,10 @@ public class Client {
 
 	}
 
-	public void AddListener(ClientListener listener){
+	public void AddListener(IClientListener listener){
 		this.listeners.Add (listener);
 	}
-	public void RemoveListener(ClientListener listener){
+	public void RemoveListener(IClientListener listener){
 		this.listeners.Remove (listener);
 	}
 

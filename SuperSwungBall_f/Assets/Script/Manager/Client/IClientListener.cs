@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public interface ClientListener {
+public interface IClientListener {
 
 	/// <summary>
 	/// Confirmation de l'authentification par le serveur

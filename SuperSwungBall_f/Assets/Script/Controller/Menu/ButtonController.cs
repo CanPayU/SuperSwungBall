@@ -27,7 +27,6 @@ namespace Menu
             {
                 Debug.Log(scene);
 				FadingManager.I.Fade (scene);
-                //StartCoroutine(ChangeLevel());
             }
         }
     }

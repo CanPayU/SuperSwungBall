@@ -11,6 +11,9 @@ public class Settings {
 		set { _instance = value; }
 	}
 
+	public const string VERSION = "1.0"; // Version actuelle
+	public string version; // Version de l'instance (sauvegarder sur l'ordi)
+
 	private Dictionary<string, Team> default_team;
 	private Dictionary<string, Player> default_player;
 	private Dictionary<string, Composition> default_compo;
@@ -20,6 +23,7 @@ public class Settings {
 	private System.Random rand = new System.Random();
 
 	public Settings (){
+		this.version = VERSION;
 		// /*
 		default_team = new Dictionary<string, Team> ();
 		default_player = new Dictionary<string, Player> ();

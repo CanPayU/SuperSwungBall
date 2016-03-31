@@ -13,22 +13,30 @@ public static class SaveLoad {
 		Debug.Log ("save_user "+ Application.persistentDataPath);
 		SaveLoad.savedUser = User.Instance;
 		BinaryFormatter bf = new BinaryFormatter();
-		FileStream file = File.Create (Application.persistentDataPath + "/user.gd");
+		FileStream file = File.Create (Application.persistentDataPath + "/user.txt");
 		bf.Serialize(file, SaveLoad.savedUser);
 		file.Close();
 	}  
 
 	public static void reset_user(){
 		Debug.Log ("reset_user "+ Application.persistentDataPath);
-		File.Delete (Application.persistentDataPath + "/user.gd");
+		File.Delete (Application.persistentDataPath + "/user.txt");
 	}
 
 	public static bool load_user() {
 		Debug.Log ("load_user "+ Application.persistentDataPath);
-		if(File.Exists(Application.persistentDataPath + "/user.gd")) {
+		if(File.Exists(Application.persistentDataPath + "/user.txt")) {
 			BinaryFormatter bf = new BinaryFormatter();
-			FileStream file = File.Open(Application.persistentDataPath + "/user.gd", FileMode.Open);
-			SaveLoad.savedUser = (User)bf.Deserialize(file);
+			FileStream file = File.Open(Application.persistentDataPath + "/user.txt", FileMode.Open);
+			try {
+				SaveLoad.savedUser = (User)bf.Deserialize(file);
+			} catch (System.Exception) {
+				Debug.LogError ("-- MàJ sur la classe User disponible. -- V" + User.VERSION);
+				return false;
+			}
+			if (savedUser.version != User.VERSION) {
+				Debug.LogWarning ("-- MàJ sur la classe User disponible (recommendé). --");
+			}
 			User.Instance = savedUser;
 			file.Close();
 			return true;
@@ -49,7 +57,15 @@ public static class SaveLoad {
 		if (File.Exists (Application.persistentDataPath + "/settings.txt")) {
 			BinaryFormatter bf = new BinaryFormatter ();
 			FileStream file = File.Open (Application.persistentDataPath + "/settings.txt", FileMode.Open);
-			SaveLoad.setting = (Settings)bf.Deserialize (file);
+			try {
+				SaveLoad.setting = (Settings)bf.Deserialize(file);
+			} catch (System.Exception) {
+				Debug.LogError ("-- MàJ sur la classe Settings disponible. -- V" + Settings.VERSION);
+				return;
+			}
+			if (setting.version != Settings.VERSION) {
+				Debug.LogWarning ("-- MàJ sur la classe Settings disponible (recommendé). --");
+			}
 			Settings.Instance = setting;
 			file.Close ();
 		} else {
