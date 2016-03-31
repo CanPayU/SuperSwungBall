@@ -2,7 +2,7 @@
 using UnityEngine.Events;
 using System.Collections;
 
-public class ClientManager : MonoBehaviour, ClientListener {
+public class ClientManager : MonoBehaviour, IClientListener {
 
 	private Client client;
 	private rslideController SlideController;
