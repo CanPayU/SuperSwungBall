@@ -5,32 +5,39 @@ using System.Net;
 using System.Net.Sockets;
 using System.Collections.Generic;
 
-using System.Threading;
 using System.Text;
+using System.Threading;
 
 
 public class Client {
 
 	private const string HOST = "127.0.0.1";
 	private const int PORT = 9734;
+	private int BUFFERSIZE = 1024;
 	private const int BUFFER_SIZE = 1024;
 	private const string CLIENT_ACTION_AUTHENTICATE = "connect";
 	private const string CLIENT_ACTION_DISCONNECT = "disconnect";
 
 	private Socket _sock;
-	private byte[] _buffer = new byte[BUFFER_SIZE];
+	private byte[] _buffer;
+	private SocketState state;
+	private readonly object thread_syncer = new object();
+
+	private Thread run; // Thread du Receive
 
 	private readonly List<IClientListener> listeners = null;
 
-	private bool isAuthenticate = false;
+	// -- Identifiant d'Authentification
 	private string username;
 	private int id;
+	// --
 
 	public Client(IClientListener listener){
 		this.listeners = new List<IClientListener> ();
 		this.listeners.Add(listener);
 		this.username = "hugo_082";
 		this.id = 1;
+		this.state = SocketState.DISCONNECTED;
 	}
 
 	/// <summary>
@@ -44,11 +51,15 @@ public class Client {
 		try
 		{
 			_sock.Connect( host, port);
-			_sock.BeginReceive(_buffer,0, BUFFER_SIZE,SocketFlags.None,new AsyncCallback(OnReceive),null);
+			this.state = SocketState.CONNECTED;
 
-			if(authenticate){
+			run = new Thread(new ThreadStart(ReceiveLoop));
+			run.Name = "ReceiveThread";
+			run.IsBackground = true;
+			run.Start();
+
+			if(authenticate)
 				this.Authenticate();
-			}
 		}
 		catch (Exception e)
 		{
@@ -63,13 +74,14 @@ public class Client {
 	public void Send(string message){
 		byte[] messageData = System.Text.Encoding.UTF8.GetBytes(message);
 		_sock.Send(messageData);
+		Debug.Log ("Sended : " + message);
 	}
 
 	/// <summary>
 	/// Authentification sur le serveur
 	/// </summary>
 	public void Authenticate(){
-		if (this.isAuthenticate)
+		if (this.state == SocketState.AUTHENTICATED)
 			return;
 		string action = CLIENT_ACTION_AUTHENTICATE;
 
@@ -82,9 +94,31 @@ public class Client {
 	/// </summary>
 	public void Disconnect(){
 		string action = CLIENT_ACTION_DISCONNECT;
-
 		string value = action + "~" + this.username + "~" + this.id;
 		this.Send (value);
+	}
+
+	/// <summary>
+	/// Disconnects the socket.
+	/// </summary>
+	public void DisconnectSocket()
+	{
+		lock (this.thread_syncer)
+		{
+			if (this._sock != null)
+			{
+				try
+				{
+					this._sock.Close();
+				}
+				catch (Exception ex)
+				{
+					Debug.LogError ("Error on Close scoket : " + ex);
+				}
+				this._sock = null;
+			}
+		}
+		this.state = SocketState.DISCONNECTED;
 	}
 
 	/// <summary>
@@ -92,25 +126,46 @@ public class Client {
 	/// </summary>
 	public void Quit(){
 		string debug = "";
-		if (this.isAuthenticate) {
+		if (this.state == SocketState.AUTHENTICATED) {
 			this.Disconnect ();
 			debug += "Client is now Disconnected - ";
 		}
-		_sock.Close ();
-		Debug.Log ( debug + "Socket is now closed");
+		this.DisconnectSocket ();
+		if (run != null ) run.Abort ();
+		this.state = SocketState.DISCONNECTED;
+		Debug.Log ( debug + "Socket is now closed - Thread is now aborted");
+	}
+
+	/// <summary>Endless loop, run in Receive Thread.</summary>
+	public void ReceiveLoop()
+	{
+		byte[] inBuffer = new byte[this.BUFFERSIZE];
+		while (this.state != SocketState.DISCONNECTED)
+		{
+			try
+			{
+				this._sock.Receive(inBuffer);
+				lock (this.thread_syncer)
+				{
+					_buffer = inBuffer;
+				}
+			}
+			catch (Exception e)
+			{
+				Debug.LogError ("Socket Receive : " + e);
+			}
+		}
+		this.DisconnectSocket();
 	}
 
 	/// <summary>
-	/// A la reception d'un message
-	/// Call automatique
+	/// A la reception d'un message, Call automatique
 	/// </summary>
-	private void OnReceive(IAsyncResult ar){
-		if (!ar.IsCompleted || !_sock.Connected)
-			return;
-		_sock.EndReceive(ar);
-
-		string message = System.Text.Encoding.UTF8.GetString(_buffer);
+	private void OnReceive(byte[] buffer){
+		string message = System.Text.Encoding.UTF8.GetString(buffer);
 		string[] parameters = message.Split('~');
+
+		Debug.Log ("OnReceive : " + message);
 
 		switch (parameters[0]) {
 		case "friendConnected":
@@ -124,20 +179,20 @@ public class Client {
 			}
 			break;
 		case "Connected":
-			this.isAuthenticate = true;
 			foreach (var listener in this.listeners) {
 				listener.OnAuthenticated ();
 			}
+			this.state = SocketState.AUTHENTICATED;
 			break;
 		case "Rejected":
-			this.isAuthenticate = false;
 			foreach (var listener in this.listeners) {
 				listener.OnRejected();
 			}
+			this.state = SocketState.CONNECTED;
 			break;
 		case "Disconnected":
-			this.isAuthenticate = false;
-			_sock.Close ();
+			this.state = SocketState.CONNECTED;
+			this.DisconnectSocket ();
 			foreach (var listener in this.listeners) {
 				listener.OnDisconnected ();
 			}
@@ -149,11 +204,25 @@ public class Client {
 			}
 			break;
 		}
-
-		_buffer = new byte[BUFFER_SIZE];
-		_sock.BeginReceive(_buffer,0, BUFFER_SIZE,SocketFlags.None,new AsyncCallback(OnReceive),null);
-
 	}
+
+	/// <summary>
+	/// Call régulièrement pour recevoir lire le buffer
+	/// </summary>
+	public void Service(){
+		if (this.state == SocketState.DISCONNECTED)
+			return;
+		byte[] buff = null;
+		lock (this.thread_syncer)
+		{
+			buff = _buffer;
+			if (buff != null) {
+				this.OnReceive (buff);
+				_buffer = null;
+			}
+		}
+	}
+
 
 	public void AddListener(IClientListener listener){
 		this.listeners.Add (listener);
@@ -163,7 +232,7 @@ public class Client {
 	}
 
 	public bool IsAuthticate {
-		get { return isAuthenticate; }
+		get { return this.state == SocketState.AUTHENTICATED; }
 	}
 	public string Host {
 		get {
@@ -175,5 +244,11 @@ public class Client {
 				return "NotConnected";
 			}
 		}
+	}
+
+	public enum SocketState {
+		CONNECTED,			// Socket connected
+		DISCONNECTED,		// Socket disconnected
+		AUTHENTICATED		// Socket connected and User autheticated
 	}
 }

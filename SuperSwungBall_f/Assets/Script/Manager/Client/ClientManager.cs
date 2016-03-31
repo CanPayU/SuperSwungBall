@@ -17,6 +17,7 @@ public class ClientManager : MonoBehaviour, IClientListener {
 
 	// Update is called once per frame
 	void Update () {
+		this.client.Service ();
 		if(Input.GetKeyDown(KeyCode.A)){
 			client.Authenticate ();
 		}
@@ -29,7 +30,6 @@ public class ClientManager : MonoBehaviour, IClientListener {
 		if(Input.GetKeyDown(KeyCode.Z)){
 			client.Send ("Bonjour la france !");
 		}
-
 	}
 
 	// -- Pour + d'info voir ClientListener.cs
@@ -39,13 +39,14 @@ public class ClientManager : MonoBehaviour, IClientListener {
 	}
 	public void OnFriendConnected(string username, int id){
 		Debug.Log ("Friend " + username + " - " + id + " is now Connected");
-		User.Instance.Friends.IsOnline (username);
+		//User.Instance.Friends.IsOnline (username);
 	}
 	public void OnReceiveMessage(string message){
 		Debug.Log ("Receive undefined method : " + message);
 	}
 	public void OnAuthenticated(){
-		Debug.Log ("Now authenticated");
+		Debug.Log ("Now authenticated -");
+		Notification.success ("Authenticated");
 	}
 	public void OnRejected(){
 		Debug.Log ("Authetification Rejected");

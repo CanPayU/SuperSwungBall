@@ -29,13 +29,10 @@ public class rslideController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetMouseButtonDown (0)) {
-			GameObject objt = EventSystem.current.currentSelectedGameObject;
-			if (objt == null)
-				gameObject.SetActive (false);
-		}
+		#if DEBUG
 		if (Input.GetKey (KeyCode.S))
 			IsOnline ("romain");
+		#endif
 	}
 
 	void OnEnable() {
