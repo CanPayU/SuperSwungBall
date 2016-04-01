@@ -31,10 +31,6 @@ namespace GameScene
             transform.localPosition = new Vector3(0, -0.5f, 0);
             display(false);
         }
-        void Update()
-        {
-
-        }
 
         # region menu
         public void display(bool afficher)//affiche/cache le menu
@@ -60,19 +56,18 @@ namespace GameScene
             components["buttons"][1].GetComponent<Renderer>().material.color = new Color(0, 0.5f, 0); //tacle
             components["buttons"][2].GetComponent<Renderer>().material.color = new Color(1, 0.2f, 0.7f); //passe
             components["buttons"][3].GetComponent<Renderer>().material.color = new Color(0, 0.5f, 1); //course
-
+            
+            //permet d'accéder plus facilement aux couleurs des boutons
             buttonsColor.Add(new Color(1, 0.5f, 0));
             buttonsColor.Add(new Color(0, 0.5f, 0));
             buttonsColor.Add(new Color(1, 0.2f, 0.7f));
             buttonsColor.Add(new Color(0, 0.5f, 1));
 
-            //Couleur zones
-            //components["zones"][0].GetComponent<Renderer>().material.color = new Color(0.6f, 1, 1); // deplacement
-            //components["zones"][1].GetComponent<Renderer>().material.color = new Color(1, 0.6f, 1); // passe
-
-            //Couleur pointeurs
+            //Couleurs pointeurs
             components["pointeurs"][0].GetComponent<Renderer>().material.color = new Color(0.2f, 0.7f, 0.7f); // deplacement
             components["pointeurs"][1].GetComponent<Renderer>().material.color = new Color(0.7f, 0.2f, 0.7f); // passe
+
+            reset();
         }
         private void add_components(string key, int min, int max) // recupere les gameObject enfant du menu de "min" (compris) à "max" (exclu) et les ajoute au dictionnaire "components"
         {
@@ -95,7 +90,7 @@ namespace GameScene
             components["pointeurs"][1].transform.localPosition = new Vector3(0, components["pointeurs"][1].transform.localPosition.y, 0);
             foreach (GameObject valeur in components["valeurs"])
             {
-                valeur.GetComponent<Renderer>().material.color = Color.white;
+                valeur.GetComponent<Renderer>().material.color = buttonsColor[0];
             }
         }
         #endregion

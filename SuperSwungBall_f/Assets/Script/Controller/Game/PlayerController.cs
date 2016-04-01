@@ -18,7 +18,7 @@ namespace GameScene
         // Event Click
         private bool menuDisplayed;
         private RaycastHit hit;
-        private Renderer selection; // cercle de sélection lors du passage de la souris
+        private Renderer selection; //cercle de sélection lors du passage de la souris
 
         //Evite le "GetComponent<>"
         private Collider myCollider;
@@ -30,10 +30,11 @@ namespace GameScene
         private float speed = 0;
         private Vector3 arrivalPoint;
         private bool movement;
-        private float pause = 0; // temps de pause du deplacement (en s), quand le player se fait plaquer par exemple
+        private float pause = 0; //temps de pause du deplacement (en secondes), quand le player se fait plaquer par exemple
 
         //Pointeur
-        private bool mouseState = false;
+        private bool mouseState = false; //clic souris enfoncée
+        private FlecheController flecheController; //fleche de déplacement (suit le pointeur de deplacement)
 
         //passe
         private Vector3 arrivalPointPasse;
@@ -88,6 +89,7 @@ namespace GameScene
             myCollisionController = GetComponent<CollisionController>();
             selection = transform.FindChild("selection").GetComponent<Renderer>();
             selection.enabled = false;
+            flecheController = transform.FindChild("fleche").GetComponent<FlecheController>();
 
             view = GetComponent<PhotonView>();
 
@@ -115,7 +117,7 @@ namespace GameScene
                     {
                         if (!menuDisplayed) //S'active uniquement le premier clic
                         {
-                            player.computeStats(); // Calcule les Stats du perso ( obligé avant d'utiliser un getter)
+                            player.computeStats(); //Calcule les Stats du perso ( obligé avant d'utiliser un getter)
                             menuController.update_zoneDeplacement(player.ZoneDeplacement, player.ZonePasse); // Change la taille des zones
                             menuController.display(true);
                         }
@@ -126,16 +128,17 @@ namespace GameScene
                     {
                         menuDisplayed = false;
                         menuController.display(false);
-                        mouseState = false; // pas obligé, mais on sait jamais
+                        mouseState = false; //pas obligé, mais on sait jamais
                     }
                 }
-                if (Input.GetMouseButtonUp(0))// Clic relache
+                if (Input.GetMouseButtonUp(0))//Clic relache
                 {
                     mouseState = false;
                 }
-                if (mouseState)// s'active tant que le joueur drag and drop un pointeur
+                if (mouseState)//s'active tant que le joueur drag and drop un pointeur
                 {
                     menuController.move_target(hit);//bouge le pointeur 'target' du menu. Si le target sort de la 'zone_target', replace le 'target'
+                    flecheController.point(new Vector2(menuController.Get_Coordsdeplacement[0],menuController.Get_Coordsdeplacement[1])); //bouge la flèche de déplacement
                 }
             }
             else
@@ -189,7 +192,9 @@ namespace GameScene
         public void updateValuesPlayer(Color c) //Activation clic boutton
         {
             player.updateValues(convertColorToValue(c)); // Change les Stats du player 
+            flecheController.changeColor(c); // change les couleurs de la flèche de déplacement
             menuController.update_zoneDeplacement(player.ZoneDeplacement, player.ZonePasse); // Change la tailles des zones
+            flecheController.point(new Vector2(menuController.Get_Coordsdeplacement[0], menuController.Get_Coordsdeplacement[1])); //bouge la flèche de déplacement
         }
         private string convertColorToValue(Color c)
         {
@@ -219,6 +224,7 @@ namespace GameScene
         public void start_Anim(bool setPoint = true) // debut de l'animation
         {
             myCollisionController.start_anim();
+            flecheController.display(false);
             mouseState = false;
             phaseAnimation = true;
             menuController.display(false);
@@ -246,6 +252,8 @@ namespace GameScene
         public void end_Anim() // fin de l'animation
         {
             menuController.reset();
+            flecheController.display(true);
+            flecheController.reset();
             player.reset();
             menuController.update_zoneDeplacement(player.ZoneDeplacement, player.ZonePasse);
             phaseAnimation = false;
