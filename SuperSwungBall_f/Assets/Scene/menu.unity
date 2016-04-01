@@ -766,7 +766,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scroll_view: {fileID: 1155581565}
   content_scroll_view: {fileID: 1155581569}
-  panel_friend: {fileID: 183424, guid: 5894478fa2f144be09e31beed14af1ec, type: 2}
+  panel_friend: {fileID: 167358, guid: 5b43715cfa4054f0ca8fe4f6b1a2447d, type: 2}
 --- !u!95 &234350062
 Animator:
   serializedVersion: 3
@@ -917,7 +917,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000030517578, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 5}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &351125123

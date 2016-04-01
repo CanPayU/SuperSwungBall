@@ -70,7 +70,7 @@ namespace GameScene.Multi
 
 			HTTP.SyncScore(score, (success) => {
 				if(!success)
-					Notification.danger("Erreur de synchronisation");
+					Debug.LogError("La synchronisation des scores a échoué");//Notification.danger("Erreur de synchronisation");
 				btn_quit.SetActive(true);
 			});
 		}

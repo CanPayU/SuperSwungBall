@@ -13,11 +13,9 @@ public class ClientManager : MonoBehaviour, IClientListener {
 
 	void Start () {
 		this.client = new Client (this);
-	}
+		this.client.Connect (); // Authenticate automatique
 
-	// Update is called once per frame
-	void Update () {
-		this.client.Service ();
+
 		if(Input.GetKeyDown(KeyCode.A)){
 			client.Authenticate ();
 		}
@@ -32,27 +30,34 @@ public class ClientManager : MonoBehaviour, IClientListener {
 		}
 	}
 
+	// Update is called once per frame
+	void Update () {
+		this.client.Service ();
+	}
+
 	// -- Pour + d'info voir ClientListener.cs
 	public void OnFriendDisconnected(string username, int id){
+		Notification.Create (NotificationType.Box, "Ami déconnecte", content: username + " est maintenant déconnecté");
 		Debug.Log ("Friend " + username + " - " + id + " is now Disconnected");
 		User.Instance.Friends.IsOnline (username, false);
 	}
 	public void OnFriendConnected(string username, int id){
+		Notification.Create (NotificationType.Box, "Ami connecte", content: username + " est maintenant connecté");
 		Debug.Log ("Friend " + username + " - " + id + " is now Connected");
-		//User.Instance.Friends.IsOnline (username);
+		User.Instance.Friends.IsOnline (username);
 	}
 	public void OnReceiveMessage(string message){
 		Debug.Log ("Receive undefined method : " + message);
 	}
 	public void OnAuthenticated(){
-		Debug.Log ("Now authenticated -");
-		Notification.success ("Authenticated");
+		Notification.Create (NotificationType.Box, "Authentifie", content: "Vous êtes maintenant authentifié en tant que " + this.client.Username);
 	}
 	public void OnRejected(){
+		Notification.Create (NotificationType.Box, "Erreur d'Authentification", content: "Impossible de vous authentifier en tant que " + this.client.Username);
 		Debug.Log ("Authetification Rejected");
 	}
 	public void OnDisconnected(){
-		Debug.Log ("Disconnected");
+		Notification.Create (NotificationType.Box, "Déconnecté", content: "Vous êtes maintenant déconnecté de notre serveur");
 	}
 
 	void OnApplicationQuit() {

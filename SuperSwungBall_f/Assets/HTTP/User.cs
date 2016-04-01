@@ -42,8 +42,10 @@ public sealed class User {
 		email = json.GetString ("email");
 		score = (int)json.GetNumber ("score");
 
-		if (!json.ContainsKey ("friends"))
+		if (!json.ContainsKey ("friends")) {
+			this.friends = new Friends ();
 			return;
+		}
 		
 		// -- Friends
 		JSONArray friends = json.GetArray ("friends");

@@ -34,12 +34,6 @@ public class MusicManager : MonoBehaviour {
 		clip_ = source_.clip;
 	}
 
-	void Update () {
-		if(Input.GetKeyDown(KeyCode.W)){
-			Notification.success ("InMusicManager");
-		}
-	}
-
 	public void Stop_Music(){
 		source_.Stop ();
 	}

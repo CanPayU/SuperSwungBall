@@ -18,25 +18,14 @@ namespace Standing
 			//SaveLoad.save_setting ();
 			SaveLoad.load_settings ();
 			this.authenticate = SaveLoad.load_user ();
+
+			Debug.Log (User.Instance);
+			Debug.Log (User.Instance.Friends);
         }
 
         // Update is called once per frame
         void Update()
         {
-			#if DEBUG
-			if (Input.GetKey(KeyCode.U)) {
-				bool suc = false;
-				HTTP.Authenticate ("antoine", "mdp", (success) => { suc = success; });
-				SaveLoad.save_user ();
-				Settings.Instance = new Settings();
-				SaveLoad.save_setting ();
-				if (suc){
-					Debug.Log("Setting Updated -- Connected with antoine");
-				}else {
-					Debug.LogError("Error Update Setting");
-				}
-			}
-			#endif
 			if (Input.anyKey) {
 				if (authenticate)
 					FadingManager.I.Fade ();

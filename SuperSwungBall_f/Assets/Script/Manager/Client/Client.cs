@@ -17,6 +17,7 @@ public class Client {
 	private const int BUFFER_SIZE = 1024;
 	private const string CLIENT_ACTION_AUTHENTICATE = "connect";
 	private const string CLIENT_ACTION_DISCONNECT = "disconnect";
+	private const string CLIENT_ACTION_INVITE_FRIEND = "inviteFriend";
 
 	private Socket _sock;
 	private byte[] _buffer;
@@ -140,7 +141,7 @@ public class Client {
 	public void ReceiveLoop()
 	{
 		byte[] inBuffer = new byte[this.BUFFERSIZE];
-		while (this.state != SocketState.DISCONNECTED)
+		while (this.state != SocketState.DISCONNECTED && IsConnected())
 		{
 			try
 			{
@@ -156,6 +157,19 @@ public class Client {
 			}
 		}
 		this.DisconnectSocket();
+	}
+
+	/// <summary>
+	/// Determines whether this socket is connected.
+	/// </summary>
+	/// <returns><c>true</c> if socket is connected; otherwise, <c>false</c>.</returns>
+	private bool IsConnected()
+	{
+		try
+		{
+			return !(this._sock.Poll(1, SelectMode.SelectRead) && this._sock.Available == 0);
+		}
+		catch (SocketException) { return false; }
 	}
 
 	/// <summary>
@@ -230,7 +244,6 @@ public class Client {
 	public void RemoveListener(IClientListener listener){
 		this.listeners.Remove (listener);
 	}
-
 	public bool IsAuthticate {
 		get { return this.state == SocketState.AUTHENTICATED; }
 	}
@@ -244,6 +257,9 @@ public class Client {
 				return "NotConnected";
 			}
 		}
+	}
+	public string Username {
+		get { return this.username; }
 	}
 
 	public enum SocketState {

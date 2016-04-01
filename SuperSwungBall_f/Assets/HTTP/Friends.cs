@@ -9,7 +9,7 @@ public class Friends {
 	private Dictionary<string,User> friends;
 
 	public Friends() {
-		friends = null;
+		this.friends = new Dictionary<string,User> ();
 	}
 
 	public Friends(JSONArray array) {
@@ -35,6 +35,8 @@ public class Friends {
 		return friends[username];
 	}
 	public void IsOnline(string username, bool online = true){
+		if (!friends.ContainsKey (username))
+			return;
 		User user = friends [username];
 		user.is_connected = online;
 	}

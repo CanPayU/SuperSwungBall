@@ -80,6 +80,7 @@ public class rslideController : MonoBehaviour {
 
 		content_text.text = username;
 		panel.name = username;
+		Setup_Information (panel, username); // Action btn inviter + info text
 
 		float panel_heigth = ((RectTransform)panel).sizeDelta.y;
 
@@ -91,9 +92,22 @@ public class rslideController : MonoBehaviour {
 		if (new_scroll_view_heigth > this.scroll_view_heigth) 
 			scroll_view.anchoredPosition = new Vector3(0, new_scroll_view_heigth - this.scroll_view_heigth);
 
-		panel.transform.SetParent (content_scroll_view.content.transform);
+		panel.transform.SetParent (content_scroll_view.content.transform, false);
 		actual_position -= ((panel_heigth / 2) + 5);
 		((RectTransform)panel).anchoredPosition = new Vector2 (0, actual_position);
 		actual_position -= ((panel_heigth / 2));
+	}
+
+
+	private void Setup_Information(Transform gm, string username){
+		Transform information = gm.Find ("Information");
+		Text text = information.Find ("Text").GetComponent<Text>();
+		Button invite = information.Find ("Invite").GetComponent<Button>();
+
+		text.text = "Navigue de le menu --";
+
+		invite.onClick.AddListener (delegate() {
+			Debug.Log("Send invitation to : " + username + " -- Autorised : " + friends.Get(username).is_connected);
+		});
 	}
 }

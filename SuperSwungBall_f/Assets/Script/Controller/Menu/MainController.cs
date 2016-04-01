@@ -33,10 +33,6 @@ namespace Menu
 				time.reset ();
 				time.start ();
 			}
-            if (Input.GetKeyDown(KeyCode.C))
-                MusicManager.I.Stop_Music();
-            if (Input.GetKeyDown(KeyCode.F))
-                MusicManager.I.Clip = "Musics/Team/PSG/Allez Paris [classic]";
         }
 
 		void Inactive(){
