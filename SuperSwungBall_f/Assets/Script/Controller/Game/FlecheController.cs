@@ -46,8 +46,7 @@ namespace GameScene
         public void point(Vector2 pos)
         {
             transform.localPosition = POS_INITIALE;
-            transform.localScale = new Vector3(Vector2.Distance(new Vector2(transform.parent.position.x, transform.parent.position.z), pos) / 7f, transform.localScale.y, transform.localScale.z);
-            Debug.Log(transform.localScale.x);
+            transform.localScale = new Vector3(Vector2.Distance(new Vector2(transform.parent.position.x, transform.parent.position.z), pos) / 6f, transform.localScale.y, transform.localScale.z);
             transform.LookAt(new Vector3(pos.x, transform.position.y, pos.y));
             transform.localEulerAngles += new Vector3(0, 90, 0);
             transform.position = new Vector3(pos.x, transform.position.y, pos.y);

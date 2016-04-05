@@ -31,7 +31,6 @@ namespace GameScene
                         combat(other);
                     }
                     premiereFrames--;
-                    Debug.Log(other);
                 }
                 if (!goal)
                 {
@@ -99,6 +98,14 @@ namespace GameScene
                         //Attaque ratée
                         playerController.Animation("Attaque Echec", 4);
                         Debug.Log(name + " rate son tacle");
+                        Debug.Log(porteurDeBall);
+                        if (porteurDeBall)
+                        {
+                            GameObject ball = transform.FindChild("perso").transform.FindChild("Ball").gameObject;
+                            ball.transform.localPosition = new Vector3(3.5f, 1.5f, -10f);
+                            ball.transform.parent = null;
+                            ball.GetComponent<Collider>().enabled = true;
+                        }
 
                     }
                 }
@@ -116,6 +123,14 @@ namespace GameScene
                         //Esquive ratée
                         playerController.Animation("Esquive Echec", 4);
                         Debug.Log(name + " rate son esquive");
+                        Debug.Log(porteurDeBall);
+                        if (porteurDeBall)
+                        {
+                            GameObject ball = transform.FindChild("perso").transform.FindChild("Ball").gameObject;
+                            ball.transform.localPosition = new Vector3(3.5f, 1.5f, -10f);
+                            ball.transform.parent = null;
+                            ball.GetComponent<Collider>().enabled = true;
+                        }
                     }
                 }
             }
