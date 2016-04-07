@@ -13,13 +13,14 @@ public sealed class User {
 		set { _instance = value; }
 	}
 
-	public const string VERSION = "1.04"; // Version actuelle
+	public const string VERSION = "1.07"; // Version actuelle
 	public string version; // Version de l'instance (sauvegarder sur l'ordi)
 
 	public int id;
 	public string username;
 	public string email;
 	public int score;
+	public string room;
 	public string[] roles;
 	private Friends friends;
 	public bool is_connected;
@@ -31,6 +32,7 @@ public sealed class User {
 		email = null;
 		score = 0;
 		roles = null;
+		room = null;
 		friends = null;
 		version = VERSION;
 	}
@@ -41,6 +43,7 @@ public sealed class User {
 		username = json.GetString ("username");
 		email = json.GetString ("email");
 		score = (int)json.GetNumber ("score");
+		room = json.GetString ("room");
 
 		if (!json.ContainsKey ("friends")) {
 			this.friends = new Friends ();

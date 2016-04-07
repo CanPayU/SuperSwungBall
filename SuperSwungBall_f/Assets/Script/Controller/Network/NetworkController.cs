@@ -22,7 +22,10 @@ namespace Network {
 
 		private System.Random rand = new System.Random();
 
+		private Client client; // Socket
+
 		void Start () {
+			this.client = GameObject.Find ("Manager").GetComponent<ClientManager> ().Client;
 			user = User.Instance;
 			if (user.is_connected) {
 				PhotonNetwork.playerName = user.username;
@@ -41,18 +44,45 @@ namespace Network {
 				PhotonNetwork.player.SetCustomProperties( props );
 
 				PhotonNetwork.ConnectUsingSettings (game_version_);
-				room_name = user.username + "-" + rand.Next (1000);
+				this.room_name = user.username + "-" + rand.Next (1000);
 			}
 		}
 
 		void OnConnectedToMaster(){
-			PhotonNetwork.JoinRandomRoom(); // création de la room
+			int state = PlayerPrefs.GetInt ("Net_State", -1); // -1 => Default | 1 => InviteFirend | 2 => InvitedByFriend
+
+			if (state == -1) {
+				PhotonNetwork.JoinRandomRoom(); // création de la room
+				return;
+			}
+			string RoomID = PlayerPrefs.GetString ("Net_RoomID", "NULL");
+			if (RoomID != "NULL")
+				this.room_name = RoomID;
+			else {
+				Notification.Create (NotificationType.Box, "Erreur lors de l'invitation", content: "Une erreur est survenue lors de la création de la room.");
+				return;
+			}
+
+			if (state == 1) {
+				RoomOptions roomOptions = new RoomOptions () { isVisible = false, maxPlayers = 2 }; // isVisible Random can join or not (ici non)
+				PhotonNetwork.JoinOrCreateRoom (this.room_name, roomOptions, TypedLobby.Default);
+			}
+			if (state == 2) {
+				PhotonNetwork.JoinRoom (this.room_name);	
+			}
+
+
+		}
+		void OnPhotonJoinRoomFailed(){
+			string roomName = PlayerPrefs.GetString ("", "NULL");
+			Notification.Create (NotificationType.Slide, title: "Room introuvable : " + roomName);
 		}
 		void OnPhotonRandomJoinFailed(){
 			RoomOptions roomOptions = new RoomOptions() { isVisible = true, maxPlayers = 2 }; // isVisible Random can join or not (ici oui)
 			PhotonNetwork.JoinOrCreateRoom(room_name, roomOptions, TypedLobby.Default);
 		}
 		void OnJoinedRoom(){
+			this.client.JoinRoom (this.room_name);
 			room_joined = true;
 			if (PhotonNetwork.playerList.Length > 1) {
 				FadingManager.I.Fade (scene);
@@ -66,7 +96,6 @@ namespace Network {
 		}
 
 		void OnGUI(){
-
 			string info = PhotonNetwork.connectionStateDetailed.ToString ();
 			if (room_joined)
 				info += " - " + room_name;
@@ -81,8 +110,6 @@ namespace Network {
 			}
 			info_users.text = info;
 		}
-
-
 
 		private byte[] ObjectToByteArray(object obj)
 		{

@@ -57,7 +57,6 @@ public class PrivateGameController : MonoBehaviour {
 	void OnGUI(){
 		string info = PhotonNetwork.connectionStateDetailed.ToString ();
 
-
 		if (PhotonNetwork.inRoom) {
 			info = "Joueur trouve : " + (PhotonNetwork.room.playerCount - 1);
 			room_name_text.text = "Room name : " + room_name;

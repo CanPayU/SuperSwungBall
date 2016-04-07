@@ -12,12 +12,13 @@ using System.Threading;
 public class Client {
 
 	private const string HOST = "127.0.0.1";
-	private const int PORT = 9734;
+	private const int PORT = 5821;
 	private int BUFFERSIZE = 1024;
 	private const int BUFFER_SIZE = 1024;
 	private const string CLIENT_ACTION_AUTHENTICATE = "connect";
 	private const string CLIENT_ACTION_DISCONNECT = "disconnect";
 	private const string CLIENT_ACTION_INVITE_FRIEND = "inviteFriend";
+	private const string CLIENT_ACTION_JOIN_ROOM = "joinRoom";
 
 	private Socket _sock;
 	private byte[] _buffer;
@@ -100,6 +101,26 @@ public class Client {
 	}
 
 	/// <summary>
+	/// Envoie de l'invitation a un ami
+	/// </summary>
+	public void InviteFriend(User Friend, string roomID){
+		string action = CLIENT_ACTION_INVITE_FRIEND;
+		string value = action + "~" + Friend.username + "~" + Friend.id + "~" + roomID;
+		this.Send (value);
+	}
+
+	/// <summary>
+	/// Indique que j'ai rejoins une room
+	/// Impossible de m'inviter
+	/// </summary>
+	/// <param name="roomID">NULL si on quitte la room</param>
+	public void JoinRoom(string roomID = null){
+		string action = CLIENT_ACTION_JOIN_ROOM;
+		string value = action + "~" + roomID;
+		this.Send (value);
+	}
+
+	/// <summary>
 	/// Disconnects the socket.
 	/// </summary>
 	public void DisconnectSocket()
@@ -145,6 +166,7 @@ public class Client {
 		{
 			try
 			{
+				inBuffer = new byte[this.BUFFERSIZE];
 				this._sock.Receive(inBuffer);
 				lock (this.thread_syncer)
 				{
@@ -177,6 +199,8 @@ public class Client {
 	/// </summary>
 	private void OnReceive(byte[] buffer){
 		string message = System.Text.Encoding.UTF8.GetString(buffer);
+		message = message.Trim(new char[] {'\0'});
+		message += "~end";
 		string[] parameters = message.Split('~');
 
 		Debug.Log ("OnReceive : " + message);
@@ -192,9 +216,19 @@ public class Client {
 				listener.OnFriendDisconnected (parameters [1], int.Parse(parameters [2]));
 			}
 			break;
+		case "FriendJoinedRoom":
+			foreach (var listener in this.listeners) {
+				listener.OnFriendJoinRoom (parameters [1], int.Parse(parameters [2]), parameters[3]);
+			}
+			break;
+		case "InvitedBy":
+			foreach (var listener in this.listeners) {
+				listener.OnReceiveInvitation (parameters [1], int.Parse(parameters [2]), parameters[3]);
+			}
+			break;
 		case "Connected":
 			foreach (var listener in this.listeners) {
-				listener.OnAuthenticated ();
+				listener.OnAuthenticated (parameters);
 			}
 			this.state = SocketState.AUTHENTICATED;
 			break;

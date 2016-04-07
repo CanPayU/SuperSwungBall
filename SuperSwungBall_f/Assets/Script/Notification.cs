@@ -104,8 +104,11 @@ public static class Notification {
 	}
 
 	private static void Coroutine(GameObject gm) {
-		if (delay > 0)
-			MonoB.StartCoroutine(Disable (gm));
+		if (delay <= 0)
+			return;
+		if(MonoB == null)
+			MonoB = GameObject.FindObjectOfType<MonoBehaviour>();
+		MonoB.StartCoroutine(Disable (gm));
 	}
 
 	private static IEnumerator  Disable(GameObject gm)

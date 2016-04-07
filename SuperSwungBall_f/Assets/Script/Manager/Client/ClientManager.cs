@@ -46,11 +46,42 @@ public class ClientManager : MonoBehaviour, IClientListener {
 		Debug.Log ("Friend " + username + " - " + id + " is now Connected");
 		User.Instance.Friends.IsOnline (username);
 	}
+	public void OnFriendJoinRoom(string username, int id, string roomID){
+
+		roomID = (roomID == "" || roomID == "null" || roomID == null) ? null : roomID;
+
+		Debug.Log ("MyFriend " + username + "have joined a room :" + roomID);
+		User.Instance.Friends.SetRoom (username, roomID);
+	}
+	public void OnReceiveInvitation(string username, int id, string roomID){
+		Notification.Create (NotificationType.Alert, "Invitation recus", -1, "Tu as recus une invitation à jouer de " + username, (success) => {
+			if (success) {
+				PlayerPrefs.SetInt("Net_State",2);
+				PlayerPrefs.SetString("Net_RoomID", roomID);
+				FadingManager.I.Fade("network");
+			}else {
+				Debug.Log("Encore un homme sans couille");
+				// Retouner InviteRejected ? 
+			}
+		}); 
+	}
 	public void OnReceiveMessage(string message){
 		Debug.Log ("Receive undefined method : " + message);
 	}
-	public void OnAuthenticated(){
+	public void OnAuthenticated(string[] connected_user){
 		Notification.Create (NotificationType.Box, "Authentifie", content: "Vous êtes maintenant authentifié en tant que " + this.client.Username);
+		Friends friends = User.Instance.Friends;
+		int len = connected_user.Length;
+		for (int i = 1; i < len - 1; i++) { // len - 1 pour eviter le "~end"
+			string userData = connected_user[i];
+			string[] data = userData.Split('∏');
+
+			User friend = friends.Get (data [0]); // username
+			friend.is_connected = true;
+			string room = data [2];
+			if (room != "null")
+				friend.room = room;
+		}
 	}
 	public void OnRejected(){
 		Notification.Create (NotificationType.Box, "Erreur d'Authentification", content: "Impossible de vous authentifier en tant que " + this.client.Username);

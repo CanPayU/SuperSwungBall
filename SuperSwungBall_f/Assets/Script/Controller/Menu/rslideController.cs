@@ -16,14 +16,16 @@ public class rslideController : MonoBehaviour {
 	private float actual_position;
 
 	private Client client;
+	private System.Random rand = new System.Random();
 
 	// Use this for initialization
 	void Start () {
 		scroll_view_heigth = ((RectTransform)this.scroll_view.transform).sizeDelta.y;
 		this.friends = User.Instance.Friends;
+		this.client = GameObject.Find ("Manager").GetComponent<ClientManager> ().Client;
 
 		foreach (KeyValuePair<string, User> friend in friends.All) {
-			InstanciateFriend (friend.Value.username);
+			InstanciateFriend (friend.Value);
 		}
 	}
 	
@@ -72,15 +74,16 @@ public class rslideController : MonoBehaviour {
 	/// Ajoute un amis a la liste
 	/// </summary>
 	/// <param name="username">Username of friend</param>
-	public void InstanciateFriend(string username){
+	public void InstanciateFriend(User user){
 
 		Transform panel = Instantiate (panel_friend).transform as Transform;
 		Transform content = panel.transform.Find ("Pseudo");
 		Text content_text = content.GetComponent<Text> ();
 
+		string username = user.username;
 		content_text.text = username;
 		panel.name = username;
-		Setup_Information (panel, username); // Action btn inviter + info text
+		Setup_Information (panel, user); // Action btn inviter + info text
 
 		float panel_heigth = ((RectTransform)panel).sizeDelta.y;
 
@@ -99,7 +102,8 @@ public class rslideController : MonoBehaviour {
 	}
 
 
-	private void Setup_Information(Transform gm, string username){
+	private void Setup_Information(Transform gm, User user){
+		string username = user.username;
 		Transform information = gm.Find ("Information");
 		Text text = information.Find ("Text").GetComponent<Text>();
 		Button invite = information.Find ("Invite").GetComponent<Button>();
@@ -107,7 +111,18 @@ public class rslideController : MonoBehaviour {
 		text.text = "Navigue de le menu --";
 
 		invite.onClick.AddListener (delegate() {
-			Debug.Log("Send invitation to : " + username + " -- Autorised : " + friends.Get(username).is_connected);
+			User friend = friends.Get(username);
+			bool autorised = friend.is_connected && friend.room == null;
+			Debug.Log("Send invitation to : " + username + " -- Autorised : " + autorised);
+			if(autorised) {
+				string RoomID = (rand.Next (1000, 9999)).ToString();
+				PlayerPrefs.SetInt("Net_State",1);
+				PlayerPrefs.SetString("Net_RoomID", RoomID);
+				client.InviteFriend(user, RoomID);
+				FadingManager.I.Fade("network");
+			}
+			else
+				Notification.Create(NotificationType.Box, "Erreur lors de l'invitation", content:"Impossible d'inviter " + username + ".\nIl est possible que l'utilisateur soit déjà occupé");
 		});
 	}
 }
