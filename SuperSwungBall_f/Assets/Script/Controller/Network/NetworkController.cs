@@ -52,9 +52,11 @@ namespace Network {
 			int state = PlayerPrefs.GetInt ("Net_State", -1); // -1 => Default | 1 => InviteFirend | 2 => InvitedByFriend
 
 			if (state == -1) {
+				Debug.Log ("JoinRandomRoom");
 				PhotonNetwork.JoinRandomRoom(); // création de la room
 				return;
 			}
+			Debug.Log ("JoinNanRandomRoom : " + state);
 			string RoomID = PlayerPrefs.GetString ("Net_RoomID", "NULL");
 			if (RoomID != "NULL")
 				this.room_name = RoomID;
@@ -70,7 +72,9 @@ namespace Network {
 			if (state == 2) {
 				PhotonNetwork.JoinRoom (this.room_name);	
 			}
-
+			PlayerPrefs.DeleteAll ();
+			state = PlayerPrefs.GetInt ("Net_State", -1);
+			Debug.Log ("JoinNanRandomRoom : " + state);
 
 		}
 		void OnPhotonJoinRoomFailed(){

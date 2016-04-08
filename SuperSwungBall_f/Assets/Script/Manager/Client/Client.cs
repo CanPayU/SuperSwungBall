@@ -74,6 +74,8 @@ public class Client {
 	/// </summary>
 	/// <param name="message">Message a envoyer</param>
 	public void Send(string message){
+		if (state != SocketState.AUTHENTICATED)
+			return;
 		byte[] messageData = System.Text.Encoding.UTF8.GetBytes(message);
 		_sock.Send(messageData);
 		Debug.Log ("Sended : " + message);
