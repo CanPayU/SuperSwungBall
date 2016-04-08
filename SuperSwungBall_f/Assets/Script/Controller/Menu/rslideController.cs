@@ -104,25 +104,46 @@ public class rslideController : MonoBehaviour {
 
 	private void Setup_Information(Transform gm, User user){
 		string username = user.username;
+		User friend = friends.Get (username);
 		Transform information = gm.Find ("Information");
 		Text text = information.Find ("Text").GetComponent<Text>();
 		Button invite = information.Find ("Invite").GetComponent<Button>();
 
-		text.text = "Navigue de le menu --";
+		if (friend.room != null)
+			text.text = "Joue en ligne";
+		else if (friend.is_connected)
+			text.text = "Navigue dans le menu";
+		else
+			text.text = "Deconnecte";
+
+		Debug.Log (friend.room);
 
 		invite.onClick.AddListener (delegate() {
-			User friend = friends.Get(username);
+			Update_Information(information, friend);
 			bool autorised = friend.is_connected && friend.room == null;
 			Debug.Log("Send invitation to : " + username + " -- Autorised : " + autorised);
 			if(autorised) {
 				string RoomID = (rand.Next (1000, 9999)).ToString();
 				PlayerPrefs.SetInt("Net_State",1);
 				PlayerPrefs.SetString("Net_RoomID", RoomID);
-				client.InviteFriend(user, RoomID);
+				client.InviteFriend(friend, RoomID);
 				FadingManager.I.Fade("network");
 			}
 			else
 				Notification.Create(NotificationType.Box, "Erreur lors de l'invitation", content:"Impossible d'inviter " + username + ".\nIl est possible que l'utilisateur soit déjà occupé");
 		});
+	}
+
+	private void Update_Information(Transform information, User friend){
+		Text text = information.Find ("Text").GetComponent<Text>();
+		Button invite = information.Find ("Invite").GetComponent<Button>();
+
+		if (friend.room != null)
+			text.text = "Joue en ligne";
+		else if (friend.is_connected)
+			text.text = "Navigue dans le menu";
+		else
+			text.text = "Deconnecte";
+		Debug.Log (friend.room);
 	}
 }

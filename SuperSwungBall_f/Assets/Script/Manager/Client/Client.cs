@@ -73,8 +73,8 @@ public class Client {
 	/// Envoi d'un message
 	/// </summary>
 	/// <param name="message">Message a envoyer</param>
-	public void Send(string message){
-		if (state != SocketState.AUTHENTICATED)
+	public void Send(string message, bool force = false){
+		if (state != SocketState.AUTHENTICATED && !force)
 			return;
 		byte[] messageData = System.Text.Encoding.UTF8.GetBytes(message);
 		_sock.Send(messageData);
@@ -90,7 +90,7 @@ public class Client {
 		string action = CLIENT_ACTION_AUTHENTICATE;
 
 		string value = action + "~" + this.username + "~" + this.id;
-		this.Send (value);
+		this.Send (value, true);
 	}
 
 	/// <summary>
