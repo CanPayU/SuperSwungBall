@@ -40,9 +40,8 @@ namespace Menu
 		}
 
 		public void deconnect(){
-			User.Instance = new User ();
 			SaveLoad.reset_user ();
-			account.SetActive (false);
+			FadingManager.I.Fade ("standing");
 		}
 
 		public void SaveParameters(){

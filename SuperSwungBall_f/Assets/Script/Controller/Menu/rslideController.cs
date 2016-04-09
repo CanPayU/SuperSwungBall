@@ -43,6 +43,10 @@ public class rslideController : MonoBehaviour {
 			User friend_user = this.friends.Get (username);
 			bool online = friend_user.is_connected;
 			IsOnline (username, online);
+
+			// Setup update
+			Transform information = friend.Find ("Information");
+			Update_Information (information, friend_user);
 		}
 
 	}
@@ -59,6 +63,8 @@ public class rslideController : MonoBehaviour {
 			Debug.LogWarning ("Username Not Found : " + username);
 			return;
 		}
+
+
 
 		GameObject gm = user.Find ("Online").gameObject;
 		Color color = new Color ();
@@ -138,12 +144,18 @@ public class rslideController : MonoBehaviour {
 		Text text = information.Find ("Text").GetComponent<Text>();
 		Button invite = information.Find ("Invite").GetComponent<Button>();
 
-		if (friend.room != null)
+		//float information_heigth = ((RectTransform)information).sizeDelta.y;
+		//float btn_heigth = ((RectTransform)invite).sizeDelta.y;
+
+		if (friend.room != null) {
 			text.text = "Joue en ligne";
-		else if (friend.is_connected)
+			invite.interactable = false;
+		} else if (friend.is_connected) {
 			text.text = "Navigue dans le menu";
-		else
+			invite.interactable = true;
+		}else {
 			text.text = "Deconnecte";
-		Debug.Log (friend.room);
+			invite.interactable = false;
+		}
 	}
 }

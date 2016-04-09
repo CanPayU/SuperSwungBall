@@ -21,6 +21,7 @@ public static class SaveLoad {
 	public static void reset_user(){
 		Debug.Log ("reset_user "+ Application.persistentDataPath);
 		File.Delete (Application.persistentDataPath + "/user.txt");
+		User.Instance = new User ();
 	}
 
 	public static bool load_user() {
@@ -44,6 +45,11 @@ public static class SaveLoad {
 		return false;
 	}
 
+	public static void reset_setting(){
+		Debug.Log ("reset_setting "+ Application.persistentDataPath);
+		File.Delete (Application.persistentDataPath + "/settings.txt");
+		Settings.Instance = new Settings ();
+	}
 	public static void save_setting(){
 		Debug.Log ("save_setting at "+ Application.persistentDataPath);
 		SaveLoad.setting = Settings.Instance; // contient PSG & France

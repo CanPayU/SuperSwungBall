@@ -18,13 +18,12 @@ public class DebugManager : MonoBehaviour {
 	
 	#if DEBUG
 	void Update () {
-
-	
 		if (Input.GetKey(KeyCode.U)) {
 			bool suc = false;
+			SaveLoad.reset_user ();
+			SaveLoad.reset_setting ();
 			HTTP.Authenticate ("antoine", "mdp", (success) => { suc = success; });
 			SaveLoad.save_user ();
-			Settings.Instance = new Settings();
 			SaveLoad.save_setting ();
 			if (suc){
 				Debug.Log("Setting Updated -- Connected with antoine");
