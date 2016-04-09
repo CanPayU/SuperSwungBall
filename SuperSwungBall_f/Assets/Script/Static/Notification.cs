@@ -23,7 +23,10 @@ public static class Notification {
 	/// <param name="title">Titre de la notif.</param>
 	/// <param name="Delay">Delai avant disparition. <=0 pour infinie</param>
 	/// <param name="content">Content, pour Box et Alert</param>
-	public static void Create(NotificationType type,  string title, float Delay = DELAY, string content = null, Action<bool> completion = null){
+	/// <param name="force">Force la notification (Seulement pour le système)</param>
+	public static void Create(NotificationType type,  string title, float Delay = DELAY, string content = null, Action<bool> completion = null, bool force = false){
+		if (!IsAutorised (type, force))
+			return;
 		Canvas = GameObject.FindObjectOfType<Canvas>().gameObject;
 		delay = Delay;
 		switch (type) {
@@ -103,6 +106,16 @@ public static class Notification {
 		Coroutine (gm);
 	}
 
+	/// <summary>
+	/// Determines if notfication is autorised.
+	/// </summary>
+	/// <returns><c>true</c> if is autorised; otherwise, <c>false</c>.</returns>
+	private static bool IsAutorised(NotificationType type, bool force){
+		NotificationState state = Settings.Instance.NotificationState;
+		Debug.Log ("Autorised : " + (force || (int)state >= (int)type));
+		return (force || (int)state >= (int)type);
+	}
+
 	private static void Coroutine(GameObject gm) {
 		if (delay <= 0)
 			return;
@@ -116,13 +129,5 @@ public static class Notification {
 		yield return new WaitForSeconds(delay);
 		gm.SetActive (false);
 		MonoBehaviour.Destroy (gm);
-
 	}
-
-}
-
-public enum NotificationType {
-	Alert, 	// Title, Content, Completion
-	Box, 	// Title, Content
-	Slide 	// Title
 }

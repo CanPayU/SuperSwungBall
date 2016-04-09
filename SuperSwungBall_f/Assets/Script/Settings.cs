@@ -11,9 +11,10 @@ public class Settings {
 		set { _instance = value; }
 	}
 
-	public const string VERSION = "1.0"; // Version actuelle
+	public const string VERSION = "1.13"; // Version actuelle
 	public string version; // Version de l'instance (sauvegarder sur l'ordi)
 
+	// -- Team
 	private Dictionary<string, Team> default_team;
 	private Dictionary<string, Player> default_player;
 	private Dictionary<string, Composition> default_compo;
@@ -21,10 +22,23 @@ public class Settings {
 	private Team selected_team;
 	private string selected_stadium_name;
 	private System.Random rand = new System.Random();
+	// -- 
+
+	// -- Keyboard
+	private Dictionary<KeyboardAction, KeyCode> keyboard;
+	// --
+
+	private NotificationState notificationState;
 
 	public Settings (){
 		this.version = VERSION;
-		// /*
+		this.notificationState = NotificationState.All;
+		this.keyboard = new Dictionary<KeyboardAction, KeyCode> ();
+
+		// -- Setup Keyboard
+		this.keyboard.Add(KeyboardAction.Passe, KeyCode.A);
+		// --
+
 		default_team = new Dictionary<string, Team> ();
 		default_player = new Dictionary<string, Player> ();
 		default_compo = new Dictionary<string, Composition> ();
@@ -62,26 +76,7 @@ public class Settings {
 		compo_fr.SetPosition (4, 5, 4);
 		Default_compo.Add ("fr",compo_fr);
 		// -------------------
-		/*
-		// ----- Default Team
-		string[] def_sound= new string[] { "Musics/Team/PSG/Allez Paris [classic]" };
-		Team psg = new Team ("PSG", compo_psg, def_sound, "psg");
-		psg.add_player(lombrix);
-		psg.add_player(gpdn);
-		psg.add_player(epta);
-		psg.add_player(pwc);
-		psg.add_player(itec);
-		default_team.Add("psg", psg);
 
-		Team fr = new Team ("France", compo_fr, def_sound, "fr");
-		fr.add_player(itec);
-		fr.add_player(pwc);
-		fr.add_player(ept);
-		fr.add_player(gpdn);
-		fr.add_player(lombrix);
-		default_team.Add("fr", fr);
-		// ------------------
-		*/
 		// ----- Default Team FOR DEBUG
 		string[] def_sound= new string[] { "Musics/Team/PSG/Allez Paris [classic]" };
 		Team psg = new Team ("PSG", compo_psg, def_sound, "psg");
@@ -100,7 +95,6 @@ public class Settings {
 		fr.add_player(new Player (4, 6, 7, 1, "Lombrix", 0));
 		default_team.Add("fr", fr);
 		// ------------------
-
 		selected_team = fr;
 	}
 
@@ -111,6 +105,10 @@ public class Settings {
 			default_team.Add (t.Code, t);
 	}
 
+	public NotificationState NotificationState {
+		get { return notificationState; }
+		set { notificationState = value; }
+	}
 	public Dictionary<string, Team> Default_Team {
 		get { return default_team; }
 	}

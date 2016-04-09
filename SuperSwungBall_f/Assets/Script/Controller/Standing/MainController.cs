@@ -27,6 +27,7 @@ namespace Standing
         void Update()
         {
 			if (Input.anyKey) {
+				//return;
 				if (authenticate)
 					FadingManager.I.Fade ();
 				else {

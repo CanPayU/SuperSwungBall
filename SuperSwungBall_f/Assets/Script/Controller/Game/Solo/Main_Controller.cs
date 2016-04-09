@@ -111,8 +111,6 @@ namespace GameScene.Solo
             {
                 float h = 30;
                 float w = 200;
-                Rect r = new Rect(0, 0, Screen.width, h);
-                Vector2 v = r.center;
                 GUI.Box(new Rect(0, 0, w, h), "Timer : " + (time.Time_remaining).ToString("0"));
             }
         }

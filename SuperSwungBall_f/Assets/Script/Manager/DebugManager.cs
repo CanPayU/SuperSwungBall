@@ -6,19 +6,22 @@ public class DebugManager : MonoBehaviour {
 
 	/// <summary>
 	/// Test de class static
-	/// Mettre tout les Input ici pour avoir une idée global des inputs disponibles et des actions de chacuns
+	/// Mettre tout les Inputs ici pour avoir une idée global des inputs disponibles et des actions de chacuns
+	/// Pour activer un input : Ctrl Gauche + ...
 	/// </summary>
 
-
-
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
 	#if DEBUG
 	void Update () {
-		if (Input.GetKey(KeyCode.U)) {
+
+		if (!Input.GetKey (KeyCode.LeftControl))
+			return;
+
+		// -- Exemple
+//		if (Input.GetKeyDown (KeyCode.B))
+//			Debug.Log ("Ctrl + B detected");
+
+		// -- SveLoadUpdate
+		if (Input.GetKeyDown(KeyCode.U)) {
 			bool suc = false;
 			SaveLoad.reset_user ();
 			SaveLoad.reset_setting ();
@@ -32,19 +35,32 @@ public class DebugManager : MonoBehaviour {
 			}
 		}
 
-		if(Input.GetKey(KeyCode.J))
+		// -- NotificationSend
+		if(Input.GetKeyDown(KeyCode.J))
 			Notification.Create(NotificationType.Slide, "My Title Slide");
-		if(Input.GetKey(KeyCode.K))
+		if(Input.GetKeyDown(KeyCode.K))
 			Notification.Create(NotificationType.Box, "My Title Box", content: "My Content Box");
-		if(Input.GetKey(KeyCode.L))
+		if(Input.GetKeyDown(KeyCode.L))
 			Notification.Create(NotificationType.Alert, "My Title Alert", content: "My Content Slide", completion: (success) => {
 				Debug.Log(success);
 			});
 
+		// -- MusicManager
 		if (Input.GetKeyDown(KeyCode.C))
 			MusicManager.I.Stop_Music();
 		if (Input.GetKeyDown(KeyCode.F))
 			MusicManager.I.Clip = "Musics/Team/PSG/Allez Paris [classic]";
+
+		// -- NotificationState
+		if (Input.GetKeyDown (KeyCode.W))
+			Settings.Instance.NotificationState = NotificationState.All;
+		if (Input.GetKeyDown (KeyCode.X))
+			Settings.Instance.NotificationState = NotificationState.Private;
+		if (Input.GetKeyDown (KeyCode.C))
+			Settings.Instance.NotificationState = NotificationState.Nothing;
+
+
+		
 	}
 	#endif
 }

@@ -23,14 +23,12 @@ namespace GameScene.Multi
         public Timer Time
         { 	get { return Time; } }
 
-        private PhotonPlayer local_player;
         private PhotonPlayer other_player;
 
         // Use this for initialization
         void Start()
 		{
             time = new Timer(10.0F, end_time);
-            local_player = PhotonNetwork.player;
             other_player = PhotonNetwork.otherPlayers[0];
 			Team ennemy_t = (Team)other_player.allProperties ["Team"];
 			Game.Instance = new Game(ennemy_t);
@@ -88,8 +86,6 @@ namespace GameScene.Multi
             {
                 float h = 30;
                 float w = 200;
-                Rect r = new Rect(0, 0, Screen.width, h);
-                Vector2 v = r.center;
                 GUI.Box(new Rect(0, 0, w, h), "Timer : " + (time.Time_remaining).ToString("0"));
             }
         }
