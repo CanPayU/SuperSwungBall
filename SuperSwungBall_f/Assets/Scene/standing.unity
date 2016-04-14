@@ -41,7 +41,7 @@ RenderSettings:
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 6
-  m_GIWorkflowMode: 1
+  m_GIWorkflowMode: 0
   m_LightmapsMode: 1
   m_GISettings:
     serializedVersion: 2
@@ -1446,6 +1446,7 @@ GameObject:
   - 114: {fileID: 1538450134}
   - 114: {fileID: 1538450133}
   - 114: {fileID: 1538450139}
+  - 114: {fileID: 1538450140}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -1596,6 +1597,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: beb4990a9de1249fa8d2d48ed62bc7ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1538450140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1538450132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2224ecd63d55f4bc7a70e977b1b451c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1627477051

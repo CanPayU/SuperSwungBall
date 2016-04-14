@@ -6,21 +6,25 @@ namespace Menu
 {
 	public class MainController : MonoBehaviour {
 
-		[SerializeField]
-		private GameObject account;
-		[SerializeField]
-		private Text account_username;
-		[SerializeField]
-		private Text account_score;
+		[SerializeField] private GameObject account;
+		[SerializeField] private Text account_username;
+		[SerializeField] private Text account_score;
+		[SerializeField] private Text account_phi;
 
 		private Timer time;
 
 		// Use this for initialization
 		void Start () {
+
+			#if DEBUG
+				SaveLoad.load_user ();
+			#endif
+
 			if (User.Instance.is_connected) {
 				account.SetActive (true);
 				account_username.text = User.Instance.username;
 				account_score.text = "Score : " + User.Instance.score;
+				account_phi.text = "MyPhi";
 			}
 			time = new Timer (60.0F, Inactive);
 			time.start ();
@@ -37,6 +41,10 @@ namespace Menu
 
 		void Inactive(){
 			FadingManager.I.Fade ("standing");
+		}
+
+		public void MorePhi(){
+			PhiManager.I.More ();
 		}
 
 		public void deconnect(){

@@ -68,6 +68,24 @@ public static class HTTP {
 
 
 	/// <summary>
+	/// Synchronise le score de l'utilisateur.
+	/// Il doir être authentifié. 
+	/// </summary>
+	/// <param name="passive"><c>true</c>Get - <c>false</c> Set | sur le serveur</param>
+	/// <param name="value">Value si on Set sur le serveur</param>
+	/// <param name="completion">Fonction éxecuté lors de la réception param : <bool></param>
+	public static void SyncPhi(bool passive, Action<bool> completion, int value = 0) 
+	{
+		User user = User.Instance;
+		if (!user.is_connected) {
+			completion (false); 
+			return;
+		}
+		// Fixme
+	}
+
+
+	/// <summary>
 	/// Execute les requêtes et renvoie le JSON
 	/// </summary>
 	/// <param name="request">Destination de la requête</param>

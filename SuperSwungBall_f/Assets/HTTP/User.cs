@@ -13,13 +13,14 @@ public sealed class User {
 		set { _instance = value; }
 	}
 
-	public const string VERSION = "1.07"; // Version actuelle
+	public const string VERSION = "1.08"; // Version actuelle
 	public string version; // Version de l'instance (sauvegarder sur l'ordi)
 
 	public int id;
 	public string username;
 	public string email;
 	public int score;
+	public int phi;
 	public string room;
 	public string[] roles;
 	private Friends friends;
@@ -31,6 +32,7 @@ public sealed class User {
 		username = null;
 		email = null;
 		score = 0;
+		phi = 0;
 		roles = null;
 		room = null;
 		friends = null;

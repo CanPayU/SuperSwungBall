@@ -19,14 +19,10 @@ namespace Menu {
 			});
 			Update_ColorAndText ();
 		}
-		
-		// Update is called once per frame
-		void Update () {
-		
-		}
 
 		private void OnChangeNotificationState(){
 			actual_NotificationState = Next<NotificationState>(actual_NotificationState);
+			Settings.Instance.NotificationState = actual_NotificationState;
 			Update_ColorAndText ();
 		}
 
