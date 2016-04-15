@@ -7,11 +7,12 @@ using Boomlagoon.JSON;
 
 public static class HTTP {
 
-	/// <summary>
-	/// Nom de domaine principale 
-	/// </summary>
+	/// <summary> Nom de domaine principale  </summary>
 	private const string HOST_DOMAIN = "http://ssb.shost.ca/API/";
 	//private const string HOST_DOMAIN = "http://localhost:8888/SuperSwungBall/web/app_dev.php/API/";
+
+	/// <summary> Key d'authentification  </summary>
+	private const string PRIVATE_KEY = "dcbcd1627918a87ea8fc20c379c83c95";
 
 
 
@@ -32,6 +33,33 @@ public static class HTTP {
 			completion (true);
 			JSONObject user = response.GetObject ("user");
 			User.Instance.update (user);
+		} else {
+			completion (false);
+		}
+	}
+
+	/// <summary>
+	/// Get les informations sur le serveur
+	/// Il doir être authentifié. 
+	/// </summary>
+	/// <param name="completion">Fonction éxecuté lors de la réception param : <bool></param>
+	public static void SyncUser(Action<bool> completion) 
+	{
+		User user = User.Instance;
+		if (!user.is_connected) {
+			completion (false); 
+			return;
+		}
+
+		string url = HOST_DOMAIN + "sync/" + user.username + "/" + user.id + "/" + PRIVATE_KEY;
+		HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+		JSONObject response = execute(request);
+
+		string status = response.GetString ("status");
+		if (status == "success") {
+			completion (true);
+			JSONObject userjson = response.GetObject ("user");
+			User.Instance.update (userjson);
 		} else {
 			completion (false);
 		}
