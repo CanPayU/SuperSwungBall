@@ -26,7 +26,6 @@ namespace Standing
             {
                 HTTP.SyncUser((success) =>
                 {
-                    Debug.Log("EndSync : " + success);
                     this.authenticate = success;
                     this.sync_ended = true;
                 });

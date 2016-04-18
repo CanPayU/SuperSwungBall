@@ -37,6 +37,9 @@ namespace Gestion
             {
                 OnBuy();
             });
+
+			if (Settings.Instance.Default_player.ContainsKey(this.player.UID))
+				BoughtButton();
         }
 
         /// <summary>

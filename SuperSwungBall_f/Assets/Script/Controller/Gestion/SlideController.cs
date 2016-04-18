@@ -21,7 +21,6 @@ namespace Gestion
         void Awake()
         {
             this.content_scroll_view = GetComponent<ScrollRect>();
-            Debug.Log(this.content_scroll_view);
         }
 
         // Update is called once per frame

@@ -9,8 +9,8 @@ public static class HTTP
 {
 
     /// <summary> Nom de domaine principale  </summary>
-    //private const string HOST_DOMAIN = "http://ssb.shost.ca/API/";
-    private const string HOST_DOMAIN = "http://localhost:8888/SuperSwungBall/web/app_dev.php/API/";
+    private const string HOST_DOMAIN = "http://ssb.shost.ca/API/";
+    //private const string HOST_DOMAIN = "http://localhost:8888/SuperSwungBall/web/app_dev.php/API/";
 
     /// <summary> Key d'authentification  </summary>
     private const string PRIVATE_KEY = "dcbcd1627918a87ea8fc20c379c83c95";
@@ -65,7 +65,7 @@ public static class HTTP
         {
             completion(true);
             JSONObject userjson = response.GetObject("user");
-            User.Instance.update(userjson);
+			User.Instance.update(userjson, true);
         }
         else
         {

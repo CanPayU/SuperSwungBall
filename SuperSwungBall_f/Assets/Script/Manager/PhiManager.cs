@@ -29,15 +29,11 @@ public class PhiManager : MonoBehaviour
         });
     }
 
-    /// <summary>
-    /// Verification et synchronisation de l'achat
-    /// </summary>
+    /// <summary> Verification et synchronisation de l'achat </summary>
     /// <returns><c>true</c>, if player was bought, <c>false</c> otherwise.</returns>
     public bool BuyPlayer(Player p)
     {
         int myPhi = User.Instance.phi;
-
-        Debug.Log((myPhi < p.Price) + "-" + Settings.Instance.Default_player.ContainsKey(p.UID) + "-" + myPhi + "-" + p.Price);
 
         if (myPhi < p.Price || Settings.Instance.Default_player.ContainsKey(p.UID))
             return false;

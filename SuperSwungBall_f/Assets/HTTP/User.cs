@@ -15,7 +15,7 @@ public sealed class User
         set { _instance = value; }
     }
 
-    public const string VERSION = "1.12"; // Version actuelle
+    public const string VERSION = "1.16"; // Version actuelle
     public string version; // Version de l'instance (sauvegarder sur l'ordi)
 
     public int id;
@@ -24,7 +24,7 @@ public sealed class User
     public int score;
     public int phi;
     public string room;
-    public string[] swungmens; // vide
+    //public Player[] swungmens;
     public string[] roles; // vide
     private Friends friends;
     public bool is_connected;
@@ -38,13 +38,13 @@ public sealed class User
         score = 0;
         phi = 0;
         roles = null;
-        swungmens = null;
+        //swungmens = null;
         room = null;
         friends = null;
         version = VERSION;
     }
 
-    public void update(JSONObject json)
+	public void update(JSONObject json, bool all = false)
     {
         is_connected = true;
         id = (int)json.GetNumber("id");
@@ -61,7 +61,8 @@ public sealed class User
             return;
         } // Info private
         phi = (int)json.GetNumber("phi");
-        swungmens = GetStringArray(json.GetArray("sungmens")); // a changer avec swungmens
+		if (all)
+			ProcessSwungMens(json.GetArray("sungmens")); // a changer avec swungmens
 
 
         // -- Friends
@@ -69,19 +70,32 @@ public sealed class User
         this.friends = new Friends(friends);
     }
 
-
-    private static string[] GetStringArray(JSONArray array)
+	/// <summary> Synchronise les SwungMens acheté et achetable </summary>
+	private static void ProcessSwungMens(JSONArray array)
     {
-        if (array == null)
-            return null;
-        string[] StringArray = new string[array.Length];
-        int i = 0;
-        foreach (JSONValue value in array)
+		foreach (JSONValue value in array)
         {
-            StringArray[++i] = value.Str;
+			Player p = new Player (value.Obj);
+			Settings.Instance.AddOrUpdate_PaidPlayer (p);
+			if (!Settings.Instance.Default_player.ContainsKey (p.UID))
+				Settings.Instance.Default_player.Add (p.UID, p);
         }
-        return StringArray;
     }
+
+
+	// A conserver pour gérer les Roles ?
+//    private static string[] GetStringArray(JSONArray array)
+//    {
+//        if (array == null)
+//            return null;
+//        string[] StringArray = new string[array.Length];
+//        int i = 0;
+//        foreach (JSONValue value in array)
+//        {
+//            StringArray[++i] = value.Str;
+//        }
+//        return StringArray;
+//    }
 
     public Friends Friends
     {
