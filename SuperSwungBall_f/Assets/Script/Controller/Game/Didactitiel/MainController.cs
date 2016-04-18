@@ -42,19 +42,23 @@ namespace Didacticiel
         // Update is called once per frame
         void Update()
         {
-            if ()
+
+        }
+
+        void phase1()
+        {
             if (current_time < temps())
                 current_time += Time.deltaTime;
-            else
+            else if (place < 5)
             {
                 current_time = 0;
                 place += 1;
                 screentext.text = phrase();
             }
-        }
-
-        void phase1()
-        {
+            else
+            {
+                phase2();
+            }
 
         }
         void phase2()
