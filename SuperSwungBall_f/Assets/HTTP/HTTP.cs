@@ -8,8 +8,8 @@ using Boomlagoon.JSON;
 public static class HTTP {
 
 	/// <summary> Nom de domaine principale  </summary>
-	private const string HOST_DOMAIN = "http://ssb.shost.ca/API/";
-	//private const string HOST_DOMAIN = "http://localhost:8888/SuperSwungBall/web/app_dev.php/API/";
+	//private const string HOST_DOMAIN = "http://ssb.shost.ca/API/";
+	private const string HOST_DOMAIN = "http://localhost:8888/SuperSwungBall/web/app_dev.php/API/";
 
 	/// <summary> Key d'authentification  </summary>
 	private const string PRIVATE_KEY = "dcbcd1627918a87ea8fc20c379c83c95";
@@ -137,7 +137,29 @@ public static class HTTP {
 			completion (false, null);
 		}
 	}
+	//unity/buysm/hugo_082/1/uid/key
+	/// <summary> Indique l'achat sur le serveur - Doit etre co  </summary>
+	public static void BuySM(string uid, Action<bool> completion) 
+	{
+		User user = User.Instance;
+		if (!user.is_connected) {
+			completion (false); 
+			return;
+		}
 
+		string url = HOST_DOMAIN + "unity/buysm/" + user.username + "/" + user.id + "/" + uid + "/" + PRIVATE_KEY;
+		HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+		JSONObject response = execute(request);
+		Debug.Log (url);
+		string status = response.GetString ("status");
+		if (status == "success") {
+			JSONObject json = response.GetObject ("user");
+			User.Instance.update (json);
+			completion (true);
+		} else {
+			completion (false);
+		}
+	}
 
 	/// <summary>
 	/// Execute les requêtes et renvoie le JSON

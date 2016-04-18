@@ -32,11 +32,15 @@ public class PhiManager : MonoBehaviour {
 	public bool BuyPlayer(Player p){
 		int myPhi = User.Instance.phi;
 
-		Debug.Log ((myPhi < p.Price) + " - " + Settings.Instance.Default_player.ContainsKey (p.UID));
+		Debug.Log ((myPhi < p.Price) + "-" + Settings.Instance.Default_player.ContainsKey (p.UID) + "-" + myPhi + "-" + p.Price);
 
 		if (myPhi < p.Price || Settings.Instance.Default_player.ContainsKey (p.UID))
 			return false;
-		Debug.Log ("A Faire : Envoyer sur le server l'achat de : " + p.Name + "-" + p.UID);
+
+		HTTP.BuySM (p.UID, (success) => {
+			if(!success)
+				Notification.Create(NotificationType.Box, "Oups ...", content: "Une erreur est survenue lors de la synchronisation.", force: true);
+		});
 		return true;
 	}
 

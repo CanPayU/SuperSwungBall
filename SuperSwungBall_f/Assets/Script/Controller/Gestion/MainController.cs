@@ -13,8 +13,8 @@ namespace Gestion {
 		void Start () {
 			this.slide = GameObject.Find ("ScrollView").GetComponent<SlideController> ();
 
-			SaveLoad.load_user ();
-			SaveLoad.load_settings ();
+
+
 
 
 			HTTP.SwungMens ((success, json) => {

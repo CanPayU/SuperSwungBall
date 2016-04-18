@@ -60,7 +60,10 @@ public class DebugManager : MonoBehaviour {
 			Settings.Instance.NotificationState = NotificationState.Nothing;
 
 
-		
+		if (Input.GetKeyDown (KeyCode.I)){
+			User u = User.Instance;
+			Debug.Log ("UserInfo : username:" + u.username + " - id:" + u.id + " - phi:" + u.phi);
+		}
 	}
 	#endif
 }

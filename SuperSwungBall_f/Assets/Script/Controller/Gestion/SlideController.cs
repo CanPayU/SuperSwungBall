@@ -74,12 +74,5 @@ namespace Gestion {
 		public void OnSlideStateChange(bool state){
 			this.slideAuthorised = state;
 		}
-
-		void OnGUI()
-		{
-			float x = Input.mousePosition.x;
-			float y = Input.mousePosition.y;
-			GUI.Box(new Rect(0, 0, 500, 30), "Pos : " + x + " - " + y);
-		}
 	}
 }
