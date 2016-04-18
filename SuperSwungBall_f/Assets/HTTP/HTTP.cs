@@ -97,7 +97,7 @@ public static class HTTP {
 
 	/// <summary>
 	/// Synchronise le score de l'utilisateur.
-	/// Il doir être authentifié. 
+	/// Il doit être authentifié. 
 	/// </summary>
 	/// <param name="passive"><c>true</c>Get - <c>false</c> Set | sur le serveur</param>
 	/// <param name="value">Value si on Set sur le serveur</param>
@@ -110,6 +110,23 @@ public static class HTTP {
 			return;
 		}
 		// Fixme
+	}
+
+
+	/// <summary> Get les SwungMens sur le serveur  </summary>
+	public static void SwungMens(Action<bool, JSONObject> completion) 
+	{
+		string url = HOST_DOMAIN + "unity/swungmens/" + PRIVATE_KEY;
+		HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+		JSONObject response = execute(request);
+
+		string status = response.GetString ("status");
+		if (status == "success") {
+			JSONObject json = response.GetObject ("swungmens");
+			completion (true, json);
+		} else {
+			completion (false, null);
+		}
 	}
 
 
