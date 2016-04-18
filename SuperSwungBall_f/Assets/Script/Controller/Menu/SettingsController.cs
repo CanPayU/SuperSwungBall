@@ -14,10 +14,16 @@ namespace Menu {
 		// Use this for initialization
 		void Start () {
 			actual_NotificationState = Settings.Instance.NotificationState;
-			notificationState.onClick.AddListener (delegate() {
-				OnChangeNotificationState();
-			});
-			Update_ColorAndText ();
+			if (notificationState != null) {
+				notificationState.onClick.AddListener (delegate() {
+					OnChangeNotificationState ();
+				});
+				Update_ColorAndText ();
+			}
+		}
+
+		public void Fade(string scene = "menu"){
+			FadingManager.I.Fade (scene);
 		}
 
 		private void OnChangeNotificationState(){

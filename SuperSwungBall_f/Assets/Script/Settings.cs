@@ -11,10 +11,9 @@ public class Settings {
 		set { _instance = value; }
 	}
 
-	public const string VERSION = "1.13"; // Version actuelle
+	public const string VERSION = "1.18"; // Version actuelle
 	public string version; // Version de l'instance (sauvegarder sur l'ordi)
 
-	// -- Team
 	private Dictionary<string, Team> default_team;
 	private Dictionary<string, Player> default_player;
 	private Dictionary<string, Composition> default_compo;
@@ -22,7 +21,8 @@ public class Settings {
 	private Team selected_team;
 	private string selected_stadium_name;
 	private System.Random rand = new System.Random();
-	// -- 
+
+	private Dictionary<string, Player> paid_player;
 
 	// -- Keyboard
 	private Dictionary<KeyboardAction, KeyCode> keyboard;
@@ -34,6 +34,7 @@ public class Settings {
 		this.version = VERSION;
 		this.notificationState = NotificationState.All;
 		this.keyboard = new Dictionary<KeyboardAction, KeyCode> ();
+		this.paid_player = new Dictionary<string, Player> ();
 
 		// -- Setup Keyboard
 		this.keyboard.Add(KeyboardAction.Passe, KeyCode.A);
@@ -45,12 +46,12 @@ public class Settings {
 		selected_stadium_name = "Stadium_0";
 
 		// ----- Default Player
-		Player lombrix = new Player (4, 6, 7, 1, "Lombrix", 0);
-		Player itec = new Player (1, 4, 2, 9, "Itectori", 0);
-		Player gpdn = new Player (7, 4, 5, 5, "GPasDNom", 0);
-		Player pwc = new Player (3, 2, 9, 2, "PlayWithCube", 0);
-		Player ept = new Player (1, 1, 1, 1, "Epitechien", 0);
-		Player epta = new Player (8, 7, 5, 7, "Epiteen", 0);
+		Player lombrix = new Player (4, 6, 7, 1, "Lombrix", null);
+		Player itec = new Player (1, 4, 2, 9, "Itectori", null);
+		Player gpdn = new Player (7, 4, 5, 5, "GPasDNom", null);
+		Player pwc = new Player (3, 2, 9, 2, "PlayWithCube", null);
+		Player ept = new Player (1, 1, 1, 1, "Epitechien", null);
+		Player epta = new Player (8, 7, 5, 7, "Epiteen", null);
 		default_player.Add ("lombrix", lombrix);
 		default_player.Add ("itec", itec);
 		default_player.Add ("gpdn", gpdn);
@@ -80,19 +81,19 @@ public class Settings {
 		// ----- Default Team FOR DEBUG
 		string[] def_sound= new string[] { "Musics/Team/PSG/Allez Paris [classic]" };
 		Team psg = new Team ("PSG", compo_psg, def_sound, "psg");
-		psg.add_player(new Player (4, 6, 7, 1, "Lombrix", 0));
-		psg.add_player(new Player (7, 4, 5, 5, "GPasDNom", 0));
-		psg.add_player(new Player (1, 1, 1, 1, "Epitechien", 0));
-		psg.add_player(new Player (3, 2, 9, 2, "PlayWithCube", 0));
-		psg.add_player(new Player (1, 4, 2, 9, "Itectori", 0));
+		psg.add_player(new Player (4, 6, 7, 1, "Lombrix", null));
+		psg.add_player(new Player (7, 4, 5, 5, "GPasDNom", null));
+		psg.add_player(new Player (1, 1, 1, 1, "Epitechien", null));
+		psg.add_player(new Player (3, 2, 9, 2, "PlayWithCube", null));
+		psg.add_player(new Player (1, 4, 2, 9, "Itectori", null));
 		default_team.Add("psg", psg);
 
 		Team fr = new Team ("France", compo_fr, def_sound, "fr");
-		fr.add_player(new Player (1, 4, 2, 9, "Itectori", 0));
-		fr.add_player(new Player (3, 2, 9, 2, "PlayWithCube", 0));
-		fr.add_player(new Player (8, 7, 5, 7, "Epiteen", 0));
-		fr.add_player(new Player (7, 4, 5, 5, "GPasDNom", 0));
-		fr.add_player(new Player (4, 6, 7, 1, "Lombrix", 0));
+		fr.add_player(new Player (1, 4, 2, 9, "Itectori", null));
+		fr.add_player(new Player (3, 2, 9, 2, "PlayWithCube", null));
+		fr.add_player(new Player (8, 7, 5, 7, "Epiteen", null));
+		fr.add_player(new Player (7, 4, 5, 5, "GPasDNom", null));
+		fr.add_player(new Player (4, 6, 7, 1, "Lombrix", null));
 		default_team.Add("fr", fr);
 		// ------------------
 		selected_team = fr;
@@ -103,6 +104,17 @@ public class Settings {
 			default_team [t.Code] = t;
 		else
 			default_team.Add (t.Code, t);
+	}
+	public void AddOrUpdate_PaidPlayer(Player p){
+		if (paid_player.ContainsKey (p.UID))
+			paid_player [p.UID] = p;
+		else
+			paid_player.Add (p.UID, p);
+	}
+
+	public void BuyPlayer(string uid) {
+		Player p = paid_player [uid];
+		default_player.Add (uid,p);
 	}
 
 	public NotificationState NotificationState {

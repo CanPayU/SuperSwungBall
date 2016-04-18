@@ -112,7 +112,7 @@ public static class Notification {
 	/// <returns><c>true</c> if is autorised; otherwise, <c>false</c>.</returns>
 	private static bool IsAutorised(NotificationType type, bool force){
 		NotificationState state = Settings.Instance.NotificationState;
-		Debug.Log ("Autorised : " + (force || (int)state >= (int)type));
+		Debug.Log ("Notification Autorised : " + (force || (int)state >= (int)type));
 		return (force || (int)state >= (int)type);
 	}
 

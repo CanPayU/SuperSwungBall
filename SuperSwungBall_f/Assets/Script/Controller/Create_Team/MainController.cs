@@ -32,7 +32,7 @@ namespace Create_Team {
 				int r_alea = rand.Next (1000);
 				Team t = new Team (name_field.text, null, null, code_name + r_alea);
 				for (int i = 0; i < t.Nb_Player; i++) {
-					t.add_player (new Player (3, 3, 3, 3, "Static", 0));
+					t.add_player (new Player (3, 3, 3, 3, "Static", null));
 				}
 				Settings.Instance.AddOrUpdate_Team (t);
 			}

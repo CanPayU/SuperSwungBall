@@ -54,10 +54,10 @@ public sealed class User {
 		if (!json.ContainsKey ("friends")) {
 			this.friends = new Friends ();
 			return;
-		} else { // Info private
-			phi = (int)json.GetNumber ("phi");
-			swungmens = GetStringArray(json.GetArray ("sungmens")); // a changer avec swungmens
-		}
+		} // Info private
+		phi = (int)json.GetNumber ("phi");
+		swungmens = GetStringArray(json.GetArray ("sungmens")); // a changer avec swungmens
+	
 		
 		// -- Friends
 		JSONArray friends = json.GetArray ("friends");

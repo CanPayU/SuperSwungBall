@@ -15,11 +15,6 @@ namespace Menu
 
 		// Use this for initialization
 		void Start () {
-
-			#if DEBUG
-				SaveLoad.load_user ();
-			#endif
-
 			if (User.Instance.is_connected) {
 				account.SetActive (true);
 				account_username.text = User.Instance.username;

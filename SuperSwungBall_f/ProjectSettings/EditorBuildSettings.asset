@@ -45,3 +45,5 @@ EditorBuildSettings:
     path: Assets/Scene/SoloGame.unity
   - enabled: 1
     path: Assets/Scene/Didacticiel.unity
+  - enabled: 1
+    path: Assets/Scene/Gestion.unity

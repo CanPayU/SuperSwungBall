@@ -13,25 +13,24 @@ namespace Gestion {
 		void Start () {
 			this.slide = GameObject.Find ("ScrollView").GetComponent<SlideController> ();
 
+			SaveLoad.load_user ();
+			SaveLoad.load_settings ();
+
+
 			HTTP.SwungMens ((success, json) => {
 				if (success)
 					Instanciate(json);
 				else
 					Debug.LogError("Impossible de charger les SungMens");
 			});
-
-
 		}
 
-		private void Instanciate(JSONObject json){
-
-			// traiter le json puis instantier
-
-			// -- Pour tester
-			foreach (var player in Settings.Instance.Default_player) {
-				slide.InstanciatePlayer (player.Value);
+		private void Instanciate(JSONArray json){
+			foreach (JSONValue swungMen in json) {
+				Player player = new Player (swungMen.Obj);
+				Settings.Instance.AddOrUpdate_PaidPlayer (player);
+				slide.InstanciatePlayer (player);
 			}
-			// --
 		}
 	}
 }

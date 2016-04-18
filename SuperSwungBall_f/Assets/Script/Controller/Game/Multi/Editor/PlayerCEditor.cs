@@ -16,7 +16,7 @@ namespace GameScene.Multi {
 			EditorGUILayout.LabelField("PointPasse", myTarget.PointPasse.ToString());
 			EditorGUILayout.LabelField("PointDeplacement", myTarget.PointDeplacement.ToString());
 			EditorGUILayout.Separator ();
-			EditorGUILayout.LabelField("ID", myTarget.Player.ID.ToString());
+			EditorGUILayout.LabelField("ID", myTarget.Player.UID);
 			EditorGUILayout.LabelField("Name", myTarget.Player.Name.ToString());
 			EditorGUILayout.LabelField("Team_id", myTarget.Player.Team_id.ToString());
 			EditorGUILayout.LabelField("Speed", myTarget.Player.Speed.ToString());

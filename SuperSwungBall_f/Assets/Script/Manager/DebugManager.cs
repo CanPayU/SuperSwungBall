@@ -20,7 +20,7 @@ public class DebugManager : MonoBehaviour {
 //		if (Input.GetKeyDown (KeyCode.B))
 //			Debug.Log ("Ctrl + B detected");
 
-		// -- SveLoadUpdate
+		// -- SaveLoadUpdate
 		if (Input.GetKeyDown(KeyCode.U)) {
 			bool suc = false;
 			SaveLoad.reset_user ();

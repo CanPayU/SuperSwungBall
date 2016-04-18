@@ -7,35 +7,39 @@ public class PhiManager : MonoBehaviour {
 
 	private GameObject more_panel;
 
-	private int phi;
-
 
 	void Start(){
 		instance.more_panel = Resources.Load("Prefabs/Setting/MorePhi") as GameObject;
-		Debug.Log (more_panel);
-		HTTP.SyncPhi (true, (success) => {
-			Debug.Log(success + " - Phi Getted");
-		});
 	}
 		
 	public void More(){
-		Debug.Log (more_panel);
 		GameObject gm = Instantiate (instance.more_panel);
 		Transform Canvas = GameObject.FindObjectOfType<Canvas>().transform;
 		gm.transform.SetParent (Canvas, false);
 	}
 
 	public void Add(int value){
-		phi += value;
-		HTTP.SyncPhi (false, (success) => {
-			Debug.Log(success + " - Phi Setted");
-		}, phi);
+		User.Instance.phi += value;
+		HTTP.SetPhi (User.Instance.phi, (success) => {
+			Debug.Log (success + " - " + User.Instance.phi);
+		});
 	}
 
-	public int Phi {
-		get { return phi; }
-		set { phi = value; }
+	/// <summary>
+	/// Verification et synchronisation de l'achat
+	/// </summary>
+	/// <returns><c>true</c>, if player was bought, <c>false</c> otherwise.</returns>
+	public bool BuyPlayer(Player p){
+		int myPhi = User.Instance.phi;
+
+		Debug.Log ((myPhi < p.Price) + " - " + Settings.Instance.Default_player.ContainsKey (p.UID));
+
+		if (myPhi < p.Price || Settings.Instance.Default_player.ContainsKey (p.UID))
+			return false;
+		Debug.Log ("A Faire : Envoyer sur le server l'achat de : " + p.Name + "-" + p.UID);
+		return true;
 	}
+
 	public static PhiManager I {
 		get { return instance; }
 	}

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using Boomlagoon.JSON;
 
 [Serializable]
 public class Player
@@ -13,26 +14,44 @@ public class Player
 		set { player_name = value; }
 	}
 	private int team_id;
-	private int id;
-	public int ID {
-		get { return id; }
+	private string uid;
+	public string UID {
+		get { return uid; }
+	}
+	private int price;
+	public int Price {
+		get { return price; }
+		set { price = value; }
 	}
 
     private Dictionary<string, int> DEFAULTSTATS = new Dictionary<string, int>(); // Stats initiales (unique au joueur)
     private List<string> buttonsValues = new List<string> { "esquive","esquive","esquive" }; // Valeurs des boutons
     private Dictionary<string, int> finalStats = new Dictionary<string, int> { { "esquive", 0 }, { "tacle", 0 }, { "passe", 0 }, { "course", 0 } }; // Stats après selection des actions dans le menu
 
-	public Player(int tacle, int esquive, int passe, int course, string player_name_, int id_, int Team_Id = 0)
+	public Player(int tacle, int esquive, int passe, int course, string player_name_, string uid, int Team_Id = 0, int price = 0)
     {
-        DEFAULTSTATS.Add("esquive", esquive);
-        DEFAULTSTATS.Add("tacle", tacle);
-        DEFAULTSTATS.Add("passe", passe);
-        DEFAULTSTATS.Add("course", course);
+        this.DEFAULTSTATS.Add("esquive", esquive);
+        this.DEFAULTSTATS.Add("tacle", tacle);
+        this.DEFAULTSTATS.Add("passe", passe);
+        this.DEFAULTSTATS.Add("course", course);
         initialize_finaleStats();
-		player_name = player_name_;
-		team_id = Team_Id;
-		id = id_;
+		this.player_name = player_name_;
+		this.team_id = Team_Id;
+		this.uid = uid;
+		this.price = price;
     }
+	public Player (JSONObject json) {
+		this.DEFAULTSTATS.Add("esquive", 0); // a gérer
+		this.DEFAULTSTATS.Add("tacle", 0);
+		this.DEFAULTSTATS.Add("passe", 0);
+		this.DEFAULTSTATS.Add("course", 0);
+		initialize_finaleStats();
+		this.player_name = json.GetString("name");
+		this.team_id = 0;
+		this.uid = json.GetString("uid");
+		this.price = (int)json.GetNumber ("price");
+	}
+
     private void initialize_finaleStats() // Initialises les stats finales
     {
         finalStats["tacle"] = 0;

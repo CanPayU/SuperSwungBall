@@ -68,7 +68,7 @@ public static class HTTP {
 
 	/// <summary>
 	/// Synchronise le score de l'utilisateur.
-	/// Il doir être authentifié. 
+	/// Il doit être authentifié. 
 	/// </summary>
 	/// <param name="score_to_add">Score à ajouter</param>
 	/// <param name="completion">Fonction éxecuté lors de la réception param : <bool></param>
@@ -96,25 +96,34 @@ public static class HTTP {
 
 
 	/// <summary>
-	/// Synchronise le score de l'utilisateur.
+	/// Set les Phis sur le serveur
 	/// Il doit être authentifié. 
 	/// </summary>
-	/// <param name="passive"><c>true</c>Get - <c>false</c> Set | sur le serveur</param>
-	/// <param name="value">Value si on Set sur le serveur</param>
-	/// <param name="completion">Fonction éxecuté lors de la réception param : <bool></param>
-	public static void SyncPhi(bool passive, Action<bool> completion, int value = 0) 
+	public static void SetPhi(int value, Action<bool> completion) 
 	{
 		User user = User.Instance;
 		if (!user.is_connected) {
 			completion (false); 
 			return;
 		}
-		// Fixme
+
+		string url = HOST_DOMAIN + "unity/phi/" + user.username + "/" + user.id + "/" + value + "/" + PRIVATE_KEY;
+		HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+		JSONObject response = execute(request);
+
+		string status = response.GetString ("status");
+		if (status == "success") {
+			JSONObject userjson = response.GetObject ("user");
+			User.Instance.update (userjson);
+			completion (true);
+		} else {
+			completion (false);
+		}
 	}
 
 
 	/// <summary> Get les SwungMens sur le serveur  </summary>
-	public static void SwungMens(Action<bool, JSONObject> completion) 
+	public static void SwungMens(Action<bool, JSONArray> completion) 
 	{
 		string url = HOST_DOMAIN + "unity/swungmens/" + PRIVATE_KEY;
 		HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
@@ -122,7 +131,7 @@ public static class HTTP {
 
 		string status = response.GetString ("status");
 		if (status == "success") {
-			JSONObject json = response.GetObject ("swungmens");
+			JSONArray json = response.GetArray ("swungmens");
 			completion (true, json);
 		} else {
 			completion (false, null);

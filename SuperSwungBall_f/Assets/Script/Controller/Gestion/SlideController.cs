@@ -11,6 +11,7 @@ namespace Gestion {
 		private float actual_position;
 
 		// -- Setup Slide
+		private bool slideAuthorised = true;
 		private const int SENSIBILITY = 40;
 		private const float INTENSITY = 0.2f;
 		// --
@@ -22,6 +23,10 @@ namespace Gestion {
 
 		// Update is called once per frame
 		void Update () {
+
+			if (!this.slideAuthorised)
+				return;
+
 			var leftLerp = Input.mousePosition.x;
 			var rightLerp = Screen.width - Input.mousePosition.x;
 
@@ -44,14 +49,11 @@ namespace Gestion {
 
 
 		public void InstanciatePlayer(Player p){
-			Debug.Log (content_scroll_view);
 			float scroll_view_w = content_scroll_view.content.sizeDelta.x;
 
 			Transform panel = Instantiate (swungmen_panel).transform as Transform;
-			Transform name = panel.Find ("Name");
-			name.GetComponent<Text> ().text = p.Name;
-
-			panel.GetComponent<PlayerController> ().Player = p;
+			PlayerController script = panel.GetComponent<PlayerController> ();
+			script.Player = p;
 
 			float panel_w = ((RectTransform)panel).sizeDelta.x;
 
@@ -67,27 +69,17 @@ namespace Gestion {
 			actual_position += ((panel_w / 2) + 5);
 			((RectTransform)panel).anchoredPosition = new Vector2 (actual_position, 0);
 			actual_position += ((panel_w / 2));
-
-
-			Button buy = panel.Find ("Buy").GetComponent<Button> ();
-			buy.onClick.AddListener(delegate() {
-				OnSelectItem();
-			});
 		}
 
-
+		public void OnSlideStateChange(bool state){
+			this.slideAuthorised = state;
+		}
 
 		void OnGUI()
 		{
 			float x = Input.mousePosition.x;
 			float y = Input.mousePosition.y;
 			GUI.Box(new Rect(0, 0, 500, 30), "Pos : " + x + " - " + y);
-		}
-
-		// Créer un ItemController ?
-		public void OnSelectItem(){
-			Debug.Log (content_scroll_view.horizontalNormalizedPosition);
-			Debug.Log ("Item selected");
 		}
 	}
 }
