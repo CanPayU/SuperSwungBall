@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace GameScene.Solo
+namespace GameScene
 {
     public class CameraController : MonoBehaviour
     {
@@ -11,15 +11,11 @@ namespace GameScene.Solo
         private new bool animation;
 
         // mouvement camera
-        private Vector3 moveTo;
-        private Vector3 lookAt;
         private float speed;
         GameObject ball; // pour suivre le mouvement de la balle
 
         void Start()
         {
-            moveTo = POSITION_INITIALE;
-            lookAt = new Vector3(0, 0, 0);
             speed = 10;
             ball = GameObject.Find("Ball");
             animation = false;

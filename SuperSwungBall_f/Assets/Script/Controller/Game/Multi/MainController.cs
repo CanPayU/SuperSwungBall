@@ -32,6 +32,8 @@ namespace GameScene.Multi
 
         private PhotonPlayer other_player;
 
+        private CameraController cameraController;
+
         // Use this for initialization
         void Start()
         {
@@ -40,6 +42,7 @@ namespace GameScene.Multi
             Team ennemy_t = (Team)other_player.allProperties["Team"];
             Game.Instance = new Game(ennemy_t);
             infoJoueur = GameObject.Find("Canvas").transform.FindChild("InfoJoueur").GetComponent<InfoJoueurController>();
+            cameraController = GameObject.Find("Main Camera").GetComponent<CameraController>();
             instantiate_team();
         }
 
@@ -70,6 +73,7 @@ namespace GameScene.Multi
                 }
                 annim_started = false;
                 time.start();
+                cameraController.end_anim();
             }
             else { // Start annimation
                 annim_started = true;
@@ -90,6 +94,7 @@ namespace GameScene.Multi
                 team.Value.start_move_players();
             }
             infoJoueur.Close();
+            cameraController.start_anim();
         }
 
 
