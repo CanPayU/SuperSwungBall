@@ -18,6 +18,8 @@ namespace GameScene.Solo
 
         CameraController cameraController;
 
+        InfoJoueurController infoJoueur; // Panel info joueur
+
         Text myGuiText;
 
         Timer time;
@@ -27,6 +29,7 @@ namespace GameScene.Solo
         {
             cameraController = GameObject.Find("Main Camera").GetComponent<CameraController>();
             time = new Timer(10.0F, end_time);
+            infoJoueur = GameObject.Find("Canvas").transform.FindChild("InfoJoueur").GetComponent<InfoJoueurController>();
             instantiate_team();
             //update_score ();
         }
@@ -99,7 +102,7 @@ namespace GameScene.Solo
         {
             annim_started = true;
             time.start();
-
+            infoJoueur.Close();
 
             Dictionary<int, Team> teams = Game.Instance.Teams;
             foreach (KeyValuePair<int, Team> team in teams)

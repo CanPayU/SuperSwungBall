@@ -1693,8 +1693,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef9c967b26fd9a84ba00703b76302b81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player1_prefab: {fileID: 151880, guid: d14107993373b3a4b9d4ea297dfd8df6, type: 2}
-  player2_prefab: {fileID: 118382, guid: db6cbf0d8f7c69b409f8e6eba50d2e58, type: 2}
+  player1_prefab: {fileID: 153914, guid: fd1487a7f54d1534998abfe0c4f990a7, type: 2}
+  player2_prefab: {fileID: 128906, guid: 7c05f3e8c5ea80c4ca489da02e985edb, type: 2}
   ball_prefab: {fileID: 132026, guid: 1cb4de539f61142409a8341ccf935429, type: 2}
   score: {fileID: 1720524803}
   skin: {fileID: 0}
