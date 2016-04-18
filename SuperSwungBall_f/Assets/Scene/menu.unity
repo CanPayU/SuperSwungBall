@@ -692,8 +692,8 @@ GameObject:
   - 222: {fileID: 234350060}
   - 114: {fileID: 234350059}
   - 95: {fileID: 234350062}
-  - 114: {fileID: 234350061}
   - 114: {fileID: 234350063}
+  - 114: {fileID: 234350061}
   m_Layer: 5
   m_Name: r_Slide_view
   m_TagString: Untagged
