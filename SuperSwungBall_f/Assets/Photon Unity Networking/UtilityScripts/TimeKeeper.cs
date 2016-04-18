@@ -35,10 +35,10 @@ namespace ExitGames.Client.DemoParticle
 
         /// <summary>Turns true of the time interval has passed (after reset or creation) or someone set ShouldExecute manually.</summary>
         /// <remarks>Call Reset to start a new interval.</remarks>
-        public bool ShouldExecute 
+        public bool ShouldExecute
         {
-            get { return (this.IsEnabled && (this.shouldExecute || (Environment.TickCount - this.lastExecutionTime > this.Interval))); } 
-            set { this.shouldExecute = value; } 
+            get { return (this.IsEnabled && (this.shouldExecute || (Environment.TickCount - this.lastExecutionTime > this.Interval))); }
+            set { this.shouldExecute = value; }
         }
 
         /// <summary>

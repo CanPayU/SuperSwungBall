@@ -194,7 +194,7 @@ public class PhotonConverter : Photon.MonoBehaviour
         bool isJS = file.Contains(".js");
 
         file = file.Replace("\\", "/"); // Get Class name for JS
-        string className = file.Substring(file.LastIndexOf("/")+1);
+        string className = file.Substring(file.LastIndexOf("/") + 1);
         className = className.Substring(0, className.IndexOf("."));
 
 
@@ -294,11 +294,11 @@ public class PhotonConverter : Photon.MonoBehaviour
             text = PregReplace(text, NOT_VAR_WITH_DOT + "Network" + NOT_VAR_WITH_DOT, "$1PhotonNetwork$2");
 
 
-        //Changed methods
-             string ignoreMe = @"([A-Za-z0-9_\[\]\(\) ]+)";
+            //Changed methods
+            string ignoreMe = @"([A-Za-z0-9_\[\]\(\) ]+)";
 
-         text = PregReplace(text, NOT_VAR_WITH_DOT + "PhotonNetwork.GetPing\\(" + ignoreMe+"\\);", "$1PhotonNetwork.GetPing();");
-        text = PregReplace(text, NOT_VAR_WITH_DOT + "PhotonNetwork.CloseConnection\\(" + ignoreMe+","+ignoreMe+"\\);", "$1PhotonNetwork.CloseConnection($2);");
+            text = PregReplace(text, NOT_VAR_WITH_DOT + "PhotonNetwork.GetPing\\(" + ignoreMe + "\\);", "$1PhotonNetwork.GetPing();");
+            text = PregReplace(text, NOT_VAR_WITH_DOT + "PhotonNetwork.CloseConnection\\(" + ignoreMe + "," + ignoreMe + "\\);", "$1PhotonNetwork.CloseConnection($2);");
 
         }
 

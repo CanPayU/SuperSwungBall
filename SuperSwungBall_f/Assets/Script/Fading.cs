@@ -2,12 +2,10 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public class Fading : MonoBehaviour {
+public class Fading : MonoBehaviour
+{
 
-
-
-
-	/*
+    /*
 	 * 
 	 * 			CE SCRIPT A ÉTÉ MIS À JOUR DANS FadingManager.cs
 	 * 
@@ -22,10 +20,9 @@ public class Fading : MonoBehaviour {
 	 * 
 	*/
 
-
     public Texture2D fadeOutTexture;
-	public float fadeSpeed = 0.8f;
-	public string scene = "menu";
+    public float fadeSpeed = 0.8f;
+    public string scene = "menu";
 
     private int drawDepth = -1000;
     private float alpha = 1.0f;
@@ -36,7 +33,7 @@ public class Fading : MonoBehaviour {
         alpha += fadeDir * fadeSpeed * Time.deltaTime;
         alpha = Mathf.Clamp01(alpha);
 
-        GUI.color = new Color(GUI.color.r,GUI.color.g,GUI.color.b, alpha);
+        GUI.color = new Color(GUI.color.r, GUI.color.g, GUI.color.b, alpha);
         GUI.depth = drawDepth;
         GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), fadeOutTexture);
     }
@@ -58,16 +55,16 @@ public class Fading : MonoBehaviour {
         yield return new WaitForSeconds(fadeTime);
     }
 
-	public void Fade()
-	{
-		StartCoroutine(ChangeScene());
-	}
+    public void Fade()
+    {
+        StartCoroutine(ChangeScene());
+    }
 
 
-	IEnumerator ChangeScene()
-	{
-		float fadeTime = BeginFade(1);
-		yield return new WaitForSeconds(fadeTime);
-		SceneManager.LoadScene(scene);
-	}
+    IEnumerator ChangeScene()
+    {
+        float fadeTime = BeginFade(1);
+        yield return new WaitForSeconds(fadeTime);
+        SceneManager.LoadScene(scene);
+    }
 }

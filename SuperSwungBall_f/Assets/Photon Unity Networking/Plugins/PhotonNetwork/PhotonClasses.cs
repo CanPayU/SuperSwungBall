@@ -442,7 +442,7 @@ namespace Photon
     {
         /// <summary>Cache field for the PhotonView on this GameObject.</summary>
         private PhotonView pvCache = null;
-        
+
         /// <summary>A cached reference to a PhotonView on this GameObject.</summary>
         /// <remarks>
         /// If you intend to work with a PhotonView in a script, it's usually easier to write this.photonView.
@@ -1478,12 +1478,12 @@ public class SceneManagerHelper
     {
         get
         {
-            #if UNITY_MIN_5_3
+#if UNITY_MIN_5_3
             UnityEngine.SceneManagement.Scene s = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
             return s.name;
-            #else
+#else
             return Application.loadedLevelName;
-            #endif
+#endif
         }
     }
 
@@ -1491,11 +1491,11 @@ public class SceneManagerHelper
     {
         get
         {
-            #if UNITY_MIN_5_3
+#if UNITY_MIN_5_3
             return UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
-            #else
+#else
             return Application.loadedLevel;
-            #endif
+#endif
         }
     }
 
@@ -1505,11 +1505,11 @@ public class SceneManagerHelper
     {
         get
         {
-            #if UNITY_MIN_5_3
+#if UNITY_MIN_5_3
             return UnityEditor.SceneManagement.EditorSceneManager.GetActiveScene().name;
-            #else
+#else
             return System.IO.Path.GetFileNameWithoutExtension(UnityEditor.EditorApplication.currentScene);
-            #endif
+#endif
         }
     }
 #endif

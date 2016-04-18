@@ -38,7 +38,7 @@ public class PhotonStreamQueue
     private void BeginWritePackage()
     {
         //If not enough time has passed since the last sample, we don't want to write anything
-        if (Time.realtimeSinceStartup < this.m_LastSampleTime + 1f/this.m_SampleRate)
+        if (Time.realtimeSinceStartup < this.m_LastSampleTime + 1f / this.m_SampleRate)
         {
             this.m_IsWriting = false;
             return;
@@ -51,10 +51,10 @@ public class PhotonStreamQueue
         }
         else if (this.m_SampleCount > 1)
         {
-            if (this.m_Objects.Count/this.m_SampleCount != this.m_ObjectsPerSample)
+            if (this.m_Objects.Count / this.m_SampleCount != this.m_ObjectsPerSample)
             {
                 Debug.LogWarning("The number of objects sent via a PhotonStreamQueue has to be the same each frame");
-                Debug.LogWarning("Objects in List: " + this.m_Objects.Count + " / Sample Count: " + this.m_SampleCount + " = " + (this.m_Objects.Count/this.m_SampleCount) + " != " + this.m_ObjectsPerSample);
+                Debug.LogWarning("Objects in List: " + this.m_Objects.Count + " / Sample Count: " + this.m_SampleCount + " = " + (this.m_Objects.Count / this.m_SampleCount) + " != " + this.m_ObjectsPerSample);
             }
         }
 
@@ -168,7 +168,7 @@ public class PhotonStreamQueue
         this.m_SampleCount = (int)stream.ReceiveNext();
         this.m_ObjectsPerSample = (int)stream.ReceiveNext();
 
-        for (int i = 0; i < this.m_SampleCount*this.m_ObjectsPerSample; ++i)
+        for (int i = 0; i < this.m_SampleCount * this.m_ObjectsPerSample; ++i)
         {
             this.m_Objects.Add(stream.ReceiveNext());
         }

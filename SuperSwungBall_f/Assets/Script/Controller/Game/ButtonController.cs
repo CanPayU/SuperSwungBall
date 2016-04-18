@@ -10,7 +10,7 @@ namespace GameScene
         //evite les "GetComponent<>"
         Color myColor;
         Collider myCollider;
-		MenuController myMenu;
+        MenuController myMenu;
 
         //Clic event
         Ray ray;
@@ -20,7 +20,7 @@ namespace GameScene
         {
             myColor = GetComponent<Renderer>().material.color;
             myCollider = GetComponent<Collider>();
-			myMenu = GetComponent<Transform>().parent.gameObject.GetComponent<MenuController>();
+            myMenu = GetComponent<Transform>().parent.gameObject.GetComponent<MenuController>();
             transform.TransformPoint(1, 0, 0);
         }
 
@@ -42,8 +42,8 @@ namespace GameScene
                     {
                         myMenu.update_Color(myColor); // Change la couleur des valeurs
 
-						GetComponent<Transform> ().parent.parent.gameObject.GetComponent<PlayerController> ().updateValuesPlayer (myColor);
-						/*
+                        GetComponent<Transform>().parent.parent.gameObject.GetComponent<PlayerController>().updateValuesPlayer(myColor);
+                        /*
 						if (PhotonNetwork.inRoom) {
 							GetComponent<Transform> ().parent.parent.gameObject.GetComponent<PlayerController> ().updateValuesPlayer (myColor);
 						} else {
@@ -53,7 +53,7 @@ namespace GameScene
                     }
                 }
             }
-            if(Input.GetKeyUp(KeyCode.Mouse0))
+            if (Input.GetKeyUp(KeyCode.Mouse0))
             {
                 transform.localScale += new Vector3(0.02f, 0.02f, 0.02f);
             }
@@ -61,7 +61,7 @@ namespace GameScene
 
         void OnMouseExit() // event souris quitte
         {
-           transform.localScale -= new Vector3(0.02f, 0.02f, 0.02f);
+            transform.localScale -= new Vector3(0.02f, 0.02f, 0.02f);
         }
     }
 }

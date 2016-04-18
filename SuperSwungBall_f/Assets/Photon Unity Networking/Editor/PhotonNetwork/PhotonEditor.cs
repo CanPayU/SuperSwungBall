@@ -81,7 +81,7 @@ public class PunWizardText
 [InitializeOnLoad]
 public class PhotonEditor : EditorWindow
 {
-    protected static Type WindowType = typeof (PhotonEditor);
+    protected static Type WindowType = typeof(PhotonEditor);
 
     protected Vector2 scrollPos = Vector2.zero;
 
@@ -194,19 +194,19 @@ public class PhotonEditor : EditorWindow
         // after a compile, check RPCs to create a cache-list
         if (!postCompileActionsDone && !EditorApplication.isCompiling && !EditorApplication.isPlayingOrWillChangePlaymode && PhotonNetwork.PhotonServerSettings != null)
         {
-            #if UNITY_4_2 || UNITY_4_3 || UNITY_4_4 || UNITY_4_5 || UNITY_4_6 || UNITY_5 || UNITY_5_0
+#if UNITY_4_2 || UNITY_4_3 || UNITY_4_4 || UNITY_4_5 || UNITY_4_6 || UNITY_5 || UNITY_5_0
             if (EditorApplication.isUpdating)
             {
                 return;
             }
-            #endif
+#endif
 
             PhotonEditor.UpdateRpcList();
             postCompileActionsDone = true; // on compile, this falls back to false (without actively doing anything)
 
-            #if UNITY_4_2 || UNITY_4_3 || UNITY_4_4 || UNITY_4_5 || UNITY_4_6 || UNITY_5 || UNITY_5_0
+#if UNITY_4_2 || UNITY_4_3 || UNITY_4_4 || UNITY_4_5 || UNITY_4_6 || UNITY_5 || UNITY_5_0
             PhotonEditor.ImportWin8Support();
-            #endif
+#endif
         }
     }
 
@@ -453,7 +453,7 @@ public class PhotonEditor : EditorWindow
         scale.height = 30;
 
         GUI.Label(scale, title, bgStyle);
-        GUILayout.Space(scale.height+5);
+        GUILayout.Space(scale.height + 5);
     }
 
     protected virtual void UiMainWizard()
@@ -600,7 +600,7 @@ public class PhotonEditor : EditorWindow
             return; // don't import while compiling
         }
 
-        #if UNITY_4_2 || UNITY_4_3 || UNITY_4_4 || UNITY_4_5 || UNITY_4_6 || UNITY_5 || UNITY_5_0
+#if UNITY_4_2 || UNITY_4_3 || UNITY_4_4 || UNITY_4_5 || UNITY_4_6 || UNITY_5 || UNITY_5_0
         const string win8Package = "Assets/Plugins/Photon3Unity3D-Win8.unitypackage";
 
         bool win8LibsExist = File.Exists("Assets/Plugins/WP8/Photon3Unity3D.dll") && File.Exists("Assets/Plugins/Metro/Photon3Unity3D.dll");
@@ -608,7 +608,7 @@ public class PhotonEditor : EditorWindow
         {
             AssetDatabase.ImportPackage(win8Package, false);
         }
-        #endif
+#endif
     }
 
 
@@ -644,14 +644,14 @@ public class PhotonEditor : EditorWindow
             foreach (MethodInfo method in methods)
             {
                 bool isOldRpc = false;
-                #pragma warning disable 618
+#pragma warning disable 618
                 // we let the Editor check for outdated RPC attributes in code. that should not cause a compile warning
-                if (method.IsDefined(typeof (RPC), false))
+                if (method.IsDefined(typeof(RPC), false))
                 {
                     countOldRpcs++;
                     isOldRpc = true;
                 }
-                #pragma warning restore 618
+#pragma warning restore 618
 
                 if (isOldRpc || method.IsDefined(typeof(PunRPC), false))
                 {

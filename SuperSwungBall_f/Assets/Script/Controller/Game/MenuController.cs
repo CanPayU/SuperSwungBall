@@ -56,7 +56,7 @@ namespace GameScene
             components["buttons"][1].GetComponent<Renderer>().material.color = new Color(0, 0.5f, 0); //tacle
             components["buttons"][2].GetComponent<Renderer>().material.color = new Color(1, 0.2f, 0.7f); //passe
             components["buttons"][3].GetComponent<Renderer>().material.color = new Color(0, 0.5f, 1); //course
-            
+
             //permet d'accéder plus facilement aux couleurs des boutons
             buttonsColor.Add(new Color(1, 0.5f, 0));
             buttonsColor.Add(new Color(0, 0.5f, 0));
@@ -86,7 +86,7 @@ namespace GameScene
         {
             components["zones"][0].transform.localScale = new Vector3(0, components["zones"][0].transform.localScale.y, 0);
             components["zones"][1].transform.localScale = new Vector3(0, components["zones"][1].transform.localScale.y, 0);
-            components["pointeurs"][0].transform.localPosition = new Vector3(0,components["pointeurs"][0].transform.localPosition.y, 0);
+            components["pointeurs"][0].transform.localPosition = new Vector3(0, components["pointeurs"][0].transform.localPosition.y, 0);
             components["pointeurs"][1].transform.localPosition = new Vector3(0, components["pointeurs"][1].transform.localPosition.y, 0);
             foreach (GameObject valeur in components["valeurs"])
             {
@@ -143,13 +143,13 @@ namespace GameScene
         }
         private void replace_pointeur() // replace le pointeur de déplacement dans sa zone si il y sort
         {
-			components["pointeurs"][0].transform.LookAt(components["zones"][0].transform);
-			float distance = Vector3.Distance(components["pointeurs"][0].transform.position, components["zones"][0].transform.position);
-			if (distance > 10 * components["zones"][0].transform.localScale.x / 2)
-			{
-				float angle = components["pointeurs"][0].transform.eulerAngles.y - transform.rotation.eulerAngles.y;
-				components["pointeurs"][0].transform.localPosition = new Vector3(-Mathf.Sin(Mathf.Deg2Rad * angle) * components["zones"][0].transform.localScale.x / 2, components["pointeurs"][0].transform.localPosition.y, -Mathf.Cos(Mathf.Deg2Rad * angle) * components["zones"][0].transform.localScale.x / 2);
-			}
+            components["pointeurs"][0].transform.LookAt(components["zones"][0].transform);
+            float distance = Vector3.Distance(components["pointeurs"][0].transform.position, components["zones"][0].transform.position);
+            if (distance > 10 * components["zones"][0].transform.localScale.x / 2)
+            {
+                float angle = components["pointeurs"][0].transform.eulerAngles.y - transform.rotation.eulerAngles.y;
+                components["pointeurs"][0].transform.localPosition = new Vector3(-Mathf.Sin(Mathf.Deg2Rad * angle) * components["zones"][0].transform.localScale.x / 2, components["pointeurs"][0].transform.localPosition.y, -Mathf.Cos(Mathf.Deg2Rad * angle) * components["zones"][0].transform.localScale.x / 2);
+            }
         }
         #endregion
     }

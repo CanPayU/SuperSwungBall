@@ -54,13 +54,13 @@ public enum OwnershipOption
 [AddComponentMenu("Photon Networking/Photon View &v")]
 public class PhotonView : Photon.MonoBehaviour
 {
-    #if UNITY_EDITOR
+#if UNITY_EDITOR
     [ContextMenu("Open PUN Wizard")]
     void OpenPunWizard()
     {
         EditorApplication.ExecuteMenuItem("Window/Photon Unity Networking");
     }
-    #endif
+#endif
 
     public int ownerId;
 
@@ -137,10 +137,10 @@ public class PhotonView : Photon.MonoBehaviour
 
 #if UNITY_EDITOR
     // Suppressing compiler warning "this variable is never used". Only used in the CustomEditor, only in Editor
-    #pragma warning disable 0414
+#pragma warning disable 0414
     [SerializeField]
     bool ObservedComponentsFoldoutOpen = true;
-    #pragma warning restore 0414
+#pragma warning restore 0414
 #endif
 
     [SerializeField]
@@ -305,9 +305,9 @@ public class PhotonView : Photon.MonoBehaviour
             bool wasInList = PhotonNetwork.networkingPeer.LocalCleanPhotonView(this);
             bool loading = false;
 
-            #if !UNITY_5 || UNITY_5_0 || UNITY_5_1
+#if !UNITY_5 || UNITY_5_0 || UNITY_5_1
             loading = Application.isLoadingLevel;
-            #endif
+#endif
 
             if (wasInList && !loading && this.instantiationId > 0 && !PhotonHandler.AppQuits && PhotonNetwork.logLevel >= PhotonLogLevel.Informational)
             {
@@ -356,63 +356,63 @@ public class PhotonView : Photon.MonoBehaviour
         }
         else if (component is Transform)
         {
-            Transform trans = (Transform) component;
+            Transform trans = (Transform)component;
 
             switch (this.onSerializeTransformOption)
             {
                 case OnSerializeTransform.All:
-                    trans.localPosition = (Vector3) stream.ReceiveNext();
-                    trans.localRotation = (Quaternion) stream.ReceiveNext();
-                    trans.localScale = (Vector3) stream.ReceiveNext();
+                    trans.localPosition = (Vector3)stream.ReceiveNext();
+                    trans.localRotation = (Quaternion)stream.ReceiveNext();
+                    trans.localScale = (Vector3)stream.ReceiveNext();
                     break;
                 case OnSerializeTransform.OnlyPosition:
-                    trans.localPosition = (Vector3) stream.ReceiveNext();
+                    trans.localPosition = (Vector3)stream.ReceiveNext();
                     break;
                 case OnSerializeTransform.OnlyRotation:
-                    trans.localRotation = (Quaternion) stream.ReceiveNext();
+                    trans.localRotation = (Quaternion)stream.ReceiveNext();
                     break;
                 case OnSerializeTransform.OnlyScale:
-                    trans.localScale = (Vector3) stream.ReceiveNext();
+                    trans.localScale = (Vector3)stream.ReceiveNext();
                     break;
                 case OnSerializeTransform.PositionAndRotation:
-                    trans.localPosition = (Vector3) stream.ReceiveNext();
-                    trans.localRotation = (Quaternion) stream.ReceiveNext();
+                    trans.localPosition = (Vector3)stream.ReceiveNext();
+                    trans.localRotation = (Quaternion)stream.ReceiveNext();
                     break;
             }
         }
         else if (component is Rigidbody)
         {
-            Rigidbody rigidB = (Rigidbody) component;
+            Rigidbody rigidB = (Rigidbody)component;
 
             switch (this.onSerializeRigidBodyOption)
             {
                 case OnSerializeRigidBody.All:
-                    rigidB.velocity = (Vector3) stream.ReceiveNext();
-                    rigidB.angularVelocity = (Vector3) stream.ReceiveNext();
+                    rigidB.velocity = (Vector3)stream.ReceiveNext();
+                    rigidB.angularVelocity = (Vector3)stream.ReceiveNext();
                     break;
                 case OnSerializeRigidBody.OnlyAngularVelocity:
-                    rigidB.angularVelocity = (Vector3) stream.ReceiveNext();
+                    rigidB.angularVelocity = (Vector3)stream.ReceiveNext();
                     break;
                 case OnSerializeRigidBody.OnlyVelocity:
-                    rigidB.velocity = (Vector3) stream.ReceiveNext();
+                    rigidB.velocity = (Vector3)stream.ReceiveNext();
                     break;
             }
         }
         else if (component is Rigidbody2D)
         {
-            Rigidbody2D rigidB = (Rigidbody2D) component;
+            Rigidbody2D rigidB = (Rigidbody2D)component;
 
             switch (this.onSerializeRigidBodyOption)
             {
                 case OnSerializeRigidBody.All:
-                    rigidB.velocity = (Vector2) stream.ReceiveNext();
-                    rigidB.angularVelocity = (float) stream.ReceiveNext();
+                    rigidB.velocity = (Vector2)stream.ReceiveNext();
+                    rigidB.angularVelocity = (float)stream.ReceiveNext();
                     break;
                 case OnSerializeRigidBody.OnlyAngularVelocity:
-                    rigidB.angularVelocity = (float) stream.ReceiveNext();
+                    rigidB.angularVelocity = (float)stream.ReceiveNext();
                     break;
                 case OnSerializeRigidBody.OnlyVelocity:
-                    rigidB.velocity = (Vector2) stream.ReceiveNext();
+                    rigidB.velocity = (Vector2)stream.ReceiveNext();
                     break;
             }
         }
@@ -435,7 +435,7 @@ public class PhotonView : Photon.MonoBehaviour
         }
         else if (component is Transform)
         {
-            Transform trans = (Transform) component;
+            Transform trans = (Transform)component;
 
             switch (this.onSerializeTransformOption)
             {
@@ -461,7 +461,7 @@ public class PhotonView : Photon.MonoBehaviour
         }
         else if (component is Rigidbody)
         {
-            Rigidbody rigidB = (Rigidbody) component;
+            Rigidbody rigidB = (Rigidbody)component;
 
             switch (this.onSerializeRigidBodyOption)
             {
@@ -479,7 +479,7 @@ public class PhotonView : Photon.MonoBehaviour
         }
         else if (component is Rigidbody2D)
         {
-            Rigidbody2D rigidB = (Rigidbody2D) component;
+            Rigidbody2D rigidB = (Rigidbody2D)component;
 
             switch (this.onSerializeRigidBodyOption)
             {
@@ -522,7 +522,7 @@ public class PhotonView : Photon.MonoBehaviour
 
             if (method != null)
             {
-                method.Invoke(component, new object[] {stream, info});
+                method.Invoke(component, new object[] { stream, info });
             }
         }
     }

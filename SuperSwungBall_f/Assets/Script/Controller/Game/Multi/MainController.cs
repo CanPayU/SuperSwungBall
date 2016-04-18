@@ -75,7 +75,8 @@ namespace GameScene.Multi
                 time.start();
                 cameraController.end_anim();
             }
-            else { // Start annimation
+            else
+            { // Start annimation
                 annim_started = true;
                 // Sync StartAnnim
                 PhotonView pv = PhotonView.Get(this);

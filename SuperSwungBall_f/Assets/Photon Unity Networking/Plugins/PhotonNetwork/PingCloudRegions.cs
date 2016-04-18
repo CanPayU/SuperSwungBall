@@ -117,7 +117,7 @@ public class PhotonPingManager
     /// </remarks>
     public IEnumerator PingSocket(Region region)
     {
-        region.Ping = Attempts*MaxMilliseconsPerPing;
+        region.Ping = Attempts * MaxMilliseconsPerPing;
 
         this.PingsRunning++;        // TODO: Add try-catch to make sure the PingsRunning are reduced at the end and that the lib does not crash the app
         PhotonPing ping;
@@ -133,7 +133,7 @@ public class PhotonPingManager
         }
         else
         {
-            ping = (PhotonPing) Activator.CreateInstance(PhotonHandler.PingImplementation);
+            ping = (PhotonPing)Activator.CreateInstance(PhotonHandler.PingImplementation);
         }
 
         //Debug.Log("Ping is: " + ping + " type " + ping.GetType());

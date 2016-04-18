@@ -23,14 +23,14 @@ namespace GameScene
 
         void Update()
         {
-            if(animation)
+            if (animation)
             {
                 transform.position = Vector3.Lerp(transform.position, new Vector3(ball.transform.position.x + 15, 10, ball.transform.position.z), Time.deltaTime * speed);
                 transform.LookAt(ball.transform.position);
             }
             else
             {
-                transform.position = Vector3.MoveTowards(transform.position,POSITION_INITIALE, Time.deltaTime * speed);
+                transform.position = Vector3.MoveTowards(transform.position, POSITION_INITIALE, Time.deltaTime * speed);
                 transform.LookAt(Vector3.zero);
             }
         }

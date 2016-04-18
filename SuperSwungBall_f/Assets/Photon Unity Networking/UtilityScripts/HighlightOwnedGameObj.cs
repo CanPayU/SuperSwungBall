@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof (PhotonView))]
+[RequireComponent(typeof(PhotonView))]
 public class HighlightOwnedGameObj : Photon.MonoBehaviour
 {
     public GameObject PointerPrefab;
@@ -15,7 +15,7 @@ public class HighlightOwnedGameObj : Photon.MonoBehaviour
         {
             if (this.markerTransform == null)
             {
-                GameObject markerObject = (GameObject) GameObject.Instantiate(this.PointerPrefab);
+                GameObject markerObject = (GameObject)GameObject.Instantiate(this.PointerPrefab);
                 markerObject.transform.parent = gameObject.transform;
                 this.markerTransform = markerObject.transform;
             }

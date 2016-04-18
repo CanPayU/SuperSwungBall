@@ -50,7 +50,7 @@ namespace ExitGames.Client.Photon.Chat
         public ChatState State { get; private set; }
         public ChatDisconnectCause DisconnectedCause { get; private set; }
         public bool CanChat { get { return this.State == ChatState.ConnectedToFrontEnd && this.HasPeer; } }
-        private bool HasPeer { get { return this.chatPeer != null; }  }
+        private bool HasPeer { get { return this.chatPeer != null; } }
 
         /// <summary>The version of your client. A new version also creates a new "virtual app" to separate players from older client versions.</summary>
         public string AppVersion { get; private set; }
@@ -123,7 +123,7 @@ namespace ExitGames.Client.Photon.Chat
             this.State = ChatState.Uninitialized;
 
             this.chatPeer = new ChatPeer(this, protocol);
-            
+
 #if UNITY_WEBGL
             if (protocol == ConnectionProtocol.WebSocket || protocol == ConnectionProtocol.WebSocketSecure) {
                 this.chatPeer.SocketImplementation = typeof(SocketWebTcp);
@@ -142,7 +142,7 @@ namespace ExitGames.Client.Photon.Chat
         /// <param name="authValues">Values for authentication. You can leave this null, if you set a UserId before. If you set authValues, they will override any UserId set before.</param>
         /// <returns></returns>
         public bool Connect(string appId, string appVersion, AuthenticationValues authValues)
-		{
+        {
             this.chatPeer.TimePingInterval = 3000;
             this.DisconnectedCause = ChatDisconnectCause.None;
 
@@ -562,7 +562,7 @@ namespace ExitGames.Client.Photon.Chat
         {
             if (!isPrivate)
             {
-               return this.PublicChannels.TryGetValue(channelName, out channel);
+                return this.PublicChannels.TryGetValue(channelName, out channel);
             }
             else
             {
@@ -669,25 +669,27 @@ namespace ExitGames.Client.Photon.Chat
             switch (statusCode)
             {
                 case StatusCode.Connect:
-	                if (!this.chatPeer.IsProtocolSecure) {
+                    if (!this.chatPeer.IsProtocolSecure)
+                    {
 #if UNITY
-						UnityEngine.Debug.Log("Establishing Encryption");
+                        UnityEngine.Debug.Log("Establishing Encryption");
 #endif
-            	        this.chatPeer.EstablishEncryption();
-        	        }
-					else {
+                        this.chatPeer.EstablishEncryption();
+                    }
+                    else
+                    {
 #if UNITY
-						UnityEngine.Debug.Log("Skipping Encryption");
+                        UnityEngine.Debug.Log("Skipping Encryption");
 #endif
                         if (!this.didAuthenticate)
-	                    {
-                    	    this.didAuthenticate = this.chatPeer.AuthenticateOnNameServer(this.AppId, this.AppVersion, this.chatRegion, this.AuthValues);
-                	        if (!this.didAuthenticate)
-            	            {
+                        {
+                            this.didAuthenticate = this.chatPeer.AuthenticateOnNameServer(this.AppId, this.AppVersion, this.chatRegion, this.AuthValues);
+                            if (!this.didAuthenticate)
+                            {
                                 ((IPhotonPeerListener)this).DebugReturn(DebugLevel.ERROR, "Error calling OpAuthenticate! Did not work. Check log output, AuthValues and if you're connected. State: " + this.State);
-    	                    }
-	                    }
-					}
+                            }
+                        }
+                    }
 
                     if (this.State == ChatState.ConnectingToNameServer)
                     {
@@ -850,7 +852,7 @@ namespace ExitGames.Client.Photon.Chat
                             this.AuthValues = new AuthenticationValues();
                         }
                         this.AuthValues.Token = operationResponse[ParameterCode.Secret] as string;
-                        this.FrontendAddress = (string) operationResponse[ParameterCode.Address];
+                        this.FrontendAddress = (string)operationResponse[ParameterCode.Address];
 
                         // we disconnect and status handler starts to connect to front end
                         this.chatPeer.Disconnect();

@@ -13,7 +13,7 @@ namespace Menu
         {
             if (other.gameObject.name == "Choice")
             {
-				FadingManager.I.Fade (scene);
+                FadingManager.I.Fade(scene);
             }
         }
     }

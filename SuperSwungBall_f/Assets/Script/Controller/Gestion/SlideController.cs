@@ -2,77 +2,83 @@
 using UnityEngine.UI;
 using System.Collections;
 
-namespace Gestion {
-	public class SlideController : MonoBehaviour {
+namespace Gestion
+{
+    public class SlideController : MonoBehaviour
+    {
+        [SerializeField]
+        private GameObject swungmen_panel;
 
-		[SerializeField] private GameObject swungmen_panel;
+        private ScrollRect content_scroll_view;
+        private float actual_position;
 
-		private ScrollRect content_scroll_view;
-		private float actual_position;
+        // -- Setup Slide
+        private bool slideAuthorised = true;
+        private const int SENSIBILITY = 40;
+        private const float INTENSITY = 0.2f;
+        // --
 
-		// -- Setup Slide
-		private bool slideAuthorised = true;
-		private const int SENSIBILITY = 40;
-		private const float INTENSITY = 0.2f;
-		// --
+        void Awake()
+        {
+            this.content_scroll_view = GetComponent<ScrollRect>();
+            Debug.Log(this.content_scroll_view);
+        }
 
-		void Awake() {
-			this.content_scroll_view = GetComponent<ScrollRect> ();
-			Debug.Log (this.content_scroll_view);
-		}
+        // Update is called once per frame
+        void Update()
+        {
 
-		// Update is called once per frame
-		void Update () {
+            if (!this.slideAuthorised)
+                return;
 
-			if (!this.slideAuthorised)
-				return;
+            var leftLerp = Input.mousePosition.x;
+            var rightLerp = Screen.width - Input.mousePosition.x;
 
-			var leftLerp = Input.mousePosition.x;
-			var rightLerp = Screen.width - Input.mousePosition.x;
+            var min = Mathf.Min(leftLerp, rightLerp);
 
-			var min = Mathf.Min (leftLerp, rightLerp);
+            var lerpMouse = 0;
+            if (min == rightLerp)
+                lerpMouse = 1;
+            else
+                lerpMouse = -1;
 
-			var lerpMouse = 0;
-			if (min == rightLerp)
-				lerpMouse = 1;
-			else
-				lerpMouse = -1;
-
-			var speed = SENSIBILITY + (int)(min * - INTENSITY);
-			var actualPos = content_scroll_view.horizontalNormalizedPosition;
-			content_scroll_view.horizontalNormalizedPosition = Mathf.Lerp (
-				actualPos, 
-				actualPos + 0.3f * lerpMouse, 
-				speed * content_scroll_view.elasticity * Time.deltaTime);
-		}
-
+            var speed = SENSIBILITY + (int)(min * -INTENSITY);
+            var actualPos = content_scroll_view.horizontalNormalizedPosition;
+            content_scroll_view.horizontalNormalizedPosition = Mathf.Lerp(
+                actualPos,
+                actualPos + 0.3f * lerpMouse,
+                speed * content_scroll_view.elasticity * Time.deltaTime);
+        }
 
 
-		public void InstanciatePlayer(Player p){
-			float scroll_view_w = content_scroll_view.content.sizeDelta.x;
 
-			Transform panel = Instantiate (swungmen_panel).transform as Transform;
-			PlayerController script = panel.GetComponent<PlayerController> ();
-			script.Player = p;
+        public void InstanciatePlayer(Player p)
+        {
+            float scroll_view_w = content_scroll_view.content.sizeDelta.x;
 
-			float panel_w = ((RectTransform)panel).sizeDelta.x;
+            Transform panel = Instantiate(swungmen_panel).transform as Transform;
+            PlayerController script = panel.GetComponent<PlayerController>();
+            script.Player = p;
 
-			RectTransform scroll_view = content_scroll_view.content.GetComponent<RectTransform> ();
-			float new_scroll_view_w = scroll_view_w + (panel_w + 5);
+            float panel_w = ((RectTransform)panel).sizeDelta.x;
 
-			scroll_view.sizeDelta = new Vector2(new_scroll_view_w, scroll_view.sizeDelta.y);
+            RectTransform scroll_view = content_scroll_view.content.GetComponent<RectTransform>();
+            float new_scroll_view_w = scroll_view_w + (panel_w + 5);
 
-			if (new_scroll_view_w > scroll_view_w) 
-				scroll_view.anchoredPosition = new Vector3(new_scroll_view_w - scroll_view_w, 0);
+            scroll_view.sizeDelta = new Vector2(new_scroll_view_w, scroll_view.sizeDelta.y);
 
-			panel.SetParent (content_scroll_view.content.transform, false);
-			actual_position += ((panel_w / 2) + 5);
-			((RectTransform)panel).anchoredPosition = new Vector2 (actual_position, 0);
-			actual_position += ((panel_w / 2));
-		}
+            if (new_scroll_view_w > scroll_view_w)
+                scroll_view.anchoredPosition = new Vector3(new_scroll_view_w - scroll_view_w, 0);
 
-		public void OnSlideStateChange(bool state){
-			this.slideAuthorised = state;
-		}
-	}
+            panel.SetParent(content_scroll_view.content.transform, false);
+            actual_position += ((panel_w / 2) + 5);
+            ((RectTransform)panel).anchoredPosition = new Vector2(actual_position, 0);
+            actual_position += ((panel_w / 2));
+        }
+
+        public void OnSlideStateChange(bool state)
+        {
+            this.slideAuthorised = state;
+        }
+    }
 }

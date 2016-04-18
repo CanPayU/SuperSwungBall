@@ -419,7 +419,7 @@ public static class PhotonNetwork
     /// To use a GameObject pool, implement IPunPrefabPool and assign it here.
     /// Prefabs are identified by name.
     /// </remarks>
-    public static IPunPrefabPool PrefabPool { get { return networkingPeer.ObjectPool; } set { networkingPeer.ObjectPool = value; }}
+    public static IPunPrefabPool PrefabPool { get { return networkingPeer.ObjectPool; } set { networkingPeer.ObjectPool = value; } }
 
     /// <summary>
     /// Keeps references to GameObjects for frequent instantiation (out of memory instead of loading the Resources).
@@ -838,7 +838,7 @@ public static class PhotonNetwork
         }
     }
 
-	/// <summary>If true, PUN will use a Stopwatch to measure time since start/connect. This is more precise than the Environment.TickCount used by default.</summary>
+    /// <summary>If true, PUN will use a Stopwatch to measure time since start/connect. This is more precise than the Environment.TickCount used by default.</summary>
     private static bool UsePreciseTimer = false;
     static Stopwatch startupStopwatch;
 
@@ -1062,7 +1062,7 @@ public static class PhotonNetwork
     /// </summary>
     static PhotonNetwork()
     {
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
 
         if (PhotonServerSettings == null)
         {
@@ -1090,7 +1090,7 @@ public static class PhotonNetwork
                 Component.DestroyImmediate(photonHandler);
             }
         }
-        #endif
+#endif
 
         Application.runInBackground = true;
 
@@ -1174,7 +1174,7 @@ public static class PhotonNetwork
         // set up a new NetworkingPeer
         NetworkingPeer newPeer = new NetworkingPeer(String.Empty, cp);
         newPeer.CustomAuthenticationValues = networkingPeer.CustomAuthenticationValues;
-        newPeer.PlayerName= networkingPeer.PlayerName;
+        newPeer.PlayerName = networkingPeer.PlayerName;
         newPeer.mLocalActor = networkingPeer.mLocalActor;
         newPeer.DebugOut = networkingPeer.DebugOut;
         newPeer.CrcEnabled = networkingPeer.CrcEnabled;
@@ -2778,7 +2778,7 @@ public static class PhotonNetwork
     {
         HashSet<GameObject> objectsWithComponent = new HashSet<GameObject>();
 
-        Component[] targetComponents = (Component[]) GameObject.FindObjectsOfType(type);
+        Component[] targetComponents = (Component[])GameObject.FindObjectsOfType(type);
         for (int index = 0; index < targetComponents.Length; index++)
         {
             objectsWithComponent.Add(targetComponents[index].gameObject);

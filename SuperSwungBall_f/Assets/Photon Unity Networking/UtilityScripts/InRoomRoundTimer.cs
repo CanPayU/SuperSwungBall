@@ -19,7 +19,7 @@ public class InRoomRoundTimer : MonoBehaviour
 {
     public int SecondsPerTurn = 5;                  // time per round/turn
     public double StartTime;                        // this should could also be a private. i just like to see this in inspector
-    public Rect TextPos = new Rect(0,80,150,300);   // default gui position. inspector overrides this!
+    public Rect TextPos = new Rect(0, 80, 150, 300);   // default gui position. inspector overrides this!
 
     private bool startRoundWhenTimeIsSynced;        // used in an edge-case when we wanted to set a start time but don't know it yet.
     private const string StartTimeKey = "st";       // the name of our "start time" custom property.
@@ -37,14 +37,14 @@ public class InRoomRoundTimer : MonoBehaviour
         }
         startRoundWhenTimeIsSynced = false;
 
-        
+
 
         ExitGames.Client.Photon.Hashtable startTimeProp = new Hashtable();  // only use ExitGames.Client.Photon.Hashtable for Photon
         startTimeProp[StartTimeKey] = PhotonNetwork.time;
         PhotonNetwork.room.SetCustomProperties(startTimeProp);              // implement OnPhotonCustomRoomPropertiesChanged(Hashtable propertiesThatChanged) to get this change everywhere
     }
 
-    
+
     /// <summary>Called by PUN when this client entered a room (no matter if joined or created).</summary>
     public void OnJoinedRoom()
     {

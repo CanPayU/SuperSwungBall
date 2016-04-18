@@ -196,7 +196,7 @@ internal class PhotonHandler : Photon.MonoBehaviour
             // check if the client should disconnect after some seconds in background
             if (timerToStopConnectionInBackground != null && PhotonNetwork.BackgroundTimeout > 0.001f)
             {
-                if (timerToStopConnectionInBackground.ElapsedMilliseconds > PhotonNetwork.BackgroundTimeout*1000)
+                if (timerToStopConnectionInBackground.ElapsedMilliseconds > PhotonNetwork.BackgroundTimeout * 1000)
                 {
                     timerToStopConnectionInBackground.Stop();
                     timerToStopConnectionInBackground.Reset();

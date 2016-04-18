@@ -39,7 +39,8 @@ public class PhotonPlayer
 
     /// <summary>Nickname of this player.</summary>
     /// <remarks>Set the PhotonNetwork.playerName to make the name synchronized in a room.</remarks>
-    public string name {
+    public string name
+    {
         get
         {
             return this.nameField;
@@ -246,7 +247,7 @@ public class PhotonPlayer
         Hashtable customProps = propertiesToSet.StripToStringKeys() as Hashtable;
         Hashtable customPropsToCheck = expectedValues.StripToStringKeys() as Hashtable;
 
-        
+
         // no expected values -> set and callback
         bool noCas = customPropsToCheck == null || customPropsToCheck.Count == 0;
         bool inOnlineRoom = this.actorID > 0 && !PhotonNetwork.offlineMode;
@@ -256,7 +257,7 @@ public class PhotonPlayer
         {
             PhotonNetwork.networkingPeer.OpSetPropertiesOfActor(this.actorID, customProps, customPropsToCheck, webForward);
         }
-        
+
         if (!inOnlineRoom || noCas)
         {
             this.InternalCacheProperties(customProps);
@@ -334,7 +335,7 @@ public class PhotonPlayer
     {
         if (string.IsNullOrEmpty(this.name))
         {
-            return string.Format("#{0:00}{1}",  this.ID, this.isMasterClient ? "(master)":"");
+            return string.Format("#{0:00}{1}", this.ID, this.isMasterClient ? "(master)" : "");
         }
 
         return string.Format("'{0}'{1}", this.name, this.isMasterClient ? "(master)" : "");
