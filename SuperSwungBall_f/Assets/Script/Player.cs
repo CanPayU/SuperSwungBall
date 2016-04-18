@@ -18,16 +18,16 @@ public class Player
 		get { return id; }
 	}
 
-    private Dictionary<string, int> defaultStats = new Dictionary<string, int>(); // Stats initiales (unique au joueur)
+    private Dictionary<string, int> DEFAULTSTATS = new Dictionary<string, int>(); // Stats initiales (unique au joueur)
     private List<string> buttonsValues = new List<string> { "esquive","esquive","esquive" }; // Valeurs des boutons
     private Dictionary<string, int> finalStats = new Dictionary<string, int> { { "esquive", 0 }, { "tacle", 0 }, { "passe", 0 }, { "course", 0 } }; // Stats après selection des actions dans le menu
 
 	public Player(int tacle, int esquive, int passe, int course, string player_name_, int id_, int Team_Id = 0)
     {
-        defaultStats.Add("esquive", esquive);
-        defaultStats.Add("tacle", tacle);
-        defaultStats.Add("passe", passe);
-        defaultStats.Add("course", course);
+        DEFAULTSTATS.Add("esquive", esquive);
+        DEFAULTSTATS.Add("tacle", tacle);
+        DEFAULTSTATS.Add("passe", passe);
+        DEFAULTSTATS.Add("course", course);
         initialize_finaleStats();
 		player_name = player_name_;
 		team_id = Team_Id;
@@ -38,7 +38,7 @@ public class Player
         finalStats["tacle"] = 0;
         finalStats["esquive"] = 0;
 		finalStats["passe"] = 0;
-        finalStats["course"] = defaultStats["course"] + 10;
+        finalStats["course"] = DEFAULTSTATS["course"] + 10;
     }
 
     public void reset() // reinitialises valeurs des boutons et les stats finales
@@ -60,7 +60,7 @@ public class Player
         initialize_finaleStats();
         foreach (string s in buttonsValues)
         {
-            finalStats[s] += defaultStats[s];
+            finalStats[s] += DEFAULTSTATS[s];
         }
 		//Debug.Log ("Compute State : Passe:" + finalStats ["passe"] + " for " + Name);
     }
@@ -83,6 +83,22 @@ public class Player
 	{
 		get { return (float)finalStats["tacle"] / 10; }
 	}
+    public float SpeedBase
+    {
+        get { return (float)DEFAULTSTATS["course"] / 10; }
+    }
+    public float EsquiveBase
+    {
+        get { return (float)DEFAULTSTATS["esquive"] / 10; }
+    }
+    public float PasseBase
+    {
+        get { return (float)DEFAULTSTATS["passe"] / 10; }
+    }
+    public float TacleBase
+    {
+        get { return (float)DEFAULTSTATS["tacle"] / 10; }
+    }
     public float ZoneDeplacement
     {
         get { return (float)finalStats["course"] / 10; }

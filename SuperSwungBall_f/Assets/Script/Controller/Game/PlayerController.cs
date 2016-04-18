@@ -19,6 +19,7 @@ namespace GameScene
         private bool menuDisplayed;
         private RaycastHit hit;
         private Renderer selection; //cercle de sélection lors du passage de la souris
+        InfoJoueurController infoJoueur; // Panel info joueur
 
         //Evite le "GetComponent<>"
         private Collider myCollider;
@@ -89,6 +90,7 @@ namespace GameScene
             myCollisionController = GetComponent<CollisionController>();
             selection = transform.FindChild("selection").GetComponent<Renderer>();
             selection.enabled = false;
+            infoJoueur = GameObject.Find("Canvas").transform.FindChild("InfoJoueur").GetComponent<InfoJoueurController>();
             flecheController = transform.FindChild("fleche").GetComponent<FlecheController>();
 
             view = GetComponent<PhotonView>();
@@ -107,22 +109,30 @@ namespace GameScene
         }
         void Update()
         {
-            if (!phaseAnimation && isMine)
+            if (!phaseAnimation)
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 Physics.Raycast(ray, out hit, 100);
-                if (Input.GetMouseButtonDown(0) && !hit.Equals(null)) //s'active au clic
+                if (Input.GetMouseButtonDown(0) && !hit.Equals(null)) //Event CLic
                 {
                     if (hit.collider == myCollider || hit.collider.transform.parent == Menu.transform) //Activation au clic sur le player ou sur le menu
                     {
-                        if (!menuDisplayed) //S'active uniquement le premier clic
+                        if (isMine) // clic sur un allié
                         {
-                            player.computeStats(); //Calcule les Stats du perso ( obligé avant d'utiliser un getter)
-                            menuController.update_zoneDeplacement(player.ZoneDeplacement, player.ZonePasse); // Change la taille des zones
-                            menuController.display(true);
+                            infoJoueur.DisplayAlly(player); // Affiche les stats du joueur;
+                            if (!menuDisplayed) //S'active uniquement si le menu n'est pas encore affiché
+                            {
+                                player.computeStats(); //Calcule les Stats du perso ( obligé avant d'utiliser un getter)
+                                menuController.update_zoneDeplacement(player.ZoneDeplacement, player.ZonePasse); // Change la taille des zones
+                                menuController.display(true);
+                            }
+                            menuDisplayed = true;
+                            mouseState = menuController.set_target(hit);//renvoit true si le joueur clic sur un pointeur et set le 'target' / 'zone_target' aux 'pointeur' / 'zone_du_pointeur' du menu_controller (false et null sinon)
                         }
-                        menuDisplayed = true;
-                        mouseState = menuController.set_target(hit);//renvoit true si le joueur clic sur un pointeur et set le 'target' / 'zone_target' aux 'pointeur' / 'zone_du_pointeur' du menu_controller (false et null sinon)
+                        else // clic sur un adversaire
+                        {
+                            infoJoueur.DisplayEnnemy(player);
+                        }
                     }
                     else //Activation lors du clic en dehors du player / menu
                     {
@@ -138,7 +148,7 @@ namespace GameScene
                 if (mouseState)//s'active tant que le joueur drag and drop un pointeur
                 {
                     menuController.move_target(hit);//bouge le pointeur 'target' du menu. Si le target sort de la 'zone_target', replace le 'target'
-                    flecheController.point(new Vector2(menuController.Get_Coordsdeplacement[0],menuController.Get_Coordsdeplacement[1])); //bouge la flèche de déplacement
+                    flecheController.point(new Vector2(menuController.Get_Coordsdeplacement[0], menuController.Get_Coordsdeplacement[1])); //bouge la flèche de déplacement
                 }
             }
             else
@@ -179,7 +189,7 @@ namespace GameScene
         }
         void OnMouseEnter()
         {
-            if (!phaseAnimation && isMine)
+            if (!phaseAnimation)
             {
                 selection.enabled = true;
             }
@@ -196,7 +206,7 @@ namespace GameScene
             menuController.update_zoneDeplacement(player.ZoneDeplacement, player.ZonePasse); // Change la tailles des zones
             flecheController.point(new Vector2(menuController.Get_Coordsdeplacement[0], menuController.Get_Coordsdeplacement[1])); //bouge la flèche de déplacement
         }
-        private string convertColorToValue(Color c)
+        private string convertColorToValue(Color c) //revoit la chaine de caractère liée à la couleur
         {
             List<Color> colors = menuController.GetButtonsColor;
             if (c == colors[0])
