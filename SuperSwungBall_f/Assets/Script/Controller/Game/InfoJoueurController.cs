@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 namespace GameScene
 {
@@ -11,6 +12,8 @@ namespace GameScene
         Vector3 moveTo;
 
         private Dictionary<string, GameObject[]> Stats;
+        private Text name;
+
         private RaycastHit hit;
 
         float speed;
@@ -31,6 +34,7 @@ namespace GameScene
             initializeDictionary("passe", 4, 7);
             initializeDictionary("tacle", 7, 10);
             initializeDictionary("esquive", 10, 13);
+            name = transform.GetChild(13).gameObject.GetComponent<Text>();
         }
         void Update()
         {
@@ -125,6 +129,7 @@ namespace GameScene
                 Stats["esquive"][i].transform.localPosition = new Vector3(20 + i * (esquive * 100 + 5), Stats["esquive"][i].transform.localPosition.y, Stats["esquive"][i].transform.localPosition.z);
                 Stats["esquive"][i].GetComponent<CanvasRenderer>().SetAlpha(0.3f);
             }
+            name.text = p.Name;
         }
         private void SetAlpha(string stat, int nb)
         {
