@@ -6,27 +6,42 @@ namespace Standing
 {
     public class MainController : MonoBehaviour
     {
-        [SerializeField]
-        private string scene;
+		[SerializeField] private GameObject Press_To_Start;
+		[SerializeField] private GameObject Authentication;
 
-		// a supp
-		[SerializeField]
-		private GameObject music;
+		private bool authenticate;
+		private bool sync_ended;
 
         // Use this for initialization
         void Start()
         {
-			SaveLoad.save_setting ();
+			//SaveLoad.save_user ();
+			//SaveLoad.save_setting ();
 			SaveLoad.load_settings ();
-			SaveLoad.load_user ();
-			Debug.Log (Settings.Instance.Default_Team);
+			this.authenticate = SaveLoad.load_user ();
+
+			if (this.authenticate) {
+				HTTP.SyncUser ((success) => {
+					this.authenticate = success;
+					this.sync_ended = true;
+				});
+			}
         }
 
         // Update is called once per frame
         void Update()
         {
-            if (Input.anyKey)
-	            FadingManager.I.Fade ();
+			if (Input.anyKey) {
+
+				if(!this.authenticate){
+					Press_To_Start.SetActive (false);
+					Authentication.SetActive (true);
+					return;
+				}
+
+				if(this.sync_ended)
+					FadingManager.I.Fade ();
+			}
         }
     }
 }

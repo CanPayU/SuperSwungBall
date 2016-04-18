@@ -39,7 +39,7 @@ public class PrivateGameController : MonoBehaviour {
 			PhotonNetwork.JoinRoom (room_name_field.text);
 	}
 	void OnPhotonJoinRoomFailed(){
-		Notification.danger ("Room introuvable - " + room_name_field.text);
+		Notification.Create (NotificationType.Slide, title: "Room introuvable - " + room_name_field.text);
 	}
 	void OnJoinedRoom(){
 		if (PhotonNetwork.playerList.Length > 1) {
@@ -56,7 +56,6 @@ public class PrivateGameController : MonoBehaviour {
 
 	void OnGUI(){
 		string info = PhotonNetwork.connectionStateDetailed.ToString ();
-
 
 		if (PhotonNetwork.inRoom) {
 			info = "Joueur trouve : " + (PhotonNetwork.room.playerCount - 1);

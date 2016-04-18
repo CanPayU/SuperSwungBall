@@ -246,4 +246,4 @@ sysinfo.txt
 *.unitypackage
 
 SuperSwungBall_f/Assets/Plugins/Photon-Unity-Win81.unitypackage.meta
-SuperSwungBall_f/ProjectSettings/ProjectSettings.asset
+*.asset

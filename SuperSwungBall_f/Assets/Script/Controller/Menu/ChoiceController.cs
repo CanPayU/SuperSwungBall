@@ -19,8 +19,6 @@ namespace Menu
         private Vector3 setRelCenter;
 
 
-
-
         // Use this for initialization
         void Start()
         {
@@ -69,6 +67,9 @@ namespace Menu
 
                     if (gm.tag == "Play" && gm != current_player) // sur un boutton Menu ? (ici Play)
                     {
+						// -- Désactivation des boutons de choix de team
+						Unactive_ButtonTeam(false);
+						// --
                         trans.LookAt(hit.point);
                         hitP = hit;
                         current_player = gm;
@@ -92,6 +93,16 @@ namespace Menu
             float fracComplete = (Time.time - startTime) / journeyTime;
             transform.position = Vector3.Slerp(riseRelCenter, setRelCenter, fracComplete) + center;
         }
+
+		/// <summary>
+		/// Unactives the button team.
+		/// </summary>
+		/// <param name="enabled">If set to <c>true</c> enabled.</param>
+		private void Unactive_ButtonTeam(bool enabled){
+			foreach (Transform child in transform) {
+				child.gameObject.SetActive (enabled);
+			}
+		}
     }
 
 }
