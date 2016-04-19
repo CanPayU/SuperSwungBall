@@ -397,8 +397,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 462564127}
   m_HandleRect: {fileID: 462564126}
   m_Direction: 0
-  m_Value: 0
-  m_Size: 1
+  m_Value: 1
+  m_Size: 0
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1448,7 +1448,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 658773685}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: 0
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1635,9 +1635,7 @@ GameObject:
   - 114: {fileID: 688016390}
   - 114: {fileID: 688016388}
   - 114: {fileID: 688016391}
-  - 114: {fileID: 688016392}
   - 114: {fileID: 688016393}
-  - 114: {fileID: 688016394}
   m_Layer: 0
   m_Name: Main
   m_TagString: Untagged
@@ -1715,17 +1713,6 @@ MonoBehaviour:
   panel: {fileID: 107468056}
   btn_quit: {fileID: 581609494}
   scene: menu
---- !u!114 &688016392
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 688016387}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b73e44e7eb60c44ef95881eb70ff76f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &688016393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1743,17 +1730,6 @@ MonoBehaviour:
   panel_other_message: {fileID: 107700, guid: 237fb5b90881d4065be84a46a7b199d8, type: 2}
   panel_event: {fileID: 190696, guid: 71ebcbc97eb7f4ad0b0da8b882bbc1f1, type: 2}
   inputField: {fileID: 888112583}
---- !u!114 &688016394
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 688016387}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9c33275a129349af90de87a458276e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &712726265
 GameObject:
   m_ObjectHideFlags: 0
