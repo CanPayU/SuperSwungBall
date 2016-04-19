@@ -1140,7 +1140,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!1 &510310990
 GameObject:
   m_ObjectHideFlags: 0
@@ -2562,7 +2562,7 @@ GameObject:
   - 64: {fileID: 1122352627}
   - 23: {fileID: 1122352626}
   m_Layer: 0
-  m_Name: Terrain
+  m_Name: terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

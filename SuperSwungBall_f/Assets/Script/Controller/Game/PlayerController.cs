@@ -104,7 +104,7 @@ namespace GameScene
             arrivalPoint = new Vector3(0, 0, 0);
 
             myCollider = GetComponent<Collider>();
-            limiteTerrain = GameObject.Find("Terrain").transform.FindChild("limites").gameObject;
+            limiteTerrain = GameObject.Find("terrain").transform.FindChild("limites").gameObject;
 
             phaseAnimation = false;
             movement = false;
