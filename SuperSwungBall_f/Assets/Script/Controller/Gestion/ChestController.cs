@@ -7,6 +7,7 @@ namespace Gestion {
 	public class ChestController : MonoBehaviour {
 		
 		private PhiManager manager;
+		private Animator animator;
 		private Text name_text;
 		private Text price_text;
 		private Button buy;
@@ -22,14 +23,7 @@ namespace Gestion {
 			this.name_text.text = "Coffre";
 			this.price_text.text = "30 000";
 
-//			GameObject playerGm = Resources.Load("Prefabs/Resources/" + this.player.UID) as GameObject;
-//			Transform player = Instantiate(playerGm).transform;
-//			player.SetParent(transform, false);
-//
-//			RectTransform rect = player.GetComponent<RectTransform>();
-//			rect.localScale = new Vector3(200f, 200f, 200f);
-//			rect.anchoredPosition3D = new Vector3(0, -35f, -20f);
-//			rect.rotation = new Quaternion(0, -180f, 0, 0);
+			this.animator = transform.Find("Chest").Find ("Groupe").GetComponent<Animator> ();
 
 			this.buy = transform.Find("Buy").GetComponent<Button>();
 			this.buy.onClick.AddListener(delegate ()
@@ -72,6 +66,7 @@ namespace Gestion {
 		private Player Open()
 		{
 			this.opened = true;
+			this.animator.Play ("Open");
 			return Settings.Instance.Random_Secret_Player;
 		}
 	}
