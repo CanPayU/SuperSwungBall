@@ -126,8 +126,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   screentext: {fileID: 2010317798}
-  player1_prefab: {fileID: 0}
-  player2_prefab: {fileID: 0}
+  player1_prefab: {fileID: 165034, guid: cd08ef288c8249a4e95f447dbddb5a86, type: 2}
+  player2_prefab: {fileID: 170820, guid: b22b788ffeff4ff419c05bf47d969887, type: 2}
 --- !u!136 &4225441
 CapsuleCollider:
   m_ObjectHideFlags: 0
