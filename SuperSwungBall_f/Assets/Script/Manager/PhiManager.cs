@@ -7,7 +7,6 @@ public class PhiManager : MonoBehaviour
 
     private GameObject more_panel;
 
-
     void Start()
     {
         instance.more_panel = Resources.Load("Prefabs/Setting/MorePhi") as GameObject;
@@ -44,7 +43,21 @@ public class PhiManager : MonoBehaviour
                 Notification.Create(NotificationType.Box, "Oups ...", content: "Une erreur est survenue lors de la synchronisation.", force: true);
         });
         return true;
-    }
+	}
+
+	/// <summary> Verification </summary>
+	/// <returns><c>true</c>, if chest was bought, <c>false</c> otherwise.</returns>
+	public bool BuyChest()
+	{
+		int myPhi = User.Instance.phi;
+		if (myPhi < 30000)
+			return false;
+		HTTP.SetPhi (myPhi - 30000, (success) => {
+			if (!success)
+				Notification.Create(NotificationType.Box, "Oups ...", content: "Une erreur est survenue lors de la synchronisation.", force: true);
+		});
+		return true;
+	}
 
     public static PhiManager I
     {

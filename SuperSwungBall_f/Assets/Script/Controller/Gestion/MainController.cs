@@ -13,11 +13,7 @@ namespace Gestion
         void Start()
         {
             this.slide = GameObject.Find("ScrollView").GetComponent<SlideController>();
-
-
-
-
-
+			Settings.Instance.ResetSpecialPlayer ();
             HTTP.SwungMens((success, json) =>
             {
                 if (success)
@@ -29,11 +25,15 @@ namespace Gestion
 
         private void Instanciate(JSONArray json)
         {
+			slide.InstanciateChest ();
             foreach (JSONValue swungMen in json)
             {
-                Player player = new Player(swungMen.Obj);
-                Settings.Instance.AddOrUpdate_PaidPlayer(player);
-                slide.InstanciatePlayer(player);
+				JSONObject obj = swungMen.Obj;
+				Player player = new Player (obj);
+				Settings.Instance.AddOrUpdate_Player (player);
+				if (player.Type == PlayerType.Buy) {
+					slide.InstanciatePlayer (player);
+				}
             }
         }
     }

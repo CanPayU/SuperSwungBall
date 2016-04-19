@@ -1792,6 +1792,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   swungmen_panel: {fileID: 158346, guid: 1ace08b56bf3f4e8e90df0f45cbba1aa, type: 2}
+  chest_panel: {fileID: 121804, guid: ce3a91b9c17024f5c964972ed7961b05, type: 2}
 --- !u!114 &1027308506
 MonoBehaviour:
   m_ObjectHideFlags: 0

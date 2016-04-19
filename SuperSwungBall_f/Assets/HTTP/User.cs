@@ -15,7 +15,7 @@ public sealed class User
         set { _instance = value; }
     }
 
-    public const string VERSION = "1.16"; // Version actuelle
+    public const string VERSION = "1.17"; // Version actuelle
     public string version; // Version de l'instance (sauvegarder sur l'ordi)
 
     public int id;
@@ -62,7 +62,7 @@ public sealed class User
         } // Info private
         phi = (int)json.GetNumber("phi");
 		if (all)
-			ProcessSwungMens(json.GetArray("sungmens")); // a changer avec swungmens
+			ProcessSwungMens(json.GetArray("swungmens")); // a changer avec swungmens
 
 
         // -- Friends
@@ -73,10 +73,11 @@ public sealed class User
 	/// <summary> Synchronise les SwungMens acheté et achetable </summary>
 	private static void ProcessSwungMens(JSONArray array)
     {
+		Settings.Instance.ResetDefaultPlayer ();
 		foreach (JSONValue value in array)
         {
 			Player p = new Player (value.Obj);
-			Settings.Instance.AddOrUpdate_PaidPlayer (p);
+			Settings.Instance.AddOrUpdate_Player (p);
 			if (!Settings.Instance.Default_player.ContainsKey (p.UID))
 				Settings.Instance.Default_player.Add (p.UID, p);
         }

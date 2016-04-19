@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 
 [System.Serializable]
@@ -13,7 +14,7 @@ public class Settings
         set { _instance = value; }
     }
 
-    public const string VERSION = "1.18"; // Version actuelle
+    public const string VERSION = "1.20"; // Version actuelle
     public string version; // Version de l'instance (sauvegarder sur l'ordi)
 
     private Dictionary<string, Team> default_team;
@@ -24,7 +25,8 @@ public class Settings
     private string selected_stadium_name;
     private System.Random rand = new System.Random();
 
-    private Dictionary<string, Player> paid_player;
+	private Dictionary<string, Player> paid_player;
+	private Dictionary<string, Player> secret_player; // in Chest
 
     // -- Keyboard
     private Dictionary<KeyboardAction, KeyCode> keyboard;
@@ -37,31 +39,18 @@ public class Settings
         this.version = VERSION;
         this.notificationState = NotificationState.All;
         this.keyboard = new Dictionary<KeyboardAction, KeyCode>();
-        this.paid_player = new Dictionary<string, Player>();
+		this.paid_player = new Dictionary<string, Player>();
+		this.secret_player = new Dictionary<string, Player>();
 
         // -- Setup Keyboard
         this.keyboard.Add(KeyboardAction.Passe, KeyCode.A);
         // --
 
-        default_team = new Dictionary<string, Team>();
-        default_player = new Dictionary<string, Player>();
-        default_compo = new Dictionary<string, Composition>();
-        selected_stadium_name = "Stadium_0";
+		ResetDefaultPlayer ();
+        this.default_team = new Dictionary<string, Team>();
+        this.default_compo = new Dictionary<string, Composition>();
+        this.selected_stadium_name = "Stadium_0";
 
-        // ----- Default Player
-        Player lombrix = new Player(4, 6, 7, 1, "Lombrix", null);
-        Player itec = new Player(1, 4, 2, 9, "Itectori", null);
-        Player gpdn = new Player(7, 4, 5, 5, "GPasDNom", null);
-        Player pwc = new Player(3, 2, 9, 2, "PlayWithCube", null);
-        Player ept = new Player(1, 1, 1, 1, "Epitechien", null);
-        Player epta = new Player(8, 7, 5, 7, "Epiteen", null);
-        default_player.Add("lombrix", lombrix);
-        default_player.Add("itec", itec);
-        default_player.Add("gpdn", gpdn);
-        default_player.Add("pwc", pwc);
-        default_player.Add("ept", ept);
-        default_player.Add("epta", epta);
-        // --------------------
 
         // ----- Default Compo
         Composition compo_psg = new Composition("PSG", "psg");
@@ -102,6 +91,22 @@ public class Settings
         selected_team = fr;
     }
 
+	public void ResetDefaultPlayer()
+	{
+		this.default_player = new Dictionary<string, Player>();
+		default_player.Add("lombrix", 	new Player(4, 6, 7, 1, "Lombrix", null));
+		default_player.Add("itec", 		new Player(1, 4, 2, 9, "Itectori", null));
+		default_player.Add("gpdn", 		new Player(7, 4, 5, 5, "GPasDNom", null));
+		default_player.Add("pwc", 		new Player(3, 2, 9, 2, "PlayWithCube", null));
+		default_player.Add("ept", 		new Player(1, 1, 1, 1, "Epitechien", null));
+		default_player.Add("epta", 		new Player(8, 7, 5, 7, "Epiteen", null));
+	}
+	public void ResetSpecialPlayer()
+	{
+		this.paid_player = new Dictionary<string, Player>();
+		this.secret_player = new Dictionary<string, Player>();
+	}
+
     public void AddOrUpdate_Team(Team t)
     {
         if (default_team.ContainsKey(t.Code))
@@ -109,19 +114,32 @@ public class Settings
         else
             default_team.Add(t.Code, t);
     }
-    public void AddOrUpdate_PaidPlayer(Player p)
+	public void AddOrUpdate_Player(Player p)
+	{
+		var players = TypeToDict (p.Type);
+		if (players.ContainsKey(p.UID))
+			players[p.UID] = p;
+		else
+			players.Add(p.UID, p);
+	}
+	public void BuyPlayer(string uid, PlayerType type = PlayerType.Buy)
     {
-        if (paid_player.ContainsKey(p.UID))
-            paid_player[p.UID] = p;
-        else
-            paid_player.Add(p.UID, p);
+		var players = TypeToDict (type);
+		Player p = players[uid];
+		default_player.Add(uid, p);
     }
 
-    public void BuyPlayer(string uid)
-    {
-        Player p = paid_player[uid];
-        default_player.Add(uid, p);
-    }
+	private Dictionary<string, Player> TypeToDict(PlayerType type)
+	{
+		switch (type) {
+		case PlayerType.Buy:
+			return paid_player;
+		case PlayerType.Secret:
+			return secret_player;
+		default:
+			return null;
+		}
+	}
 
     public NotificationState NotificationState
     {
@@ -166,5 +184,23 @@ public class Settings
             }
             return selected_team;
         }
-    }
+	}
+	public Player Random_Secret_Player
+	{
+		get 
+		{
+			int size = secret_player.Count;
+			int alea = rand.Next (size * 100);
+
+			int i = 0;
+			foreach (var item in secret_player) {
+				Player p = item.Value;
+				i += p.Proba;
+				if (alea < size * i) {
+					return p;
+				}
+			}
+			return secret_player.First ().Value; // Théoriquement jamais call
+		}
+	}
 }

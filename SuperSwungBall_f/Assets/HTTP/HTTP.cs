@@ -170,7 +170,6 @@ public static class HTTP
         string url = HOST_DOMAIN + "unity/buysm/" + user.username + "/" + user.id + "/" + uid + "/" + PRIVATE_KEY;
         HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
         JSONObject response = execute(request);
-        Debug.Log(url);
         string status = response.GetString("status");
         if (status == "success")
         {
@@ -180,6 +179,7 @@ public static class HTTP
         }
         else
         {
+			Debug.LogError("Error Sync : " + url);
             completion(false);
         }
     }

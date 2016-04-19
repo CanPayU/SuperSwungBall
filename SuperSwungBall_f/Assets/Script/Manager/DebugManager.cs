@@ -68,7 +68,9 @@ public class DebugManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.I))
         {
             User u = User.Instance;
-            Debug.Log("UserInfo : username:" + u.username + " - id:" + u.id + " - phi:" + u.phi);
+			Debug.Log("UserInfo : username:" + u.username + " - id:" + u.id + " - phi:" + u.phi);
+			Settings s = Settings.Instance;
+			Debug.Log("UserInfo : default:" + s.Default_player.ToStringFull());
         }
     }
 #endif

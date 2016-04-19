@@ -25,7 +25,19 @@ public class Player
     {
         get { return price; }
         set { price = value; }
-    }
+	}
+	private PlayerType type;
+	public PlayerType Type
+	{
+		get { return type; }
+		set { type = value; }
+	}
+	private int proba; // Pourcentage
+	public int Proba
+	{
+		get { return proba; }
+		set { proba = value; }
+	}
 
     private Dictionary<string, int> DEFAULTSTATS = new Dictionary<string, int>(); // Stats initiales (unique au joueur)
     private List<string> buttonsValues = new List<string> { "esquive", "esquive", "esquive" }; // Valeurs des boutons
@@ -52,8 +64,10 @@ public class Player
         initialize_finaleStats();
         this.player_name = json.GetString("name");
         this.team_id = 0;
-        this.uid = json.GetString("uid");
-        this.price = (int)json.GetNumber("price");
+		this.uid = json.GetString("uid");
+		this.type = (PlayerType)Enum.Parse(typeof(PlayerType), json.GetString("type"));
+		this.price = (int)json.GetNumber("price");
+		this.proba = (int)json.GetNumber("proba");
     }
 
     private void initialize_finaleStats() // Initialises les stats finales
