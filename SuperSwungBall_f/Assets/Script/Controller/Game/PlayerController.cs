@@ -36,6 +36,7 @@ namespace GameScene
         //Pointeur
         private bool mouseState = false; //clic souris enfoncée
         private FlecheController flecheController; //fleche de déplacement (suit le pointeur de deplacement)
+        private GameObject limiteTerrain; //limites autours du terrain
 
         //passe
         private Vector3 arrivalPointPasse;
@@ -103,6 +104,7 @@ namespace GameScene
             arrivalPoint = new Vector3(0, 0, 0);
 
             myCollider = GetComponent<Collider>();
+            limiteTerrain = GameObject.Find("Terrain").transform.FindChild("limites").gameObject;
 
             phaseAnimation = false;
             movement = false;
@@ -128,6 +130,13 @@ namespace GameScene
                             }
                             menuDisplayed = true;
                             mouseState = menuController.set_target(hit);//renvoit true si le joueur clic sur un pointeur et set le 'target' / 'zone_target' aux 'pointeur' / 'zone_du_pointeur' du menu_controller (false et null sinon)
+                            if(mouseState)
+                            {
+                                limiteTerrain.SetActive(true);//activation des limites du terrain (pour empêcher le pointeur de sortir)
+                                Physics.Raycast(ray, out hit, 100);
+                                menuController.move_target(hit);
+                                flecheController.point(new Vector2(menuController.Get_Coordsdeplacement[0], menuController.Get_Coordsdeplacement[1]));
+                            }
                         }
                         else // clic sur un adversaire
                         {
@@ -144,6 +153,7 @@ namespace GameScene
                 if (Input.GetMouseButtonUp(0))//Clic relache
                 {
                     mouseState = false;
+                    limiteTerrain.SetActive(false);//suppression des limites du terrain (pour pouvoir cliquer sur les boutons présents en dehors)
                 }
                 if (mouseState)//s'active tant que le joueur drag and drop un pointeur
                 {
