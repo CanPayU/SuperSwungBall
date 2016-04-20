@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using System;
 
-namespace Didacticiel
+namespace GameScene.Didacticiel
 {
     public class MainController : MonoBehaviour
     {
@@ -15,10 +15,10 @@ namespace Didacticiel
         [SerializeField]
         private GameObject player2_prefab;
 
-        /*   
-        private string screentext_text;
-        private float startTime; 
-        */
+        CameraController cameraController;
+
+        InfoJoueurController infoJoueur; // Panel info joueur
+
         Timer time;
         private float current_time;
         private string[,] tableau;
@@ -28,6 +28,7 @@ namespace Didacticiel
         // Use this for initialization
         void Start()
         {
+            cameraController = GameObject.Find("Main Camera").GetComponent<CameraController>();
             phase = 1;
             place = 0;
             current_time = 0;
