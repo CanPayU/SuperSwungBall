@@ -32,6 +32,8 @@ namespace GameScene
         private Vector3 arrivalPoint;
         private bool movement;
         private float pause = 0; //temps de pause du deplacement (en secondes), quand le player se fait plaquer par exemple
+        private Animator anim; //évite le getComponent - anim.Play("animation_name") pour jouer une animation
+        private string animationDeplacement; //nom de l'animation de déplacement du player. Varie en fonction de la vitesse
 
         //Pointeur
         private bool mouseState = false; //clic souris enfoncée
@@ -106,6 +108,8 @@ namespace GameScene
             myCollider = GetComponent<Collider>();
             limiteTerrain = GameObject.Find("terrain").transform.FindChild("limites").gameObject;
 
+            anim = transform.FindChild("perso").GetComponent<Animator>();
+            animationDeplacement = "Course";
             phaseAnimation = false;
             movement = false;
         }
@@ -172,7 +176,7 @@ namespace GameScene
                         if (transform.position == arrivalPoint)
                         {
                             //arret du personnage ( a atteint son point d'arrivé)
-                            transform.FindChild("perso").GetComponent<Animator>().Play("Repos");
+                            anim.Play("Repos");
                             movement = false;
                         }
                     }
@@ -187,11 +191,11 @@ namespace GameScene
                         if (movement) // play precedente animation
                         {
                             transform.FindChild("perso").LookAt(new Vector3(arrivalPoint.x, transform.FindChild("perso").position.y, arrivalPoint.z));
-                            transform.FindChild("perso").GetComponent<Animator>().Play("Course");
+                            anim.Play(animationDeplacement);
                         }
                         else
                         {
-                            transform.FindChild("perso").GetComponent<Animator>().Play("Repos");
+                            anim.Play("Repos");
                         }
                     }
                 }
@@ -238,7 +242,7 @@ namespace GameScene
         {
             myCollider.enabled = false;
             pause = tempsAnimation;
-            transform.FindChild("perso").GetComponent<Animator>().Play(animation);
+            anim.Play(animation);
         }
 
         public void start_Anim(bool setPoint = true) // debut de l'animation
@@ -264,7 +268,8 @@ namespace GameScene
             if (arrivalPoint != transform.position)
             {
                 transform.FindChild("perso").LookAt(new Vector3(arrivalPoint.x, transform.FindChild("perso").position.y, arrivalPoint.z));
-                transform.FindChild("perso").GetComponent<Animator>().Play("Course");
+                animationDeplacement = "Course"; // animation de déplacement en fonction de la vitesse
+                anim.Play(animationDeplacement);
                 movement = true;
             }
 
@@ -282,7 +287,7 @@ namespace GameScene
             selection.enabled = false;
 
             //animation repos
-            transform.FindChild("perso").GetComponent<Animator>().Play("Repos");
+            anim.Play("Repos");
             movement = false;
         }
 

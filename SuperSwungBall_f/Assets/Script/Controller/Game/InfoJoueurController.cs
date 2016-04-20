@@ -29,7 +29,6 @@ namespace GameScene
             transform.position = close;
             // Initialisation du Dictionnaire
             Stats = new Dictionary<string, GameObject[]>();
-            GameObject[] sprint = new GameObject[4];
             initializeDictionary("sprint", 0, 4);
             initializeDictionary("passe", 4, 7);
             initializeDictionary("tacle", 7, 10);
