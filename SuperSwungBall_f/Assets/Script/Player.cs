@@ -45,10 +45,10 @@ public class Player
 
     public Player(int tacle, int esquive, int passe, int course, string player_name_, string uid, int Team_Id = 0, int price = 0)
     {
-        this.DEFAULTSTATS.Add("esquive", esquive);
-        this.DEFAULTSTATS.Add("tacle", tacle);
-        this.DEFAULTSTATS.Add("passe", passe);
-        this.DEFAULTSTATS.Add("course", course);
+		this.DEFAULTSTATS.Add("esquive", esquive * 10);
+		this.DEFAULTSTATS.Add("tacle", tacle * 10);
+		this.DEFAULTSTATS.Add("passe", passe * 10);
+		this.DEFAULTSTATS.Add("course", course * 10);
         initialize_finaleStats();
         this.player_name = player_name_;
         this.team_id = Team_Id;
@@ -57,17 +57,23 @@ public class Player
     }
     public Player(JSONObject json)
     {
-        this.DEFAULTSTATS.Add("esquive", 0); // a gérer
-        this.DEFAULTSTATS.Add("tacle", 0);
-        this.DEFAULTSTATS.Add("passe", 0);
-        this.DEFAULTSTATS.Add("course", 0);
-        initialize_finaleStats();
+//        this.DEFAULTSTATS.Add("esquive", 0); // a gérer
+//        this.DEFAULTSTATS.Add("tacle", 0);
+//        this.DEFAULTSTATS.Add("passe", 0);
+//        this.DEFAULTSTATS.Add("course", 0);
         this.player_name = json.GetString("name");
         this.team_id = 0;
 		this.uid = json.GetString("uid");
 		this.type = (PlayerType)Enum.Parse(typeof(PlayerType), json.GetString("type"));
 		this.price = (int)json.GetNumber("price");
 		this.proba = (int)json.GetNumber("proba");
+
+		var stats = json.GetObject ("stats");
+		this.DEFAULTSTATS.Add("passe", (int)stats.GetNumber("passe") * 10);
+		this.DEFAULTSTATS.Add("course", (int)stats.GetNumber("course") * 10);
+		this.DEFAULTSTATS.Add("esquive", (int)stats.GetNumber("esquive") * 10);
+		this.DEFAULTSTATS.Add("tacle", (int)stats.GetNumber("tacle") * 10);
+		initialize_finaleStats();
     }
 
     private void initialize_finaleStats() // Initialises les stats finales

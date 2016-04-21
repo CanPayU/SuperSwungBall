@@ -83,10 +83,11 @@ namespace Gestion
 			Transform course = t_p.Find ("Course").Find ("Value");
 			Transform esquive = t_p.Find ("Esquive").Find ("Value");
 			Transform tacle = t_p.Find ("Tacle").Find ("Value");
-			SetStatsValue (passe, 5);
-			SetStatsValue (course, 2);
-			SetStatsValue (esquive, 7);
-			SetStatsValue (tacle, 10);
+			Player p = this.player;
+			SetStatsValue (passe, this.player.PasseBase);
+			SetStatsValue (course, this.player.SpeedBase);
+			SetStatsValue (esquive, this.player.EsquiveBase);
+			SetStatsValue (tacle, this.player.TacleBase);
 		}
 
 		private void SetStatsValue(Transform t, float value){
