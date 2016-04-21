@@ -57,10 +57,5 @@ namespace Menu
             SaveLoad.reset_user();
             FadingManager.I.Fade("standing");
         }
-
-        public void SaveParameters()
-        {
-            Debug.Log("A FAIRE : SAVE SETTINGS");
-        }
     }
 }

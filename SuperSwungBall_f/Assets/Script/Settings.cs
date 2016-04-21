@@ -14,7 +14,7 @@ public class Settings
         set { _instance = value; }
     }
 
-    public const string VERSION = "1.20"; // Version actuelle
+    public const string VERSION = "1.23"; // Version actuelle
     public string version; // Version de l'instance (sauvegarder sur l'ordi)
 
     private Dictionary<string, Team> default_team;
@@ -172,7 +172,7 @@ public class Settings
     {
         get
         {
-            var teams = default_team;
+			var teams = new Dictionary<string, Team>(default_team);
             teams.Remove(selected_team.Code);
             int alea = rand.Next(teams.Count);
             int i = 0;

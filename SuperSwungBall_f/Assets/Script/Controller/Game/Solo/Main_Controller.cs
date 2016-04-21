@@ -131,7 +131,8 @@ namespace GameScene.Solo
 
 
         private void instantiate_team()
-        {
+		{
+			Debug.Log("TeamInfo : default:" + Settings.Instance.Default_Team.ToStringFull());
             Team team_0 = Game.Instance.Teams[0];
             int cote = -1; // -1 => domicile | 1 => extérieur
             int i = 0;
@@ -172,6 +173,7 @@ namespace GameScene.Solo
                 controller.Player = player_t1;
                 controller.IsMine = true;
             }
+			Debug.Log("TeamInfo : default:" + Settings.Instance.Default_Team.ToStringFull());
         }
     }
 

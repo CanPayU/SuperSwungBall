@@ -70,7 +70,7 @@ public class DebugManager : MonoBehaviour
             User u = User.Instance;
 			Debug.Log("UserInfo : username:" + u.username + " - id:" + u.id + " - phi:" + u.phi);
 			Settings s = Settings.Instance;
-			Debug.Log("UserInfo : default:" + s.Default_player.ToStringFull());
+			Debug.Log("TeamInfo : default:" + s.Default_Team.ToStringFull());
         }
     }
 #endif
