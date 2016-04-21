@@ -39,16 +39,16 @@ public class Player
 		set { proba = value; }
 	}
 
-    private Dictionary<string, int> DEFAULTSTATS = new Dictionary<string, int>(); // Stats initiales (unique au joueur)
+	private PlayerStats DEFAULTSTATS = new PlayerStats(0, 0, 0, 0); // Stats initiales (unique au joueur)
     private List<string> buttonsValues = new List<string> { "esquive", "esquive", "esquive" }; // Valeurs des boutons
-    private Dictionary<string, int> finalStats = new Dictionary<string, int> { { "esquive", 0 }, { "tacle", 0 }, { "passe", 0 }, { "course", 0 } }; // Stats après selection des actions dans le menu
+	private PlayerStats finalStats = new PlayerStats(0, 0, 0, 0); // Stats après selection des actions dans le menu
 
     public Player(int tacle, int esquive, int passe, int course, string player_name_, string uid, int Team_Id = 0, int price = 0)
     {
-		this.DEFAULTSTATS.Add("esquive", esquive * 10);
-		this.DEFAULTSTATS.Add("tacle", tacle * 10);
-		this.DEFAULTSTATS.Add("passe", passe * 10);
-		this.DEFAULTSTATS.Add("course", course * 10);
+		this.DEFAULTSTATS.Esquive = esquive * 10;
+		this.DEFAULTSTATS.Tacle = tacle * 10;
+		this.DEFAULTSTATS.Passe = passe * 10;
+		this.DEFAULTSTATS.Course = course * 10;
         initialize_finaleStats();
         this.player_name = player_name_;
         this.team_id = Team_Id;
@@ -69,19 +69,19 @@ public class Player
 		this.proba = (int)json.GetNumber("proba");
 
 		var stats = json.GetObject ("stats");
-		this.DEFAULTSTATS.Add("passe", (int)stats.GetNumber("passe") * 10);
-		this.DEFAULTSTATS.Add("course", (int)stats.GetNumber("course") * 10);
-		this.DEFAULTSTATS.Add("esquive", (int)stats.GetNumber("esquive") * 10);
-		this.DEFAULTSTATS.Add("tacle", (int)stats.GetNumber("tacle") * 10);
+		this.DEFAULTSTATS.Esquive = (int)stats.GetNumber("esquive") * 10;
+		this.DEFAULTSTATS.Tacle = (int)stats.GetNumber("tacle") * 10;
+		this.DEFAULTSTATS.Passe = (int)stats.GetNumber("passe") * 10;
+		this.DEFAULTSTATS.Course = (int)stats.GetNumber("course") * 10;
 		initialize_finaleStats();
     }
 
     private void initialize_finaleStats() // Initialises les stats finales
     {
-        finalStats["tacle"] = 0;
-        finalStats["esquive"] = 0;
-        finalStats["passe"] = 0;
-        finalStats["course"] = DEFAULTSTATS["course"] + 10;
+		finalStats.Tacle = 0;
+		finalStats.Esquive = 0;
+		finalStats.Passe = 0;
+		finalStats.Course = DEFAULTSTATS.Course + 10;
     }
 
     public void reset() // reinitialises valeurs des boutons et les stats finales
@@ -103,52 +103,51 @@ public class Player
         initialize_finaleStats();
         foreach (string s in buttonsValues)
         {
-            finalStats[s] += DEFAULTSTATS[s];
+			finalStats[s] += DEFAULTSTATS[s];
         }
-        //Debug.Log ("Compute State : Passe:" + finalStats ["passe"] + " for " + Name);
     }
 
     // Valeurs à changer pour l'equilibrage
     #region Getters
     public float Speed
     {
-        get { return (float)finalStats["course"] / 10; }
+		get { return (float)finalStats.Course / 10; }
     }
     public float Esquive
     {
-        get { return (float)finalStats["esquive"] / 10; }
+		get { return (float)finalStats.Esquive / 10; }
     }
     public float Passe
     {
-        get { return (float)finalStats["passe"] / 10; }
+		get { return (float)finalStats.Passe / 10; }
     }
     public float Tacle
     {
-        get { return (float)finalStats["tacle"] / 10; }
+		get { return (float)finalStats.Tacle / 10; }
     }
     public float SpeedBase
     {
-        get { return (float)DEFAULTSTATS["course"] / 10; }
+		get { return (float)DEFAULTSTATS.Course / 10; }
     }
     public float EsquiveBase
     {
-        get { return (float)DEFAULTSTATS["esquive"] / 10; }
+		get { return (float)DEFAULTSTATS.Esquive / 10; }
     }
     public float PasseBase
     {
-        get { return (float)DEFAULTSTATS["passe"] / 10; }
+		get { return (float)DEFAULTSTATS.Passe / 10; }
     }
     public float TacleBase
     {
-        get { return (float)DEFAULTSTATS["tacle"] / 10; }
+		get { return (float)DEFAULTSTATS.Tacle / 10; }
     }
     public float ZoneDeplacement
     {
-        get { return (float)finalStats["course"] / 10; }
+		get { return (float)finalStats.Course / 10; }
     }
     public float ZonePasse
     {
-        get { return (float)finalStats["passe"] / 10; }
+		get { return (float)finalStats.Passe / 10; }
     }
     public GameObject Gm
     {
