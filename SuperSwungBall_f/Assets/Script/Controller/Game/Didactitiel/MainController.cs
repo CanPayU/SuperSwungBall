@@ -22,14 +22,15 @@ namespace GameScene.Didacticiel
 
         Timer time;
         private float current_time;
-        private string[,] tableau;
+        private string[,] tableau_1;
+        private string[,] tableau_2;
         private int place;
         private int phase;
+        private bool premier_passage = true;
 
-        /******************** EDITED **********************/
         private bool annim_started = false;
         private PlayerController player_phase_2;
-        /******************************************/
+
         // Use this for initialization
         void Start()
         {
@@ -37,18 +38,21 @@ namespace GameScene.Didacticiel
             phase = 1;
             place = 0;
             current_time = 0;
-            tableau = new string[,] {
+            time = new Timer(10.0F, end_time);
+            //text
+            tableau_1 = new string[,] {
             {"Bienvenue dans le didactitiel","1" }, //2
             {"Comment jouer ?","1" }, //3
             {"Le but du jeu est de marquer 3 points", "1" }, //3
             {"Chaque joueur contrôle son équipe", "1" }, //3
-            {"Commençons par bouger un Swungman", "1" }, //3
+            {"Commençons voir les contrôles d'un Swungman", "1" }, //3
             {"", "0" }};
-            screentext.text = phrase();
-            phase1();
-            /******************* EDITED ***********************/
-            time = new Timer(10.0F, end_time);
-            /******************************************/
+
+            tableau_2 = new string[,] {
+            {"Les capacités de déplacements sont représentées \n par la couleur bleu", "1" },
+            {"Appuie sur le bouton bleu", "1" },
+            {"","0" } };
+            screentext.text = message(tableau_1);
         }
         // Update is called once per frame
         void Update()
@@ -59,55 +63,67 @@ namespace GameScene.Didacticiel
                     phase1();
                     break;
                 case 2:
+                    phase2();
+                    break;
+                case 3:
+                    phase3();
                     break;
             }
-            /********************** EDITED ********************/
             time.update();
             if (Input.GetKeyDown(KeyCode.Space) && !annim_started)
             {
                 start_annim();
             }
-            /******************************************/
         }
         void phase1()
         {
-            if (temps() == 0)
-            {
-                phase++;
-                phase2();
-                /***************** EDITED *************************/
-                return;
-                /******************************************/
-            }
-            if (current_time < temps())
-                current_time += Time.deltaTime;
-            else
-            {
-                current_time = 0;
-                place += 1;
-                screentext.text = phrase();
-            }
+            text(tableau_1);
         }
         void phase2()
         {
-            /******************* EDITED ***********************/
             //Team team_0 = Game.Instance.Teams[0];
             Player play_t0 = Settings.Instance.Default_player["gpdn"];
-            //bool isMine = (PhotonNetwork.isMasterClient);
             GameObject play0 = Instantiate(player1_prefab, new Vector3(1F, 1F, 0F), Quaternion.identity) as GameObject;
             play_t0.Team_id = 0;
             play_t0.Name += "-" + 0;
             play0.name = play_t0.Name + "-" + play_t0.Team_id;
             this.player_phase_2 = play0.GetComponent<PlayerController>();
             this.player_phase_2.Player = play_t0;
-            this.player_phase_2.IsMine = true; //ismine
-                                               /******************************************/
+            this.player_phase_2.IsMine = true;
+            phase++;
         }
-        string phrase()
+        void phase3()
+        {
+            if (premier_passage)
+            {
+                screentext.transform.position = new Vector3(0, 100, 0);
+                premier_passage = false;
+                screentext.text = message(tableau_2);
+            }
+        }
+
+        void text(string[,] tableau)
+        {
+            if (temps(tableau) == 0)
+            {
+                phase++;
+                current_time = 0;
+                place = 0;
+            }
+            else if (current_time < temps(tableau))
+                current_time += Time.deltaTime;
+            else
+            {
+                current_time = 0;
+                place += 1;
+                screentext.text = message(tableau);
+            }
+        }
+        string message(string[,] tableau)
         { return screentext.text = tableau[place, 0]; }
-        float temps()
+        float temps(string[,] tableau)
         { return float.Parse(tableau[place, 1]); }
-        /********************* EDITED ************************************************/
+
         private void end_time()
         {
             time.reset();
@@ -123,6 +139,5 @@ namespace GameScene.Didacticiel
             time.start();
             this.player_phase_2.start_Anim();
         }
-        /******************************************/
     }
 }
