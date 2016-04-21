@@ -7,17 +7,22 @@ namespace Gestion {
 	public class ChestController : MonoBehaviour {
 		
 		private PhiManager manager;
+
 		private Animator animator;
+		private GameObject chest;
+		private GameObject info;
 		private Text name_text;
 		private Text price_text;
 		private Button buy;
-		private bool opened = false;
+
+		private bool info_displayed = false;
 
 		// Use this for initialization
 		void Start()
 		{
-			manager = GameObject.Find("Manager").GetComponent<PhiManager>();
-
+			this.chest = transform.Find ("Chest").gameObject;
+			this.info = transform.Find ("Info").gameObject;
+			this.manager = GameObject.Find("Manager").GetComponent<PhiManager>();
 			this.name_text = transform.Find("Name").GetComponent<Text>();
 			this.price_text = transform.Find("Price").Find("Text").GetComponent<Text>();
 			this.name_text.text = "Coffre";
@@ -62,10 +67,17 @@ namespace Gestion {
 			this.buy.image.color = new Color(0f / 255f, 173f / 255f, 0f / 255f);
 		}
 
+		/// <summary> Affiche les infos sur le SwungMens </summary>
+		public void DisplayInformation()
+		{
+			this.info_displayed = !this.info_displayed;
+			this.info.SetActive (this.info_displayed);
+			this.chest.SetActive (!this.info_displayed);
+		}
+
 		/// <summary> Ouvre le coffre </summary>
 		private Player Open()
 		{
-			this.opened = true;
 			this.animator.Play ("Open");
 			return Settings.Instance.Random_Secret_Player;
 		}

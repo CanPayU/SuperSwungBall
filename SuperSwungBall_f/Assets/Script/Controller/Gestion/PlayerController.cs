@@ -8,29 +8,29 @@ namespace Gestion
     {
         private PhiManager manager;
         private Player player;
+
+		private GameObject swungMen;
+		private GameObject stats_panel;
         private Text name_text;
         private Text price_text;
         private Button buy;
 
+		private bool stats_displayed = false;
+
         // Use this for initialization
         void Start()
         {
-            manager = GameObject.Find("Manager").GetComponent<PhiManager>();
             if (this.player == null)
                 return;
+			this.stats_panel = transform.Find("Stats").gameObject;
             this.name_text = transform.Find("Name").GetComponent<Text>();
             this.price_text = transform.Find("Price").Find("Text").GetComponent<Text>();
             this.name_text.text = this.player.Name;
-            this.price_text.text = this.player.Price.ToString();
+			this.price_text.text = this.player.Price.ToString();
+			this.manager = GameObject.Find("Manager").GetComponent<PhiManager>();
 
-            GameObject playerGm = Resources.Load("Prefabs/Resources/" + this.player.UID) as GameObject;
-            Transform player = Instantiate(playerGm).transform;
-            player.SetParent(transform, false);
-
-            RectTransform rect = player.GetComponent<RectTransform>();
-            rect.localScale = new Vector3(200f, 200f, 200f);
-            rect.anchoredPosition3D = new Vector3(0, -35f, -20f);
-            rect.rotation = new Quaternion(0, -180f, 0, 0);
+			InstantiateSwungMen ();
+			SetUpStats ();
 
             this.buy = transform.Find("Buy").GetComponent<Button>();
             this.buy.onClick.AddListener(delegate ()
@@ -62,7 +62,51 @@ namespace Gestion
         {
             this.buy.interactable = false;
             this.buy.image.color = new Color(0f / 255f, 173f / 255f, 0f / 255f);
-        }
+		}
+
+		/// <summary> Affiche les infos sur le SwungMens </summary>
+		public void DisplayInformation()
+		{
+			this.stats_displayed = !this.stats_displayed;
+			this.stats_panel.SetActive (this.stats_displayed);
+			this.swungMen.SetActive (!this.stats_displayed);
+//			/*Left*/ rectTransform.offsetMin.x;
+//			/*Right*/ rectTransform.offsetMax.x;
+//			/*Top*/ rectTransform.offsetMax.y;
+//			/*Bottom*/ rectTransform.offsetMin.y;
+		}
+
+		private void SetUpStats(){
+			this.stats_panel.SetActive (false);
+			Transform t_p = this.stats_panel.transform;
+			Transform passe = t_p.Find ("Passe").Find ("Value");
+			Transform course = t_p.Find ("Course").Find ("Value");
+			Transform esquive = t_p.Find ("Esquive").Find ("Value");
+			Transform tacle = t_p.Find ("Tacle").Find ("Value");
+			SetStatsValue (passe, 5);
+			SetStatsValue (course, 2);
+			SetStatsValue (esquive, 7);
+			SetStatsValue (tacle, 10);
+		}
+
+		private void SetStatsValue(Transform t, float value){
+			RectTransform r = t.GetComponent<RectTransform> ();
+			var size = r.rect.size.x - r.offsetMax.x; // + car value -
+			var val = size - ((size / 10) * value);
+			r.offsetMax = new Vector2 (-val , r.offsetMax.y);
+		}
+
+		private void InstantiateSwungMen(){
+			GameObject gm = Resources.Load("Prefabs/Resources/" + this.player.UID) as GameObject;
+			this.swungMen = Instantiate(gm);
+			Transform player = this.swungMen.transform;
+			player.SetParent(transform, false);
+
+			RectTransform rect = player.GetComponent<RectTransform>();
+			rect.localScale = new Vector3(200f, 200f, 200f);
+			rect.anchoredPosition3D = new Vector3(0, -35f, -20f);
+			rect.rotation = new Quaternion(0, -180f, 0, 0);
+		}
 
         public Player Player
         {

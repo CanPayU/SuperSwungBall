@@ -1791,8 +1791,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 956f60d0f5e124bd09d131f8ff2cde94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  swungmen_panel: {fileID: 146048, guid: 1ace08b56bf3f4e8e90df0f45cbba1aa, type: 2}
-  chest_panel: {fileID: 114646, guid: 5516a80fd37234b0794c6bde3820cfc9, type: 2}
+  swungmen_panel: {fileID: 141548, guid: 552f154c1bc644d868762d5537505db0, type: 2}
+  chest_panel: {fileID: 116166, guid: 677f190b47c9f460bbf08698421db7c9, type: 2}
 --- !u!114 &1027308506
 MonoBehaviour:
   m_ObjectHideFlags: 0
