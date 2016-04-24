@@ -59,7 +59,6 @@ namespace Create_Team
                 child.GetComponent<Image>().color = new Color(1, 1, 1);
             if (index_ != null)
             {
-                Debug.Log("Player-" + index_);
                 Transform btn = game_panel.transform.Find("Player-" + index_);
                 btn.GetComponent<Image>().color = new Color(0, 0, 0);
             }
@@ -69,7 +68,6 @@ namespace Create_Team
             foreach (Transform child in game_panel.transform)
                 Destroy(child.gameObject);
             int i = 0;
-            Debug.Log(actual_team.Compo.Name);
             foreach (Player p in players)
             {
                 GameObject btn = Instantiate(btn_player);

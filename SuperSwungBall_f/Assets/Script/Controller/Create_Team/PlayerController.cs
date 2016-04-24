@@ -39,25 +39,18 @@ namespace Create_Team
         {
             player_name.text = actual_player.Name;
 
-            int w = (int)(280.0 * actual_player.Passe);
-            RectTransform rt = passe_stat.GetComponent<RectTransform>();
-            rt.sizeDelta = new Vector2(w, 25);
-            rt.anchoredPosition = new Vector2(w / 2, -35);
+			Scrollbar sb = passe_stat.GetComponent<Scrollbar>();
+			sb.size = actual_player.PasseBase / 10f;
 
-            w = (int)(280.0 * actual_player.Speed);
-            rt = course_stat.GetComponent<RectTransform>();
-            rt.sizeDelta = new Vector2(w, 25);
-            rt.anchoredPosition = new Vector2(w / 2, -35);
+			sb = course_stat.GetComponent<Scrollbar>();
+			sb.size = actual_player.SpeedBase / 10f;
 
-            w = (int)(280.0 * actual_player.Tacle);
-            rt = tacle_stat.GetComponent<RectTransform>();
-            rt.sizeDelta = new Vector2(w, 25);
-            rt.anchoredPosition = new Vector2(w / 2, -35);
+			sb = tacle_stat.GetComponent<Scrollbar>();
+			sb.size = actual_player.TacleBase / 10f;
 
-            w = (int)(280.0 * actual_player.Esquive);
-            rt = esquive_stat.GetComponent<RectTransform>();
-            rt.sizeDelta = new Vector2(w, 25);
-            rt.anchoredPosition = new Vector2(w / 2, -35);
+			sb = esquive_stat.GetComponent<Scrollbar>();
+			sb.size = actual_player.EsquiveBase / 10f;
+
         }
 
         public void send_player_to_team()
