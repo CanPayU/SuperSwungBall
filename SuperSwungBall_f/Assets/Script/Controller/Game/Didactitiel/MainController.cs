@@ -15,6 +15,7 @@ namespace GameScene.Didacticiel
         [SerializeField]
         private GameObject player2_prefab;
 
+
         CameraController cameraController;
 
         InfoJoueurController infoJoueur;
@@ -41,17 +42,20 @@ namespace GameScene.Didacticiel
             time = new Timer(10.0F, end_time);
             //text
             tableau_1 = new string[,] {
-            {"Bienvenue dans le didactitiel","1" }, //2
-            {"Comment jouer ?","1" }, //3
-            {"Le but du jeu est de marquer 3 points", "1" }, //3
-            {"Chaque joueur contrôle son équipe", "1" }, //3
-            {"Commençons voir les contrôles d'un Swungman", "1" }, //3
+            {"Bienvenue dans le didactitiel","1" },
+            {"Comment jouer ?","1" }, 
+          //  {"Le but du jeu est de marquer 3 points", "1" }, 
+            //{"Chaque joueur contrôle son équipe", "1" }, 
+            //{"Commençons par voir les contrôles \n d'un Swungman", "1" }, 
             {"", "0" }};
 
             tableau_2 = new string[,] {
-            {"Les capacités de déplacements sont représentées \n par la couleur bleu", "1" },
-            {"Appuie sur le bouton bleu", "1" },
+            {"Ca c'est un Swungman, \n appuie dessus pour pouvoir le contrôler","1" },
+           {"Les capacités de déplacements sont représentées \n par la couleur bleu", "1" },
+         //   {"Appuie sur le bouton bleu 3 fois pour le faire \n courire le plus vite et le plus loin possible", "1" },
+            {"Déplace le Swungman jusqu'ici", "1"},
             {"","0" } };
+
             screentext.text = message(tableau_1);
         }
         // Update is called once per frame
@@ -67,6 +71,9 @@ namespace GameScene.Didacticiel
                     break;
                 case 3:
                     phase3();
+                    break;
+                case 4:
+                    phase4();
                     break;
             }
             time.update();
@@ -85,7 +92,7 @@ namespace GameScene.Didacticiel
             Player play_t0 = Settings.Instance.Default_player["gpdn"];
             GameObject play0 = Instantiate(player1_prefab, new Vector3(1F, 1F, 0F), Quaternion.identity) as GameObject;
             play_t0.Team_id = 0;
-            play_t0.Name += "-" + 0;
+            play_t0.Name += "";
             play0.name = play_t0.Name + "-" + play_t0.Team_id;
             this.player_phase_2 = play0.GetComponent<PlayerController>();
             this.player_phase_2.Player = play_t0;
@@ -96,23 +103,30 @@ namespace GameScene.Didacticiel
         {
             if (premier_passage)
             {
-                screentext.transform.position = new Vector3(0, 100, 0);
+                screentext.transform.position = new Vector2(930, 700);
                 premier_passage = false;
                 screentext.text = message(tableau_2);
             }
+            text(tableau_2);
+        }
+        void phase4()
+        {
+            this.GetComponent<Renderer>().material.SetColor("_SpecColor", Color.red);
         }
 
         void text(string[,] tableau)
         {
-            if (temps(tableau) == 0)
+            float temp = temps(tableau);
+
+            if (temp == 0) //dernier passage
             {
                 phase++;
                 current_time = 0;
                 place = 0;
             }
-            else if (current_time < temps(tableau))
+            else if (current_time < temp) //continuer à afficher
                 current_time += Time.deltaTime;
-            else
+            else // changer de texte
             {
                 current_time = 0;
                 place += 1;
@@ -120,9 +134,14 @@ namespace GameScene.Didacticiel
             }
         }
         string message(string[,] tableau)
-        { return screentext.text = tableau[place, 0]; }
+        {
+            return screentext.text = tableau[place, 0];
+        }
+
         float temps(string[,] tableau)
-        { return float.Parse(tableau[place, 1]); }
+        {
+            return float.Parse(tableau[place, 1]);
+        }
 
         private void end_time()
         {

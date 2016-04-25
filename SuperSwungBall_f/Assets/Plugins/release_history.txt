@@ -8,6 +8,32 @@ https://doc.photonengine.com
 http://forum.photonengine.com
 
 
+*** Version 4.1.0.2 (21. April 2016 - rev3283)
+Internal:
+    Changed: PeerBase: ipv6 flag set in INIT_BYTES[5] after dns lookup, when ip address type already known 
+    Changed: PeerBase: INIT_BYTES[4] contains clientlibid and release flag (15)
+    Changed: PeerBase: client version packed in INIT_BYTES[5,7,6] bytes
+    Changed: pProtocol prefix and path parsed (and trimmed) in IPhotonSocket.TryParseAddress to support websocket urls
+    Changed: Client version moved to separate version.cs
+    Changed: Protocol static methods reworked to instance methods, IProtocol interface extracted
+    Changed: PeerBase.DeserializeMessageAndCallback() to use a variant of new MemoryStream that exists in Windows 10 Universal APIs, too.
+LoadBalancing:
+    Added: Expected Users. This affects the Room, LoadBalancingClient, JoinRoom, JoinOrCreateRoom and CreateRoom.
+    Added: null check in Extensions.StripToStringKeys().
+    Fixed: FriendInfo.IsInRoom, which returned the opposite of it's naming! Also changed FriendInfo ToString() according to PUN's.
+    Added: RoomInfo expectedUsersField, which is updated with room properties (well known ones).
+    Added: Room.ExpectedUsers and ClearExpectedUsers() to expose the list of expected players.
+    Added: RoomInfo.serverSideMasterClient and masterClientIdField (also updated with well known properties). 
+    Changed: OpRaiseEvent now re-uses a Dictionary in the LoadBalancingPeer. It uses Clear(), rather than creating a new Dict each time.
+    Changed: AuthenticationValues to also use C# properties and and backup-fields. This is guaranteed to work in Unity.
+    Updated: EventCode ErrorInfo reference with a link to "WebHooks" doc online.
+    Changed: Disconnect handling in the LoadBalancingClient. The client should reset correctly and log info, if it's in a State where a disconnect is a proper error. Note: In some cases like "switching server", a disconnect is expected, so it's not an error then.
+    Fixed: PlayerProperties sent to game server will now include well-known properties again. This fixes the "NickName missing" bug.
+    Fixed: LoadBalancingClient.State value when the client fails to join or create a game on the Master Server. The state is correctly re-set to ClientState.JoinedLobby or ClientState.ConnectedToMaster.
+    Internal: Added private inLobby value, to store if the client was/is in a lobby on the Master Server.
+    Fixed: DemoClient (in demo-loadbalancing) now makes use of the Name Server by using: ConnectToRegionMaster("eu").
+    Added: DemoClient now has debug output when the connection times out or can't be established.
+
 
 *** Version 4.0.5.1 (18. January 2016 - rev3187)
     Fixed: EnetPeer.ExecuteCommand(). Fixed: Receiving a Disconnect-command didn't clear the receive-buffers. However, it has to be the last command executed.
@@ -19,7 +45,6 @@ LoadBalancing:
 Unity SDK:
     Changed: The Unity condition which defines "using Hashtable = ExitGames.Client.Photon.Hashtable;". All versions of Unity 4 and up now define that Photon's Hashtable is needed. This is only in the LoadBalancing API, not in the demos.
     Added: WebGL support
-
 
 *** Version 4.0.5.0 (3. December 2015 - rev3144)
     Changed: Signature of SetCustomProperties methods. All overloads now include a final, optional "webForward" parameter. This enables you to update a WebHook when properties change. This is intended for turnbased games, not for high-frequency updates - use with care.

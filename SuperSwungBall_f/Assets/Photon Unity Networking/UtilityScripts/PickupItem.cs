@@ -26,7 +26,7 @@ public class PickupItem : Photon.MonoBehaviour, IPunObservable
     /// are being re-set.
     /// </remarks>
     public float SecondsBeforeRespawn = 2;
-
+    
     /// <summary>The most likely trigger to pick up an item. Set in inspector!</summary>
     /// <remarks>Edit the collider and set collision masks to avoid pickups by random objects.</remarks>
     public bool PickupOnTrigger;
@@ -43,13 +43,13 @@ public class PickupItem : Photon.MonoBehaviour, IPunObservable
 
 
     // these values are internally used. they are public for debugging only
-
+    
     /// <summary>If this client sent a pickup. To avoid sending multiple pickup requests before reply is there.</summary>
     public bool SentPickup;
-
+    
     /// <summary>Timestamp when to respawn the item (compared to PhotonNetwork.time). </summary>
     public double TimeOfRespawn;    // needed when we want to update new players when a PickupItem respawns
-
+    
     /// <summary></summary>
     public int ViewID { get { return this.photonView.viewID; } }
 
@@ -95,12 +95,12 @@ public class PickupItem : Photon.MonoBehaviour, IPunObservable
             // skip sending more pickups until the original pickup-RPC got back to this client
             return;
         }
-
+        
         this.SentPickup = true;
         this.photonView.RPC("PunPickup", PhotonTargets.AllViaServer);
     }
 
-
+    
     /// <summary>Makes use of RPC PunRespawn to drop an item (sent through server for all).</summary>
     public void Drop()
     {
@@ -136,10 +136,10 @@ public class PickupItem : Photon.MonoBehaviour, IPunObservable
             return;     // makes this RPC being ignored
         }
 
-
+        
         // if the RPC isn't ignored by now, this is a successful pickup. this might be "my" pickup and we should do a callback
         this.PickupIsMine = msgInfo.sender.isLocal;
-
+        
         // call the method OnPickedUp(PickupItem item) if a GameObject was defined as callback target
         if (this.OnPickedUpCall != null)
         {
@@ -194,11 +194,11 @@ public class PickupItem : Photon.MonoBehaviour, IPunObservable
     [PunRPC]
     internal void PunRespawn()
     {
-#if DEBUG
+        #if DEBUG
         // debugging: in some cases, the respawn is "late". it's unclear why! just be aware of this.
         double timeDiffToRespawnTime = PhotonNetwork.time - this.TimeOfRespawn;
         if (timeDiffToRespawnTime > 0.1f) Debug.LogWarning("Spawn time is wrong by: " + timeDiffToRespawnTime + " (this is not an error. you just need to be aware of this.)");
-#endif
+        #endif
 
 
         // if this is called from another thread, we might want to do this in OnEnable() instead of here (depends on Invoke's implementation)

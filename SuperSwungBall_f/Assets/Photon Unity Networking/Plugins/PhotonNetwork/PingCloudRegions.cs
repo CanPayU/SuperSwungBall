@@ -6,6 +6,7 @@ using System.Net;
 using ExitGames.Client.Photon;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
+using SupportClassPun = ExitGames.Client.Photon.SupportClass;
 
 
 #if UNITY_EDITOR || (!UNITY_ANDROID && !UNITY_IPHONE && !UNITY_PS3 && !UNITY_WINRT)
@@ -53,7 +54,7 @@ public class PingMonoEditor : PhotonPing
         }
 
         int read = sock.Receive(PingBytes, SocketFlags.None);
-        //Debug.Log("Got: " + SupportClass.ByteArrayToString(PingBytes));
+        //Debug.Log("Got: " + SupportClassPun.ByteArrayToString(PingBytes));
         bool replyMatch = PingBytes[PingBytes.Length - 1] == PingId && read == PingLength;
         if (!replyMatch) Debug.Log("ReplyMatch is false! ");
 
@@ -117,7 +118,7 @@ public class PhotonPingManager
     /// </remarks>
     public IEnumerator PingSocket(Region region)
     {
-        region.Ping = Attempts * MaxMilliseconsPerPing;
+        region.Ping = Attempts*MaxMilliseconsPerPing;
 
         this.PingsRunning++;        // TODO: Add try-catch to make sure the PingsRunning are reduced at the end and that the lib does not crash the app
         PhotonPing ping;
@@ -133,7 +134,7 @@ public class PhotonPingManager
         }
         else
         {
-            ping = (PhotonPing)Activator.CreateInstance(PhotonHandler.PingImplementation);
+            ping = (PhotonPing) Activator.CreateInstance(PhotonHandler.PingImplementation);
         }
 
         //Debug.Log("Ping is: " + ping + " type " + ping.GetType());

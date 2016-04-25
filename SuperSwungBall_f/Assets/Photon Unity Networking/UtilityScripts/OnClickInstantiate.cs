@@ -5,7 +5,7 @@ public class OnClickInstantiate : MonoBehaviour
 {
     public GameObject Prefab;
     public int InstantiateType;
-    private string[] InstantiateTypeNames = { "Mine", "Scene" };
+    private string[] InstantiateTypeNames = {"Mine", "Scene"};
 
     public bool showGui;
 

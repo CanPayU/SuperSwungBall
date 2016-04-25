@@ -1,4 +1,14 @@
-﻿using UnityEngine;
+﻿// ----------------------------------------------------------------------------
+// <copyright file="PhotonTransformView.cs" company="Exit Games GmbH">
+//   PhotonNetwork Framework for Unity - Copyright (C) 2016 Exit Games GmbH
+// </copyright>
+// <summary>
+//   Component to synchronize Transforms via PUN PhotonView.
+// </summary>
+// <author>developer@exitgames.com</author>
+// ----------------------------------------------------------------------------
+
+using UnityEngine;
 using System.Collections;
 
 /// <summary>
@@ -43,6 +53,18 @@ public class PhotonTransformView : MonoBehaviour, IPunObservable
         m_RotationControl = new PhotonTransformViewRotationControl( m_RotationModel );
         m_ScaleControl = new PhotonTransformViewScaleControl( m_ScaleModel );
     }
+
+	void Reset()
+	{
+		Debug.Log("Reset");
+		m_PositionModel =  new PhotonTransformViewPositionModel();
+		m_RotationModel = new PhotonTransformViewRotationModel();
+		m_ScaleModel = new PhotonTransformViewScaleModel();
+
+		m_PositionControl = new PhotonTransformViewPositionControl( m_PositionModel );
+		m_RotationControl = new PhotonTransformViewRotationControl( m_RotationModel );
+		m_ScaleControl = new PhotonTransformViewScaleControl( m_ScaleModel );
+	}
 
     void Update()
     {

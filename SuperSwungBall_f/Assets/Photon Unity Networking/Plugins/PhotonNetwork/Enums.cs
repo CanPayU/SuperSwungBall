@@ -405,7 +405,7 @@ public enum PhotonNetworkingMessage
     /// </remarks>
     /// <example>void OnOwnershipRequest(object[] viewAndPlayer) {} //</example>
     OnOwnershipRequest,
-
+    
     /// <summary>
     /// Called when the Master Server sent an update for the Lobby Statistics, updating PhotonNetwork.LobbyStatistics.
     /// </summary>
@@ -488,11 +488,11 @@ public enum CloudRegionCode
 [Flags]
 public enum CloudRegionFlag
 {
-    eu = 1 << 0,
-    us = 1 << 1,
-    asia = 1 << 2,
-    jp = 1 << 3,
-    au = 1 << 4,
+    eu =    1 << 0,
+    us =    1 << 1,
+    asia =  1 << 2,
+    jp =    1 << 3,
+    au =    1 << 4,
 };
 
 

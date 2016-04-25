@@ -149,6 +149,6 @@ public class WebSocket
 			return m_Error;
 		}
 	}
-#endif
+#endif 
 }
 #endif

@@ -30,6 +30,7 @@ using ExitGames.Client.Photon;
 using UnityEngine;
 
 using Hashtable = ExitGames.Client.Photon.Hashtable;
+using SupportClassPun = ExitGames.Client.Photon.SupportClass;
 
 
 /// <summary>Defines the OnPhotonSerializeView method to make it easy to implement correctly for observable scripts.</summary>
@@ -447,7 +448,7 @@ namespace Photon
         /// <remarks>
         /// If you intend to work with a PhotonView in a script, it's usually easier to write this.photonView.
         ///
-        /// If you intend to remove the PhotonView component from the GameObject but keep this Photon.MonoBehaviour, 
+        /// If you intend to remove the PhotonView component from the GameObject but keep this Photon.MonoBehaviour,
         /// avoid this reference or modify this code to use PhotonView.Get(obj) instead.
         /// </remarks>
         public PhotonView photonView
@@ -462,7 +463,7 @@ namespace Photon
             }
         }
 
-
+        #if !UNITY_MIN_5_3
         /// <summary>
         /// This property is only here to notify developers when they use the outdated value.
         /// </summary>
@@ -485,6 +486,7 @@ namespace Photon
                 return PhotonView.Get(this);
             }
         }
+        #endif
     }
 
 
@@ -940,11 +942,9 @@ public class RoomOptions
     /// <summary>Max number of players that can be in the room at any time. 0 means "no limit".</summary>
     public byte maxPlayers;
 
-    /// <summary>Time To Live (TTL) for an 'actor' in a room. If a client disconnects, this actor is inactive first and removed after this timeout. In milliseconds.</summary>
-    // public int PlayerTtl;
 
-    /// <summary>Time To Live (TTL) for a room when the last player leaves. Keeps room in memory for case a player re-joins soon. In milliseconds.</summary>
-    // public int EmptyRoomTtl;
+    /// <summary>Time To Live (TTL) for an 'actor' in a room. If a client disconnects, this actor is inactive first and removed after this timeout. In milliseconds.</summary>
+    public int PlayerTtl;
 
 
     /// <summary>Time To Live (TTL) for a room when the last player leaves. Keeps room in memory for case a player re-joins soon. In milliseconds.</summary>
@@ -985,6 +985,14 @@ public class RoomOptions
     /// </remarks>
     public string[] customRoomPropertiesForLobby = new string[0];
 
+    /// <summary>Informs the server of the expected plugin setup.</summary>
+    /// <remarks>
+    /// The operation will fail in case of a plugin missmatch returning error code PluginMismatch 32757(0x7FFF - 10).
+    /// Setting string[]{} means the client expects no plugin to be setup.
+    /// Note: for backwards compatibility null omits any check.
+    /// </remarks>
+    public string[] plugins;
+
     /// <summary>
     /// Tells the server to skip room events for joining and leaving players.
     /// </summary>
@@ -998,12 +1006,16 @@ public class RoomOptions
     public bool suppressRoomEvents { get { return this.suppressRoomEventsField; } /*set { this.suppressRoomEventsField = value; }*/ }
     private bool suppressRoomEventsField = false;
 
-
-    ///// <summary>
-    ///// Defines if the UserIds of players get "published" in the room. Useful for FindFriends, if players want to play another game together.
-    ///// </summary>
-    //public bool publishUserId { get { return this.publishUserIdField; } set { this.publishUserIdField = value; } }
-    //private bool publishUserIdField = false;
+    /// <summary>
+    /// Defines if the UserIds of players get "published" in the room. Useful for FindFriends, if players want to play another game together.
+    /// </summary>
+    /// <remarks>
+    /// When you set this to true, Photon will publish the UserIds of the players in that room.
+    /// In that case, you can use PhotonPlayer.userId, to access any player's userID.
+    /// This is useful for FindFriends and to set "expected users" to reserve slots in a room (see PhotonNetwork.JoinRoom e.g.).
+    /// </remarks>
+    public bool publishUserId { get { return this.publishUserIdField; } set { this.publishUserIdField = value; } }
+    private bool publishUserIdField = false;
 }
 
 
@@ -1129,7 +1141,7 @@ internal class PunEvent
 public class PhotonStream
 {
     bool write = false;
-    private List<object> writeData;
+    private Queue<object> writeData;
     private object[] readData;
     internal byte currentItem = 0; //Used to track the next item to receive.
 
@@ -1141,12 +1153,17 @@ public class PhotonStream
         this.write = write;
         if (incomingData == null)
         {
-            this.writeData = new List<object>(10);
+            this.writeData = new Queue<object>(10);
         }
         else
         {
             this.readData = incomingData;
         }
+    }
+
+    internal void ResetWriteStream()
+    {
+        writeData.Clear();
     }
 
     /// <summary>If true, this client should add data to the stream to send it.</summary>
@@ -1207,7 +1224,7 @@ public class PhotonStream
             return;
         }
 
-        this.writeData.Add(obj);
+        this.writeData.Enqueue(obj);
     }
 
     /// <summary>Turns the stream into a new object[].</summary>
@@ -1223,7 +1240,7 @@ public class PhotonStream
     {
         if (this.write)
         {
-            this.writeData.Add(myBool);
+            this.writeData.Enqueue(myBool);
         }
         else
         {
@@ -1242,7 +1259,7 @@ public class PhotonStream
     {
         if (write)
         {
-            this.writeData.Add(myInt);
+            this.writeData.Enqueue(myInt);
         }
         else
         {
@@ -1261,7 +1278,7 @@ public class PhotonStream
     {
         if (write)
         {
-            this.writeData.Add(value);
+            this.writeData.Enqueue(value);
         }
         else
         {
@@ -1280,7 +1297,7 @@ public class PhotonStream
     {
         if (write)
         {
-            this.writeData.Add(value);
+            this.writeData.Enqueue(value);
         }
         else
         {
@@ -1299,7 +1316,7 @@ public class PhotonStream
     {
         if (write)
         {
-            this.writeData.Add(value);
+            this.writeData.Enqueue(value);
         }
         else
         {
@@ -1318,7 +1335,7 @@ public class PhotonStream
     {
         if (write)
         {
-            this.writeData.Add(obj);
+            this.writeData.Enqueue(obj);
         }
         else
         {
@@ -1337,7 +1354,7 @@ public class PhotonStream
     {
         if (write)
         {
-            this.writeData.Add(obj);
+            this.writeData.Enqueue(obj);
         }
         else
         {
@@ -1356,7 +1373,7 @@ public class PhotonStream
     {
         if (write)
         {
-            this.writeData.Add(obj);
+            this.writeData.Enqueue(obj);
         }
         else
         {
@@ -1375,7 +1392,7 @@ public class PhotonStream
     {
         if (write)
         {
-            this.writeData.Add(obj);
+            this.writeData.Enqueue(obj);
         }
         else
         {
@@ -1394,7 +1411,7 @@ public class PhotonStream
     {
         if (write)
         {
-            this.writeData.Add(obj);
+            this.writeData.Enqueue(obj);
         }
         else
         {
@@ -1478,12 +1495,12 @@ public class SceneManagerHelper
     {
         get
         {
-#if UNITY_MIN_5_3
+            #if UNITY_MIN_5_3
             UnityEngine.SceneManagement.Scene s = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
             return s.name;
-#else
+            #else
             return Application.loadedLevelName;
-#endif
+            #endif
         }
     }
 
@@ -1491,11 +1508,11 @@ public class SceneManagerHelper
     {
         get
         {
-#if UNITY_MIN_5_3
+            #if UNITY_MIN_5_3
             return UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
-#else
+            #else
             return Application.loadedLevel;
-#endif
+            #endif
         }
     }
 
@@ -1505,11 +1522,11 @@ public class SceneManagerHelper
     {
         get
         {
-#if UNITY_MIN_5_3
+            #if UNITY_MIN_5_3
             return UnityEditor.SceneManagement.EditorSceneManager.GetActiveScene().name;
-#else
+            #else
             return System.IO.Path.GetFileNameWithoutExtension(UnityEditor.EditorApplication.currentScene);
-#endif
+            #endif
         }
     }
 #endif
@@ -1559,7 +1576,7 @@ public class WebRpcResponse
     /// <returns>String resembling the result.</returns>
     public string ToStringFull()
     {
-        return string.Format("{0}={2}: {1} \"{3}\"", Name, SupportClass.DictionaryToString(Parameters), ReturnCode, DebugMessage);
+        return string.Format("{0}={2}: {1} \"{3}\"", Name, SupportClassPun.DictionaryToString(Parameters), ReturnCode, DebugMessage);
     }
 }
 

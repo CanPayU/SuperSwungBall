@@ -20,7 +20,7 @@ public class PickupItemSyncer : Photon.MonoBehaviour
             this.SendPickedUpItems(newPlayer);
         }
     }
-
+    
     public void OnJoinedRoom()
     {
         Debug.Log("Joined Room. isMasterClient: " + PhotonNetwork.isMasterClient + " id: " + PhotonNetwork.player.ID);
@@ -53,11 +53,11 @@ public class PickupItemSyncer : Photon.MonoBehaviour
                 nextPlayer = PhotonNetwork.player.GetNext();
                 //Debug.Log("This player is the Master's next. Asking this client's 'next' player: " + ((nextPlayer != null) ? nextPlayer.ToStringFull() : ""));
             }
-
+            
             if (nextPlayer != null && !nextPlayer.Equals(PhotonNetwork.player))
             {
                 this.photonView.RPC("RequestForPickupTimes", nextPlayer);
-
+                
                 // you could restart this invoke and try to find another player after 4 seconds. but after a while it doesnt make a difference anymore
                 //this.Invoke("AskForPickupItemSpawnTimes", 2.0f);
             }
@@ -134,7 +134,7 @@ public class PickupItemSyncer : Photon.MonoBehaviour
         // if there are no inactive pickups, the sender will send a list of 0 items. this is not a problem...
         for (int i = 0; i < inactivePickupsAndTimes.Length / 2; i++)
         {
-            int arrayIndex = i * 2;
+            int arrayIndex = i*2;
             int viewIdOfPickup = (int)inactivePickupsAndTimes[arrayIndex];
             float timeUntilRespawnBasedOnTimeBase = inactivePickupsAndTimes[arrayIndex + 1];
 
@@ -157,7 +157,7 @@ public class PickupItemSyncer : Photon.MonoBehaviour
                     timeBeforeRespawn = 0.0f;
                 }
 
-                pi.PickedUp((float)timeBeforeRespawn);
+                pi.PickedUp((float) timeBeforeRespawn);
             }
         }
     }

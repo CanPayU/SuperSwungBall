@@ -4,11 +4,10 @@ using System.Collections;
 
 
 [RequireComponent(typeof(PhotonView))]
-public class OnAwakeUsePhotonView : Photon.MonoBehaviour
-{
+public class OnAwakeUsePhotonView : Photon.MonoBehaviour {
 
     // tries to send an RPC as soon as this script awakes (e.g. immediately when instantiated)
-    void Awake()
+	void Awake() 
     {
         if (!this.photonView.isMine)
         {
@@ -16,8 +15,8 @@ public class OnAwakeUsePhotonView : Photon.MonoBehaviour
         }
 
         // Debug.Log("OnAwakeSendRPC.Awake() of " + this + " photonView: " + this.photonView + " this.photonView.instantiationData: " + this.photonView.instantiationData);
-        this.photonView.RPC("OnAwakeRPC", PhotonTargets.All);
-    }
+	    this.photonView.RPC("OnAwakeRPC", PhotonTargets.All);
+	}
 
     // tries to send an RPC as soon as this script starts (e.g. immediately when instantiated)
     void Start()
@@ -30,7 +29,7 @@ public class OnAwakeUsePhotonView : Photon.MonoBehaviour
         // Debug.Log("OnAwakeSendRPC.Start() of " + this + " photonView: " + this.photonView);
         this.photonView.RPC("OnAwakeRPC", PhotonTargets.All, (byte)1);
     }
-
+	
     [PunRPC]
     public void OnAwakeRPC()
     {

@@ -19,14 +19,14 @@ using UnityEngine;
 using Rotorz.ReorderableList.Internal;
 
 
-[CustomEditor(typeof(PhotonView))]
+[CustomEditor(typeof (PhotonView))]
 public class PhotonViewInspector : Editor
 {
     private PhotonView m_Target;
 
     public override void OnInspectorGUI()
     {
-        m_Target = (PhotonView)this.target;
+        m_Target = (PhotonView) this.target;
         bool isProjectPrefab = EditorUtility.IsPersistent(m_Target.gameObject);
 
         if (m_Target.ObservedComponents == null)
@@ -64,7 +64,12 @@ public class PhotonViewInspector : Editor
 
         // ownership requests
         EditorGUI.BeginDisabledGroup(Application.isPlaying);
-        m_Target.ownershipTransfer = (OwnershipOption)EditorGUILayout.EnumPopup(m_Target.ownershipTransfer, GUILayout.Width(100));
+        OwnershipOption own = (OwnershipOption)EditorGUILayout.EnumPopup(m_Target.ownershipTransfer, GUILayout.Width(100));
+        if (own != m_Target.ownershipTransfer)
+        {
+            Undo.RecordObject(m_Target, "Change PhotonView Ownership Transfer");
+            m_Target.ownershipTransfer = own;
+        }
         EditorGUI.EndDisabledGroup();
 
         EditorGUILayout.EndHorizontal();
@@ -82,7 +87,11 @@ public class PhotonViewInspector : Editor
         else
         {
             int idValue = EditorGUILayout.IntField("View ID [1.." + (PhotonNetwork.MAX_VIEW_IDS - 1) + "]", m_Target.viewID);
-            m_Target.viewID = idValue;
+            if (m_Target.viewID != idValue)
+            {
+                Undo.RecordObject(m_Target, "Change PhotonView viewID");
+                m_Target.viewID = idValue;
+            }
         }
 
 
@@ -133,14 +142,16 @@ public class PhotonViewInspector : Editor
         // Cleanup: save and fix look
         if (GUI.changed)
         {
+            #if !UNITY_MIN_5_3
             EditorUtility.SetDirty(m_Target);
+            #endif
             PhotonViewHandler.HierarchyChange(); // TODO: check if needed
         }
 
         GUI.color = Color.white;
-#if !UNITY_MIN_5_3
+        #if !UNITY_MIN_5_3
         EditorGUIUtility.LookLikeControls();
-#endif
+        #endif
     }
 
     private void DrawSpecificTypeSerializationOptions()
@@ -148,14 +159,14 @@ public class PhotonViewInspector : Editor
         if (m_Target.ObservedComponents.FindAll(item => item != null && item.GetType() == typeof(Transform)).Count > 0 ||
             (m_Target.observed != null && m_Target.observed.GetType() == typeof(Transform)))
         {
-            m_Target.onSerializeTransformOption = (OnSerializeTransform)EditorGUILayout.EnumPopup("Transform Serialization:", m_Target.onSerializeTransformOption);
+            m_Target.onSerializeTransformOption = (OnSerializeTransform) EditorGUILayout.EnumPopup("Transform Serialization:", m_Target.onSerializeTransformOption);
         }
         else if (m_Target.ObservedComponents.FindAll(item => item != null && item.GetType() == typeof(Rigidbody)).Count > 0 ||
                  (m_Target.observed != null && m_Target.observed.GetType() == typeof(Rigidbody)) ||
                  m_Target.ObservedComponents.FindAll(item => item != null && item.GetType() == typeof(Rigidbody2D)).Count > 0 ||
                  (m_Target.observed != null && m_Target.observed.GetType() == typeof(Rigidbody2D)))
         {
-            m_Target.onSerializeRigidBodyOption = (OnSerializeRigidBody)EditorGUILayout.EnumPopup("Rigidbody Serialization:", m_Target.onSerializeRigidBodyOption);
+            m_Target.onSerializeRigidBodyOption = (OnSerializeRigidBody) EditorGUILayout.EnumPopup("Rigidbody Serialization:", m_Target.onSerializeRigidBodyOption);
         }
     }
 
@@ -164,13 +175,13 @@ public class PhotonViewInspector : Editor
         if (m_Target.observed != null)
         {
             Type type = m_Target.observed.GetType();
-            if (type == typeof(Transform))
+            if (type == typeof (Transform))
             {
-                m_Target.onSerializeTransformOption = (OnSerializeTransform)EditorGUILayout.EnumPopup("Serialization:", m_Target.onSerializeTransformOption);
+                m_Target.onSerializeTransformOption = (OnSerializeTransform) EditorGUILayout.EnumPopup("Serialization:", m_Target.onSerializeTransformOption);
             }
-            else if (type == typeof(Rigidbody))
+            else if (type == typeof (Rigidbody))
             {
-                m_Target.onSerializeRigidBodyOption = (OnSerializeRigidBody)EditorGUILayout.EnumPopup("Serialization:", m_Target.onSerializeRigidBodyOption);
+                m_Target.onSerializeRigidBodyOption = (OnSerializeRigidBody) EditorGUILayout.EnumPopup("Serialization:", m_Target.onSerializeRigidBodyOption);
             }
         }
     }
@@ -184,6 +195,7 @@ public class PhotonViewInspector : Editor
 
         if (m_Target.observed != null)
         {
+            Undo.RecordObject(m_Target, null);
             if (m_Target.ObservedComponents.Contains(m_Target.observed) == false)
             {
                 bool wasAdded = false;
@@ -204,7 +216,9 @@ public class PhotonViewInspector : Editor
             }
 
             m_Target.observed = null;
+            #if !UNITY_MIN_5_3
             EditorUtility.SetDirty(m_Target);
+            #endif
         }
     }
 
@@ -225,7 +239,7 @@ public class PhotonViewInspector : Editor
         }
 
 
-        Component componenValue = (Component)EditorGUILayout.ObjectField("Observe: " + typeOfObserved, m_Target.observed, typeof(Component), true);
+        Component componenValue = (Component) EditorGUILayout.ObjectField("Observe: " + typeOfObserved, m_Target.observed, typeof (Component), true);
         if (m_Target.observed != componenValue)
         {
             if (m_Target.observed == null)
@@ -269,7 +283,7 @@ public class PhotonViewInspector : Editor
         }
 
         float containerElementHeight = 22;
-        float containerHeight = listProperty.arraySize * containerElementHeight;
+        float containerHeight = listProperty.arraySize*containerElementHeight;
 
         bool isOpen = PhotonGUI.ContainerHeaderFoldout("Observed Components (" + GetObservedComponentsCount() + ")", serializedObject.FindProperty("ObservedComponentsFoldoutOpen").boolValue);
         serializedObject.FindProperty("ObservedComponentsFoldoutOpen").boolValue = isOpen;
@@ -287,9 +301,9 @@ public class PhotonViewInspector : Editor
         {
             for (int i = 0; i < listProperty.arraySize; ++i)
             {
-                Rect elementRect = new Rect(containerRect.xMin, containerRect.yMin + containerElementHeight * i, containerRect.width, containerElementHeight);
+                Rect elementRect = new Rect(containerRect.xMin, containerRect.yMin + containerElementHeight*i, containerRect.width, containerElementHeight);
                 {
-                    Rect texturePosition = new Rect(elementRect.xMin + 6, elementRect.yMin + elementRect.height / 2f - 1, 9, 5);
+                    Rect texturePosition = new Rect(elementRect.xMin + 6, elementRect.yMin + elementRect.height/2f - 1, 9, 5);
                     ReorderableListResources.DrawTexture(texturePosition, ReorderableListResources.texGrabHandle);
 
                     Rect propertyPosition = new Rect(elementRect.xMin + 20, elementRect.yMin + 3, elementRect.width - 45, 16);
@@ -331,15 +345,21 @@ public class PhotonViewInspector : Editor
 
         if (wasObservedComponentsEmpty == true && isObservedComponentsEmpty == false && m_Target.synchronization == ViewSynchronization.Off)
         {
+            Undo.RecordObject(m_Target, "Change PhotonView");
             m_Target.synchronization = ViewSynchronization.UnreliableOnChange;
+            #if !UNITY_MIN_5_3
             EditorUtility.SetDirty(m_Target);
+            #endif
             serializedObject.Update();
         }
 
         if (wasObservedComponentsEmpty == false && isObservedComponentsEmpty == true)
         {
+            Undo.RecordObject(m_Target, "Change PhotonView");
             m_Target.synchronization = ViewSynchronization.Off;
+            #if !UNITY_MIN_5_3
             EditorUtility.SetDirty(m_Target);
+            #endif
             serializedObject.Update();
         }
     }

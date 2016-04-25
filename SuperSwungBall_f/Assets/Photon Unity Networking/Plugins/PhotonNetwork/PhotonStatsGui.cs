@@ -92,7 +92,7 @@ public class PhotonStatsGui : MonoBehaviour
         this.healthStatsVisible = GUILayout.Toggle(this.healthStatsVisible, "health");
         this.trafficStatsOn = GUILayout.Toggle(this.trafficStatsOn, "traffic");
         GUILayout.EndHorizontal();
-
+        
         string total = string.Format("Out|In|Sum:\t{0,4} | {1,4} | {2,4}", gls.TotalOutgoingMessageCount, gls.TotalIncomingMessageCount, gls.TotalMessageCount);
         string elapsedTime = string.Format("{0}sec average:", elapsedMs);
         string average = string.Format("Out|In|Sum:\t{0,4} | {1,4} | {2,4}", gls.TotalOutgoingMessageCount / elapsedMs, gls.TotalIncomingMessageCount / elapsedMs, gls.TotalMessageCount / elapsedMs);

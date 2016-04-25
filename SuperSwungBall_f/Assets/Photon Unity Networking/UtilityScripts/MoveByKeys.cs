@@ -11,7 +11,7 @@ using UnityEngine;
 /// JumpForce defines how high the object "jumps". 
 /// JumpTimeout defines after how many seconds you can jump again.
 /// </remarks>
-[RequireComponent(typeof(PhotonView))]
+[RequireComponent(typeof (PhotonView))]
 public class MoveByKeys : Photon.MonoBehaviour
 {
     public float Speed = 10f;
@@ -43,12 +43,12 @@ public class MoveByKeys : Photon.MonoBehaviour
 
         if (Input.GetKey(KeyCode.A))
         {
-            transform.position += Vector3.left * (this.Speed * Time.deltaTime);
+            transform.position += Vector3.left*(this.Speed*Time.deltaTime);
         }
 
         if (Input.GetKey(KeyCode.D))
         {
-            transform.position += Vector3.right * (this.Speed * Time.deltaTime);
+            transform.position += Vector3.right*(this.Speed*Time.deltaTime);
         }
 
         // jumping has a simple "cooldown" time but you could also jump in the air
@@ -61,7 +61,7 @@ public class MoveByKeys : Photon.MonoBehaviour
                 {
                     this.jumpingTime = this.JumpTimeout;
 
-                    Vector2 jump = Vector2.up * this.JumpForce;
+                    Vector2 jump = Vector2.up*this.JumpForce;
                     if (this.body2d != null)
                     {
                         this.body2d.AddForce(jump);
@@ -83,12 +83,12 @@ public class MoveByKeys : Photon.MonoBehaviour
         {
             if (Input.GetKey(KeyCode.W))
             {
-                transform.position += Vector3.forward * (this.Speed * Time.deltaTime);
+                transform.position += Vector3.forward*(this.Speed*Time.deltaTime);
             }
 
             if (Input.GetKey(KeyCode.S))
             {
-                transform.position -= Vector3.forward * (this.Speed * Time.deltaTime);
+                transform.position -= Vector3.forward*(this.Speed*Time.deltaTime);
             }
         }
     }

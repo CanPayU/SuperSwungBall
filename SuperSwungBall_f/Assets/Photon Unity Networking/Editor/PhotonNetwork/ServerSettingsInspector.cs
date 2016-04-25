@@ -1,9 +1,19 @@
+// ----------------------------------------------------------------------------
+// <copyright file="ServerSettingsInspector.cs" company="Exit Games GmbH">
+//   PhotonNetwork Framework for Unity - Copyright (C) 2016 Exit Games GmbH
+// </copyright>
+// <summary>
+//   This is a custom editor for the ServerSettings scriptable object.
+// </summary>
+// <author>developer@exitgames.com</author>
+// ----------------------------------------------------------------------------
+
 using System;
 using ExitGames.Client.Photon;
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(ServerSettings))]
+[CustomEditor(typeof (ServerSettings))]
 public class ServerSettingsInspector : Editor
 {
     public enum ProtocolChoices
@@ -18,10 +28,10 @@ public class ServerSettingsInspector : Editor
 
     public override void OnInspectorGUI()
     {
-        ServerSettings settings = (ServerSettings)target;
+        ServerSettings settings = (ServerSettings) target;
+        Undo.RecordObject(settings, "Edit PhotonServerSettings");
 
-
-        settings.HostType = (ServerSettings.HostingOption)EditorGUILayout.EnumPopup("Hosting", settings.HostType);
+        settings.HostType = (ServerSettings.HostingOption) EditorGUILayout.EnumPopup("Hosting", settings.HostType);
         EditorGUI.indentLevel = 1;
 
         switch (settings.HostType)
@@ -62,11 +72,11 @@ public class ServerSettingsInspector : Editor
 
                 // protocol
                 ProtocolChoices valProtocol = settings.Protocol == ConnectionProtocol.Tcp ? ProtocolChoices.Tcp : ProtocolChoices.Udp;
-                valProtocol = (ProtocolChoices)EditorGUILayout.EnumPopup("Protocol", valProtocol);
-                settings.Protocol = (ConnectionProtocol)valProtocol;
-#if UNITY_WEBGL
+                valProtocol = (ProtocolChoices) EditorGUILayout.EnumPopup("Protocol", valProtocol);
+                settings.Protocol = (ConnectionProtocol) valProtocol;
+                #if UNITY_WEBGL
                 EditorGUILayout.HelpBox("WebGL always use Secure WebSockets as protocol.\nThis setting gets ignored in current export.", MessageType.Warning);
-#endif
+                #endif
                 break;
 
             case ServerSettings.HostingOption.SelfHosted:
@@ -80,13 +90,13 @@ public class ServerSettingsInspector : Editor
                 {
                     settings.ServerPort = 4530;
                 }
-#if RHTTP
+                #if RHTTP
                 if (settings.Protocol == ConnectionProtocol.RHttp)
                 {
                     settings.ServerPort = 0;
                     hidePort = true;
                 }
-#endif
+                #endif
                 settings.ServerAddress = EditorGUILayout.TextField("Server Address", settings.ServerAddress);
                 settings.ServerAddress = settings.ServerAddress.Trim();
                 if (!hidePort)
@@ -96,11 +106,11 @@ public class ServerSettingsInspector : Editor
 
                 // protocol
                 valProtocol = settings.Protocol == ConnectionProtocol.Tcp ? ProtocolChoices.Tcp : ProtocolChoices.Udp;
-                valProtocol = (ProtocolChoices)EditorGUILayout.EnumPopup("Protocol", valProtocol);
-                settings.Protocol = (ConnectionProtocol)valProtocol;
-#if UNITY_WEBGL
+                valProtocol = (ProtocolChoices) EditorGUILayout.EnumPopup("Protocol", valProtocol);
+                settings.Protocol = (ConnectionProtocol) valProtocol;
+                #if UNITY_WEBGL
                 EditorGUILayout.HelpBox("WebGL always use Secure WebSockets as protocol.\nThis setting gets ignored in current export.", MessageType.Warning);
-#endif
+                #endif
 
                 // appid
                 settings.AppID = EditorGUILayout.TextField("AppId", settings.AppID);
@@ -176,7 +186,7 @@ public class ServerSettingsInspector : Editor
 
         if (GUI.changed)
         {
-            EditorUtility.SetDirty(target);
+            EditorUtility.SetDirty(target);     // even in Unity 5.3+ it's OK to SetDirty() for non-scene objects. 
         }
     }
 

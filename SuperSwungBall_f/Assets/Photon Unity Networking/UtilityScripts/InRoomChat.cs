@@ -3,9 +3,9 @@ using UnityEngine;
 using System.Collections;
 
 [RequireComponent(typeof(PhotonView))]
-public class InRoomChat : Photon.MonoBehaviour
+public class InRoomChat : Photon.MonoBehaviour 
 {
-    public Rect GuiRect = new Rect(0, 0, 250, 300);
+    public Rect GuiRect = new Rect(0,0, 250,300);
     public bool IsVisible = true;
     public bool AlignBottom = false;
     public List<string> messages = new List<string>();
@@ -28,7 +28,7 @@ public class InRoomChat : Photon.MonoBehaviour
         {
             return;
         }
-
+        
         if (Event.current.type == EventType.KeyDown && (Event.current.keyCode == KeyCode.KeypadEnter || Event.current.keyCode == KeyCode.Return))
         {
             if (!string.IsNullOrEmpty(this.inputLine))
@@ -85,7 +85,7 @@ public class InRoomChat : Photon.MonoBehaviour
             }
         }
 
-        this.messages.Add(senderName + ": " + newLine);
+        this.messages.Add(senderName +": " + newLine);
     }
 
     public void AddLine(string newLine)
