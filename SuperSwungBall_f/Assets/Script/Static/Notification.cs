@@ -9,6 +9,7 @@ public static class Notification
     private static MonoBehaviour MonoB = GameObject.FindObjectOfType<MonoBehaviour>();
     private static GameObject Canvas = GameObject.FindObjectOfType<Canvas>().gameObject;
 
+	private static GameObject Text_Prefab = Resources.Load("Prefabs/Notification/Text") as GameObject;
     private static GameObject Alert_Prefab = Resources.Load("Prefabs/Notification/Alert") as GameObject;
     private static GameObject Box_Prefab = Resources.Load("Prefabs/Notification/Box") as GameObject;
     private static GameObject Slide_Prefab = Resources.Load("Prefabs/Notification/Slide") as GameObject;
@@ -24,14 +25,19 @@ public static class Notification
     /// <param name="Delay">Delai avant disparition. <=0 pour infinie</param>
     /// <param name="content">Content, pour Box et Alert</param>
     /// <param name="force">Force la notification (Seulement pour le système)</param>
-    public static void Create(NotificationType type, string title, float Delay = DELAY, string content = null, Action<bool> completion = null, bool force = false)
+    public static void Create(NotificationType type, string title, float Delay = DELAY, string content = null, Action<bool, string> completion = null, bool force = false)
     {
         if (!IsAutorised(type, force))
             return;
         Canvas = GameObject.FindObjectOfType<Canvas>().gameObject;
         delay = Delay;
         switch (type)
-        {
+		{
+			case NotificationType.Text:
+				if (content == null && completion == null)
+					return;
+				Instanciate_Text(title, content, completion);
+				break;
             case NotificationType.Alert:
                 if (content == null && completion == null)
                     return;
@@ -48,14 +54,39 @@ public static class Notification
             default:
                 break;
         }
-    }
+	}
+	/// <summary>
+	/// Instanciates the alert.
+	/// </summary>
+	/// <param name="title">Title.</param>
+	/// <param name="content">Content.</param>
+	/// <param name="completion">Execute on click button : <c>true</c> Accepted or  <c>false</c> Refused</param>
+	private static void Instanciate_Text(string title, string content, Action<bool, string> completion)
+	{
+		GameObject gm = MonoBehaviour.Instantiate(Text_Prefab);
+		gm.name = "NotificationText";
+		gm.transform.SetParent(Canvas.transform, false);
+		Text textComponent = gm.transform.Find("Title").GetComponent<Text>();
+		textComponent.text = title;
+		textComponent = gm.transform.Find("Content").GetComponent<Text>();
+		textComponent.text = content;
+
+		InputField text = gm.transform.Find("Value").GetComponent<InputField>();
+		Button accepted = gm.transform.Find("Send").GetComponent<Button>();
+		accepted.onClick.AddListener(delegate ()
+			{
+				completion(true, text.text);
+				gm.SetActive(false);
+				MonoBehaviour.Destroy(gm);
+			});
+	}
     /// <summary>
     /// Instanciates the alert.
     /// </summary>
     /// <param name="title">Title.</param>
     /// <param name="content">Content.</param>
     /// <param name="completion">Execute on click button : <c>true</c> Accepted or  <c>false</c> Refused</param>
-    private static void Instanciate_Alert(string title, string content, Action<bool> completion)
+    private static void Instanciate_Alert(string title, string content, Action<bool, string> completion)
     {
         GameObject gm = MonoBehaviour.Instantiate(Alert_Prefab);
         gm.name = "NotificationAlert";
@@ -71,14 +102,14 @@ public static class Notification
 
         accepted.onClick.AddListener(delegate ()
         {
-            completion(true);
+            completion(true, null);
             gm.SetActive(false);
             MonoBehaviour.Destroy(gm);
         });
 
         refused.onClick.AddListener(delegate ()
         {
-            completion(false);
+            completion(false, null);
             gm.SetActive(false);
             MonoBehaviour.Destroy(gm);
         });

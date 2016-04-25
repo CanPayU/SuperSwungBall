@@ -45,7 +45,7 @@ public class DebugManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.K))
             Notification.Create(NotificationType.Box, "My Title Box", content: "My Content Box");
         if (Input.GetKeyDown(KeyCode.L))
-            Notification.Create(NotificationType.Alert, "My Title Alert", content: "My Content Slide", completion: (success) =>
+            Notification.Create(NotificationType.Alert, "My Title Alert", content: "My Content Slide", completion: (success, _) =>
             {
                 Debug.Log(success);
             });

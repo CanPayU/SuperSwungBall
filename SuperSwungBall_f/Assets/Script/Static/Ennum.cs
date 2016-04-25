@@ -16,7 +16,8 @@ public enum NotificationState
 
 public enum NotificationType
 {
-    Alert = 3,  	// Title, Content, Completion
+	Text = 4,  		// Title, Content, Completion<bool, string>
+    Alert = 3,  	// Title, Content, Completion<bool, null>
     Box = 2,    	// Title, Content
     Slide = 1 		// Title
 }
