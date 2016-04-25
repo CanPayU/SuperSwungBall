@@ -79,15 +79,20 @@ namespace Gestion
 		private void SetUpStats(){
 			this.stats_panel.SetActive (false);
 			Transform t_p = this.stats_panel.transform;
-			Transform passe = t_p.Find ("Passe").Find ("Value");
-			Transform course = t_p.Find ("Course").Find ("Value");
-			Transform esquive = t_p.Find ("Esquive").Find ("Value");
-			Transform tacle = t_p.Find ("Tacle").Find ("Value");
-			Player p = this.player;
-			SetStatsValue (passe, this.player.PasseBase);
-			SetStatsValue (course, this.player.SpeedBase);
-			SetStatsValue (esquive, this.player.EsquiveBase);
-			SetStatsValue (tacle, this.player.TacleBase);
+			Scrollbar passe = t_p.Find ("Passe").Find ("Value").GetComponent<Scrollbar>();
+			Scrollbar course = t_p.Find ("Course").Find ("Value").GetComponent<Scrollbar>();
+			Scrollbar esquive = t_p.Find ("Esquive").Find ("Value").GetComponent<Scrollbar>();
+			Scrollbar tacle = t_p.Find ("Tacle").Find ("Value").GetComponent<Scrollbar>();
+
+			passe.size = this.player.PasseBase / 10f;
+			course.size = this.player.SpeedBase / 10f;
+			esquive.size = this.player.EsquiveBase / 10f;
+			tacle.size = this.player.TacleBase / 10f;
+
+//			SetStatsValue (passe, this.player.PasseBase);
+//			SetStatsValue (course, this.player.SpeedBase);
+//			SetStatsValue (esquive, this.player.EsquiveBase);
+//			SetStatsValue (tacle, this.player.TacleBase);
 		}
 
 		private void SetStatsValue(Transform t, float value){

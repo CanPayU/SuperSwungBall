@@ -23,9 +23,6 @@ namespace Menu
             if (User.Instance.is_connected)
             {
                 account.SetActive(true);
-                account_username.text = User.Instance.username;
-                account_score.text = "Score : " + User.Instance.score;
-                account_phi.text = "MyPhi";
             }
             time = new Timer(60.0F, Inactive);
             time.start();
@@ -44,17 +41,6 @@ namespace Menu
 
         void Inactive()
         {
-            FadingManager.I.Fade("standing");
-        }
-
-        public void MorePhi()
-        {
-            PhiManager.I.More();
-        }
-
-        public void deconnect()
-        {
-            SaveLoad.reset_user();
             FadingManager.I.Fade("standing");
         }
     }

@@ -32,15 +32,47 @@ public static class HTTP
         string status = response.GetString("status");
         if (status == "success")
         {
-            completion(true);
             JSONObject user = response.GetObject("user");
-            User.Instance.update(user);
+			User.Instance.update(user);
+			completion(true);
         }
         else
-        {
-            completion(false);
-        }
+			completion(false);
     }
+
+	/// <summary> Envoie un code aux devices pour se connecter </summary>
+	/// <param name="username">Username de l'utilisateur</param>
+	/// <param name="completion">Fonction éxecuté lors de la réception param : <bool></param>
+	public static void AuthDeviceAsk(string username, Action<bool> completion)
+	{
+		string url = HOST_DOMAIN + "authDevice/ask/" + username + "/" + SystemInfo.deviceName + "/" + PRIVATE_KEY;
+		HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+		JSONObject response = execute(request);
+
+		string status = response.GetString("status");
+		completion(status == "success");
+	}
+
+	/// <summary> Vérifie si le code est valid </summary>
+	/// <param name="username">Username de l'utilisateur</param>
+	/// <param name="code">Code a 4 chiffre envoyé sur la device</param>
+	/// <param name="completion">Fonction éxecuté lors de la réception param : <bool></param>
+	public static void AuthDeviceReply(string username, string code, Action<bool> completion)
+	{
+		string url = HOST_DOMAIN + "authDevice/reply/" + username + "/" + code + "/" + PRIVATE_KEY;
+		HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+		JSONObject response = execute(request);
+
+		string status = response.GetString("status");
+		if (status == "success")
+		{
+			JSONObject user = response.GetObject("user");
+			User.Instance.update(user);
+			completion(true);
+		}
+		else
+			completion(false);
+	}
 
     /// <summary>
     /// Get les informations sur le serveur
@@ -63,9 +95,9 @@ public static class HTTP
         string status = response.GetString("status");
         if (status == "success")
         {
-            completion(true);
             JSONObject userjson = response.GetObject("user");
 			User.Instance.update(userjson, true);
+			completion(true);
         }
         else
         {
