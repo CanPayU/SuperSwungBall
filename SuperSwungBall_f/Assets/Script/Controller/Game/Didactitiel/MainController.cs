@@ -17,17 +17,15 @@ namespace GameScene.Didacticiel
 
 
         CameraController cameraController;
-
         InfoJoueurController infoJoueur;
-        // Panel info joueur​
-
+        Renderer render;
         Timer time;
+
         private float current_time;
         private string[,] tableau_1;
         private string[,] tableau_2;
         private int place;
         private int phase;
-        private bool premier_passage = true;
 
         private bool annim_started = false;
         private PlayerController player_phase_2;
@@ -35,7 +33,10 @@ namespace GameScene.Didacticiel
         // Use this for initialization
         void Start()
         {
-            cameraController = GameObject.Find("Main Camera").GetComponent<CameraController>();
+            render = this.GetComponent<Renderer>();
+            render.material.SetColor("_Color", Color.cyan);
+            render.enabled = false;
+            //cameraController = GameObject.Find("Main Camera").GetComponent<CameraController>();
             phase = 1;
             place = 0;
             current_time = 0;
@@ -43,16 +44,16 @@ namespace GameScene.Didacticiel
             //text
             tableau_1 = new string[,] {
             {"Bienvenue dans le didactitiel","1" },
-            {"Comment jouer ?","1" }, 
-          //  {"Le but du jeu est de marquer 3 points", "1" }, 
-            //{"Chaque joueur contrôle son équipe", "1" }, 
-            //{"Commençons par voir les contrôles \n d'un Swungman", "1" }, 
+            {"Comment jouer ?","1" },
+            {"Le but du jeu est de marquer 3 points", "1" },
+            {"Chaque joueur contrôle son équipe", "1" },
+            {"Commençons par voir les contrôles \n d'un Swungman", "1" },
             {"", "0" }};
 
             tableau_2 = new string[,] {
             {"Ca c'est un Swungman, \n appuie dessus pour pouvoir le contrôler","1" },
-           {"Les capacités de déplacements sont représentées \n par la couleur bleu", "1" },
-         //   {"Appuie sur le bouton bleu 3 fois pour le faire \n courire le plus vite et le plus loin possible", "1" },
+            {"Les capacités de déplacements sont représentées \n par la couleur bleu", "1" },
+            {"Appuie sur le bouton bleu 3 fois pour le faire \n courire le plus vite et le plus loin possible", "1" },
             {"Déplace le Swungman jusqu'ici", "1"},
             {"","0" } };
 
@@ -74,6 +75,12 @@ namespace GameScene.Didacticiel
                     break;
                 case 4:
                     phase4();
+                    break;
+                case 5:
+                    phase5();
+                    break;
+                case 6:
+                    phase6();
                     break;
             }
             time.update();
@@ -101,19 +108,24 @@ namespace GameScene.Didacticiel
         }
         void phase3()
         {
-            if (premier_passage)
-            {
-                screentext.transform.position = new Vector2(930, 700);
-                premier_passage = false;
-                screentext.text = message(tableau_2);
-            }
-            text(tableau_2);
+            screentext.transform.position = new Vector2(930, 700);
+            screentext.text = message(tableau_2);
+            phase++;
         }
         void phase4()
         {
-            this.GetComponent<Renderer>().material.SetColor("_SpecColor", Color.red);
+            text(tableau_2);
         }
-
+        void phase5()
+        {
+            render.enabled = true;
+            phase++;
+        }
+        void phase6() //collision, pas encore fait. Help me Corentin ?
+        {
+            if (this.gameObject)
+                phase++;
+        }
         void text(string[,] tableau)
         {
             float temp = temps(tableau);
