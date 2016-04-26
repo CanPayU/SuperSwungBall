@@ -72,6 +72,12 @@ public class DebugManager : MonoBehaviour
 			Settings s = Settings.Instance;
 			Debug.Log("TeamInfo : default:" + s.Default_Team.ToStringFull());
         }
+
+
+		if (Input.GetKeyDown (KeyCode.T))
+			StartCoroutine (FadingManager.I.FadeInAsync ());
+		if (Input.GetKeyDown (KeyCode.O))
+			StartCoroutine (FadingManager.I.FadeOutAsync ());
     }
 #endif
 }

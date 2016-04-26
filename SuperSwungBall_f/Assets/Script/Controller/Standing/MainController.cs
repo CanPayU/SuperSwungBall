@@ -35,7 +35,7 @@ namespace Standing
         // Update is called once per frame
         void Update()
         {
-            if (Input.anyKey)
+			if (Input.anyKeyDown && !Input.GetKey(KeyCode.LeftControl))
             {
 
                 if (!this.authenticate)
@@ -46,7 +46,7 @@ namespace Standing
                 }
 
                 if (this.sync_ended)
-                    FadingManager.I.Fade();
+					FadingManager.I.Fade();
             }
         }
     }
