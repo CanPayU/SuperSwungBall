@@ -41,7 +41,7 @@ namespace Menu
 
         void Inactive()
         {
-            FadingManager.I.Fade("standing");
+			FadingManager.Instance.Fade("standing");
         }
     }
 }

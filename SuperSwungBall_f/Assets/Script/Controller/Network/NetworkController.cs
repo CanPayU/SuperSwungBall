@@ -104,14 +104,14 @@ namespace Network
             room_joined = true;
             if (PhotonNetwork.playerList.Length > 1)
             {
-                FadingManager.I.Fade(scene);
+				FadingManager.Instance.Fade(scene);
             }
         }
         void OnPhotonPlayerConnected(PhotonPlayer other)
         {
             if (PhotonNetwork.playerList.Length > 1)
             {
-                FadingManager.I.Fade(scene);
+				FadingManager.Instance.Fade(scene);
             }
         }
 

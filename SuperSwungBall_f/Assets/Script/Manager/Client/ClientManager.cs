@@ -72,7 +72,7 @@ public class ClientManager : MonoBehaviour, IClientListener
             {
                 PlayerPrefs.SetInt("Net_State", 2);
                 PlayerPrefs.SetString("Net_RoomID", roomID);
-                FadingManager.I.Fade("network");
+				FadingManager.Instance.Fade("network");
             }
             else
             {

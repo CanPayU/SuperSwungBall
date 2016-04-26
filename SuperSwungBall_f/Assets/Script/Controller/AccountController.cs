@@ -26,7 +26,7 @@ public class AccountController : MonoBehaviour
 	{
 		Debug.Log ("OnDisconnect");    
 		SaveLoad.reset_user();
-		FadingManager.I.Fade("standing");
+		FadingManager.Instance.Fade("standing");
 	}
 
 	private void SetUp()
@@ -42,6 +42,6 @@ public class AccountController : MonoBehaviour
 
 	public void MorePhi()
 	{
-		PhiManager.I.More();
+		PhiManager.Instance.More();
 	}
 }

@@ -150,7 +150,7 @@ namespace GameScene.Multi
         }
         public void exit()
         {
-            FadingManager.I.Fade(scene);
+			FadingManager.Instance.Fade(scene);
 
             PhotonNetwork.LeaveRoom();
             PhotonNetwork.Disconnect();

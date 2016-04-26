@@ -46,7 +46,7 @@ namespace Standing
                 }
 
                 if (this.sync_ended)
-					FadingManager.I.Fade();
+					FadingManager.Instance.Fade();
             }
         }
     }

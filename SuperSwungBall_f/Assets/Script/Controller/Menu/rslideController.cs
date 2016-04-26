@@ -146,7 +146,7 @@ public class RslideController : MonoBehaviour
                 PlayerPrefs.SetInt("Net_State", 1);
                 PlayerPrefs.SetString("Net_RoomID", RoomID);
                 client.InviteFriend(friend, RoomID);
-                FadingManager.I.Fade("network");
+				FadingManager.Instance.Fade("network");
             }
             else
                 Notification.Create(NotificationType.Box, "Erreur lors de l'invitation", content: "Impossible d'inviter " + username + ".\nIl est possible que l'utilisateur soit déjà occupé");

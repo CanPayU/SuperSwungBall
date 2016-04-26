@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class DebugManager : MonoBehaviour
+using Singleton;
+
+public class DebugManager : Singleton<DebugManager>
 {
     /// <summary>
     /// Test de class static
@@ -52,9 +54,9 @@ public class DebugManager : MonoBehaviour
 
         // -- MusicManager
         if (Input.GetKeyDown(KeyCode.C))
-            MusicManager.I.Stop_Music();
+			MusicManager.Instance.Stop_Music();
         if (Input.GetKeyDown(KeyCode.F))
-            MusicManager.I.Clip = "Musics/Team/PSG/Allez Paris [classic]";
+			MusicManager.Instance.Clip = "Musics/Team/PSG/Allez Paris [classic]";
 
         // -- NotificationState
         if (Input.GetKeyDown(KeyCode.W))
@@ -75,9 +77,9 @@ public class DebugManager : MonoBehaviour
 
 
 		if (Input.GetKeyDown (KeyCode.T))
-			StartCoroutine (FadingManager.I.FadeInAsync ());
+			StartCoroutine (FadingManager.Instance.FadeInAsync ());
 		if (Input.GetKeyDown (KeyCode.O))
-			StartCoroutine (FadingManager.I.FadeOutAsync ());
+			StartCoroutine (FadingManager.Instance.FadeOutAsync ());
     }
 #endif
 }

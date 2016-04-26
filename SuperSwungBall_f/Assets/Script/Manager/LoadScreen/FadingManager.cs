@@ -2,26 +2,10 @@
 using UnityEngine.SceneManagement;
 using System.Collections;
 
-public class FadingManager : MonoBehaviour
+using Singleton;
+
+public class FadingManager : Singleton<FadingManager>
 {
-    private static FadingManager instance = null;
-    /// <summary>
-    /// Instance static de la class
-    /// </summary>
-    public static FadingManager I
-    {
-        get { return instance; }
-    }
-
-    void Awake()
-    {
-        if ((instance != null && instance != this))
-        { Destroy(this.gameObject); return; }
-        else
-            instance = this;
-        DontDestroyOnLoad(this.gameObject);
-    }
-
     public Texture2D fadeOutTexture;
 	public float fadeSpeed = 0.8f;
 	/// <summary> Delai minimum en seconde </summary>

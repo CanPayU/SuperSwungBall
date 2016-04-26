@@ -28,7 +28,7 @@ namespace Menu
 
         public void Fade(string scene = "menu")
         {
-            FadingManager.I.Fade(scene);
+			FadingManager.Instance.Fade(scene);
         }
 
         private void OnChangeNotificationState()

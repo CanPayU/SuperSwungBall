@@ -1,33 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MusicManager : MonoBehaviour
-{
-    private static MusicManager instance = null;
-    /// <summary>
-    /// Instance static de la class
-    /// </summary>
-    public static MusicManager I
-    {
-        get { return instance; }
-    }
+using Singleton;
 
+public class MusicManager : Singleton<MusicManager>
+{
     private AudioSource source_;
     private AudioClip clip_;
 
-    void Awake()
-    {
-        if ((instance != null && instance != this))
-        {
-            Destroy(this.gameObject);
-            return;
-        }
-        else
-        {
-            instance = this;
-        }
-        DontDestroyOnLoad(this.gameObject);
-    }
 
     void Start()
     {

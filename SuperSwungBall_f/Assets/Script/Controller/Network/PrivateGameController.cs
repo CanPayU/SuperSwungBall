@@ -51,14 +51,14 @@ public class PrivateGameController : MonoBehaviour
     {
         if (PhotonNetwork.playerList.Length > 1)
         {
-            FadingManager.I.Fade(scene);
+			FadingManager.Instance.Fade(scene);
         }
     }
     void OnPhotonPlayerConnected(PhotonPlayer other)
     {
         if (PhotonNetwork.playerList.Length > 1)
         {
-            FadingManager.I.Fade(scene);
+			FadingManager.Instance.Fade(scene);
         }
 
     }

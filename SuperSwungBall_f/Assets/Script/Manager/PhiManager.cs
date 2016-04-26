@@ -1,20 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PhiManager : MonoBehaviour
-{
-    private static PhiManager instance = new PhiManager();
+using Singleton;
 
+public class PhiManager : Singleton<PhiManager>
+{
     private GameObject more_panel;
 
     void Start()
     {
-        instance.more_panel = Resources.Load("Prefabs/Setting/MorePhi") as GameObject;
+        more_panel = Resources.Load("Prefabs/Setting/MorePhi") as GameObject;
     }
 
     public void More()
     {
-        GameObject gm = Instantiate(instance.more_panel);
+        GameObject gm = Instantiate(more_panel);
         Transform Canvas = GameObject.FindObjectOfType<Canvas>().transform;
         gm.transform.SetParent(Canvas, false);
     }
@@ -58,9 +58,4 @@ public class PhiManager : MonoBehaviour
 		});
 		return true;
 	}
-
-    public static PhiManager I
-    {
-        get { return instance; }
-    }
 }

@@ -53,7 +53,7 @@ namespace Standing
                 if (success)
                 {
                     SaveLoad.save_user();
-                    FadingManager.I.Fade();
+					FadingManager.Instance.Fade();
                 }
                 else
                 {
@@ -78,7 +78,7 @@ namespace Standing
                             if (success_reply)
                             {
                                 SaveLoad.save_user();
-                                FadingManager.I.Fade();
+								FadingManager.Instance.Fade();
                             }
                             else
                             {
