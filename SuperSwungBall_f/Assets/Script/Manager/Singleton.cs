@@ -15,10 +15,11 @@ namespace Singleton
 					if (objects.Length > 0) {
 						_instance = objects[0];
 						if (objects.Length > 1) {
-							Debug.LogWarning("There is more than one instance of Singleton of type \"" + type + "\". Keeping the first. Destroying the others.");
+							Debug.LogWarning ("There is more than one instance of Singleton of type \"" + type + "\". Keeping the first. Destroying the others.");
 							for (var i = 1; i < objects.Length; i++)
-								DestroyImmediate(objects[i].gameObject);
+								DestroyImmediate (objects [i].gameObject);
 						}
+						DontDestroyOnLoad(objects [0].gameObject);
 						return _instance;
 					}
 
@@ -30,6 +31,10 @@ namespace Singleton
 				}
 				return _instance;
 			}
+		}
+
+		void Awake(){
+
 		}
 	}
 }
