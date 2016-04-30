@@ -375,10 +375,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ChatAppId: 
   ChannelsToJoinOnConnect:
-  - 6d61696e
+  - main
   HistoryLengthToFetch: 0
   DemoPublishOnSubscribe: 1
   GuiRect:
+    serializedVersion: 2
     x: 0
     y: 0
     width: 400

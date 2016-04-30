@@ -1490,34 +1490,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Colors:
-  - r: 0.121107265
-    g: 0.47374636
-    b: 0.6862745
-    a: 1
-  - r: 0.6862745
-    g: 0.121107265
-    b: 0.38558665
-    a: 1
-  - r: 0.121107265
-    g: 0.6862745
-    b: 0.33206108
-    a: 1
-  - r: 0.62802607
-    g: 0.6862745
-    b: 0.121107265
-    a: 1
+  - {r: 0.121107265, g: 0.47374636, b: 0.6862745, a: 1}
+  - {r: 0.6862745, g: 0.121107265, b: 0.38558665, a: 1}
+  - {r: 0.121107265, g: 0.6862745, b: 0.33206108, a: 1}
+  - {r: 0.62802607, g: 0.6862745, b: 0.121107265, a: 1}
   ShowColorLabel: 1
   ColorLabelArea:
+    serializedVersion: 2
     x: 0
     y: 80
     width: 100
     height: 200
   img: {fileID: 2800000, guid: e824c90b700b59a48bb75bf8ac3b5682, type: 3}
-  MyColor:
-    r: 0.5
-    g: 0.5
-    b: 0.5
-    a: 1
+  MyColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
 --- !u!1 &1415367350
 GameObject:
   m_ObjectHideFlags: 0
