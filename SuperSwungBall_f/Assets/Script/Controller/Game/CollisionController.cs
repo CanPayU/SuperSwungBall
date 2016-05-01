@@ -83,56 +83,41 @@ namespace GameScene
                 transform.FindChild("perso").transform.LookAt(new Vector3(adversaireCollider.transform.position.x, transform.FindChild("perso").position.y, adversaireCollider.transform.position.z));
 
                 float attaqueAdverse = Mathf.Max(adversaire.Tacle, adversaire.Esquive);
-                bool porteurDeBall = transform.FindChild("perso").transform.FindChild("Ball") != null;
                 if (player.Tacle > player.Esquive)
                 {
-                    Debug.Log(player.Tacle);
                     if (player.Tacle > attaqueAdverse)
                     {
-                        //Attaque réussit
-                        playerController.Animation("Attaque Reussit", 2);
-                        Debug.Log(name + " réussit son tacle");
-                    }
-                    else
-                    {
-                        //Attaque ratée
-                        playerController.Animation("Attaque Echec", 4);
-                        Debug.Log(name + " rate son tacle");
-                        Debug.Log(porteurDeBall);
-                        if (porteurDeBall)
-                        {
-                            GameObject ball = transform.FindChild("perso").transform.FindChild("Ball").gameObject;
-                            ball.transform.localPosition = new Vector3(3.5f, 1.5f, -10f);
-                            ball.transform.parent = null;
-                            ball.GetComponent<Collider>().enabled = true;
-                        }
-
+                        //Attaque Réussit
+                        Debug.Log(name + "réussit son tacle!");
+                        playerController.Animation("Attaque Reussit", 2f);
+                        adversaireCollider.gameObject.GetComponent<CollisionController>().echec("Esquive");
                     }
                 }
                 else
                 {
-                    Debug.Log(player.Esquive);
                     if (player.Esquive > attaqueAdverse)
                     {
                         //Esquive Réussit
-                        playerController.Animation("Esquive Reussit", 1);
-                        Debug.Log(name + " réussit son esquive");
-                    }
-                    else
-                    {
-                        //Esquive ratée
-                        playerController.Animation("Esquive Echec", 4);
-                        Debug.Log(name + " rate son esquive");
-                        Debug.Log(porteurDeBall);
-                        if (porteurDeBall)
-                        {
-                            GameObject ball = transform.FindChild("perso").transform.FindChild("Ball").gameObject;
-                            ball.transform.localPosition = new Vector3(3.5f, 1.5f, -10f);
-                            ball.transform.parent = null;
-                            ball.GetComponent<Collider>().enabled = true;
-                        }
+                        Debug.Log(name + "réussit son esquive!");
+                        playerController.Animation("Esquive Reussit", 0.7f);
+                        adversaireCollider.gameObject.GetComponent<CollisionController>().echec("Attaque");
                     }
                 }
+            }
+        }
+
+        public void echec(string animation)
+        {
+            bool porteurDeBall = transform.FindChild("perso").transform.FindChild("Ball") != null;
+            playerController.Animation(animation + " Echec", 4);
+            Debug.Log(name + " rate son" + animation);
+            if (porteurDeBall)
+            {
+                Debug.Log(name + "perd la balle!");
+                GameObject ball = transform.FindChild("perso").transform.FindChild("Ball").gameObject;
+                ball.transform.localPosition = new Vector3(3.5f, 1.5f, -10f);
+                ball.transform.parent = null;
+                ball.GetComponent<Collider>().enabled = true;
             }
         }
 
