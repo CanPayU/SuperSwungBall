@@ -134,7 +134,7 @@ namespace GameScene
                             }
                             menuDisplayed = true;
                             mouseState = menuController.set_target(hit);//renvoit true si le joueur clic sur un pointeur et set le 'target' / 'zone_target' aux 'pointeur' / 'zone_du_pointeur' du menu_controller (false et null sinon)
-                            if(mouseState)
+                            if (mouseState)
                             {
                                 limiteTerrain.SetActive(true);//activation des limites du terrain (pour empêcher le pointeur de sortir)
                                 Physics.Raycast(ray, out hit, 100);
@@ -268,7 +268,10 @@ namespace GameScene
             if (arrivalPoint != transform.position)
             {
                 transform.FindChild("perso").LookAt(new Vector3(arrivalPoint.x, transform.FindChild("perso").position.y, arrivalPoint.z));
-                animationDeplacement = "Course"; // animation de déplacement en fonction de la vitesse
+                animationDeplacement = "Marche";
+                if (speed > 1)
+                    animationDeplacement = "Course"; // animation de déplacement en fonction de la vitesse
+                    
                 anim.Play(animationDeplacement);
                 movement = true;
             }
