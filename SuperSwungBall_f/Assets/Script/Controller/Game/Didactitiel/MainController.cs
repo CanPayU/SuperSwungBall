@@ -44,17 +44,17 @@ namespace GameScene.Didacticiel
             //text
             tableau_1 = new string[,] {
             {"Bienvenue dans le didactitiel","1" },
-            {"Comment jouer ?","1" },
-            {"Le but du jeu est de marquer 3 points", "1" },
-            {"Chaque joueur contrôle son équipe", "1" },
-            {"Commençons par voir les contrôles \n d'un Swungman", "1" },
+        //    {"Comment jouer ?","1" },
+          //  {"Le but du jeu est de marquer 3 points", "1" },
+            //{"Chaque joueur contrôle son équipe", "1" },
+            //{"Commençons par voir les contrôles \n d'un Swungman", "1" },
             {"", "0" }};
 
             tableau_2 = new string[,] {
             {"Ca c'est un Swungman, \n appuie dessus pour pouvoir le contrôler","1" },
-            {"Les capacités de déplacements sont représentées \n par la couleur bleu", "1" },
-            {"Appuie sur le bouton bleu 3 fois pour le faire \n courire le plus vite et le plus loin possible", "1" },
-            {"Déplace le Swungman jusqu'ici", "1"},
+            //{"Les capacités de déplacements sont représentées \n par la couleur bleu", "1" },
+          //  {"Appuie sur le bouton bleu 3 fois pour le faire \n courire le plus vite et le plus loin possible", "1" },
+            //{"Déplace le Swungman jusqu'ici", "1"},
             {"","0" } };
 
             screentext.text = message(tableau_1);
@@ -169,6 +169,11 @@ namespace GameScene.Didacticiel
             annim_started = true;
             time.start();
             this.player_phase_2.start_Anim();
+        }
+        void OnTriggerEnter()
+        {
+            phase++;
+            Debug.Log("bite");
         }
     }
 }

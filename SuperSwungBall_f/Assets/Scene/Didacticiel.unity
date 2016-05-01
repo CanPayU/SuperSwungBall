@@ -97,6 +97,7 @@ GameObject:
   - 114: {fileID: 4225440}
   - 33: {fileID: 4225443}
   - 23: {fileID: 4225442}
+  - 54: {fileID: 4225444}
   m_Layer: 0
   m_Name: Main
   m_TagString: Untagged
@@ -111,7 +112,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 4225438}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5, y: 0.6, z: 10}
+  m_LocalPosition: {x: 1.68, y: -0.29, z: 4.41}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -176,6 +177,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 4225438}
   m_Mesh: {fileID: 4300122, guid: 236d6ea799e7d41b6be74170910ed94d, type: 3}
+--- !u!54 &4225444
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 4225438}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &16067540
 GameObject:
   m_ObjectHideFlags: 0
