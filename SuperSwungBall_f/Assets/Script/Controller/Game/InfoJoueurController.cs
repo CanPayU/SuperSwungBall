@@ -13,6 +13,8 @@ namespace GameScene
 
         private Dictionary<string, GameObject[]> Stats;
         private Text playername;
+        private float scaleStats;
+
 
         private RaycastHit hit;
 
@@ -34,6 +36,7 @@ namespace GameScene
             initializeDictionary("tacle", 7, 10);
             initializeDictionary("esquive", 10, 13);
             playername = transform.GetChild(13).gameObject.GetComponent<Text>();
+            scaleStats = 1f;
         }
         void Update()
         {
@@ -107,10 +110,10 @@ namespace GameScene
 
         private void SetStats(Player p) // set la taille et la position des images de stat
         {
-            float speed = p.SpeedBase;
-            float passe = p.PasseBase;
-            float tacle = p.TacleBase;
-            float esquive = p.EsquiveBase;
+            float speed = p.SpeedBase * scaleStats;
+            float passe = p.PasseBase * scaleStats;
+            float tacle = p.TacleBase * scaleStats;
+            float esquive = p.EsquiveBase * scaleStats;
             Stats["sprint"][0].transform.localScale = new Vector3(speed, Stats["sprint"][0].transform.localScale.y, Stats["sprint"][0].transform.localScale.z);
             Stats["sprint"][0].transform.localPosition = new Vector3(20, Stats["sprint"][0].transform.localPosition.y, Stats["sprint"][0].transform.localPosition.z);
             for (int i = 0; i < 3; i++)

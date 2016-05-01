@@ -111,43 +111,43 @@ public class Player
     #region Getters
     public float Speed
     {
-		get { return (float)finalStats.Course / 10; }
+		get { return (float)finalStats.Course / 100; }
     }
     public float Esquive
     {
-		get { return (float)finalStats.Esquive / 10; }
+		get { return (float)finalStats.Esquive / 100; }
     }
     public float Passe
     {
-		get { return (float)finalStats.Passe / 10; }
+		get { return (float)finalStats.Passe / 100; }
     }
     public float Tacle
     {
-		get { return (float)finalStats.Tacle / 10; }
+		get { return (float)finalStats.Tacle / 100; }
     }
     public float SpeedBase
     {
-		get { return (float)DEFAULTSTATS.Course / 10; }
+		get { return (float)DEFAULTSTATS.Course / 100; }
     }
     public float EsquiveBase
     {
-		get { return (float)DEFAULTSTATS.Esquive / 10; }
+		get { return (float)DEFAULTSTATS.Esquive / 100; }
     }
     public float PasseBase
     {
-		get { return (float)DEFAULTSTATS.Passe / 10; }
+		get { return (float)DEFAULTSTATS.Passe / 100; }
     }
     public float TacleBase
     {
-		get { return (float)DEFAULTSTATS.Tacle / 10; }
+		get { return (float)DEFAULTSTATS.Tacle / 100; }
     }
     public float ZoneDeplacement
     {
-		get { return (float)finalStats.Course / 10; }
+		get { return (float)finalStats.Course / 100; }
     }
     public float ZonePasse
     {
-		get { return (float)finalStats.Passe / 10; }
+		get { return (float)finalStats.Passe / 100; }
     }
     public GameObject Gm
     {
