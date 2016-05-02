@@ -40,16 +40,16 @@ namespace Create_Team
             player_name.text = actual_player.Name;
 
 			Scrollbar sb = passe_stat.GetComponent<Scrollbar>();
-			sb.size = actual_player.PasseBase / 10f;
+			sb.size = actual_player.PasseBase;
 
 			sb = course_stat.GetComponent<Scrollbar>();
-			sb.size = actual_player.SpeedBase / 10f;
+			sb.size = actual_player.SpeedBase;
 
 			sb = tacle_stat.GetComponent<Scrollbar>();
-			sb.size = actual_player.TacleBase / 10f;
+			sb.size = actual_player.TacleBase;
 
 			sb = esquive_stat.GetComponent<Scrollbar>();
-			sb.size = actual_player.EsquiveBase / 10f;
+			sb.size = actual_player.EsquiveBase;
 
         }
 

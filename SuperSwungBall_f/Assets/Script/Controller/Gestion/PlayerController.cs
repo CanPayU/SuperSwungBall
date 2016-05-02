@@ -84,10 +84,10 @@ namespace Gestion
 			Scrollbar esquive = t_p.Find ("Esquive").Find ("Value").GetComponent<Scrollbar>();
 			Scrollbar tacle = t_p.Find ("Tacle").Find ("Value").GetComponent<Scrollbar>();
 
-			passe.size = this.player.PasseBase / 10f;
-			course.size = this.player.SpeedBase / 10f;
-			esquive.size = this.player.EsquiveBase / 10f;
-			tacle.size = this.player.TacleBase / 10f;
+			passe.size = this.player.PasseBase;
+			course.size = this.player.SpeedBase;
+			esquive.size = this.player.EsquiveBase;
+			tacle.size = this.player.TacleBase;
 
 //			SetStatsValue (passe, this.player.PasseBase);
 //			SetStatsValue (course, this.player.SpeedBase);

@@ -144,9 +144,12 @@ namespace GameScene.Solo
 
                 float posX = ((-6) + x * 5) / 1.3f;
                 float posY = (cote * 22 + (y * 3 * -cote)) / 1.3f;
-                // ---
-
-                GameObject play0 = Instantiate(player1_prefab, new Vector3(posX, 1F, posY), Quaternion.identity) as GameObject;
+				// ---
+				GameObject play0 = Resources.Load("Prefabs/Solo/" + player_t0.UID) as GameObject;
+				if (play0 == null)
+					play0 = Instantiate (player1_prefab, new Vector3 (posX, 1F, posY), Quaternion.identity) as GameObject;
+				else
+					play0 = Instantiate (play0, new Vector3 (posX, 1F, posY), Quaternion.identity) as GameObject;
                 player_t0.Team_id = 0;
                 player_t0.Name += "-" + (++i);
                 play0.name = player_t0.Name + "-" + player_t0.Team_id;
@@ -165,7 +168,9 @@ namespace GameScene.Solo
                 float posX = ((-6) + x * 5) / 1.3f;
                 float posY = (cote * 22 + (y * 3 * -cote)) / 1.3f;
                 // ---
-                GameObject play1 = Instantiate(player2_prefab, new Vector3(posX, 1F, -posY), Quaternion.identity) as GameObject;
+				GameObject play1 = Resources.Load("Prefabs/Solo/" + player_t1.UID) as GameObject;
+				if (play1 == null)
+                	play1 = Instantiate(player2_prefab, new Vector3(posX, 1F, -posY), Quaternion.identity) as GameObject;
                 player_t1.Team_id = 1;
                 player_t1.Name += "-" + (++i);
                 play1.name = player_t1.Name + "-" + player_t1.Team_id;
