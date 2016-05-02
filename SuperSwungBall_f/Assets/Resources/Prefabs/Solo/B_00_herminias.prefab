@@ -373,7 +373,7 @@ GameObject:
   - 114: {fileID: 11494010}
   - 114: {fileID: 11483432}
   m_Layer: 0
-  m_Name: Herminias
+  m_Name: B_00_herminias
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

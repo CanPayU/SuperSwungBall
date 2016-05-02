@@ -324,7 +324,7 @@ GameObject:
   - 114: {fileID: 11494358}
   - 114: {fileID: 11412296}
   m_Layer: 0
-  m_Name: Philonis
+  m_Name: B_03_philonis
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
