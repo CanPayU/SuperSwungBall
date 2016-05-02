@@ -32,12 +32,15 @@ namespace GameScene.Multi
         private PhotonPlayer local_player;
         private PhotonPlayer other_player;
 
+		private User ennemy;
+
         // Use this for initialization
         void Start()
         {
             panel.SetActive(false);
             other_player = PhotonNetwork.otherPlayers[0];
             local_player = PhotonNetwork.player;
+			ennemy = (User)other_player.allProperties ["User"];
         }
 
         public void on_end(End type, object value = null)
@@ -76,20 +79,39 @@ namespace GameScene.Multi
 
         void calculate_point()
         {
+			int newPhi = User.Instance.phi;
             if (!win)
             {
-                score = 0;
+				if (ennemy.score > User.Instance.score) {
+					this.score = -50;
+					newPhi += 600;
+				}
+				else {
+					this.score = -150;
+					newPhi += 250;
+				}
             }
             else
-            {
-                score = 10;
+			{
+				if (ennemy.score > User.Instance.score) {
+					this.score = 200;
+					newPhi += 1200;
+				} else {
+					this.score = 60;
+					newPhi += 800;
+				}
             }
 
             HTTP.SyncScore(score, (success) =>
             {
                 if (!success)
                     Debug.LogError("La synchronisation des scores a échoué");//Notification.danger("Erreur de synchronisation");
-                btn_quit.SetActive(true);
+					HTTP.SetPhi(newPhi, (success_phi) =>
+					{
+							if (!success_phi)
+								Debug.LogError("La synchronisation des phis a échoué");//Notification.danger("Erreur de synchronisation");
+							btn_quit.SetActive(true);
+					});
             });
         }
 
