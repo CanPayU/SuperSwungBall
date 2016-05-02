@@ -297,8 +297,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 462564127}
   m_HandleRect: {fileID: 462564126}
   m_Direction: 0
-  m_Value: 1
-  m_Size: 0
+  m_Value: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -522,6 +522,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 377527704}
   - 218: {fileID: 377527706}
+  - 154: {fileID: 377527705}
   m_Layer: 0
   m_Name: Terrain
   m_TagString: Untagged
@@ -541,6 +542,16 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1122352629}
   m_RootOrder: 3
+--- !u!154 &377527705
+TerrainCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 377527703}
+  m_Material: {fileID: 0}
+  m_Enabled: 1
+  m_TerrainData: {fileID: 15600000, guid: 2119e458681d5a244a589a562c0b0e34, type: 2}
+  m_EnableTreeColliders: 1
 --- !u!218 &377527706
 Terrain:
   m_ObjectHideFlags: 0
@@ -1243,7 +1254,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 658773685}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1486,7 +1497,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef9c967b26fd9a84ba00703b76302b81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player1_prefab: {fileID: 153914, guid: fd1487a7f54d1534998abfe0c4f990a7, type: 2}
+  player1_prefab: {fileID: 160584, guid: 90f958c964fb7404b9368e6d82e09ee5, type: 2}
   player2_prefab: {fileID: 128906, guid: 7c05f3e8c5ea80c4ca489da02e985edb, type: 2}
   ball_prefab: {fileID: 132026, guid: 1cb4de539f61142409a8341ccf935429, type: 2}
   score: {fileID: 1720524803}
