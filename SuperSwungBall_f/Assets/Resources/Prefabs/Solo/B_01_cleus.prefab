@@ -340,7 +340,7 @@ GameObject:
   - 114: {fileID: 11497454}
   - 114: {fileID: 11437916}
   m_Layer: 0
-  m_Name: B_01_cleus
+  m_Name: Cleus
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

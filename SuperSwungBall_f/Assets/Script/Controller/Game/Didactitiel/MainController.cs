@@ -43,17 +43,17 @@ namespace GameScene.Didacticiel
             time = new Timer(10.0F, end_time);
             //text
             tableau_1 = new string[,] {
-            {"Bienvenue dans le didacticiel","1" },
+            {"Bienvenue dans le didacticiel","2.5" },
             {"Comment jouer ?","1" },
-            {"Le but du jeu est de marquer 3 points", "1" },
-            {"Chaque joueur contrôle son équipe", "1" },
-            {"Commençons par voir les contrôles \n d'un Swungman", "1" },
+            {"Le but du jeu est de marquer 3 points", "2" },
+            {"Chaque joueur contrôle son équipe", "2" },
+            {"Commençons par voir les contrôles \n d'un Swungman", "2" },
             {"", "0" }};
 
             tableau_2 = new string[,] {
-            {"Ca c'est un Swungman, \n appuie dessus pour pouvoir le contrôler","1" },
-            {"Les capacités de déplacements sont représentées \n par la couleur bleu", "1" },
-            {"Appuie sur le bouton bleu 3 fois pour le faire \n courire le plus vite et le plus loin possible", "1" },
+            {"Ca c'est un Swungman, \n appuie dessus pour pouvoir le contrôler","2" },
+            {"Les capacités de déplacements sont représentées \n par la couleur bleu", "2" },
+            {"Appuie sur le bouton bleu 3 fois pour le faire \n courire le plus vite et le plus loin possible", "2" },
             {"Déplace le Swungman jusqu'ici", "1"},
             {"","0" } };
 

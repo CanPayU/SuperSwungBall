@@ -80,19 +80,21 @@ namespace GameScene.Solo
             time.reset();
 
             if (annim_started)
-            {
+            {// start Reflexion
                 Dictionary<int, Team> teams = Game.Instance.Teams;
                 foreach (KeyValuePair<int, Team> team in teams)
                 {
                     team.Value.end_move_players();
                 }
                 annim_started = false;
+				time = new Timer(60.0F, end_time);
                 time.start();
                 Debug.Log("Start reflexion");
                 cameraController.end_anim();
             }
             else
-            {
+            {// start Annimation
+				time = new Timer(10.0F, end_time);
                 annim_started = true;
                 start_annim();
             }
