@@ -43,7 +43,7 @@ namespace GameScene.Didacticiel
             time = new Timer(10.0F, end_time);
             //text
             tableau_1 = new string[,] {
-            {"Bienvenue dans le didactitiel","1" },
+            {"Bienvenue dans le didacticiel","1" },
             {"Comment jouer ?","1" },
             {"Le but du jeu est de marquer 3 points", "1" },
             {"Chaque joueur contrôle son équipe", "1" },
