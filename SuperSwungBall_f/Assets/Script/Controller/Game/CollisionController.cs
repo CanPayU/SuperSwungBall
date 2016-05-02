@@ -5,13 +5,18 @@ namespace GameScene
 {
     public class CollisionController : MonoBehaviour
     {
+		ChatController chatController;
         Player player;
         PlayerController playerController; // évite le GetComponent<>()
         List<Collider> playerMet; // joueurs rencontré (uniquement ceux combattus) lors du tour. Un player de peut pas tacler 2 fois le même adversaire en 1 seul tour.
         bool goal;
         int premiereFrames;
+
+
         void Start()
         {
+			if (PhotonNetwork.inRoom)
+				chatController = GameObject.Find ("Main").GetComponent<ChatController> ();
             playerController = GetComponent<PlayerController>();
             player = playerController.Player;
             premiereFrames = 5;
@@ -87,7 +92,9 @@ namespace GameScene
                 {
                     if (player.Tacle > attaqueAdverse)
                     {
-                        //Attaque Réussit
+						//Attaque Réussit
+						if (PhotonNetwork.inRoom)
+							chatController.InstanciateMessage (player.Name + " réussit son tacle !", ChatController.Chat.EVENT);
                         Debug.Log(name + "réussit son tacle!");
                         playerController.Animation("Attaque Reussit", 2f);
                         adversaireCollider.gameObject.GetComponent<CollisionController>().echec("Esquive");
@@ -98,6 +105,8 @@ namespace GameScene
                     if (player.Esquive > attaqueAdverse)
                     {
                         //Esquive Réussit
+						if (PhotonNetwork.inRoom)
+							chatController.InstanciateMessage (player.Name + " réussit son esquive !", ChatController.Chat.EVENT);
                         Debug.Log(name + "réussit son esquive!");
                         playerController.Animation("Esquive Reussit", 0.7f);
                         adversaireCollider.gameObject.GetComponent<CollisionController>().echec("Attaque");
@@ -112,7 +121,9 @@ namespace GameScene
             playerController.Animation(animation + " Echec", 4);
             Debug.Log(name + " rate son" + animation);
             if (porteurDeBall)
-            {
+			{
+				if (PhotonNetwork.inRoom)
+					chatController.InstanciateMessage (player.Name + " perd la balle !", ChatController.Chat.EVENT);
                 Debug.Log(name + "perd la balle!");
                 GameObject ball = transform.FindChild("perso").transform.FindChild("Ball").gameObject;
                 ball.transform.localPosition = new Vector3(3.5f, 1.5f, -10f);
