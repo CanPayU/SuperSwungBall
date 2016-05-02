@@ -108,10 +108,13 @@ namespace Gestion
 			Transform player = this.swungMen.transform;
 			player.SetParent(transform, false);
 
-			RectTransform rect = player.GetComponent<RectTransform>();
-			rect.localScale = new Vector3(200f, 200f, 200f);
-			rect.anchoredPosition3D = new Vector3(0, -35f, -20f);
-			rect.rotation = new Quaternion(0, -180f, 0, 0);
+			Transform rect = player.GetComponent<Transform>();
+			rect.localScale = new Vector3(20f, 20f, 200f);
+			//rect.position = new Vector3(0, -35f, -20f);
+			rect.localPosition = new Vector3(0, -35f, -20f);
+			//rect.anchoredPosition3D = new Vector3(0, -35f, -20f);
+			//rect.rotation = new Quaternion(0, -180f, 0, 0);
+			rect.localRotation = new Quaternion(0, -180f, 0, 0);
 		}
 
         public Player Player

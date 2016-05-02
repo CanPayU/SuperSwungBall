@@ -22,6 +22,11 @@ public class AccountController : MonoBehaviour
 		SetUp ();
 	}
 
+	void Update()
+	{
+		SetUp ();
+	}
+
 	public void OnDisconnect()
 	{
 		Debug.Log ("OnDisconnect");    
@@ -35,7 +40,6 @@ public class AccountController : MonoBehaviour
 		nfi.NumberGroupSeparator = " ";
 
 		this.username.text = User.Instance.username;
-		Debug.Log(User.Instance.username);
 		this.score.text = "Score : " + User.Instance.score.ToString("#,0", nfi);
 		this.phi.text = User.Instance.phi.ToString("#,0", nfi);
 	}
