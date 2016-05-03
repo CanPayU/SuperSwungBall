@@ -13,7 +13,6 @@ namespace Network
     public class NetworkController : MonoBehaviour
     {
         private string game_version_ = "2.0";
-        private bool room_joined = false;
         private string room_name;
         private User user;
 
@@ -101,7 +100,6 @@ namespace Network
         void OnJoinedRoom()
         {
             this.client.JoinRoom(this.room_name);
-            room_joined = true;
             if (PhotonNetwork.playerList.Length > 1)
             {
 				FadingManager.Instance.Fade(scene);
@@ -118,12 +116,12 @@ namespace Network
         void OnGUI()
         {
             string info = PhotonNetwork.connectionStateDetailed.ToString();
-            if (room_joined)
+			if (PhotonNetwork.inRoom)
                 info += " - " + room_name;
             info_network.text = info;
 
             info = "Connexion";
-            if (room_joined)
+			if (PhotonNetwork.inRoom)
             {
                 info = "Joueur trouve : " + (PhotonNetwork.room.playerCount - 1) + "\n";
                 if (PhotonNetwork.playerList.Length > 1)

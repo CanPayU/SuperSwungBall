@@ -22,12 +22,6 @@ namespace OptionButton
 				AddButton (btn);
 			}
         }
-			
-        public void Fade(string scene = "menu")
-        {
-			FadingManager.Instance.Fade(scene);
-        }
-
 
 		private ButtonType[] getButtons(int buildIndex) {
 			if (buildIndex < 2)

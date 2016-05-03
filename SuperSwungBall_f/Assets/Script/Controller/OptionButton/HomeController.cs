@@ -2,25 +2,32 @@
 using UnityEngine.UI;
 using System.Collections;
 
-namespace OptionButton
-{
-	public class QuitController : MonoBehaviour 
+namespace OptionButton {
+	
+	public class HomeController : MonoBehaviour 
 	{
 		private Button btn;
+
 		// Use this for initialization
-		void Start () {
+		void Start () 
+		{
 			this.btn = gameObject.GetComponent<Button> ();
 			if (this.btn != null)
 			{
 				this.btn.onClick.AddListener(delegate ()
 					{
-						OnQuit();
+						OnHome();
 					});
 			}
 		}
 
-		private void OnQuit () {
-			Application.Quit ();
+		private void OnHome () 
+		{
+			if (PhotonNetwork.inRoom) {
+				PhotonNetwork.LeaveRoom ();
+				PhotonNetwork.Disconnect();
+			}
+			FadingManager.Instance.Fade();
 		}
 	}
 }
