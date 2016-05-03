@@ -630,9 +630,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 234350057}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0bcec88b528014f92bb47f3eb1dde82b, type: 3}
+  m_Script: {fileID: 11500000, guid: 1eed18b11080b4f45bbb6adfaf7e9c08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scroll_view: {fileID: 1155581565}
+  content_scroll_view: {fileID: 1155581569}
+  panel_friend: {fileID: 199502, guid: 5b43715cfa4054f0ca8fe4f6b1a2447d, type: 2}
 --- !u!95 &234350062
 Animator:
   serializedVersion: 3

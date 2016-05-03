@@ -124,6 +124,7 @@ GameObject:
   - 54: {fileID: 5486324}
   - 114: {fileID: 11446430}
   - 114: {fileID: 11459188}
+  - 114: {fileID: 11487432}
   m_Layer: 0
   m_Name: B_04_naalpha
   m_TagString: Player
@@ -974,6 +975,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 789e3bcda4150464d8de3c9207d91203, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11487432
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 127528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ownerId: 0
+  group: 0
+  prefixBackup: -1
+  observed: {fileID: 0}
+  synchronization: 0
+  onSerializeTransformOption: 3
+  onSerializeRigidBodyOption: 2
+  ownershipTransfer: 0
+  ObservedComponents: []
+  ObservedComponentsFoldoutOpen: 1
+  viewIdField: 0
+  instantiationId: -1
+  isRuntimeInstantiated: 0
 --- !u!136 &13683822
 CapsuleCollider:
   m_ObjectHideFlags: 1

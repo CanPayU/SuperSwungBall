@@ -26,7 +26,7 @@ namespace GameScene
 
         public void OnTriggerStay(Collider other)
         {
-            if (playerController.PhaseAnimation)
+			if (playerController != null && playerController.PhaseAnimation)
             {
                 if (premiereFrames > 0)
                 {

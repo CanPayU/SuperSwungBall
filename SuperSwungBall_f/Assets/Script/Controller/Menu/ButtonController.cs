@@ -12,17 +12,20 @@ namespace Menu
 
         void Start()
         {
-            myAnimator = transform.GetChild(0).GetComponent<Animator>();
+			if (transform.childCount > 0)
+            	myAnimator = transform.GetChild(0).GetComponent<Animator>();
         }
 
         void OnMouseEnter()
         {
-            myAnimator.Play("Action");
+			if (myAnimator != null)
+            	myAnimator.Play("Action");
         }
 
         void OnMouseExit()
-        {
-            myAnimator.Play("Repos");
+		{
+			if (myAnimator != null)
+            	myAnimator.Play("Repos");
         }
 
         void OnTriggerEnter(Collider other)

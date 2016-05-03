@@ -44,7 +44,7 @@ public class LoadingSceneManager : MonoBehaviour {
 
 	public static void UnloadLoadingScene()
 	{
-		SceneManager.UnloadScene ("LoadingScreen");
+		//SceneManager.UnloadScene ("LoadingScreen");
 	}
 
 	public static AsyncOperation Async 
