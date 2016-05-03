@@ -19,12 +19,14 @@ public class OptionButtonManager : Singleton<OptionButtonManager> {
 
 	private GameObject canvas;
 
+	private GameObject account;
 	private GameObject settings;
 	private GameObject home;
 
 	void Start()
 	{
 		this.canvas = GameObject.FindObjectOfType<Canvas>().gameObject;
+		this.account = Resources.Load("Prefabs/OptionButton/Account") as GameObject;
 		this.settings = Resources.Load("Prefabs/OptionButton/Settings") as GameObject;
 		this.home = Resources.Load("Prefabs/OptionButton/Home") as GameObject;
 	}
@@ -35,23 +37,18 @@ public class OptionButtonManager : Singleton<OptionButtonManager> {
 			return;
 		
 		this.canvas = GameObject.FindObjectOfType<Canvas>().gameObject;
-		instanciateSettingsBtn ();
+		instanciateBtn (this.settings, "Settings");
+		if (User.Instance.is_connected)
+			instanciateBtn (this.account, "Account");
 
 		if (level != 8)
-			instanciateHomeBtn ();
+			instanciateBtn (this.home, "Home");
 	}
 
-	private void instanciateSettingsBtn()
+	private void instanciateBtn(GameObject btn, string name)
 	{
-		GameObject gm = Instantiate(settings);
-		gm.name = "Settings";
-		gm.transform.SetParent(canvas.transform, false);
-	}
-
-	private void instanciateHomeBtn()
-	{
-		GameObject gm = Instantiate(home);
-		gm.name = "Home";
+		GameObject gm = Instantiate(btn);
+		gm.name = name;
 		gm.transform.SetParent(canvas.transform, false);
 	}
 }

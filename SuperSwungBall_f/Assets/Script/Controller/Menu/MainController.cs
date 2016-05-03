@@ -7,8 +7,6 @@ namespace Menu
     public class MainController : MonoBehaviour
     {
         [SerializeField]
-        private GameObject account;
-        [SerializeField]
         private Text account_username;
         [SerializeField]
         private Text account_score;
@@ -20,10 +18,6 @@ namespace Menu
         // Use this for initialization
         void Start()
         {
-            if (User.Instance.is_connected)
-            {
-                account.SetActive(true);
-            }
             time = new Timer(60.0F, Inactive);
             time.start();
         }
