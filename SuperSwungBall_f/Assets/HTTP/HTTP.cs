@@ -97,6 +97,7 @@ public static class HTTP
         {
             JSONObject userjson = response.GetObject("user");
 			User.Instance.update(userjson, true);
+			SaveLoad.save_user ();
 			completion(true);
         }
         else
@@ -188,7 +189,7 @@ public static class HTTP
             completion(false, null);
         }
     }
-    //unity/buysm/hugo_082/1/uid/key
+
     /// <summary> Indique l'achat sur le serveur - Doit etre co  </summary>
     public static void BuySM(string uid, Action<bool> completion)
     {
@@ -214,7 +215,42 @@ public static class HTTP
 			Debug.LogError("Error Sync : " + url);
             completion(false);
         }
-    }
+	}
+
+	/// <summary> Indique la fin d'une game gagné - Doit etre co  </summary>
+	public static void WinGame(int point, string ennemyUsername, int ennemyPoint, Action<bool> completion)
+	{
+		User user = User.Instance;
+		if (!user.is_connected)
+		{
+			completion(false);
+			return;
+		}
+
+		//unity/gameEnd/{winnerUsername}/{winnerPoint}/{loserPoint}/{loserUsername}/{key}
+		string url = HOST_DOMAIN + "unity/gameEnd/" + user.username + "/" + point + "/" + ennemyPoint + "/" + ennemyUsername + "/" + PRIVATE_KEY;
+		Debug.Log (url);
+		HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+		JSONObject response = execute(request);
+		string status = response.GetString("status");
+		if (status == "success")
+		{
+			JSONObject jsonChallenge = response.GetObject("challengeUnlocked");
+			bool unlocked = jsonChallenge.GetString ("status") != "nothing";
+			if (unlocked) {
+				Debug.Log ("Vous avez débloqué un challenge");
+			}
+			JSONObject jsonUpdate = response.GetObject("user");
+			User.Instance.update(jsonUpdate, unlocked);
+
+			completion(true);
+		}
+		else
+		{
+			Debug.LogError("Error Sync : " + url);
+			completion(false);
+		}
+	}
 
     /// <summary>
     /// Execute les requêtes et renvoie le JSON

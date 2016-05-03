@@ -62,13 +62,13 @@ public sealed class User
         } // Info private
         phi = (int)json.GetNumber("phi");
 		if (all)
-			ProcessSwungMens(json.GetArray("swungmens")); // a changer avec swungmens
+			ProcessSwungMens(json.GetArray("swungmens"));
 
 
         // -- Friends
         JSONArray friends = json.GetArray("friends");
         this.friends = new Friends(friends);
-    }
+	}
 
 	/// <summary> Synchronise les SwungMens acheté et achetable </summary>
 	private static void ProcessSwungMens(JSONArray array)

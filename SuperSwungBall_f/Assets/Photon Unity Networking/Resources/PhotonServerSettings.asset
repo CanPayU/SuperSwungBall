@@ -50,4 +50,5 @@ MonoBehaviour:
   - GetMyParam
   - ExecutePasse
   - ReceiveMessage
+  - OnServerUpdated
   DisableAutoOpenWizard: 1
