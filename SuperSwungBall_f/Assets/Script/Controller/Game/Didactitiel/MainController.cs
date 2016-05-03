@@ -18,13 +18,15 @@ namespace GameScene.Didacticiel
 
         CameraController cameraController;
         InfoJoueurController infoJoueur;
-        Renderer render;
+        Renderer thisRenderer; //renderer de ce game object
+        Renderer ballRenderer; //renderer de la balle 
         Timer time;
 
-        private float current_time;
         private string[,] tableau_1;
         private string[,] tableau_2;
         private string[,] tableau_3;
+        private string[,] tableau_4;
+        private float current_time;
         private int place;
         private int phase;
 
@@ -34,39 +36,52 @@ namespace GameScene.Didacticiel
         // Use this for initialization
         void Start()
         {
-            render = this.GetComponent<Renderer>();
-            render.material.SetColor("_Color", Color.cyan);
-            render.enabled = false;
-            //cameraController = GameObject.Find("Main Camera").GetComponent<CameraController>();
+            // -- Renderers
+            thisRenderer = this.GetComponent<Renderer>();
+            thisRenderer.material.SetColor("_Color", Color.cyan);
+            thisRenderer.enabled = false;
+
+            ballRenderer = GameObject.Find("Ball").GetComponent<Renderer>();
+            ballRenderer.enabled = false;
+            // --
+
+            // --
+            cameraController = GameObject.Find("Main Camera").GetComponent<CameraController>();
+            time = new Timer(10.0F, end_time);
+            // --
+
+            // -- text
             phase = 1;
             place = 0;
             current_time = 0;
-            time = new Timer(10.0F, end_time);
-            //text
             tableau_1 = new string[,] {
-            {"Bienvenue dans le didacticiel","1" },
-       //     {"Comment jouer ?","1" },
-       //     {"Le but du jeu est de marquer 3 points", "1" },
-       //     {"Chaque joueur contrôle son équipe", "1" },
-       //     {"Commençons par voir les contrôles \n d'un Swungman", "1" },
-            {"", "0" }};
+               {"Bienvenue dans le didacticiel", "1"},
+           //     {"Comment jouer ?", "1"},
+           //     {"Le but du jeu est de marquer 3 points", "1"},
+           //     {"Chaque joueur contrôle son équipe", "1"},
+           //     {"Commençons par voir les contrôles \n d'un Swungman", "1"},
+                {"", "0" }};
 
             tableau_2 = new string[,] {
-            {"Ca c'est un Swungman, \n appuie dessus pour pouvoir le contrôler","1" },
-        //    {"Les capacités de déplacements sont représentées \n par la couleur bleu", "1" },
-        //    {"Appuie sur le bouton bleu 3 fois pour le faire \n courire le plus vite et le plus loin possible", "1" },
-        //    {"Déplace le Swungman jusqu'ici", "1"},
-            {"","0" } };
+                {"Ca c'est un Swungman, \n appuie dessus pour pouvoir le contrôler", "1" },
+            //    {"Les capacités de déplacements sont représentées \n par la couleur bleu", "1"},
+            //    {"Appuie sur le bouton bleu 3 fois pour le faire \n courire le plus vite et le plus loin possible", "1"},
+            //    {"Clique sur la zone de déplacement (bleue) pour contoller \n le déplacement","1" },
+                {"","0" }};
 
-            tableau_3 = new string[,]{
-                {"Bien, maintenant nous allons voir comment faire une passe","1" },
-               // {"Pour récupérer la balle et faire une passe, \n il faut au moins un point de passe ","1" },
-                //{"Met 1 point de maîtrise dans la passe et \n 2 points dans la course","1" },
-                //{"Déplace toi maintenant vers la balle","1" },
-                {"","0" }
-            };
+            tableau_3 = new string[,] {
+                {"Bien, maintenant nous allons voir comment récupérer la balle", "1"},
+             //   {"Pour récupérer la balle et faire une passe, \n il faut au moins un point de passe", "1"},
+             //   {"Met 1 point de maîtrise dans la passe et \n 2 points dans la course", "1"},
+                {"","0"}};
 
-            screentext.text = message(tableau_1);
+            tableau_4 = new string[,] {
+                {"Nous avons désormais la balle, envoyons-la quelque part", "1" },
+             //   {"Pour envoyer la balle,\n il faut au moins un point de maîtrise de passe", "1"},
+             //   {"Met 3 ponts de maîtrise dans la passe pour faire un passe très loin", "1"},
+             //   {"Clique sur la zone rose, puis déplace le curseur \n pour marquer la direction de la passe", "1" },
+                { "", "0" } };
+            // --
         }
         // Update is called once per frame
         void Update()
@@ -88,8 +103,17 @@ namespace GameScene.Didacticiel
                 case 5:
                     phase5();
                     break;
-                case 7: //6 = collision
+                case 7: //6 = collision main
                     phase7();
+                    break;
+                case 8:
+                    phase8();
+                    break;
+                case 10: //9 = collision balle
+                    phase10();
+                    break;
+                case 11:
+                    phase11();
                     break;
             }
             time.update();
@@ -98,6 +122,8 @@ namespace GameScene.Didacticiel
                 start_annim();
             }
         }
+
+        // -- Phases
         void phase1()
         {
             text(tableau_1);
@@ -118,7 +144,6 @@ namespace GameScene.Didacticiel
         void phase3()
         {
             screentext.transform.position = new Vector2(930, 700);
-            screentext.text = message(tableau_2);
             phase++;
         }
         void phase4()
@@ -127,43 +152,83 @@ namespace GameScene.Didacticiel
         }
         void phase5()
         {
-            render.enabled = true;
+            screentext.text = "Déplace le Swungman jusqu'ici \n et appuie sur 'Espace' pour lancer le déplacement";
+            thisRenderer.enabled = true;
             phase++;
         }
         void phase7()
         {
             text(tableau_3);
         }
+        void phase8()
+        {
+            screentext.text = "Déplace toi maintenant vers la balle, ('Espace' pour lancer le déplacement)";
+            ballRenderer.enabled = true;
+            this.transform.position = new Vector3(5, 0);
+            thisRenderer.enabled = true; //remplacer par false
+            phase++;
+        }
+        void phase10()
+        {
+            text(tableau_4);
+        }
+        void phase11()
+        {
+            thisRenderer.enabled = true;
+        }
+        // --
 
+        // -- Text
         void text(string[,] tableau)
         {
-            float temp = temps(tableau);
+            float temps = float.Parse(tableau[place, 1]);
 
-            if (temp == 0) //dernier passage
+            if (place == 0) //premier passage
+            {
+                screentext.text = message(tableau);
+            }
+
+            if (temps == 0) //dernier passage
             {
                 phase++;
                 current_time = 0;
                 place = 0;
             }
-            else if (current_time < temp) //continuer à afficher
+            else if (current_time < temps) // temps pas atteint ? -> continuer à afficher
                 current_time += Time.deltaTime;
-            else // changer de texte
+            else // temps atteint ? -> changer de texte
             {
                 current_time = 0;
                 place += 1;
-                screentext.text = message(tableau);
             }
         }
         string message(string[,] tableau)
         {
             return screentext.text = tableau[place, 0];
         }
+        // --
 
-        float temps(string[,] tableau)
+        // Collisions
+        void OnTriggerEnter()
         {
-            return float.Parse(tableau[place, 1]);
-        }
+            if (phase == 6)
+            {
+                phase++;
+                thisRenderer.enabled = true; //a changer en false
+                this.transform.position = new Vector3(5, 0);
+                end_time();
+            }
+            if (phase == 9)
+            {
+                phase++;
+                this.transform.position = new Vector3(0, 0);
+                end_time();
+            }
 
+        }
+        // --
+
+        // -- Anim'
         private void end_time()
         {
             time.reset();
@@ -179,16 +244,7 @@ namespace GameScene.Didacticiel
             time.start();
             this.player_phase_2.start_Anim();
         }
-        void OnTriggerEnter()
-        {
-            if (phase == 6)
-            {
-                phase++;
-                this.render.enabled = false;
-                this.transform.position = new Vector3(10, 10);
-            }
+        // --
 
-        }
-
-    }//class
-}//namespace
+    }//Class
+}//Namespace
