@@ -1642,6 +1642,7 @@ GameObject:
   - 114: {fileID: 1538450133}
   - 114: {fileID: 1538450139}
   - 114: {fileID: 1538450140}
+  - 114: {fileID: 1538450141}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -1760,6 +1761,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeOutTexture: {fileID: 2800000, guid: d64ba61560e2870429011fe87d7608c0, type: 3}
   fadeSpeed: 0.8
+  min_delay: 3
 --- !u!114 &1538450137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1803,6 +1805,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2224ecd63d55f4bc7a70e977b1b451c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1538450141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1538450132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a64ca6ac7e0340c7bdbc7fa9e83fe57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1627477051

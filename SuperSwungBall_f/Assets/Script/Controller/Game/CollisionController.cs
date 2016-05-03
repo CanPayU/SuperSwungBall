@@ -45,7 +45,7 @@ namespace GameScene
         }
         public void OnTriggerEnter(Collider other)
         {
-            if (playerController.PhaseAnimation)
+			if (playerController != null && playerController.PhaseAnimation)
             {
                 interception(other);
                 if (other.tag == "Player")

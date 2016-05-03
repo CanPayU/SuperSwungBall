@@ -34,18 +34,18 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scene/standing.unity
   - enabled: 1
-    path: Assets/Scene/menu.unity
-  - enabled: 1
-    path: Assets/Scene/network.unity
-  - enabled: 1
-    path: Assets/Scene/game.unity
-  - enabled: 1
-    path: Assets/Scene/create_team.unity
-  - enabled: 1
-    path: Assets/Scene/SoloGame.unity
+    path: Assets/Scene/LoadingScreen.unity
   - enabled: 1
     path: Assets/Scene/Didacticiel.unity
   - enabled: 1
+    path: Assets/Scene/SoloGame.unity
+  - enabled: 1
+    path: Assets/Scene/game.unity
+  - enabled: 1
+    path: Assets/Scene/network.unity
+  - enabled: 1
+    path: Assets/Scene/create_team.unity
+  - enabled: 1
     path: Assets/Scene/Gestion.unity
   - enabled: 1
-    path: Assets/Scene/LoadingScreen.unity
+    path: Assets/Scene/menu.unity
