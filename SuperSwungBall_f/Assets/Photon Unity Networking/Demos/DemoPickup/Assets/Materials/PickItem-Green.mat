@@ -39,12 +39,12 @@ Material:
     m_Floats:
       data:
         first:
-          name: _InvFade
-        second: 1.3488061
-      data:
-        first:
           name: _EmissionLM
         second: 0
+      data:
+        first:
+          name: _InvFade
+        second: 1.3488061
     m_Colors:
       data:
         first:
