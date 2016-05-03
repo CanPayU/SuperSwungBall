@@ -67,8 +67,8 @@ namespace Create_Team
         {
             foreach (Transform child in game_panel.transform)
                 Destroy(child.gameObject);
-            int i = 0;
-            foreach (Player p in players)
+            int length = players.Length;
+            for (int i = 0; i < length; i++)
             {
                 GameObject btn = Instantiate(btn_player);
                 btn.transform.parent = game_panel.transform;
@@ -86,7 +86,6 @@ namespace Create_Team
                 rt.anchoredPosition = new Vector2(w * 0.05F + cst_x, -(h * 0.066F + cst_y));
                 // ---
 
-                i++;
             }
         }
 
