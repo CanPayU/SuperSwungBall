@@ -62,6 +62,8 @@ public class PhotonTransformViewEditor : Editor
 
     public override void OnInspectorGUI()
     {
+		serializedObject.Update ();
+
         //this.m_Target = (PhotonTransformView) target;
 
         DrawIsPlayingWarning();

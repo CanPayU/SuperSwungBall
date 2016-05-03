@@ -50,8 +50,8 @@ public class PhotonAnimatorViewEditor : Editor
         }
 
         DrawWeightInspector();
-        //TODO: in Unity 5, it seems the layerCount is empty unless we use the controller?!
-        if (GetLayerCount() == 0)
+       
+		if (GetLayerCount() == 0)
         {
             GUILayout.BeginVertical(GUI.skin.box);
             GUILayout.Label("Animator doesn't have any layers setup to synchronize");
@@ -76,11 +76,11 @@ public class PhotonAnimatorViewEditor : Editor
 	 
     private int GetLayerCount()
     {
-#if UNITY_5 || UNITY_5_0
-        return (this.m_Controller == null) ? 0 : this.m_Controller.layers.Length;
-#else
-        return this.m_Animator.layerCount;
-#endif
+		#if UNITY_5 || UNITY_5_0
+		return (this.m_Controller == null) ? 0 : this.m_Controller.layers.Length;
+		#else
+		return (this.m_Controller == null) ? 0 : this.m_Controller.layerCount;
+		#endif
     }
 
 

@@ -2056,7 +2056,7 @@ internal class NetworkingPeer : LoadbalancingPeer, IPhotonPeerListener
             case PunEvent.RPC:
                 //ts: each event now contains a single RPC. execute this
                 // Debug.Log("Ev RPC from: " + originatingPlayer);
-                this.ExecuteRpc(photonEvent[ParameterCode.Data] as object[], originatingPlayer);
+                this.ExecuteRpc(photonEvent[ParameterCode.Data] as Hashtable, originatingPlayer);
                 break;
 
             case PunEvent.SendSerialize:
@@ -2244,27 +2244,27 @@ internal class NetworkingPeer : LoadbalancingPeer, IPhotonPeerListener
     /// <summary>
     /// Executes a received RPC event
     /// </summary>
-    protected internal void ExecuteRpc(object[] rpcData, PhotonPlayer sender)
+    protected internal void ExecuteRpc(Hashtable rpcData, PhotonPlayer sender)
     {
-        if (rpcData == null)
+        if (rpcData == null || !rpcData.ContainsKey((byte)0))
         {
-            Debug.LogError("Malformed RPC; this should never occur. Content: " + LogObjectArray(rpcData));
+            Debug.LogError("Malformed RPC; this should never occur. Content: " + SupportClassPun.DictionaryToString(rpcData));
             return;
         }
 
         // ts: updated with "flat" event data
         int netViewID = (int)rpcData[(byte)0]; // LIMITS PHOTONVIEWS&PLAYERS
         int otherSidePrefix = 0;    // by default, the prefix is 0 (and this is not being sent)
-        if (rpcData[1] != null)
+        if (rpcData.ContainsKey((byte)1))
         {
             otherSidePrefix = (short)rpcData[(byte)1];
         }
 
 
         string inMethodName;
-        if (rpcData[5] != null)
+        if (rpcData.ContainsKey((byte)5))
         {
-            int rpcIndex = (byte)rpcData[5];  // LIMITS RPC COUNT
+            int rpcIndex = (byte)rpcData[(byte)5];  // LIMITS RPC COUNT
             if (rpcIndex > PhotonNetwork.PhotonServerSettings.RpcList.Count - 1)
             {
                 Debug.LogError("Could not find RPC with index: " + rpcIndex + ". Going to ignore! Check PhotonServerSettings.RpcList");
@@ -2277,10 +2277,15 @@ internal class NetworkingPeer : LoadbalancingPeer, IPhotonPeerListener
         }
         else
         {
-            inMethodName = (string)rpcData[3];
+            inMethodName = (string)rpcData[(byte)3];
         }
 
-        object[] inMethodParameters = (object[])rpcData[4];
+        object[] inMethodParameters = null;
+        if (rpcData.ContainsKey((byte)4))
+        {
+            inMethodParameters = (object[])rpcData[(byte)4];
+        }
+
         if (inMethodParameters == null)
         {
             inMethodParameters = new object[0];
@@ -2313,7 +2318,7 @@ internal class NetworkingPeer : LoadbalancingPeer, IPhotonPeerListener
         // Get method name
         if (string.IsNullOrEmpty(inMethodName))
         {
-            Debug.LogError("Malformed RPC; this should never occur. Content: " + LogObjectArray(rpcData));
+            Debug.LogError("Malformed RPC; this should never occur. Content: " + SupportClassPun.DictionaryToString(rpcData));
             return;
         }
 
@@ -3193,7 +3198,7 @@ internal class NetworkingPeer : LoadbalancingPeer, IPhotonPeerListener
 
 
         //ts: changed RPCs to a one-level hashtable as described in internal.txt
-        object[] rpcEvent = new object[6];
+        Hashtable rpcEvent = new Hashtable();
         rpcEvent[(byte)0] = (int)view.viewID; // LIMITS PHOTONVIEWS&PLAYERS
         if (view.prefix > 0)
         {
@@ -3228,10 +3233,7 @@ internal class NetworkingPeer : LoadbalancingPeer, IPhotonPeerListener
         }
     }
 
-    /// RPC Definition
-    /// RPCs are sent as object[] (PUN v1.66 and up)
-    /// Values that are not used, are null
-    ///
+    /// RPC Hashtable Structure
     /// (byte)0 -> (int) ViewId (combined from actorNr and actor-unique-id)
     /// (byte)1 -> (short) prefix (level)
     /// (byte)2 -> (int) server timestamp
@@ -3257,8 +3259,8 @@ internal class NetworkingPeer : LoadbalancingPeer, IPhotonPeerListener
             Debug.Log("Sending RPC \"" + methodName + "\" to " + target);
 
 
-        // in v1.66 this was changed to a object[]
-        object[] rpcEvent = new object[6];
+        //ts: changed RPCs to a one-level hashtable as described in internal.txt
+        Hashtable rpcEvent = new Hashtable();
         rpcEvent[(byte)0] = (int)view.viewID; // LIMITS NETWORKVIEWS&PLAYERS
         if (view.prefix > 0)
         {

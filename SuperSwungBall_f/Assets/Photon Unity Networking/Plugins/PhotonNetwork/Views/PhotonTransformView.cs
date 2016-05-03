@@ -54,18 +54,6 @@ public class PhotonTransformView : MonoBehaviour, IPunObservable
         m_ScaleControl = new PhotonTransformViewScaleControl( m_ScaleModel );
     }
 
-	void Reset()
-	{
-		Debug.Log("Reset");
-		m_PositionModel =  new PhotonTransformViewPositionModel();
-		m_RotationModel = new PhotonTransformViewRotationModel();
-		m_ScaleModel = new PhotonTransformViewScaleModel();
-
-		m_PositionControl = new PhotonTransformViewPositionControl( m_PositionModel );
-		m_RotationControl = new PhotonTransformViewRotationControl( m_RotationModel );
-		m_ScaleControl = new PhotonTransformViewScaleControl( m_ScaleModel );
-	}
-
     void Update()
     {
         if( m_PhotonView == null || m_PhotonView.isMine == true || PhotonNetwork.connected == false )

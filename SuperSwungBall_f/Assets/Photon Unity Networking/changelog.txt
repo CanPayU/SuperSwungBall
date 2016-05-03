@@ -1,4 +1,13 @@
+v1.68 (3. May 2016)
+Fixed: The "reset" action of a PhotonTransformView-inspector now works as expected and sets proper, useful default values.
+Fixed: PhotonAnimatorView. Layers in Unity 4 where not counted properly, it now lists layers properly.
+Fixed: Buffered RPCs can be removed (as expected) from the buffer with RemoveRPCs(). Affected versions were v1.66 and v1.67. Please update those.
+Updated: The docs (.chm and .pdf).
+
+
 v1.67 (21. April 2016)
+Fixed: PhotonAnimatorView, Triggers now supported
+Added: PhotonAnimatorView, Live view in Inspector of current Values for parameters
 Fixed: Photon Chat for WebGL export. It failed to compile because SocketWebTcp was not found. The PhotonChatApi folder now got moved from Assets\Plugins to Assets.
 Changed: If sent by server, UserId and Nickname values are updated (with the server's values). This can be done with CustomAuthentication. All clients always get some UserId assigned by the server (if you didn't set one in the first place).
 Added: "Slot Reservation" as feature for matchmaking. 
@@ -25,7 +34,6 @@ Added: PhotonNetwork.ReconnectAndRejoin() to be used when a client loses connect
 Added: PhotonNetwork.Reconnect() to be used when a client lost connection. Use this only when your client was connected to a region or a game before (to get into the same region).
 Fixed: A compile warning about Photon.MonoBehaviour.networkView "does not hide an inherited member" in Unity 5.3.4 and up. The old networking API of Unity is being removed, it seems.
 Fixed: PhotonNetwork.time for offline mode. Internal: It now uses the Environment.TickCount, which is similar to the server's timestamps. All usage of time in PUN is now either based on PhotonNetwork.time or .ServerTimestamp.
-
 
 v1.66 (21. January 2016)
 Important: This might affect your import! The folder "ChatApi" is now renamed to "PhotonChatApi". This way, the folder uses the same name as in our other packages. Remove the "ChatApi" folder, if the import didn't do that for you!
