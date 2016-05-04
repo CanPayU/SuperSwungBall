@@ -458,7 +458,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2104657048}
   m_HandleRect: {fileID: 2104657047}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -677,6 +677,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   swungmen_panel: {fileID: 149098, guid: e121824d6f76f412aaacd6b9a229685e, type: 2}
   chest_panel: {fileID: 199296, guid: 677f190b47c9f460bbf08698421db7c9, type: 2}
+  challenge_panel: {fileID: 199122, guid: d0fd57baa80784e179766d7adb1109c0, type: 2}
 --- !u!114 &1027308506
 MonoBehaviour:
   m_ObjectHideFlags: 0

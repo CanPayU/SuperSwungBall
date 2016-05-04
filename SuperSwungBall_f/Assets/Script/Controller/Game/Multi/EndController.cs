@@ -100,7 +100,6 @@ namespace GameScene.Multi
 		private void Sync(bool respondAtEnnemy)
         {
 			HTTP.WinGame (Game.Instance.MyTeam.Points, ennemy.username, Game.Instance.EnnemyTeam.Points, (success) => {
-				Debug.Log("HTTP : " + success);
 				if(respondAtEnnemy) {
 					PhotonView pv = PhotonView.Get(this);
 					pv.RPC("OnServerUpdated", PhotonTargets.Others);

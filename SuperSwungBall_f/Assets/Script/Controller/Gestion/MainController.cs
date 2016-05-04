@@ -31,9 +31,10 @@ namespace Gestion
 				JSONObject obj = swungMen.Obj;
 				Player player = new Player (obj);
 				Settings.Instance.AddOrUpdate_Player (player);
-				if (player.Type == PlayerType.Buy) {
+				if (player.Type == PlayerType.Buy)
 					slide.InstanciatePlayer (player);
-				}
+				else if (player.Type == PlayerType.Challenge)
+					slide.InstanciateChallenge (player);
             }
         }
     }

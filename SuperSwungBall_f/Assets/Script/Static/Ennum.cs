@@ -9,15 +9,16 @@ public enum KeyboardAction
 public enum NotificationState
 {
 	// Les notifications système ne sont pas concernées (force = true)
-    All = 3,        // Tout
+    All = 5,        // Tout
     Private = 2,    // Tout sauf invitation
     Nothing = 0		// Rien
 }
 
 public enum NotificationType
 {
-	Text = 4,  		// Title, Content, Completion<bool, string>
-    Alert = 3,  	// Title, Content, Completion<bool, null>
+	Text = 5,  		// Title, Content, Completion<bool, string>
+    Alert = 4,  	// Title, Content, Completion<bool, null>
+	SimpleAlert = 3,// Title, Content, Completion<null, null>
     Box = 2,    	// Title, Content
     Slide = 1 		// Title
 }
@@ -25,5 +26,6 @@ public enum NotificationType
 public enum PlayerType
 {
 	Buy,			// Purchasable
-	Secret			// In Chest
+	Secret,			// In Chest
+	Challenge		// Challenge permanent
 }

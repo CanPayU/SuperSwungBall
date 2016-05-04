@@ -10,6 +10,7 @@ public static class Notification
     private static GameObject Canvas = GameObject.FindObjectOfType<Canvas>().gameObject;
 
 	private static GameObject Text_Prefab = Resources.Load("Prefabs/Notification/Text") as GameObject;
+	private static GameObject SimpleAlert_Prefab = Resources.Load("Prefabs/Notification/SimpleAlert") as GameObject;
     private static GameObject Alert_Prefab = Resources.Load("Prefabs/Notification/Alert") as GameObject;
     private static GameObject Box_Prefab = Resources.Load("Prefabs/Notification/Box") as GameObject;
     private static GameObject Slide_Prefab = Resources.Load("Prefabs/Notification/Slide") as GameObject;
@@ -27,8 +28,10 @@ public static class Notification
     /// <param name="force">Force la notification (Seulement pour le système)</param>
     public static void Create(NotificationType type, string title, float Delay = DELAY, string content = null, Action<bool, string> completion = null, bool force = false)
     {
-        if (!IsAutorised(type, force))
-            return;
+		if (!IsAutorised (type, force)) {
+			Debug.Log ("Notification rejected");
+			return;
+		}
         Canvas = GameObject.FindObjectOfType<Canvas>().gameObject;
         delay = Delay;
         switch (type)
@@ -37,6 +40,11 @@ public static class Notification
 				if (content == null && completion == null)
 					return;
 				Instanciate_Text(title, content, completion);
+				break;
+			case NotificationType.SimpleAlert:
+				if (content == null && completion == null)
+					return;
+				Instanciate_SimpleAlert(title, content, completion);
 				break;
             case NotificationType.Alert:
                 if (content == null && completion == null)
@@ -60,7 +68,31 @@ public static class Notification
 	/// </summary>
 	/// <param name="title">Title.</param>
 	/// <param name="content">Content.</param>
-	/// <param name="completion">Execute on click button : <c>true</c> Accepted or  <c>false</c> Refused</param>
+	/// <param name="completion">Execute on click button</param>
+	private static void Instanciate_SimpleAlert(string title, string content, Action<bool, string> completion)
+	{
+		GameObject gm = MonoBehaviour.Instantiate(SimpleAlert_Prefab);
+		gm.name = "NotificationSimpleAlert";
+		gm.transform.SetParent(Canvas.transform, false);
+		Text textComponent = gm.transform.Find("Title").GetComponent<Text>();
+		textComponent.text = title;
+		textComponent = gm.transform.Find("Content").GetComponent<Text>();
+		textComponent.text = content;
+
+		Button accepted = gm.transform.Find("Send").GetComponent<Button>();
+		accepted.onClick.AddListener(delegate ()
+			{
+				completion(true, null);
+				gm.SetActive(false);
+				MonoBehaviour.Destroy(gm);
+			});
+	}
+	/// <summary>
+	/// Instanciates the alert.
+	/// </summary>
+	/// <param name="title">Title.</param>
+	/// <param name="content">Content.</param>
+	/// <param name="completion">Execute on click button <c>true</c></param>
 	private static void Instanciate_Text(string title, string content, Action<bool, string> completion)
 	{
 		GameObject gm = MonoBehaviour.Instantiate(Text_Prefab);
@@ -75,6 +107,8 @@ public static class Notification
 		Button accepted = gm.transform.Find("Send").GetComponent<Button>();
 		accepted.onClick.AddListener(delegate ()
 			{
+				if (text.text == null || text.text == "")
+					return;
 				completion(true, text.text);
 				gm.SetActive(false);
 				MonoBehaviour.Destroy(gm);
@@ -151,7 +185,6 @@ public static class Notification
     private static bool IsAutorised(NotificationType type, bool force)
     {
         NotificationState state = Settings.Instance.NotificationState;
-        Debug.Log("Notification Autorised : " + (force || (int)state >= (int)type));
         return (force || (int)state >= (int)type);
     }
 

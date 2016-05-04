@@ -10,6 +10,8 @@ namespace Gestion
 		private GameObject swungmen_panel;
 		[SerializeField]
 		private GameObject chest_panel;
+		[SerializeField]
+		private GameObject challenge_panel;
 
         private ScrollRect content_scroll_view;
         private float actual_position;
@@ -52,12 +54,12 @@ namespace Gestion
         }
 
 		/// <summary> Instantie un player achetable </summary>
-        public void InstanciatePlayer(Player p)
+        public void InstanciateChallenge(Player p)
         {
             float scroll_view_w = content_scroll_view.content.sizeDelta.x;
 
-            Transform panel = Instantiate(swungmen_panel).transform as Transform;
-            PlayerController script = panel.GetComponent<PlayerController>();
+			Transform panel = Instantiate(challenge_panel).transform as Transform;
+			ChallengeController script = panel.GetComponent<ChallengeController>();
             script.Player = p;
 
             float panel_w = ((RectTransform)panel).sizeDelta.x;
@@ -74,7 +76,32 @@ namespace Gestion
             actual_position += ((panel_w / 2) + 5);
             ((RectTransform)panel).anchoredPosition = new Vector2(actual_position, 0);
             actual_position += ((panel_w / 2));
-        }
+		}
+
+		/// <summary> Instantie un player achetable </summary>
+		public void InstanciatePlayer(Player p)
+		{
+			float scroll_view_w = content_scroll_view.content.sizeDelta.x;
+
+			Transform panel = Instantiate(swungmen_panel).transform as Transform;
+			PlayerController script = panel.GetComponent<PlayerController>();
+			script.Player = p;
+
+			float panel_w = ((RectTransform)panel).sizeDelta.x;
+
+			RectTransform scroll_view = content_scroll_view.content.GetComponent<RectTransform>();
+			float new_scroll_view_w = scroll_view_w + (panel_w + 5);
+
+			scroll_view.sizeDelta = new Vector2(new_scroll_view_w, scroll_view.sizeDelta.y);
+
+			if (new_scroll_view_w > scroll_view_w)
+				scroll_view.anchoredPosition = new Vector3(new_scroll_view_w - scroll_view_w, 0);
+
+			panel.SetParent(content_scroll_view.content.transform, false);
+			actual_position += ((panel_w / 2) + 5);
+			((RectTransform)panel).anchoredPosition = new Vector2(actual_position, 0);
+			actual_position += ((panel_w / 2));
+		}
 
 		/// <summary> Instantie un coffre achetable </summary>
 		public void InstanciateChest()

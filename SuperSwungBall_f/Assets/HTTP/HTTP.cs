@@ -229,16 +229,15 @@ public static class HTTP
 
 		//unity/gameEnd/{winnerUsername}/{winnerPoint}/{loserPoint}/{loserUsername}/{key}
 		string url = HOST_DOMAIN + "unity/gameEnd/" + user.username + "/" + point + "/" + ennemyPoint + "/" + ennemyUsername + "/" + PRIVATE_KEY;
-		Debug.Log (url);
 		HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
 		JSONObject response = execute(request);
 		string status = response.GetString("status");
 		if (status == "success")
 		{
 			JSONObject jsonChallenge = response.GetObject("challengeUnlocked");
-			bool unlocked = jsonChallenge.GetString ("status") != "nothing";
+			bool unlocked = jsonChallenge.GetBoolean ("status");
 			if (unlocked) {
-				Debug.Log ("Vous avez débloqué un challenge");
+				ApplicationModel.ChallengeCompleted = jsonChallenge.GetArray ("values");
 			}
 			JSONObject jsonUpdate = response.GetObject("user");
 			User.Instance.update(jsonUpdate, unlocked);

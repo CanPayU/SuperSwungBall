@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using Boomlagoon.JSON;
 
 namespace Menu
 {
@@ -20,6 +21,7 @@ namespace Menu
         {
             time = new Timer(60.0F, Inactive);
             time.start();
+			checkChallengeCompleted ();
         }
 
         // Update is called once per frame
@@ -37,5 +39,23 @@ namespace Menu
         {
 			FadingManager.Instance.Fade("standing");
         }
+
+		private void checkChallengeCompleted(){
+			JSONArray challenges = ApplicationModel.ChallengeCompleted;
+
+			if (challenges == null || challenges.Length < 1)
+				return;
+
+			JSONObject obj = challenges [0].Obj;
+			challenges.Remove (0);
+
+			string swName = obj.GetObject ("swungMan").GetString("name");
+			string text = obj.GetString ("text");
+			string title = "Nouveau défi débloqué !";
+			string content = text + "\n" + "Vous avez obtenu un nouveau SwungMan : " + swName + "\n" + "Rendez-vous dans la boutique pour en savoir plus !";
+			Notification.Create (NotificationType.SimpleAlert, title, content: content, completion: (success, nothing)=> {
+				checkChallengeCompleted();
+			});
+		}
     }
 }

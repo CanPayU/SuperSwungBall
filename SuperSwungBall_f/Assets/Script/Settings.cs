@@ -14,7 +14,7 @@ public class Settings
         set { _instance = value; }
     }
 
-    public const string VERSION = "1.23"; // Version actuelle
+    public const string VERSION = "1.26"; // Version actuelle
     public string version; // Version de l'instance (sauvegarder sur l'ordi)
 
     private Dictionary<string, Team> default_team;
@@ -27,6 +27,7 @@ public class Settings
 
 	private Dictionary<string, Player> paid_player;
 	private Dictionary<string, Player> secret_player; // in Chest
+	private Dictionary<string, Player> challenge_player; // in Challenge
 
     // -- Keyboard
     private Dictionary<KeyboardAction, KeyCode> keyboard;
@@ -41,6 +42,7 @@ public class Settings
         this.keyboard = new Dictionary<KeyboardAction, KeyCode>();
 		this.paid_player = new Dictionary<string, Player>();
 		this.secret_player = new Dictionary<string, Player>();
+		this.challenge_player = new Dictionary<string, Player>();
 
         // -- Setup Keyboard
         this.keyboard.Add(KeyboardAction.Passe, KeyCode.A);
@@ -136,6 +138,8 @@ public class Settings
 			return paid_player;
 		case PlayerType.Secret:
 			return secret_player;
+		case PlayerType.Challenge:
+			return challenge_player;
 		default:
 			return null;
 		}

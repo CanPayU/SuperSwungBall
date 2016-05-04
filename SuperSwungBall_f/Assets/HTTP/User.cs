@@ -53,8 +53,6 @@ public sealed class User
         score = (int)json.GetNumber("score");
         room = json.GetString("room");
 
-        //Debug.Log (swungmens [0]);
-
         if (!json.ContainsKey("friends"))
         {
             this.friends = new Friends();
