@@ -18,6 +18,7 @@ namespace GameScene.Didacticiel
 
         CameraController cameraController;
         InfoJoueurController infoJoueur;
+        Collider thisCollider; //collider de ce game object
         Renderer thisRenderer; //renderer de ce game object
         Renderer ballRenderer; //renderer de la balle 
         Timer time;
@@ -36,14 +37,18 @@ namespace GameScene.Didacticiel
         // Use this for initialization
         void Start()
         {
-            // -- Renderers
+            // -- Renderers / Collider
             thisRenderer = this.GetComponent<Renderer>();
             thisRenderer.material.SetColor("_Color", Color.cyan);
             thisRenderer.enabled = false;
 
+            thisCollider = this.GetComponent<Collider>();
+
             ballRenderer = GameObject.Find("Ball").GetComponent<Renderer>();
             ballRenderer.enabled = false;
             // --
+
+
 
             // --
             cameraController = GameObject.Find("Main Camera").GetComponent<CameraController>();
@@ -140,6 +145,7 @@ namespace GameScene.Didacticiel
             this.player_phase_2.Player = play_t0;
             this.player_phase_2.IsMine = true;
             phase++;
+            Debug.Log(play0.name);
         }
         void phase3()
         {
@@ -209,22 +215,25 @@ namespace GameScene.Didacticiel
         // --
 
         // Collisions
-        void OnTriggerEnter()
+        void OnTriggerEnter(Collider other)
         {
-            if (phase == 6)
+            GameObject objet = other.gameObject;
+            if (objet.name == "GPasDNom-0") //collision avec un Player ?
             {
-                phase++;
-                thisRenderer.enabled = true; //a changer en false
-                this.transform.position = new Vector3(5, 0);
-                end_time();
+                if (phase == 6)
+                {
+                    phase++;
+                    thisRenderer.enabled = true; //a changer en false
+                    this.transform.position = new Vector3(5, 0);
+                    end_time();
+                }
+                if (phase == 9)
+                {
+                    phase++;
+                    this.transform.position = new Vector3(0, 0);
+                    end_time();
+                }
             }
-            if (phase == 9)
-            {
-                phase++;
-                this.transform.position = new Vector3(0, 0);
-                end_time();
-            }
-
         }
         // --
 
@@ -236,10 +245,12 @@ namespace GameScene.Didacticiel
             {
                 this.player_phase_2.end_Anim();
                 annim_started = false;
+                thisCollider.enabled = false; //désactiver le collider quand on est pas en phase d'animation
             }
         }
         private void start_annim()
         {
+            thisCollider.enabled = true; //réactiver le collider quand on est en phase d'animation
             annim_started = true;
             time.start();
             this.player_phase_2.start_Anim();
