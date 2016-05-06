@@ -29,3 +29,11 @@ public enum PlayerType
 	Secret,			// In Chest
 	Challenge		// Challenge permanent
 }
+
+public enum SoundState
+{
+	All,			// Tout
+	Effect,			// Effet
+	Musique,		// Musique
+	Nothing			// Rien
+}

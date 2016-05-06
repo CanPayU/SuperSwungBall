@@ -1,30 +1,31 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 using System;
+using System.Collections;
 
-namespace OptionButton
-{
-	public class NotificationController : MonoBehaviour
-	{
+
+namespace OptionButton {
+	
+	public class SoundController : MonoBehaviour {
+
 		private Text text;
 		private Button btn;
-		private NotificationState actualNotificationState;
+		private SoundState actualSoundState;
 
 		private int pressId = 0;
-		private string defaultText = "Notification";
+		private string defaultText = "Son";
 
 		// Use this for initialization
 		void Start()
 		{
 			this.btn = gameObject.GetComponent<Button> ();
 			this.text = transform.Find("Text").GetComponent<Text>();
-			actualNotificationState = Settings.Instance.NotificationState;
+			actualSoundState = Settings.Instance.SoundState;
 			if (this.btn != null)
 			{
 				this.btn.onClick.AddListener(delegate ()
 					{
-						OnChangeNotificationState();
+						OnChangeSoundState();
 					});
 				updateView();
 				this.text.text = this.defaultText;
@@ -36,11 +37,11 @@ namespace OptionButton
 				this.text.text = this.defaultText;
 		}
 
-		private void OnChangeNotificationState()
+		private void OnChangeSoundState()
 		{
 			this.pressId++;
-			this.actualNotificationState = Next<NotificationState>(actualNotificationState);
-			Settings.Instance.NotificationState = actualNotificationState;
+			actualSoundState = Next<SoundState>(actualSoundState);
+			Settings.Instance.SoundState = actualSoundState;
 			SaveLoad.save_setting ();
 			updateView();
 			StartCoroutine(defaultSetUp (this.pressId));
@@ -52,21 +53,26 @@ namespace OptionButton
 				this.text.text = this.defaultText;
 		}
 
-		private void updateView()
-		{
-			switch (this.actualNotificationState)
+		private void updateView(){
+			switch (this.actualSoundState)
 			{
-			case NotificationState.All:
+			case SoundState.All:
 				this.btn.colors = Colors.Block.Green;
-				text.text = "Tout";
+				this.text.text = "Tout";
+				AudioListener.pause = false;
 				break;
-			case NotificationState.Private:
+			case SoundState.Effect:
 				this.btn.colors = Colors.Block.Orange;
-				text.text = "Prive";
+				this.text.text = actualSoundState.ToString();
 				break;
-			case NotificationState.Nothing:
+			case SoundState.Musique:
+				this.btn.colors = Colors.Block.Orange;
+				this.text.text = actualSoundState.ToString();
+				break;
+			case SoundState.Nothing:
 				this.btn.colors = Colors.Block.Red;
-				text.text = "Aucune";
+				this.text.text = "Aucun";
+				AudioListener.pause = true;
 				break;
 			default:
 				break;
@@ -82,3 +88,5 @@ namespace OptionButton
 		}
 	}
 }
+
+

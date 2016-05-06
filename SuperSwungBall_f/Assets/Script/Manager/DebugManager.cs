@@ -80,6 +80,11 @@ public class DebugManager : Singleton<DebugManager>
 			StartCoroutine (FadingManager.Instance.FadeInAsync ());
 		if (Input.GetKeyDown (KeyCode.O))
 			StartCoroutine (FadingManager.Instance.FadeOutAsync ());
+
+		if (Input.GetKeyDown (KeyCode.S))
+			AudioListener.volume = 0f;
+		if (Input.GetKeyDown (KeyCode.M))
+			AudioListener.volume = 1f;
     }
 #endif
 }

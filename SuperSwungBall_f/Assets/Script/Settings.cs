@@ -14,7 +14,7 @@ public class Settings
         set { _instance = value; }
     }
 
-    public const string VERSION = "1.26"; // Version actuelle
+    public const string VERSION = "1.28"; // Version actuelle
     public string version; // Version de l'instance (sauvegarder sur l'ordi)
 
     private Dictionary<string, Team> default_team;
@@ -33,12 +33,14 @@ public class Settings
     private Dictionary<KeyboardAction, KeyCode> keyboard;
     // --
 
-    private NotificationState notificationState;
+	private NotificationState notificationState;
+	private SoundState soundState;
 
     public Settings()
     {
         this.version = VERSION;
-        this.notificationState = NotificationState.All;
+		this.notificationState = NotificationState.All;
+		this.soundState = SoundState.All;
         this.keyboard = new Dictionary<KeyboardAction, KeyCode>();
 		this.paid_player = new Dictionary<string, Player>();
 		this.secret_player = new Dictionary<string, Player>();
@@ -149,7 +151,12 @@ public class Settings
     {
         get { return notificationState; }
         set { notificationState = value; }
-    }
+	}
+	public SoundState SoundState
+	{
+		get { return soundState; }
+		set { soundState = value; }
+	}
     public Dictionary<string, Team> Default_Team
     {
         get { return default_team; }
