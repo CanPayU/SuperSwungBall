@@ -21,7 +21,7 @@ public class Player
         get { return uid; }
     }
     private int price;
-    public int Price
+    public int Price // En Phi
     {
         get { return price; }
         set { price = value; }
@@ -38,12 +38,13 @@ public class Player
 		get { return proba; }
 		set { proba = value; }
 	}
+	private float ducat; // Cout d'un player dans une team
 
 	private PlayerStats DEFAULTSTATS = new PlayerStats(0, 0, 0, 0); // Stats initiales (unique au joueur)
     private List<string> buttonsValues = new List<string> { "esquive", "esquive", "esquive" }; // Valeurs des boutons
 	private PlayerStats finalStats = new PlayerStats(0, 0, 0, 0); // Stats après selection des actions dans le menu
 
-    public Player(int tacle, int esquive, int passe, int course, string player_name_, string uid, int Team_Id = 0, int price = 0)
+	public Player(int tacle, int esquive, int passe, int course, string player_name_, string uid = "IdPlayer", int Team_Id = 0, int price = 0, int ducat = -1)
     {
 		this.DEFAULTSTATS.Esquive = esquive * 10;
 		this.DEFAULTSTATS.Tacle = tacle * 10;
@@ -54,13 +55,11 @@ public class Player
         this.team_id = Team_Id;
         this.uid = uid;
         this.price = price;
+		this.ducat = ducat;
     }
     public Player(JSONObject json)
-    {
-//        this.DEFAULTSTATS.Add("esquive", 0); // a gérer
-//        this.DEFAULTSTATS.Add("tacle", 0);
-//        this.DEFAULTSTATS.Add("passe", 0);
-//        this.DEFAULTSTATS.Add("course", 0);
+	{
+		this.ducat = -1;
         this.player_name = json.GetString("name");
         this.team_id = 0;
 		this.uid = json.GetString("uid");
@@ -83,6 +82,20 @@ public class Player
 		finalStats.Passe = 0;
 		finalStats.Course = DEFAULTSTATS.Course + 10;
     }
+
+	private void calculateDucat(){
+		float sum = this.DEFAULTSTATS.Esquive + this.DEFAULTSTATS.Passe + this.DEFAULTSTATS.Course + this.DEFAULTSTATS.Tacle;
+		// Combo
+		float ce = this.DEFAULTSTATS.Course + this.DEFAULTSTATS.Esquive; 	// bien
+		float pe = this.DEFAULTSTATS.Passe + this.DEFAULTSTATS.Esquive; 	// bien
+		float ct = this.DEFAULTSTATS.Course + this.DEFAULTSTATS.Tacle; 		// bien
+		float cp = this.DEFAULTSTATS.Course + this.DEFAULTSTATS.Passe; 		// mal
+		float te = this.DEFAULTSTATS.Tacle + this.DEFAULTSTATS.Esquive; 	// mal
+		float pt = this.DEFAULTSTATS.Passe + this.DEFAULTSTATS.Tacle; 		// mal
+		float finalCombo = ce + pe + ct - cp - te - pt;
+
+		this.ducat = ((sum + finalCombo) / 4)/100;
+	}
 
     public void reset() // reinitialises valeurs des boutons et les stats finales
     {
@@ -149,6 +162,18 @@ public class Player
     {
 		get { return (float)finalStats.Passe / 100; }
     }
+	public float Ducat
+	{
+		get { 
+			if (ducat > -1)
+				return ducat;
+			else {
+				calculateDucat ();
+				return ducat;
+			}
+		}
+		set { ducat = value; }
+	}
     public GameObject Gm
     {
         get { return GameObject.Find(player_name + "-" + team_id); }

@@ -23,8 +23,7 @@ namespace Create_Team
             GameObject game_panel = GameObject.Find("Game");
             RectTransform rt = game_panel.GetComponent<RectTransform>();
             int w = Screen.width; int h = Screen.height;
-            rt.position = new Vector2(w / 4, h / 2);
-            rt.sizeDelta = new Vector2(w / 2, h);
+			rt.offsetMax = new Vector2( -(w/2), rt.offsetMax.y);
         }
 
         public void Validate_Creation()
