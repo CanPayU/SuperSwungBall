@@ -14,7 +14,7 @@ public class Settings
         set { _instance = value; }
     }
 
-    public const string VERSION = "1.28"; // Version actuelle
+    public const string VERSION = "1.30"; // Version actuelle
     public string version; // Version de l'instance (sauvegarder sur l'ordi)
 
     private Dictionary<string, Team> default_team;
@@ -126,6 +126,10 @@ public class Settings
 		else
 			players.Add(p.UID, p);
 	}
+	public void UpdateKeyboard(KeyboardAction action, KeyCode code)
+	{
+		this.keyboard [action] = code;
+	}
 	public void BuyPlayer(string uid, PlayerType type = PlayerType.Buy)
     {
 		var players = TypeToDict (type);
@@ -168,7 +172,11 @@ public class Settings
     public Dictionary<string, Composition> Default_compo
     {
         get { return default_compo; }
-    }
+	}
+	public Dictionary<KeyboardAction, KeyCode> Keyboard
+	{
+		get { return keyboard; }
+	}
     public string Selected_Stadium
     {
         get { return selected_stadium_name; }

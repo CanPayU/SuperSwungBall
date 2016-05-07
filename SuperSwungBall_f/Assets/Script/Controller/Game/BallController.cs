@@ -10,8 +10,11 @@ namespace GameScene
         private Vector3 arrivalPoint; // point d'arrivée de la passe
         private bool deplacement; // Balle en l'air
 
+		private KeyCode keyPasse; // Touche utilisé pour la passe
+
         void Start()
         {
+			this.keyPasse = Settings.Instance.Keyboard [KeyboardAction.Passe];
             deplacement = false;
             if (transform.parent != null)
             {
@@ -24,7 +27,7 @@ namespace GameScene
         {
             if (!deplacement)
             {
-                if (Input.GetKeyDown(KeyCode.A) && transform.parent != null)
+				if (Input.GetKeyDown(keyPasse) && transform.parent != null)
                 {
                     TriggerPasse();
                 }

@@ -43,31 +43,6 @@ namespace GameScene.Solo
                 start_annim();
             }
             time.update();
-
-            if (Input.GetKeyDown(KeyCode.S) && !annim_started)
-            {
-                int score = 15;
-                Debug.Log(User.Instance.score);
-                HTTP.SyncScore(score, (success) =>
-                {
-                    Debug.Log(success);
-                    Debug.Log(User.Instance.score);
-                });
-                Debug.Log("sended");
-            }
-
-            if (Input.GetKeyDown(KeyCode.C) && !annim_started)
-            {
-                // localhost
-                string username = "antoine"; // id = 1
-                string password = "mdp"; // OK
-                Debug.Log("isConnected ? " + User.Instance.is_connected);
-                HTTP.Authenticate(username, password, (success) =>
-                {
-                    Debug.Log("isConnected ? " + User.Instance.is_connected + " - Success ?" + success);
-                });
-                Debug.Log("sended");
-            }
         }
 
         private void suc(bool success)
