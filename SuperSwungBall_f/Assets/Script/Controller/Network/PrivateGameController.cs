@@ -45,7 +45,7 @@ public class PrivateGameController : MonoBehaviour
     }
     void OnPhotonJoinRoomFailed()
     {
-        Notification.Create(NotificationType.Slide, title: "Room introuvable - " + room_name_field.text);
+        Notification.Create(NotificationType.Slide, "Room introuvable - " + room_name_field.text, null);
     }
     void OnJoinedRoom()
     {

@@ -43,11 +43,11 @@ public class DebugManager : Singleton<DebugManager>
 
         // -- NotificationSend
         if (Input.GetKeyDown(KeyCode.J))
-            Notification.Create(NotificationType.Slide, "My Title Slide");
+            Notification.Create(NotificationType.Slide, "My Title Slide", null);
         if (Input.GetKeyDown(KeyCode.K))
             Notification.Create(NotificationType.Box, "My Title Box", content: "My Content Box");
         if (Input.GetKeyDown(KeyCode.L))
-            Notification.Create(NotificationType.Alert, "My Title Alert", content: "My Content Slide", completion: (success, _) =>
+            Notification.Alert("My Title Alert", "My Content Slide", completion: (success) =>
             {
                 Debug.Log(success);
             });

@@ -10,9 +10,6 @@ namespace Create_Team
 {
     public class TeamController : MonoBehaviour
     {
-
-        [SerializeField]
-        private GameObject btn_player;
         [SerializeField]
         private Text team_name;
         [SerializeField]

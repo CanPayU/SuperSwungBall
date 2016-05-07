@@ -18,90 +18,76 @@ public static class Notification
     private const float DELAY = 4;
     private static float delay;
 
-    /// <summary>
-    /// Create the specified type, title, Delay and content.
-    /// </summary>
-    /// <param name="type">Type de la notifi</param>
-    /// <param name="title">Titre de la notif.</param>
-    /// <param name="Delay">Delai avant disparition. <=0 pour infinie</param>
-    /// <param name="content">Content, pour Box et Alert</param>
-    /// <param name="force">Force la notification (Seulement pour le système)</param>
-    public static void Create(NotificationType type, string title, float Delay = DELAY, string content = null, Action<bool, string> completion = null, bool force = false)
-    {
-		if (!IsAutorised (type, force)) {
-			Debug.Log ("Notification rejected");
-			return;
-		}
-        Canvas = GameObject.FindObjectOfType<Canvas>().gameObject;
-        delay = Delay;
-        switch (type)
-		{
-			case NotificationType.Text:
-				if (content == null && completion == null)
-					return;
-				Instanciate_Text(title, content, completion);
-				break;
-			case NotificationType.SimpleAlert:
-				if (content == null && completion == null)
-					return;
-				Instanciate_SimpleAlert(title, content, completion);
-				break;
-            case NotificationType.Alert:
-                if (content == null && completion == null)
-                    return;
-                Instanciate_Alert(title, content, completion);
-                break;
-            case NotificationType.Box:
-                if (content == null)
-                    return;
-                Instanciate_Box(title, content);
-                break;
-            case NotificationType.Slide:
-                Instanciate_Slide(title);
-                break;
-            default:
-                break;
-        }
-	}
-	/// <summary>
-	/// Instanciates the alert.
-	/// </summary>
-	/// <param name="title">Title.</param>
-	/// <param name="content">Content.</param>
-	/// <param name="completion">Execute on click button</param>
-	private static void Instanciate_SimpleAlert(string title, string content, Action<bool, string> completion)
-	{
-		GameObject gm = MonoBehaviour.Instantiate(SimpleAlert_Prefab);
-		gm.name = "NotificationSimpleAlert";
-		gm.transform.SetParent(Canvas.transform, false);
-		Text textComponent = gm.transform.Find("Title").GetComponent<Text>();
-		textComponent.text = title;
-		textComponent = gm.transform.Find("Content").GetComponent<Text>();
-		textComponent.text = content;
+	///
+	/// Create.
+	///
 
-		Button accepted = gm.transform.Find("Send").GetComponent<Button>();
-		accepted.onClick.AddListener(delegate ()
-			{
-				completion(true, null);
-				gm.SetActive(false);
-				MonoBehaviour.Destroy(gm);
-			});
-	}
 	/// <summary>
-	/// Instanciates the alert.
+	/// Create a notification of type Box or Slide.
 	/// </summary>
-	/// <param name="title">Title.</param>
-	/// <param name="content">Content.</param>
-	/// <param name="completion">Execute on click button <c>true</c></param>
-	private static void Instanciate_Text(string title, string content, Action<bool, string> completion)
+	public static void Create (NotificationType type, string title, string content, float Delay = DELAY, bool force = false)
 	{
-		GameObject gm = MonoBehaviour.Instantiate(Text_Prefab);
-		gm.name = "NotificationText";
-		gm.transform.SetParent(Canvas.transform, false);
-		Text textComponent = gm.transform.Find("Title").GetComponent<Text>();
-		textComponent.text = title;
-		textComponent = gm.transform.Find("Content").GetComponent<Text>();
-		textComponent.text = content;
+		if (!IsAutorised (type, force))
+			return;
+		
+		Canvas = GameObject.FindObjectOfType<Canvas>().gameObject;
+		delay = Delay;
+		if (type == NotificationType.Box)
+			instanciateBox(title, content);
+		if (type == NotificationType.Slide)
+			instanciateSlide(title);
+	}
+
+	/// <summary>
+	/// Create a notification of type SimpleAlert.
+	/// </summary>
+	public static void SimpleAlert (string title, string content, Action completion = null, bool force = false)
+	{
+		var type = NotificationType.SimpleAlert;
+		if (!IsAutorised (type, force)) 
+			return;
+		
+		Canvas = GameObject.FindObjectOfType<Canvas>().gameObject;
+		if (type == NotificationType.SimpleAlert)
+			instanciateSimpleAlert(title, content, completion);
+	}
+
+	/// <summary>
+	/// Create a notification of type Text
+	/// </summary>
+	public static void Alert (string title, string content, Action<bool> completion, bool force = false)
+	{
+		var type = NotificationType.Alert;
+		if (!IsAutorised (type, force))
+			return;
+		Canvas = GameObject.FindObjectOfType<Canvas>().gameObject;
+		instanciateAlert(title, content, completion);
+	}
+
+	/// <summary>
+	/// Create a notification of type Text
+	/// </summary>
+	public static void Text (string title, string content, Action<string> completion, bool force = false)
+	{
+		var type = NotificationType.Text;
+		if (!IsAutorised (type, force))
+			return;
+		
+		Canvas = GameObject.FindObjectOfType<Canvas>().gameObject;
+		instanciateText(title, content, completion);
+	}
+
+	///
+	/// Instanciate.
+	///
+
+	/// <summary>
+	/// Instanciate the Text notification.
+	/// </summary>
+	/// <param name="completion">Execute on click button ok.</param>
+	private static void instanciateText(string title, string content, Action<string> completion)
+	{
+		GameObject gm = globalSetUp (title, content, Text_Prefab);
 
 		InputField text = gm.transform.Find("Value").GetComponent<InputField>();
 		Button accepted = gm.transform.Find("Send").GetComponent<Button>();
@@ -109,74 +95,103 @@ public static class Notification
 			{
 				if (text.text == null || text.text == "")
 					return;
-				completion(true, text.text);
+				completion(text.text);
 				gm.SetActive(false);
 				MonoBehaviour.Destroy(gm);
 			});
 	}
-    /// <summary>
-    /// Instanciates the alert.
-    /// </summary>
-    /// <param name="title">Title.</param>
-    /// <param name="content">Content.</param>
-    /// <param name="completion">Execute on click button : <c>true</c> Accepted or  <c>false</c> Refused</param>
-    private static void Instanciate_Alert(string title, string content, Action<bool, string> completion)
-    {
-        GameObject gm = MonoBehaviour.Instantiate(Alert_Prefab);
-        gm.name = "NotificationAlert";
-        gm.transform.SetParent(Canvas.transform, false);
-        Text textComponent = gm.transform.Find("Title").GetComponent<Text>();
-        textComponent.text = title;
-        textComponent = gm.transform.Find("Content").GetComponent<Text>();
-        textComponent.text = content;
+	/// <summary>
+	/// Instanciate the Alert notification.
+	/// </summary>
+	/// <param name="completion">Execute on click button : <c>true</c> Accepted or  <c>false</c> Refused</param>
+	private static void instanciateAlert(string title, string content, Action<bool> completion)
+	{
+		GameObject gm = globalSetUp (title, content, Alert_Prefab);
 
-        Transform action = gm.transform.Find("Action");
-        Button refused = action.Find("btn_1").GetComponent<Button>();
-        Button accepted = action.Find("btn_2").GetComponent<Button>();
+		Transform action = gm.transform.Find("Action");
+		Button refused = action.Find("btn_1").GetComponent<Button>();
+		Button accepted = action.Find("btn_2").GetComponent<Button>();
 
-        accepted.onClick.AddListener(delegate ()
-        {
-            completion(true, null);
-            gm.SetActive(false);
-            MonoBehaviour.Destroy(gm);
-        });
+		accepted.onClick.AddListener(delegate ()
+			{
+				completion(true);
+				gm.SetActive(false);
+				MonoBehaviour.Destroy(gm);
+			});
 
-        refused.onClick.AddListener(delegate ()
-        {
-            completion(false, null);
-            gm.SetActive(false);
-            MonoBehaviour.Destroy(gm);
-        });
-    }
-    /// <summary>
-    /// Instanciates the box.
-    /// </summary>
-    /// <param name="title">Title.</param>
-    /// <param name="content">Content.</param>
-    private static void Instanciate_Box(string title, string content)
-    {
-        GameObject gm = MonoBehaviour.Instantiate(Box_Prefab);
-        gm.name = "NotificationBox";
-        gm.transform.SetParent(Canvas.transform, false);
-        Text textComponent = gm.transform.Find("Title").GetComponent<Text>();
-        textComponent.text = title;
-        textComponent = gm.transform.Find("Content").GetComponent<Text>();
-        textComponent.text = content;
-        Coroutine(gm);
-    }
-    /// <summary>
-    /// Instanciates the slide.
-    /// </summary>
-    /// <param name="title">Title.</param>
-    private static void Instanciate_Slide(string title)
-    {
-        GameObject gm = MonoBehaviour.Instantiate(Slide_Prefab);
-        gm.name = "NotificationSlide";
-        gm.transform.SetParent(Canvas.transform, false);
-        Text textComponent = gm.transform.Find("Title").GetComponent<Text>();
-        textComponent.text = title;
-        Coroutine(gm);
-    }
+		refused.onClick.AddListener(delegate ()
+			{
+				completion(false);
+				gm.SetActive(false);
+				MonoBehaviour.Destroy(gm);
+			});
+	}
+
+	/// <summary>
+	/// Instanciate the Box notification.
+	/// </summary>
+	private static void instanciateBox(string title, string content)
+	{
+		GameObject gm = globalSetUp (title, content, Box_Prefab);
+		Coroutine(gm);
+	}
+
+
+	/// <summary>
+	/// Instanciate the Slide notification.
+	/// </summary>
+	private static void instanciateSlide(string title)
+	{
+		GameObject gm = globalSetUp (title, null, Slide_Prefab);
+		Coroutine(gm);
+	}
+
+	///
+	/// Global.
+	///
+
+	/// <summary>
+	/// Instanciate the SimpleAlert notification.
+	/// </summary>
+	/// <param name="completion">Execute on click button ok.</param>
+	private static void instanciateSimpleAlert(string title, string content, Action completion)
+	{
+		GameObject gm = globalSetUp (title, content, SimpleAlert_Prefab);
+
+		Button accepted = gm.transform.Find("Send").GetComponent<Button>();
+		accepted.onClick.AddListener(delegate ()
+			{
+				if (completion != null)
+					completion();
+				gm.SetActive(false);
+				MonoBehaviour.Destroy(gm);
+			});
+
+		Button close = gm.transform.Find("Close").GetComponent<Button>();
+		close.onClick.AddListener(delegate ()
+			{
+				gm.SetActive(false);
+				MonoBehaviour.Destroy(gm);
+			});
+	}
+
+	/// <summary>
+	/// Set up the notification.
+	/// </summary>
+	private static GameObject globalSetUp(string title, string content, GameObject instanceGm){
+		GameObject gm = MonoBehaviour.Instantiate(instanceGm);
+		gm.name = "Notification"+instanceGm.name;
+		gm.transform.SetParent(Canvas.transform, false);
+		if (title != null) {
+			Text textComponent = gm.transform.Find("Title").GetComponent<Text>();
+			textComponent.text = title;
+		}
+		if (content != null) {
+			Text textComponent = gm.transform.Find("Content").GetComponent<Text>();
+			textComponent.text = content;
+		}
+		return gm;
+	}
 
     /// <summary>
     /// Determines if notfication is autorised.
@@ -185,7 +200,12 @@ public static class Notification
     private static bool IsAutorised(NotificationType type, bool force)
     {
         NotificationState state = Settings.Instance.NotificationState;
-        return (force || (int)state >= (int)type);
+		if (force || (int)state >= (int)type)
+			return true;
+		else {
+			Debug.Log ("Notification " + type + " rejected. State : " + state);
+			return false;
+		}
     }
 
     private static void Coroutine(GameObject gm)

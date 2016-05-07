@@ -53,7 +53,7 @@ namespace Menu
 			string text = obj.GetString ("text");
 			string title = "Nouveau défi débloqué !";
 			string content = text + "\n" + "Vous avez obtenu un nouveau SwungMan : " + swName + "\n" + "Rendez-vous dans la boutique pour en savoir plus !";
-			Notification.Create (NotificationType.SimpleAlert, title, content: content, completion: (success, nothing)=> {
+			Notification.SimpleAlert (title, content, force: true, completion: () => {
 				checkChallengeCompleted();
 			});
 		}

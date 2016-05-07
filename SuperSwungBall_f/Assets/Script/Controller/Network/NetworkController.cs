@@ -90,7 +90,7 @@ namespace Network
         void OnPhotonJoinRoomFailed()
         {
             string roomName = PlayerPrefs.GetString("", "NULL");
-            Notification.Create(NotificationType.Slide, title: "Room introuvable : " + roomName);
+            Notification.Create(NotificationType.Slide, "Room introuvable : " + roomName, null);
         }
         void OnPhotonRandomJoinFailed()
         {

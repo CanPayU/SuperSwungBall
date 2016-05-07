@@ -54,7 +54,7 @@ namespace Gestion {
 					title = "Contenu du coffre";
 				}
 				string content = "Vous avez obtenu " + p.Name + " !";
-				Notification.Create(NotificationType.Box, title, content: content, force: true);
+				Notification.Create (NotificationType.Box, title, content, force: true);
 			}
 			else
 				Notification.Create(NotificationType.Box, "Achat impossible", content: "Vous n'avez pas assé de Phi", force: true);

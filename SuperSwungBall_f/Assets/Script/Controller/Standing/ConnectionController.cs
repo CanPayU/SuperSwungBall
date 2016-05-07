@@ -71,9 +71,9 @@ namespace Standing
             HTTP.AuthDeviceAsk(username.text, (success_ask) =>
             {
                 if (success_ask)
-                    Notification.Create(NotificationType.Text, "Code de confirmation", 0, "Entrez le code recus sur votre mobile", force: true, completion: (value, text) =>
+					Notification.Text("Code de confirmation", "Entrez le code recus sur votre mobile", force: true, completion: (text) =>
                     {
-                        HTTP.AuthDeviceReply(username.text, text, (success_reply) =>
+						HTTP.AuthDeviceReply(username.text, text, (success_reply) =>
                         {
                             if (success_reply)
                             {

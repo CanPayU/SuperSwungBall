@@ -193,8 +193,24 @@ public class Settings
                     return team.Value;
                 i++;
             }
-            return selected_team;
+			return selected_team; // Théoriquement jamais call
         }
+	}
+	public Player Random_Player
+	{
+		get
+		{
+			var players = new Dictionary<string, Player>(default_player);
+			int alea = rand.Next(players.Count);
+			int i = 0;
+			foreach (var player in players)
+			{
+				if (i == alea)
+					return player.Value;
+				i++;
+			}
+			return players.First().Value; // Théoriquement jamais call
+		}
 	}
 	public Player Random_Secret_Player
 	{
