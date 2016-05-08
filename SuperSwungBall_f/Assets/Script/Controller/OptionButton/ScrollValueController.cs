@@ -9,11 +9,14 @@ public class ScrollValueController : MonoBehaviour {
 	private Image image;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		this.scroll = transform.Find("Value").GetComponent<Scrollbar>();
 		this.image = scroll.transform.Find ("Mask").Find ("Image").GetComponent<Image>();
 		this.textValue = transform.Find("Text").GetComponent<Text>();
 		this.title = transform.Find("Title").GetComponent<Text>();
+
+		this.textValue.text = string.Empty;
+		this.scroll.interactable = false;
 	}
 
 	/// <summary>
@@ -46,7 +49,14 @@ public class ScrollValueController : MonoBehaviour {
 	}
 	public float Value {
 		get { return this.scroll.size; }
-		set { this.scroll.size = value; }
+		set {
+			if (this.scroll != null)
+				this.scroll.size = value;
+			else {
+				Awake ();
+				this.scroll.size = value;
+			}
+		}
 	}
 	public Color Color {
 		set { this.image.color = value; }

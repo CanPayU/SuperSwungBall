@@ -79,20 +79,15 @@ namespace Gestion
 		private void SetUpStats(){
 			this.stats_panel.SetActive (false);
 			Transform t_p = this.stats_panel.transform;
-			Scrollbar passe = t_p.Find ("Passe").Find ("Value").GetComponent<Scrollbar>();
-			Scrollbar course = t_p.Find ("Course").Find ("Value").GetComponent<Scrollbar>();
-			Scrollbar esquive = t_p.Find ("Esquive").Find ("Value").GetComponent<Scrollbar>();
-			Scrollbar tacle = t_p.Find ("Tacle").Find ("Value").GetComponent<Scrollbar>();
+			ScrollValueController passe = t_p.Find ("Passe").GetComponent<ScrollValueController>();
+			ScrollValueController course = t_p.Find ("Course").GetComponent<ScrollValueController>();
+			ScrollValueController esquive = t_p.Find ("Esquive").GetComponent<ScrollValueController>();
+			ScrollValueController tacle = t_p.Find ("Tacle").GetComponent<ScrollValueController>();
 
-			passe.size = this.player.PasseBase;
-			course.size = this.player.SpeedBase;
-			esquive.size = this.player.EsquiveBase;
-			tacle.size = this.player.TacleBase;
-
-//			SetStatsValue (passe, this.player.PasseBase);
-//			SetStatsValue (course, this.player.SpeedBase);
-//			SetStatsValue (esquive, this.player.EsquiveBase);
-//			SetStatsValue (tacle, this.player.TacleBase);
+			passe.Value = this.player.PasseBase;
+			course.Value = this.player.SpeedBase;
+			esquive.Value = this.player.EsquiveBase;
+			tacle.Value = this.player.TacleBase;
 		}
 
 		private void SetStatsValue(Transform t, float value){
@@ -110,10 +105,7 @@ namespace Gestion
 
 			Transform rect = player.GetComponent<Transform>();
 			rect.localScale = new Vector3(20f, 20f, 200f);
-			//rect.position = new Vector3(0, -35f, -20f);
 			rect.localPosition = new Vector3(0, -35f, -20f);
-			//rect.anchoredPosition3D = new Vector3(0, -35f, -20f);
-			//rect.rotation = new Quaternion(0, -180f, 0, 0);
 			rect.localRotation = new Quaternion(0, -180f, 0, 0);
 		}
 

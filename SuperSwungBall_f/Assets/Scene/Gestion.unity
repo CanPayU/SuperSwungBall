@@ -458,7 +458,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2104657048}
   m_HandleRect: {fileID: 2104657047}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -675,9 +675,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 956f60d0f5e124bd09d131f8ff2cde94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  swungmen_panel: {fileID: 149098, guid: e121824d6f76f412aaacd6b9a229685e, type: 2}
+  swungmen_panel: {fileID: 163742, guid: 1e58032a4f2c949d281c51b4e9f26829, type: 2}
   chest_panel: {fileID: 199296, guid: 677f190b47c9f460bbf08698421db7c9, type: 2}
-  challenge_panel: {fileID: 199122, guid: d0fd57baa80784e179766d7adb1109c0, type: 2}
+  challenge_panel: {fileID: 180862, guid: 8155d7b238c5c482fbea6a8aa4464399, type: 2}
 --- !u!114 &1027308506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1125,7 +1125,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 771414402}
   m_HandleRect: {fileID: 771414401}
   m_Direction: 0
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
