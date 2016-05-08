@@ -513,7 +513,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2127276019}
+      - m_Target: {fileID: 0}
         m_MethodName: OnConnectWithDevice
         m_Mode: 1
         m_Arguments:
@@ -942,7 +942,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2127276019}
+      - m_Target: {fileID: 0}
         m_MethodName: LinkInscription
         m_Mode: 1
         m_Arguments:
@@ -1071,6 +1071,7 @@ GameObject:
   - 224: {fileID: 1001121147}
   - 222: {fileID: 1001121149}
   - 114: {fileID: 1001121148}
+  - 114: {fileID: 1001121150}
   m_Layer: 5
   m_Name: Connection
   m_TagString: Untagged
@@ -1135,6 +1136,21 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1001121146}
+--- !u!114 &1001121150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1001121146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b1573d7dec2f4496958059eb7de33d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  username: {fileID: 1987954164}
+  password: {fileID: 315976979}
+  connect: {fileID: 1213024536}
+  withoutPass: {fileID: 464808870}
 --- !u!1 &1019102489
 GameObject:
   m_ObjectHideFlags: 0
@@ -1417,7 +1433,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2127276019}
+      - m_Target: {fileID: 0}
         m_MethodName: check_login
         m_Mode: 1
         m_Arguments:
@@ -2320,7 +2336,6 @@ GameObject:
   - 4: {fileID: 2127276017}
   - 114: {fileID: 2127276018}
   - 114: {fileID: 2127276016}
-  - 114: {fileID: 2127276019}
   m_Layer: 0
   m_Name: Main
   m_TagString: Untagged
@@ -2365,18 +2380,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tip_text: {fileID: 1367629936}
---- !u!114 &2127276019
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2127276015}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b1573d7dec2f4496958059eb7de33d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  username: {fileID: 1987954164}
-  password: {fileID: 315976979}
-  connect: {fileID: 1213024536}
-  withoutPass: {fileID: 464808870}

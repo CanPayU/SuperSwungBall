@@ -28,18 +28,26 @@ namespace Standing
             {
                 OnChange(false);
             });
-
+			username.Select ();
         }
+
+		void Update(){
+			if (Input.GetKeyDown (KeyCode.Tab)) {
+				Debug.Log ("Press Tab");
+				if (username.isFocused)
+					password.Select ();
+				else if (password.isFocused)
+					check_login ();
+			}
+		}
 
         private void OnChange(bool all)
         {
             if (this.validated)
-            {
-                ColorBlock cb = connect.colors;
-                cb.normalColor = new Color(45f / 255f, 125f / 255f, 204f / 255f);
-                connect.colors = cb;
-                if (all)
-                    withoutPass.colors = cb;
+			{
+				connect.colors = Colors.Block.Blue;
+				if (all) 
+					withoutPass.colors = Colors.Block.Blue;
                 this.validated = false;
             }
         }
@@ -47,20 +55,17 @@ namespace Standing
         public void check_login()
         {
             this.validated = true;
-            connect.interactable = false;
+			connect.interactable = false;
+			Debug.Log ("false");
             HTTP.Authenticate(username.text, password.text, (success) =>
             {
-                if (success)
-                {
+                if (success) {
                     SaveLoad.save_user();
 					FadingManager.Instance.Fade();
                 }
-                else
-                {
-                    connect.interactable = true;
-                    ColorBlock cb = connect.colors;
-                    cb.normalColor = new Color(229f / 255f, 76f / 255f, 76f / 255f);
-                    connect.colors = cb;
+                else {
+					connect.interactable = true;
+					connect.colors = Colors.Block.Red;
                 }
             });
         }
