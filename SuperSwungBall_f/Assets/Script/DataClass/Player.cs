@@ -8,37 +8,16 @@ using Boomlagoon.JSON;
 [Serializable]
 public class Player
 {
-    private string player_name;
-    public string Name
-    {
-        get { return player_name; }
-        set { player_name = value; }
-    }
-    private int team_id;
-    private string uid;
-    public string UID
-    {
-        get { return uid; }
-    }
-    private int price;
-    public int Price // En Phi
-    {
-        get { return price; }
-        set { price = value; }
-	}
-	private PlayerType type;
-	public PlayerType Type
-	{
-		get { return type; }
-		set { type = value; }
-	}
-	private int proba; // Pourcentage
-	public int Proba
-	{
-		get { return proba; }
-		set { proba = value; }
-	}
+	private string player_name;
+	private int team_id;
+	private string uid;
 	private float ducat; // Cout d'un player dans une team
+
+	// --- Pour la gestion
+	private int price;
+	private PlayerType type;
+	private int proba; // Pourcentage
+
 
 	private PlayerStats DEFAULTSTATS = new PlayerStats(0, 0, 0, 0); // Stats initiales (unique au joueur)
     private List<string> buttonsValues = new List<string> { "esquive", "esquive", "esquive" }; // Valeurs des boutons
@@ -46,10 +25,10 @@ public class Player
 
 	public Player(int tacle, int esquive, int passe, int course, string player_name_, string uid = "IdPlayer", int Team_Id = 0, int price = 0, int ducat = -1)
     {
-		this.DEFAULTSTATS.Esquive = esquive * 10;
-		this.DEFAULTSTATS.Tacle = tacle * 10;
-		this.DEFAULTSTATS.Passe = passe * 10;
-		this.DEFAULTSTATS.Course = course * 10;
+		this.DEFAULTSTATS.Esquive = esquive;
+		this.DEFAULTSTATS.Tacle = tacle;
+		this.DEFAULTSTATS.Passe = passe;
+		this.DEFAULTSTATS.Course = course;
         initialize_finaleStats();
         this.player_name = player_name_;
         this.team_id = Team_Id;
@@ -68,10 +47,10 @@ public class Player
 		this.proba = (int)json.GetNumber("proba");
 
 		var stats = json.GetObject ("stats");
-		this.DEFAULTSTATS.Esquive = (int)stats.GetNumber("esquive") * 10;
-		this.DEFAULTSTATS.Tacle = (int)stats.GetNumber("tacle") * 10;
-		this.DEFAULTSTATS.Passe = (int)stats.GetNumber("passe") * 10;
-		this.DEFAULTSTATS.Course = (int)stats.GetNumber("course") * 10;
+		this.DEFAULTSTATS.Esquive = (int)stats.GetNumber("esquive");
+		this.DEFAULTSTATS.Tacle = (int)stats.GetNumber("tacle");
+		this.DEFAULTSTATS.Passe = (int)stats.GetNumber("passe");
+		this.DEFAULTSTATS.Course = (int)stats.GetNumber("course");
 		initialize_finaleStats();
     }
 
@@ -94,7 +73,7 @@ public class Player
 		float pt = this.DEFAULTSTATS.Passe + this.DEFAULTSTATS.Tacle; 		// mal
 		float finalCombo = ce + pe + ct - cp - te - pt;
 
-		this.ducat = ((sum + finalCombo) / 4)/100;
+		this.ducat = ((sum + finalCombo) / 4)/10;
 	}
 
     public void reset() // reinitialises valeurs des boutons et les stats finales
@@ -121,46 +100,70 @@ public class Player
     }
 
     // Valeurs à changer pour l'equilibrage
-    #region Getters
+	#region Getters
+	public string Name
+	{
+		get { return player_name; }
+		set { player_name = value; }
+	}
+	public string UID
+	{
+		get { return uid; }
+	}
+	public int Price // En Phi
+	{
+		get { return price; }
+		set { price = value; }
+	}
+	public PlayerType Type
+	{
+		get { return type; }
+		set { type = value; }
+	}
+	public int Proba
+	{
+		get { return proba; }
+		set { proba = value; }
+	}
     public float Speed
     {
-		get { return (float)finalStats.Course / 100; }
+		get { return (float)finalStats.Course / 10; }
     }
     public float Esquive
     {
-		get { return (float)finalStats.Esquive / 100; }
+		get { return (float)finalStats.Esquive / 10; }
     }
     public float Passe
     {
-		get { return (float)finalStats.Passe / 100; }
+		get { return (float)finalStats.Passe / 10; }
     }
     public float Tacle
     {
-		get { return (float)finalStats.Tacle / 100; }
+		get { return (float)finalStats.Tacle / 10; }
     }
     public float SpeedBase
     {
-		get { return (float)DEFAULTSTATS.Course / 100; }
+		get { return (float)DEFAULTSTATS.Course / 10; }
     }
     public float EsquiveBase
     {
-		get { return (float)DEFAULTSTATS.Esquive / 100; }
+		get { return (float)DEFAULTSTATS.Esquive / 10; }
     }
     public float PasseBase
     {
-		get { return (float)DEFAULTSTATS.Passe / 100; }
+		get { return (float)DEFAULTSTATS.Passe / 10; }
     }
     public float TacleBase
     {
-		get { return (float)DEFAULTSTATS.Tacle / 100; }
+		get { return (float)DEFAULTSTATS.Tacle / 10; }
     }
     public float ZoneDeplacement
     {
-		get { return (float)finalStats.Course / 100; }
+		get { return (float)finalStats.Course / 10; }
     }
     public float ZonePasse
     {
-		get { return (float)finalStats.Passe / 100; }
+		get { return (float)finalStats.Passe / 10; }
     }
 	public float Ducat
 	{
