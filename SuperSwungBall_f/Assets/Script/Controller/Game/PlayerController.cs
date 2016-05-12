@@ -3,9 +3,11 @@ using System.IO;
 using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters.Binary;
 
+using GameKit;
+
 namespace GameScene
 {
-    public class PlayerController : MonoBehaviour
+	public class PlayerController : GameBehavior
     {
         [SerializeField]
         private GameObject Menu;
@@ -259,7 +261,6 @@ namespace GameScene
 
             if (setPoint)
             {
-                Debug.Log("Set Points");
                 arrivalPoint = new Vector3(menuController.Get_Coordsdeplacement[0], transform.position.y, menuController.Get_Coordsdeplacement[1]); // point d'arrivé du déplacement
                 arrivalPointPasse = new Vector3(menuController.Get_CoordsPasse[0], 0.2f, menuController.Get_CoordsPasse[1]); // point d'arrivé de la passe
             }
@@ -293,6 +294,23 @@ namespace GameScene
             anim.Play("Repos");
             movement = false;
         }
+
+
+		// -- Event
+
+		public override void OnSucceedAttack(Player p){
+			Debug.Log ("I have succeed my Attack : " + p.Name + " - " + name);
+		}
+		public override void OnSucceedEsquive(Player p){
+			Debug.Log ("I Have succeed my Esquive : " + p.Name + " - " + name);
+		}
+		public override void OnFailedAttack(Player p){
+			Debug.Log ("I Have failed my Esquive : " + p.Name + " - " + name);
+		}
+		public override void OnFailedEsquive(Player p){
+			Debug.Log ("I Have failed my Esquive : " + p.Name + " - " + name);
+		}
+
 
         // -- Network
         public void SyncValues()

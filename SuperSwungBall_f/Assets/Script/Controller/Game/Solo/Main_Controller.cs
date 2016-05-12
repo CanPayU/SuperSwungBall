@@ -3,9 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
+using GameKit;
+
 namespace GameScene.Solo
 {
-    public class Main_Controller : MonoBehaviour
+	public class Main_Controller : GameBehavior
     {
         private bool annim_started = false;
 
@@ -23,6 +25,10 @@ namespace GameScene.Solo
         Text myGuiText;
 
         Timer time;
+
+		public Main_Controller(){
+			this.global = true;
+		}
 
         // Use this for initialization
         void Start()
@@ -157,6 +163,11 @@ namespace GameScene.Solo
             }
 			Debug.Log("TeamInfo : default:" + Settings.Instance.Default_Team.ToStringFull());
         }
+
+		// ------- Event
+		public override void OnGoal(GoalController controller){
+			Debug.Log ("OnGoal TeamId: " + controller.Team);
+		}
     }
 
 }

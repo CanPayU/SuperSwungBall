@@ -10,7 +10,10 @@ namespace GameScene
         [SerializeField]
         private int team_id;
         public int Team
-        { set { team_id = value; } }
+        { 
+			set { team_id = value; }
+			get { return team_id; }
+		}
 
         private GameObject main;
 

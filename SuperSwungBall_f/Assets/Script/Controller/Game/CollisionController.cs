@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
+using GameKit;
+
 namespace GameScene
 {
-    public class CollisionController : MonoBehaviour
+	public class CollisionController : GameBehavior
     {
 		ChatController chatController;
         Player player;
@@ -75,6 +77,7 @@ namespace GameScene
                 GoalController g_controller = goalCollider.GetComponent<GoalController>();
                 g_controller.goal();
                 goal = true;
+				Caller.Goal (g_controller);
             }
         }
         private void combat(Collider adversaireCollider)
@@ -98,19 +101,24 @@ namespace GameScene
                         Debug.Log(name + "réussit son tacle!");
                         playerController.Animation("Attaque Reussit", 2f);
                         adversaireCollider.gameObject.GetComponent<CollisionController>().echec("Esquive");
-                    }
+						Caller.SuccessAttack (player);
+					} else {
+						Caller.FailedAttack (player);
+					}
                 }
                 else
                 {
-                    if (player.Esquive > attaqueAdverse)
-                    {
-                        //Esquive Réussit
+					if (player.Esquive > attaqueAdverse) {
+						//Esquive Réussit
 						if (PhotonNetwork.inRoom)
 							chatController.InstanciateMessage (player.Name + " réussit son esquive !", ChatController.Chat.EVENT);
-                        Debug.Log(name + "réussit son esquive!");
-                        playerController.Animation("Esquive Reussit", 0.7f);
-                        adversaireCollider.gameObject.GetComponent<CollisionController>().echec("Attaque");
-                    }
+						Debug.Log (name + "réussit son esquive!");
+						playerController.Animation ("Esquive Reussit", 0.7f);
+						adversaireCollider.gameObject.GetComponent<CollisionController> ().echec ("Attaque");
+						Caller.SuccessEsquive (player);
+					} else {
+						Caller.FailedEsquive (player);
+					}
                 }
             }
         }
