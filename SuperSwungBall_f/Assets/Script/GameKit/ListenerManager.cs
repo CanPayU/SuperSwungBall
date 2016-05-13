@@ -9,15 +9,17 @@ namespace GameKit {
 		private static Dictionary<GameObject, List<IGameListener>> gmListeners = new Dictionary<GameObject, List<IGameListener>> ();
 		private static List<IGameListener> globalListeners = new List<IGameListener> ();
 
-		public static void AddListener(IGameListener listener, GameObject gm, bool global = false) {
-			if (global)
+
+		public static void AddListener(IGameListener listener, EventType type, GameObject gm) {
+			if ((int)type > 1)
 				globalListeners.Add (listener);
-			else {
+			if ((int)type < 2 || (int)type == 3) {
 				if (!gmListeners.ContainsKey(gm))
 					gmListeners [gm] = new List<IGameListener> ();
 				gmListeners [gm].Add (listener);
 			}
 		}
+
 		public static void RemoveListener(IGameListener listener, GameObject gm, bool global = false) {
 			if (global)
 				globalListeners.Remove (listener);
@@ -32,21 +34,6 @@ namespace GameKit {
 				return gmListeners [gm];
 			return globalListeners;
 		}
-
-		// ---- V1
-
-//		public static List<IGameListener> listeners = new List<IGameListener>();
-//
-//		public static void AddListener(IGameListener listener) {
-//			listeners.Add (listener);
-//			//Debug.Log ("AddListener");
-//		}
-//
-//		public static void RemoveListener(IGameListener listener) {
-//			listeners.Remove (listener);
-//			//Debug.Log ("RemoveListener");
-//		}
-
 	}
 
 }

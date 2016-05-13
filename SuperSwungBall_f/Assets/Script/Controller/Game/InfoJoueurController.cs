@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 
+using GameKit;
+
 namespace GameScene
 {
-    public class InfoJoueurController : MonoBehaviour
+	public class InfoJoueurController : GameBehavior
     {
 
         Vector3 open;
@@ -20,6 +22,11 @@ namespace GameScene
 
         float speed;
         bool movement;
+
+
+		public InfoJoueurController(){
+			this.eventType = GameKit.EventType.Global;
+		}
 
         void Start()
         {
@@ -147,5 +154,9 @@ namespace GameScene
                 component[i - min] = transform.GetChild(i).gameObject;
             Stats.Add(key, component);
         }
+
+		public override void OnStartAnimation(){
+			this.Close ();
+		}
     }
 }

@@ -18,24 +18,18 @@ namespace GameScene.Solo
         [SerializeField]
         private Text score;
 
-        CameraController cameraController;
-
-        InfoJoueurController infoJoueur; // Panel info joueur
-
         Text myGuiText;
 
         Timer time;
 
 		public Main_Controller(){
-			this.global = true;
+			this.eventType = GameKit.EventType.Global;
 		}
 
         // Use this for initialization
         void Start()
         {
-            cameraController = GameObject.Find("Main Camera").GetComponent<CameraController>();
             time = new Timer(10.0F, end_time);
-            infoJoueur = GameObject.Find("Canvas").transform.FindChild("InfoJoueur").GetComponent<InfoJoueurController>();
             instantiate_team();
             //update_score ();
         }
@@ -46,7 +40,7 @@ namespace GameScene.Solo
 
             if (Input.GetKeyDown(KeyCode.Space) && !annim_started)
             {
-                start_annim();
+				Caller.StartAnimation ();
             }
             time.update();
         }
@@ -58,41 +52,12 @@ namespace GameScene.Solo
 
         private void end_time()
         {
-            time.reset();
+            this.time.reset();
 
             if (annim_started)
-            {// start Reflexion
-                Dictionary<int, Team> teams = Game.Instance.Teams;
-                foreach (KeyValuePair<int, Team> team in teams)
-                {
-                    team.Value.end_move_players();
-                }
-                annim_started = false;
-				time = new Timer(60.0F, end_time);
-                time.start();
-                Debug.Log("Start reflexion");
-                cameraController.end_anim();
-            }
+				Caller.StartReflexion();
             else
-            {// start Annimation
-				time = new Timer(10.0F, end_time);
-                annim_started = true;
-                start_annim();
-            }
-        }
-
-        private void start_annim()
-        {
-            annim_started = true;
-            time.start();
-            infoJoueur.Close();
-
-            Dictionary<int, Team> teams = Game.Instance.Teams;
-            foreach (KeyValuePair<int, Team> team in teams)
-            {
-                team.Value.start_move_players();
-            }
-            cameraController.start_anim();
+				Caller.StartAnimation();
         }
 
         void OnGUI()
@@ -167,6 +132,20 @@ namespace GameScene.Solo
 		// ------- Event
 		public override void OnGoal(GoalController controller){
 			Debug.Log ("OnGoal TeamId: " + controller.Team);
+		}
+		public override void OnStartAnimation(){
+			Debug.Log ("OnStartAnimation");
+
+			this.time = new Timer (10.0F, end_time);
+			this.annim_started = true;
+			this.time.start ();
+		}
+		public override void OnStartReflexion(){
+			Debug.Log ("Start Reflexion");
+
+			this.annim_started = false;
+			this.time = new Timer(10.0F, end_time);
+			this.time.start();
 		}
     }
 

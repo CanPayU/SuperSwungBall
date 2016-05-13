@@ -11,24 +11,25 @@ namespace GameKit {
 		internal Call Caller = null;
 
 		private bool isListener = false;
-		internal bool global = false;
+
+		internal EventType eventType = EventType.Local;
 
 		void Awake(){
 			this.Caller = new GameBehavior.Call(this);
-			ListenerManager.AddListener (this, gameObject, global);
+			ListenerManager.AddListener (this, eventType, gameObject);
 			isListener = true;
 		}
 
 		void OnDisable(){
 			if (isListener) {
-				ListenerManager.RemoveListener (this, gameObject, global);
+				ListenerManager.AddListener (this, eventType, gameObject);
 				isListener = false;
 			}
 		}
 
 		void OnEnable() {
 			if (!isListener) {
-				ListenerManager.AddListener (this, gameObject, global);
+				ListenerManager.AddListener (this, eventType, gameObject);
 				isListener = true;
 			}
 		}
@@ -37,6 +38,8 @@ namespace GameKit {
 		/// Event
 		///
 
+		public virtual void OnStartAnimation() { }
+		public virtual void OnStartReflexion() { }
 		public virtual void OnGoal(GoalController g) { }
 
 		public virtual void OnSucceedAttack (Player pl) { }
@@ -57,7 +60,14 @@ namespace GameKit {
 				this.parent = parent;
 			}
 
-			// TEST
+			internal void StartAnimation() {
+				callGlobalListeners ("OnStartAnimation", null);
+			}
+
+			internal void StartReflexion() {
+				callGlobalListeners ("OnStartReflexion", null);
+			}
+		
 			internal void Goal(GoalController g) {
 				callGlobalListeners ("OnGoal", new object[] { g });
 			}

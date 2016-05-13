@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+using GameKit;
+
 namespace GameScene
 {
-    public class CameraController : MonoBehaviour
+	public class CameraController : GameBehavior
     {
 
         private Vector3 POSITION_INITIALE = new Vector3(15, 40, 0); // constante position phase de reflexion
@@ -14,6 +16,10 @@ namespace GameScene
         private float speed;
         GameObject ball; // pour suivre le mouvement de la balle
 
+		public CameraController(){
+			this.eventType = GameKit.EventType.Global;
+		}
+			
         void Start()
         {
             speed = 10;
@@ -46,5 +52,15 @@ namespace GameScene
             animation = false;
             speed = 20;
         }
+
+		public override void OnStartAnimation(){
+			this.animation = true;
+			this.speed = 1;
+			this.transform.position = new Vector3(ball.transform.position.x + 15, 10, ball.transform.position.z);
+		}
+		public override void OnStartReflexion(){
+			this.animation = false;
+			this.speed = 20;
+		}
     }
 }

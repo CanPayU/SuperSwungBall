@@ -85,6 +85,10 @@ namespace GameScene
         }
         #endregion
 
+		public PlayerController(){
+			this.eventType = GameKit.EventType.All;
+		}
+
         void Start()
         {
             //initialisation menu
@@ -117,6 +121,10 @@ namespace GameScene
         }
         void Update()
         {
+			if (Input.GetKeyDown(KeyCode.R))
+			{
+				Caller.SuccessAttack (this.player);
+			}
             if (!phaseAnimation)
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -309,6 +317,13 @@ namespace GameScene
 		}
 		public override void OnFailedEsquive(Player p){
 			Debug.Log ("I Have failed my Esquive : " + p.Name + " - " + name);
+		}
+
+		public override void OnStartAnimation(){
+			start_Anim ();
+		}
+		public override void OnStartReflexion(){
+			end_Anim();
 		}
 
 

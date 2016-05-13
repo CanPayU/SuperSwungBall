@@ -7,7 +7,7 @@ namespace Manual {
 	/* 			COMMENT UTILISER GAMEKIT
 	 * 
 	 * Introduction
-	 * 1 - Player Event
+	 * 1 - Local Event
 	 * 2 - Global Event
 	 * 3 - Listen Event
 	 * 4 - Call Event
@@ -19,6 +19,12 @@ namespace Manual {
 
 	// --- INTRODUCTION
 
+	// Il existe 2 types d'events :  Lacal et Global
+	// Ils sont symbolisés par un enum :
+	// 		EventType :
+	//			- All		Ecoute Global et Local
+	// 			- Local
+	// 			- Global
 	// Pour qu'une class gère les events, elle doit hériter de GameBehavior et non de MonoBehaviour. (Oui j'ai oublié le u ^^)
 	// Pensez à importer GameKit avec : using GameKit;
 
@@ -32,10 +38,10 @@ namespace Manual {
 
 
 	// 1.
-	// --- Player Event
+	// --- Local Event
 
-	// Les PlayerEvents sont des évennemets interne au gameObject
-	// Si tu déclenches un PlayerEvent, il sera appelé uniquement dans les scripts du gameObject
+	// Les LocalEvents sont des évennemets interne au gameObject
+	// Si tu déclenches un LocalEvent, il sera appelé uniquement dans les scripts du gameObject
 	// Concrètement :
 	// 		Un player contient plusieurs scripts : CollisionController, PlayerController, ...
 	//		Si dans le CollisionController tu appels l'évennement "Tacle Réussi", seul les scripts du gameObject qui a réussi le tacle recoivent l'évennement
@@ -59,12 +65,11 @@ namespace Manual {
 	// Les GlobalEvents sont des évennemets globaux (logique ...)
 	// Si tu déclenches un GlobalEvent, il sera appelé sur tout les scripts qui ecoutent les GlobalEvents
 	// Pour qu'un script écoute les GlobalEvents, il faut lui spécifier
-	// ATTENTION : Un script qui écoute les GlobalEvents n'écoute pas les PlayerEvents
 
 	// Exemple :
 	class MyGlobalEventScript : GameBehavior {
 		public MyGlobalEventScript(){ // Constructor
-			this.global = true;
+			this.eventType = GameKit.EventType.Global; // All pour écouter les deux
 		}
 		// Le script écoute maintenant les GlobalEvents.
 	}
@@ -107,7 +112,7 @@ namespace Manual {
 	// --- Tout les évennements
 
 	// Tout les evennements sont disponible et commenté dans Assets/Script/GameKit/IGameListener
-	// Il est spécifié si c'est un GlobalEvent ou PlayerEvent.
+	// Il est spécifié si c'est un GlobalEvent ou LocalEvent.
 
 
 
