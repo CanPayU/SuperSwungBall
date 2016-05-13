@@ -30,7 +30,7 @@ public class Team
         players = new Dictionary<int, Player>();
     }
 
-    public void start_move_players()
+    public void start_move_players() // Va disparaitre une fois les events implentés
     {
         foreach (KeyValuePair<int, Player> player in players)
         {
@@ -45,7 +45,7 @@ public class Team
             }
         }
     }
-    public void end_move_players()
+	public void end_move_players() // Va disparaitre une fois les events implentés
     {
         foreach (KeyValuePair<int, Player> player in players)
         {

@@ -16,7 +16,11 @@ namespace GameScene.Solo
         [SerializeField]
         private GameObject player2_prefab;
         [SerializeField]
-        private Text score;
+		private Text score;
+		[SerializeField]
+		private Text timerText;
+		[SerializeField]
+		private Animator timerAnimator;
 
         Text myGuiText;
 
@@ -42,12 +46,9 @@ namespace GameScene.Solo
             {
 				Caller.StartAnimation ();
             }
+			updateTimerText ();
+			
             time.update();
-        }
-
-        private void suc(bool success)
-        {
-            Debug.Log(success);
         }
 
         private void end_time()
@@ -60,15 +61,27 @@ namespace GameScene.Solo
 				Caller.StartAnimation();
         }
 
-        void OnGUI()
-        {
-            if (!annim_started)
-            {
-                float h = 30;
-                float w = 200;
-                GUI.Box(new Rect(0, 0, w, h), "Timer : " + (time.Time_remaining).ToString("0"));
-            }
-        }
+		private void updateTimerText(){
+			if (this.annim_started) {
+				this.timerText.text = string.Empty;
+				return;
+			}
+			this.timerText.text = (this.time.Time_remaining).ToString ("0");
+			if (this.time.Time_remaining < 10f)
+				this.timerAnimator.Play ("EndTimer");
+			else
+				this.timerAnimator.Play ("Empty");
+		}
+
+//        void OnGUI()
+//        {
+//            if (!annim_started)
+//            {
+//                float h = 30;
+//                float w = 200;
+//                GUI.Box(new Rect(0, 0, w, h), "Timer : " + (time.Time_remaining).ToString("0"));
+//            }
+//        }
 
         public void update_score()
         {
@@ -144,7 +157,7 @@ namespace GameScene.Solo
 			Debug.Log ("Start Reflexion");
 
 			this.annim_started = false;
-			this.time = new Timer(10.0F, end_time);
+			this.time = new Timer(15.0F, end_time);
 			this.time.start();
 		}
     }
