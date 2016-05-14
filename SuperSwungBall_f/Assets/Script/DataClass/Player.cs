@@ -18,6 +18,7 @@ public class Player
 	private PlayerType type;
 	private int proba; // Pourcentage
 
+	private bool ballHolder = false; // porte la balle
 
 	private PlayerStats DEFAULTSTATS = new PlayerStats(0, 0, 0, 0); // Stats initiales (unique au joueur)
     private List<string> buttonsValues = new List<string> { "esquive", "esquive", "esquive" }; // Valeurs des boutons
@@ -101,6 +102,11 @@ public class Player
 
     // Valeurs à changer pour l'equilibrage
 	#region Getters
+	public bool BallHolder
+	{
+		get { return ballHolder; }
+		set { ballHolder = value; }
+	}
 	public string Name
 	{
 		get { return player_name; }

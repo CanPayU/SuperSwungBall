@@ -15,7 +15,7 @@ namespace GameScene
         private int team_id;
 
         private Player player; //gere les stats
-        private bool isMine;
+        private bool isMine; // je peux le controller ?
 
         // Event Click
         private bool menuDisplayed;

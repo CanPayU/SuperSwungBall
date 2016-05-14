@@ -96,8 +96,6 @@ namespace GameScene
                     if (player.Tacle > attaqueAdverse)
                     {
 						//Attaque Réussit
-						if (PhotonNetwork.inRoom)
-							chatController.InstanciateMessage (player.Name + " réussit son tacle !", ChatController.Chat.EVENT);
                         Debug.Log(name + "réussit son tacle!");
                         playerController.Animation("Attaque Reussit", 2f);
                         adversaireCollider.gameObject.GetComponent<CollisionController>().echec("Esquive");
@@ -110,8 +108,6 @@ namespace GameScene
                 {
 					if (player.Esquive > attaqueAdverse) {
 						//Esquive Réussit
-						if (PhotonNetwork.inRoom)
-							chatController.InstanciateMessage (player.Name + " réussit son esquive !", ChatController.Chat.EVENT);
 						Debug.Log (name + "réussit son esquive!");
 						playerController.Animation ("Esquive Reussit", 0.7f);
 						adversaireCollider.gameObject.GetComponent<CollisionController> ().echec ("Attaque");
@@ -133,12 +129,20 @@ namespace GameScene
 				if (PhotonNetwork.inRoom)
 					chatController.InstanciateMessage (player.Name + " perd la balle !", ChatController.Chat.EVENT);
                 Debug.Log(name + "perd la balle!");
-                GameObject ball = transform.FindChild("perso").transform.FindChild("Ball").gameObject;
+                
+				GameObject ball = transform.FindChild("perso").transform.FindChild("Ball").gameObject;
                 ball.transform.localPosition = new Vector3(3.5f, 1.5f, -10f);
                 ball.transform.parent = null;
                 ball.GetComponent<Collider>().enabled = true;
             }
         }
+
+		public override void OnFailedAttack(Player p){
+			// ... Mettre echec ici
+		}
+		public override void OnFailedEsquive(Player p){
+			// ... Mettre echec ici
+		}
 
         public void start_anim()
         {

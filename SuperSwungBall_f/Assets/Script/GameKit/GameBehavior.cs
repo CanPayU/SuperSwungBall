@@ -10,28 +10,23 @@ namespace GameKit {
 		/// <summary> Permet d'appeler un évennement. </summary>
 		internal Call Caller = null;
 
-		private bool isListener = false;
+		private ListenerManager listener;
 
 		internal EventType eventType = EventType.Local;
 
 		void Awake(){
+			this.listener = new ListenerManager (this, this.eventType, this.gameObject, true);
 			this.Caller = new GameBehavior.Call(this);
-			ListenerManager.AddListener (this, eventType, gameObject);
-			isListener = true;
 		}
 
 		void OnDisable(){
-			if (isListener) {
-				ListenerManager.AddListener (this, eventType, gameObject);
-				isListener = false;
-			}
+			if (listener.Listen)
+				this.listener.StopListening ();
 		}
 
 		void OnEnable() {
-			if (!isListener) {
-				ListenerManager.AddListener (this, eventType, gameObject);
-				isListener = true;
-			}
+			if (!listener.Listen)
+				this.listener.StartListening ();
 		}
 
 		///
@@ -61,50 +56,50 @@ namespace GameKit {
 			}
 
 			internal void StartAnimation() {
-				callGlobalListeners ("OnStartAnimation", null);
+				callListeners ("OnStartAnimation", null, EventType.Global);
 			}
 
 			internal void StartReflexion() {
-				callGlobalListeners ("OnStartReflexion", null);
+				callListeners ("OnStartReflexion", null, EventType.Global);
 			}
 		
 			internal void Goal(GoalController g) {
-				callGlobalListeners ("OnGoal", new object[] { g });
+				callListeners ("OnGoal", new object[] { g }, EventType.Global);
 			}
 
-			internal void SuccessEsquive(Player p) {
-				callListeners ("OnSuccessEsquive", new object[] { p });
+			internal void SuccessEsquive(Player p, bool external = true) {
+				var obj = new object[] { p };
+				if (external)
+					callListeners ("OnSucceedEsquive", obj, EventType.External);
+				callListeners ("OnSucceedEsquive", obj, EventType.Local);
 			}
 
-			internal void SuccessAttack(Player p) {
-				callListeners ("OnSuccessAttack", new object[] { p });
+			internal void SuccessAttack(Player p, bool external = true) {
+				var obj = new object[] { p };
+				if (external)
+					callListeners ("OnSucceedAttack", obj, EventType.External);
+				callListeners ("OnSucceedAttack", obj, EventType.Local);
 			}
 
-			internal void FailedAttack(Player p) {
-				callListeners ("OnFailedAttack", new object[] { p });
+			internal void FailedAttack(Player p, bool external = false) {
+				var obj = new object[] { p };
+				if (external)
+					callListeners ("OnFailedAttack", obj, EventType.External);
+				callListeners ("OnFailedAttack", obj, EventType.Local);
 			}
 
-			internal void FailedEsquive(Player p) {
-				callListeners ("OnFailedEsquive", new object[] { p });
+			internal void FailedEsquive(Player p, bool external = false) {
+				var obj = new object[] { p };
+				if (external)
+					callListeners ("OnFailedEsquive", obj, EventType.External);
+				callListeners ("OnFailedEsquive", obj, EventType.Local);
 			}
 
-			private void callListeners(string methodName, object[] parameters){
-				foreach (var l in ListenerManager.getListeners(parent.gameObject)) {
+			private void callListeners(string methodName, object[] parameters, EventType type){
+				foreach (var l in ListenerManager.getListeners(type, this.parent.gameObject)) {
 					typeof(IGameListener).GetMethod(methodName).Invoke(l, parameters);
 				}
 			}
-
-			private void callGlobalListeners(string methodName, object[] parameters){
-				foreach (var l in ListenerManager.getListeners()) {
-					typeof(IGameListener).GetMethod(methodName).Invoke(l, parameters);
-				}
-			}
-
-//			private void callListeners(string methodName, object[] parameters){
-//				foreach (var l in ListenerManager.listeners) {
-//					typeof(IGameListener).GetMethod(methodName).Invoke(l, parameters);
-//				}
-//			}
 		}
 	
 	}
