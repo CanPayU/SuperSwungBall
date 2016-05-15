@@ -121,6 +121,9 @@ namespace GameScene
             float passe = p.PasseBase * scaleStats;
             float tacle = p.TacleBase * scaleStats;
             float esquive = p.EsquiveBase * scaleStats;
+
+			Debug.Log (speed);
+
             Stats["sprint"][0].transform.localScale = new Vector3(speed, Stats["sprint"][0].transform.localScale.y, Stats["sprint"][0].transform.localScale.z);
             Stats["sprint"][0].transform.localPosition = new Vector3(20, Stats["sprint"][0].transform.localPosition.y, Stats["sprint"][0].transform.localPosition.z);
             for (int i = 0; i < 3; i++)
