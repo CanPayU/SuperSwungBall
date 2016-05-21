@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
+using GameScene;
+
 namespace GameScene.Multi
 {
 
-    [CustomEditor(typeof(PlayerController))]
+	[CustomEditor(typeof(PlayerController))]
     public class PlayerCEditor : Editor
     {
 

@@ -229,8 +229,8 @@ GameObject:
   - 33: {fileID: 3342166}
   - 136: {fileID: 13646482}
   - 54: {fileID: 5400352}
-  - 114: {fileID: 11477554}
   - 114: {fileID: 11427182}
+  - 114: {fileID: 11460684}
   m_Layer: 0
   m_Name: Player_2
   m_TagString: Player
@@ -869,7 +869,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0f1e673146254f3aa3885b556db013e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &11477554
+--- !u!114 &11460684
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -877,11 +877,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 170820}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7af0acfc2a77943c3806146a0dd76e36, type: 3}
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Menu: {fileID: 118014, guid: cc80d7bb4e5bd4c42a08f33da3ac1e69, type: 2}
-  team_id: 1
+  ownerId: 0
+  group: 0
+  prefixBackup: -1
+  observed: {fileID: 0}
+  synchronization: 0
+  onSerializeTransformOption: 3
+  onSerializeRigidBodyOption: 2
+  ownershipTransfer: 0
+  ObservedComponents: []
+  ObservedComponentsFoldoutOpen: 1
+  viewIdField: 0
+  instantiationId: -1
+  isRuntimeInstantiated: 0
 --- !u!114 &11499418
 MonoBehaviour:
   m_ObjectHideFlags: 1

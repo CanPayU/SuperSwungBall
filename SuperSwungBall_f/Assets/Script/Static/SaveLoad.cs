@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 
+using GameScene.Replay;
+
 public static class SaveLoad
 {
     public static User savedUser;
@@ -102,4 +104,43 @@ public static class SaveLoad
             save_setting();
         }
     }
+
+
+	// -- Encore en phase de développement
+
+	public static Replay replay;
+
+	public static void save_replay(Replay replay)
+	{
+		Debug.Log("save_replay " + Application.persistentDataPath);
+		SaveLoad.replay = replay;
+		BinaryFormatter bf = new BinaryFormatter();
+		FileStream file = File.Create(Application.persistentDataPath + "/replay.txt");
+		bf.Serialize(file, replay);
+		file.Close();
+	}
+	public static Replay load_replay()
+	{
+		Debug.Log("load_replay " + Application.persistentDataPath);
+		if (File.Exists(Application.persistentDataPath + "/replay.txt"))
+		{
+			BinaryFormatter bf = new BinaryFormatter();
+			FileStream file = File.Open(Application.persistentDataPath + "/replay.txt", FileMode.Open);
+			try
+			{
+				SaveLoad.replay = (Replay)bf.Deserialize(file);
+			}
+			catch (System.Exception)
+			{
+				Debug.LogError("Erreur lors de la désérialisation");
+				return null;
+			}
+			file.Close();
+			return SaveLoad.replay;
+		}
+		return null;
+	}
+
+
+
 }

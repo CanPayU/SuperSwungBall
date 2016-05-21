@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters.Binary;
 
 using GameKit;
+using GameScene.Replay;
+using GameScene.Multi.Replay;
 
 namespace GameScene
 {
@@ -320,11 +322,30 @@ namespace GameScene
 		}
 
 		public override void OnStartAnimation(){
+			PlayerAction action = new PlayerAction (0, this.PointDeplacement, this.PointPasse, this.Player.Button_Values);
+			ReplayController controller = GameObject.Find ("Main").GetComponent<ReplayController> ();
+			controller.setPlayerAction (this.Player, action);
+
+//			MainController controllerMain = GameObject.Find ("Main").GetComponent<GameScene.Replay.MainController> ();
+//			GetMyParam(controllerMain.getPlayerAction (this.player));
 			start_Anim ();
 		}
 		public override void OnStartReflexion(){
 			end_Anim();
 		}
+
+
+
+		// -- En développement
+		private void GetMyParam(PlayerAction action)
+		{
+			this.PointDeplacement = action.Deplacement;
+			this.PointPasse = action.Passe;
+			this.Player.Button_Values = action.ButtonValues;
+			start_Anim(false);
+		}
+		// --
+
 
 
         // -- Network

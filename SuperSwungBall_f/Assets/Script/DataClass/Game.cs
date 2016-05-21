@@ -6,6 +6,7 @@ using GameScene.Multi;
 
 using GameScene;
 
+[System.Serializable]
 public class Game
 {
     private static Game game_instance = new Game();

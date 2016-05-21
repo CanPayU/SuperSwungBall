@@ -9,7 +9,7 @@ namespace GameScene
     {
 		ChatController chatController;
         Player player;
-        PlayerController playerController; // évite le GetComponent<>()
+		BasicPlayerController playerController; // évite le GetComponent<>()
         List<Collider> playerMet; // joueurs rencontré (uniquement ceux combattus) lors du tour. Un player de peut pas tacler 2 fois le même adversaire en 1 seul tour.
         bool goal;
         int premiereFrames;
@@ -19,7 +19,7 @@ namespace GameScene
         {
 			if (PhotonNetwork.inRoom)
 				chatController = GameObject.Find ("Main").GetComponent<ChatController> ();
-            playerController = GetComponent<PlayerController>();
+			playerController = GetComponent<BasicPlayerController>();
             player = playerController.Player;
             premiereFrames = 5;
             goal = false;
@@ -82,7 +82,7 @@ namespace GameScene
         }
         private void combat(Collider adversaireCollider)
         {
-            Player adversaire = adversaireCollider.GetComponent<PlayerController>().Player;
+			Player adversaire = adversaireCollider.GetComponent<BasicPlayerController>().Player;
             // collision adversaire et déclenchement combat
             if (adversaire.Team_id != player.Team_id && (adversaire.Tacle != 0 || player.Tacle != 0) && !playerMet.Contains(adversaireCollider))
             {

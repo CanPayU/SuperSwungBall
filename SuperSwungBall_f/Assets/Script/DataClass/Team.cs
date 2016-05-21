@@ -6,6 +6,8 @@ using GameScene;
 using GameScene.Solo;
 using GameScene.Multi;
 
+using PlayerController = GameScene.PlayerController;
+
 [System.Serializable]
 public class Team
 {

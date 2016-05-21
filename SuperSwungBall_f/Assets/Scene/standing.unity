@@ -1433,7 +1433,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1001121150}
         m_MethodName: check_login
         m_Mode: 1
         m_Arguments:

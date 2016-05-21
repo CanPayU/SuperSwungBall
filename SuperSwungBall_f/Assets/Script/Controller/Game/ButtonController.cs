@@ -42,7 +42,7 @@ namespace GameScene
                     {
                         myMenu.update_Color(myColor); // Change la couleur des valeurs
 
-                        GetComponent<Transform>().parent.parent.gameObject.GetComponent<PlayerController>().updateValuesPlayer(myColor);
+						GetComponent<Transform>().parent.parent.gameObject.GetComponent<BasicPlayerController>().updateValuesPlayer(myColor);
                         /*
 						if (PhotonNetwork.inRoom) {
 							GetComponent<Transform> ().parent.parent.gameObject.GetComponent<PlayerController> ().updateValuesPlayer (myColor);

@@ -920,7 +920,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 688016389}
-  - 114: {fileID: 688016388}
+  - 114: {fileID: 688016390}
+  - 114: {fileID: 688016392}
   m_Layer: 0
   m_Name: Main
   m_TagString: Untagged
@@ -928,22 +929,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &688016388
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 688016387}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f3e24e584b3f46bcbcedc3d9e588762, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player1_prefab: {fileID: 165034, guid: cd08ef288c8249a4e95f447dbddb5a86, type: 2}
-  player2_prefab: {fileID: 170820, guid: b22b788ffeff4ff419c05bf47d969887, type: 2}
-  score: {fileID: 1720524803}
-  timerText: {fileID: 1401794969}
-  timerAnimator: {fileID: 1401794971}
 --- !u!4 &688016389
 Transform:
   m_ObjectHideFlags: 0
@@ -956,6 +941,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
+--- !u!114 &688016390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 688016387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db452a0fcb6dc4aa5a6a06b2b1a5c87f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &688016392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 688016387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7f8705cdc1ac4a9e93002ad937a858a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 0
 --- !u!1 &712726265
 GameObject:
   m_ObjectHideFlags: 0
