@@ -19,7 +19,7 @@ namespace GameScene.Didacticiel
         CameraController cameraController;
         InfoJoueurController infoJoueur;
         Collider thisCollider; //collider de ce game object
-        Renderer thisRenderer; //renderer de ce game object
+        Renderer[] flechesRenderer = new Renderer[4]; //renderer de ce game object
         Renderer ballRenderer; //renderer de la balle 
         Timer time;
 
@@ -38,9 +38,15 @@ namespace GameScene.Didacticiel
         void Start()
         {
             // -- Renderers / Collider
-            thisRenderer = this.GetComponent<Renderer>();
-            thisRenderer.material.SetColor("_Color", Color.cyan);
-            thisRenderer.enabled = false;
+            for(int i = 0; i < 4; i++)
+            {
+                flechesRenderer[i] = transform.FindChild("fleche" + (i + 1)).FindChild("flecheTuto").GetComponent<Renderer>();
+            }
+            foreach(Renderer r in flechesRenderer)
+            {
+                r.material.SetColor("_Color", Color.cyan);
+                r.enabled = false;
+            }
 
             thisCollider = this.GetComponent<Collider>();
 
@@ -159,7 +165,8 @@ namespace GameScene.Didacticiel
         void phase5()
         {
             screentext.text = "Déplace le Swungman jusqu'ici \n et appuie sur 'Espace' pour lancer le déplacement";
-            thisRenderer.enabled = true;
+            foreach(Renderer r in flechesRenderer)
+                r.enabled = true;
             phase++;
         }
         void phase7()
@@ -171,7 +178,8 @@ namespace GameScene.Didacticiel
             screentext.text = "Déplace toi maintenant vers la balle, ('Espace' pour lancer le déplacement)";
             ballRenderer.enabled = true;
             this.transform.position = new Vector3(5, 0);
-            thisRenderer.enabled = true; //remplacer par false
+            foreach(Renderer r in flechesRenderer)
+                r.enabled = true; //remplacer par false
             phase++;
         }
         void phase10()
@@ -180,7 +188,8 @@ namespace GameScene.Didacticiel
         }
         void phase11()
         {
-            thisRenderer.enabled = true;
+            foreach(Renderer r in flechesRenderer)
+                r.enabled = true;
         }
         // --
 
@@ -223,7 +232,8 @@ namespace GameScene.Didacticiel
                 if (phase == 6)
                 {
                     phase++;
-                    thisRenderer.enabled = true; //a changer en false
+                    foreach(Renderer r in flechesRenderer)
+                        r.enabled = true; //a changer en false
                     this.transform.position = new Vector3(5, 0);
                     end_time();
                 }
