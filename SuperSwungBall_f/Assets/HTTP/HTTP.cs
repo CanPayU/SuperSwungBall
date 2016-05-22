@@ -4,17 +4,18 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Net;
 using Boomlagoon.JSON;
 
 public static class HTTP
 {
 
-	//private const string HOST_DOMAIN_BASIC = "http://ssb.shost.ca/";
-	private const string HOST_DOMAIN_BASIC = "http://localhost:8888/SuperSwungBall/";
+	private const string HOST_DOMAIN_BASIC = "http://ssb.shost.ca/";
+	//private const string HOST_DOMAIN_BASIC = "http://localhost:8888/SuperSwungBall/";
     /// <summary> Nom de domaine principale  </summary>
-    //private const string HOST_DOMAIN = "http://ssb.shost.ca/API/";
-    private const string HOST_DOMAIN = "http://localhost:8888/SuperSwungBall/web/app_dev.php/API/";
+    private const string HOST_DOMAIN = "http://ssb.shost.ca/API/";
+    //private const string HOST_DOMAIN = "http://localhost:8888/SuperSwungBall/web/app_dev.php/API/";
 
     /// <summary> Key d'authentification  </summary>
     private const string PRIVATE_KEY = "dcbcd1627918a87ea8fc20c379c83c95";
@@ -262,6 +263,27 @@ public static class HTTP
 			Debug.LogError("Error Sync : " + url);
 			completion(false);
 		}
+	}
+
+	public static void downloadFile(string relativePath, string fileName, string relativeDestination) {
+		string remoteUri = HOST_DOMAIN_BASIC + relativePath;
+		string folderDestination = (Application.persistentDataPath + relativeDestination);
+		if (!Directory.Exists (folderDestination)) {
+			try {
+				Directory.CreateDirectory (Application.persistentDataPath + relativeDestination);
+			}
+			catch (Exception e) 
+			{
+				Console.WriteLine("The process failed: {0}", e.ToString());
+			} 
+		}
+		WebClient myWebClient = new WebClient();
+
+		string myStringWebResource = remoteUri + fileName;
+		string fileDestionation = folderDestination + fileName;
+		myWebClient.DownloadFile(myStringWebResource, fileDestionation);		
+
+		Debug.Log ("File downloaded to : " + fileDestionation);
 	}
 
 	private static void uploadFile(NameValueCollection getParamters, string uri, string fileName){
