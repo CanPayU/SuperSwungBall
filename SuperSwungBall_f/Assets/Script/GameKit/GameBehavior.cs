@@ -36,6 +36,7 @@ namespace GameKit {
 		public virtual void OnStartAnimation() { }
 		public virtual void OnStartReflexion() { }
 		public virtual void OnGoal(GoalController g) { }
+		public virtual void OnEndGame(GameScene.Multi.End type) { }
 
 		public virtual void OnSucceedAttack (Player pl) { }
 		public virtual void OnSucceedEsquive (Player pl) { }
@@ -65,6 +66,16 @@ namespace GameKit {
 		
 			internal void Goal(GoalController g) {
 				callListeners ("OnGoal", new object[] { g }, EventType.Global);
+			}
+
+			// ---
+
+			internal void EndGame(GameScene.Multi.End type) {
+				callListeners ("OnEndGame", new object[] { type }, EventType.Global);
+			}
+
+			internal static void OnEndGame(GameScene.Multi.End type) {
+				CallListeners ("OnEndGame", new object[] { type }, EventType.Global);
 			}
 
 			internal void SuccessEsquive(Player p, bool external = true) {
@@ -97,6 +108,12 @@ namespace GameKit {
 
 			private void callListeners(string methodName, object[] parameters, EventType type){
 				foreach (var l in ListenerManager.getListeners(type, this.parent.gameObject)) {
+					typeof(IGameListener).GetMethod(methodName).Invoke(l, parameters);
+				}
+			}
+
+			private static void CallListeners(string methodName, object[] parameters, EventType type){
+				foreach (var l in ListenerManager.getListeners(type, null)) {
 					typeof(IGameListener).GetMethod(methodName).Invoke(l, parameters);
 				}
 			}

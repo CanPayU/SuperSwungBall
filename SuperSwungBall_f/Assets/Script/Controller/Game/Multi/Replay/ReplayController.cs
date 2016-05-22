@@ -37,6 +37,9 @@ namespace GameScene.Multi.Replay
 		public override void OnStartAnimation(){
 			this.replay.newRound ();
 		}
+		public override void OnEndGame(End type) {
+			SaveLoad.save_replay (replay);
+		}
 
 		public void setPlayerAction(Player player, PlayerAction action) {
 			this.replay.ActualRound.setPlayerAction (player, action);

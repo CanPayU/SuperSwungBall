@@ -23,6 +23,9 @@ namespace GameKit {
 		/// <param name="goal">GoalController du gameObject</param>
 		void OnGoal(GoalController goal);
 
+		/// <summary> Appelé lors de la fin de la game. </summary>
+		void OnEndGame(GameScene.Multi.End type);
+
 
 		// ============== LocalEvent
 

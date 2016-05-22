@@ -135,5 +135,8 @@ namespace GameScene
 			this.time = new Timer(15.0F, end_time);
 			this.time.start();
 		}
+		public override void OnEndGame(GameScene.Multi.End type) {
+			update_score ();
+		}
 	}
 }

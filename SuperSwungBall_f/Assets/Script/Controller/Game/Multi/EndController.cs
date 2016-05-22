@@ -4,9 +4,11 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 
+using GameKit;
+
 namespace GameScene.Multi
 {
-    public class EndController : MonoBehaviour
+	public class EndController : GameBehavior
     {
 
         [SerializeField]
@@ -34,6 +36,10 @@ namespace GameScene.Multi
 
 		private User ennemy;
 
+		public EndController(){
+			this.eventType = GameKit.EventType.Global;
+		}
+
         // Use this for initialization
         void Start()
         {
@@ -43,7 +49,7 @@ namespace GameScene.Multi
 			ennemy = (User)other_player.allProperties ["User"];
         }
 
-        public void on_end(End type)
+        public override void OnEndGame(End type)
         {
             Game.Instance.isFinish = true;
             switch (type)
@@ -127,7 +133,7 @@ namespace GameScene.Multi
         {
             if (!Game.Instance.isFinish)
             {
-                on_end(End.ABANDON);
+				Call.OnEndGame (End.ABANDON);
             }
         }
 

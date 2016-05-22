@@ -48,21 +48,7 @@ public class Game
         if (team.Points >= max_point)
         {
             finished = true;
-            end_game();
-        }
-    }
-
-    private void end_game()
-    {
-        GameObject main = GameObject.Find("Main");
-        if (PhotonNetwork.inRoom)
-        {
-            main.GetComponent<MainController>().update_score();
-            main.GetComponent<EndController>().on_end(End.TIME);
-        }
-        else
-        {
-            main.GetComponent<Main_Controller>().update_score();
+			GameKit.GameBehavior.Call.OnEndGame (End.TIME);
         }
     }
 
