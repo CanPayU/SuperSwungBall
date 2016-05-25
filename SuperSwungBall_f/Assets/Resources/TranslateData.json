@@ -1,0 +1,62 @@
+
+{
+	"data": "TranslateData",
+    "languages": [
+        "FR",
+        "EN"
+    ],
+	"FR": {
+
+		"SCENE" : "Standing",
+
+		"standingTitle" : "Appuyer sur une touche pour commencer",
+		"classicConnectionButton" : "Connexion",
+		
+
+
+		"SCENE" : "Ressources",
+
+		"..." : "...",
+		
+
+
+		"SCENE" : "Nom de la Scene",
+
+		"NameOfMyField" : "Value",
+		"NameOfMyField2" : "Another Value"
+	},
+	"EN": {
+
+		"SCENE" : "Standing",
+
+		"standingTitle" : "Press any key to start",
+		"classicConnectionButton" : "Connection",
+		
+
+
+		"SCENE" : "Ressources",
+
+		"..." : "...",
+
+
+
+		"SCENE" : "Nom de la Scene",
+
+		"NameOfMyField" : "Value EN",
+		"NameOfMyField2" : "Another Value EN"
+	}
+}
+// Utilise les SCENE pour mettre les nom scene
+// Laisse 3 retour à la ligne entre chaques scenes
+// ATTENTION - ATTENTION - ATTENTION - ATTENTION - ATTENTION - ATTENTION
+// N'oublie pas de supprimer la virgule pour la dernière option
+// Il faut que les clées ("NameOfMyField") soient les mêmes entre les différentes langues !!
+
+// "FR":"Bonne chance !"
+// "EN":"Good Luck !"
+
+// Et en bonus, peut-etre ude l'espagnol ? allemand ? ;) 
+
+
+
+
