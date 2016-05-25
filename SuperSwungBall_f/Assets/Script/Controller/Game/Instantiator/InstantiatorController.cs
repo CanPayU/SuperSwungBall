@@ -17,7 +17,7 @@ namespace GameScene.Instantiator {
 		private bool instanciated = false;
 
 		private bool gameIsReplay = false;
-		private bool gameIsSolo = false;
+		private bool gameIsSolo = true;
 		private bool gameIsMulti = true;
 
 		// Use this for initialization

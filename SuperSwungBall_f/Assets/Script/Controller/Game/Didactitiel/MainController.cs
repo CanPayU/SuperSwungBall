@@ -10,9 +10,7 @@ namespace GameScene.Didacticiel
     {
         [SerializeField]
         private Text screentext;
-        [SerializeField]
         private GameObject player1_prefab;
-        [SerializeField]
         private GameObject player2_prefab;
 
 
@@ -32,11 +30,13 @@ namespace GameScene.Didacticiel
         private int phase;
 
         private bool annim_started = false;
-        private PlayerController player_phase_2;
+		private BasicPlayerController player_phase_2;
 
         // Use this for initialization
         void Start()
-        {
+		{
+			this.player1_prefab = Resources.Load("Prefabs/Solo/Player_1") as GameObject;
+			this.player2_prefab = Resources.Load("Prefabs/Solo/Player_2") as GameObject;
             // -- Renderers / Collider
             for(int i = 0; i < 4; i++)
             {
@@ -146,8 +146,8 @@ namespace GameScene.Didacticiel
             GameObject play0 = Instantiate(player1_prefab, new Vector3(1F, 1F, 0F), Quaternion.identity) as GameObject;
             play_t0.Team_id = 0;
             play_t0.Name += "";
-            play0.name = play_t0.Name + "-" + play_t0.Team_id;
-            this.player_phase_2 = play0.GetComponent<PlayerController>();
+			play0.name = play_t0.Name + "-" + play_t0.Team_id;
+			this.player_phase_2 = (BasicPlayerController)play0.AddComponent (typeof(GameScene.Solo.PlayerController));
             this.player_phase_2.Player = play_t0;
             this.player_phase_2.IsMine = true;
             phase++;
