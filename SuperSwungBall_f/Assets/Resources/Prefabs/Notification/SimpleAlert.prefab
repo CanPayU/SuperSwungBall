@@ -99,6 +99,7 @@ GameObject:
   - 222: {fileID: 22263272}
   - 114: {fileID: 11471456}
   - 95: {fileID: 9571796}
+  - 114: {fileID: 11486272}
   m_Layer: 5
   m_Name: SimpleAlert
   m_TagString: Untagged
@@ -422,6 +423,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &11486272
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 160266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bed565ae2f5cf45438b3ae513af199c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11496728
 MonoBehaviour:
   m_ObjectHideFlags: 1
