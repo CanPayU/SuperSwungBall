@@ -32,11 +32,12 @@ namespace OptionButton
 				array_mid [1] = ButtonType.Sound;
 				return array_mid;
 			}
-			var array = new ButtonType[4];
+			var array = new ButtonType[5];
 			array [0] = ButtonType.Notification;
 			array [1] = ButtonType.Sound;
 			array [2] = ButtonType.KeyPasse;
-			array [3] = ButtonType.Quit;
+			array [3] = ButtonType.More;
+			array [4] = ButtonType.Quit;
 			return array;
 		}
 
@@ -74,6 +75,7 @@ namespace OptionButton
 			public static readonly ButtonType Notification = new ButtonType("Notification");
 			public static readonly ButtonType Sound = new ButtonType("Sound");
 			public static readonly ButtonType KeyPasse = new ButtonType("KeyPasse");
+			public static readonly ButtonType More = new ButtonType("More");
 
 			private ButtonType(string value)
 			{

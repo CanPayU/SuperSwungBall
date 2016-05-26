@@ -18,7 +18,6 @@ namespace Menu
         private Vector3 riseRelCenter;
         private Vector3 setRelCenter;
 
-
         // Use this for initialization
         void Start()
         {
@@ -57,7 +56,7 @@ namespace Menu
 
         private void moovingToPoint()
         {
-            if (Input.GetKeyDown(KeyCode.Mouse0)) // clic droit
+			if (Input.GetKeyDown(KeyCode.Mouse0) && ApplicationModel.BackgroundSceneActionAllowed) // clic droit
             {
                 RaycastHit hit;
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); // recuperation de la pos

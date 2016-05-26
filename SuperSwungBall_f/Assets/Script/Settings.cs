@@ -3,6 +3,8 @@ using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
 
+using TranslateKit;
+
 [System.Serializable]
 public class Settings
 {
@@ -14,7 +16,7 @@ public class Settings
         set { _instance = value; }
     }
 
-    public const string VERSION = "1.32"; // Version actuelle
+    public const string VERSION = "1.34"; // Version actuelle
     public string version; // Version de l'instance (sauvegarder sur l'ordi)
 
     private Dictionary<string, Team> default_team;
@@ -36,6 +38,10 @@ public class Settings
 	private NotificationState notificationState;
 	private SoundState soundState;
 
+	private bool allowReplayBackup;
+
+	private AvailableLanguage selectedLanguage;
+
     public Settings()
     {
         this.version = VERSION;
@@ -45,6 +51,8 @@ public class Settings
 		this.paid_player = new Dictionary<string, Player>();
 		this.secret_player = new Dictionary<string, Player>();
 		this.challenge_player = new Dictionary<string, Player>();
+		this.allowReplayBackup = true;
+		this.selectedLanguage = AvailableLanguage.FR;
 
         // -- Setup Keyboard
         this.keyboard.Add(KeyboardAction.Passe, KeyCode.A);
@@ -151,6 +159,15 @@ public class Settings
 		}
 	}
 
+
+	public AvailableLanguage SelectedLanguage {
+		get { return this.selectedLanguage; }
+		set { this.selectedLanguage = value; }
+	}
+	public bool AllowReplayBackup {
+		get { return this.allowReplayBackup; }
+		set { this.allowReplayBackup = value; }
+	}
     public NotificationState NotificationState
     {
         get { return notificationState; }

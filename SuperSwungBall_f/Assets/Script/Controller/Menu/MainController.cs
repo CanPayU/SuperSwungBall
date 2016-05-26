@@ -7,13 +7,6 @@ namespace Menu
 {
     public class MainController : MonoBehaviour
     {
-        [SerializeField]
-        private Text account_username;
-        [SerializeField]
-        private Text account_score;
-        [SerializeField]
-        private Text account_phi;
-
         private Timer time;
 
         // Use this for initialization

@@ -20,4 +20,10 @@ namespace TranslateKit {
 		}
 	}
 
+
+	public enum AvailableLanguage {
+		FR,		// Français
+		EN		// Anglais
+	}
+
 }
