@@ -69,7 +69,9 @@ namespace Create_Team
 			int j = 0;
 			foreach (var player in players) {
 				GameObject gm = Resources.Load("Prefabs/Resources/" + player.UID) as GameObject;
-				Transform p = Instantiate(gm).transform;
+                if (gm == null)
+                    gm = Resources.Load("Prefabs/Resources/IdPlayer") as GameObject;
+                Transform p = Instantiate(gm).transform;
 				p.name = "Player-" + j;
 				var capCollider = p.gameObject.AddComponent<CapsuleCollider> ();
 				capCollider.radius = 3;

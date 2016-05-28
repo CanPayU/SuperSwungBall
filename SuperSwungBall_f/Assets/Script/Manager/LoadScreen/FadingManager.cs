@@ -34,7 +34,8 @@ public class FadingManager : Singleton<FadingManager>
 
 	public void Fade(string sceneName = "menu")
 	{
-		StartCoroutine(this.LoadScene(sceneName));
+        if(!this.fading)
+		    StartCoroutine(this.LoadScene(sceneName));
 	}
 
 	private IEnumerator LoadScene(string sceneName)
