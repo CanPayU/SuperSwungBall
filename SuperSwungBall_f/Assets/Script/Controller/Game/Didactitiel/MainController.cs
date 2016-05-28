@@ -30,19 +30,19 @@ namespace GameScene.Didacticiel
         private int phase;
 
         private bool annim_started = false;
-		private BasicPlayerController player_phase_2;
+        private BasicPlayerController player_phase_2;
 
         // Use this for initialization
         void Start()
-		{
-			this.player1_prefab = Resources.Load("Prefabs/Solo/Player_1") as GameObject;
-			this.player2_prefab = Resources.Load("Prefabs/Solo/Player_2") as GameObject;
+        {
+            this.player1_prefab = Resources.Load("Prefabs/Solo/Player_1") as GameObject;
+            this.player2_prefab = Resources.Load("Prefabs/Solo/Player_2") as GameObject;
             // -- Renderers / Collider
-            for(int i = 0; i < 4; i++)
+            for (int i = 0; i < 4; i++)
             {
                 flechesRenderer[i] = transform.FindChild("fleche" + (i + 1)).FindChild("flecheTuto").GetComponent<Renderer>();
             }
-            foreach(Renderer r in flechesRenderer)
+            foreach (Renderer r in flechesRenderer)
             {
                 r.material.SetColor("_Color", Color.cyan);
                 r.enabled = false;
@@ -146,8 +146,8 @@ namespace GameScene.Didacticiel
             GameObject play0 = Instantiate(player1_prefab, new Vector3(1F, 1F, 0F), Quaternion.identity) as GameObject;
             play_t0.Team_id = 0;
             play_t0.Name += "";
-			play0.name = play_t0.Name + "-" + play_t0.Team_id;
-			this.player_phase_2 = (BasicPlayerController)play0.AddComponent (typeof(GameScene.Solo.PlayerController));
+            play0.name = play_t0.Name + "-" + play_t0.Team_id;
+            this.player_phase_2 = (BasicPlayerController)play0.AddComponent(typeof(GameScene.Solo.PlayerController));
             this.player_phase_2.Player = play_t0;
             this.player_phase_2.IsMine = true;
             phase++;
@@ -165,7 +165,7 @@ namespace GameScene.Didacticiel
         void phase5()
         {
             screentext.text = "Déplace le Swungman jusqu'ici \n et appuie sur 'Espace' pour lancer le déplacement";
-            foreach(Renderer r in flechesRenderer)
+            foreach (Renderer r in flechesRenderer)
                 r.enabled = true;
             phase++;
         }
@@ -178,7 +178,7 @@ namespace GameScene.Didacticiel
             screentext.text = "Déplace toi maintenant vers la balle, ('Espace' pour lancer le déplacement)";
             ballRenderer.enabled = true;
             this.transform.position = new Vector3(5, 0);
-            foreach(Renderer r in flechesRenderer)
+            foreach (Renderer r in flechesRenderer)
                 r.enabled = true; //remplacer par false
             phase++;
         }
@@ -188,7 +188,7 @@ namespace GameScene.Didacticiel
         }
         void phase11()
         {
-            foreach(Renderer r in flechesRenderer)
+            foreach (Renderer r in flechesRenderer)
                 r.enabled = true;
         }
         // --
@@ -232,7 +232,7 @@ namespace GameScene.Didacticiel
                 if (phase == 6)
                 {
                     phase++;
-                    foreach(Renderer r in flechesRenderer)
+                    foreach (Renderer r in flechesRenderer)
                         r.enabled = true; //a changer en false
                     this.transform.position = new Vector3(5, 0);
                     end_time();

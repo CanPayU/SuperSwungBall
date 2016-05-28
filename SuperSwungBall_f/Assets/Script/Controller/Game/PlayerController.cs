@@ -9,7 +9,7 @@ using GameScene.Multi.Replay;
 
 namespace GameScene
 {
-	public class PlayerController : GameBehavior
+    public class PlayerController : GameBehavior
     {
         [SerializeField]
         private GameObject Menu;
@@ -87,9 +87,10 @@ namespace GameScene
         }
         #endregion
 
-		public PlayerController(){
-			this.eventType = GameKit.EventType.All;
-		}
+        public PlayerController()
+        {
+            this.eventType = GameKit.EventType.All;
+        }
 
         void Start()
         {
@@ -123,10 +124,10 @@ namespace GameScene
         }
         void Update()
         {
-			if (Input.GetKeyDown(KeyCode.R))
-			{
-				Caller.SuccessAttack (this.player);
-			}
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                Caller.SuccessAttack(this.player);
+            }
             if (!phaseAnimation)
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -282,7 +283,7 @@ namespace GameScene
                 animationDeplacement = "Marche";
                 if (speed > 1)
                     animationDeplacement = "Course"; // animation de déplacement en fonction de la vitesse
-                    
+
                 anim.Play(animationDeplacement);
                 movement = true;
             }
@@ -306,45 +307,51 @@ namespace GameScene
         }
 
 
-		// -- Event
+        // -- Event
 
-		public override void OnSucceedAttack(Player p){
-			Debug.Log ("I have succeed my Attack : " + p.Name + " - " + name);
-		}
-		public override void OnSucceedEsquive(Player p){
-			Debug.Log ("I Have succeed my Esquive : " + p.Name + " - " + name);
-		}
-		public override void OnFailedAttack(Player p){
-			Debug.Log ("I Have failed my Esquive : " + p.Name + " - " + name);
-		}
-		public override void OnFailedEsquive(Player p){
-			Debug.Log ("I Have failed my Esquive : " + p.Name + " - " + name);
-		}
+        public override void OnSucceedAttack(Player p)
+        {
+            Debug.Log("I have succeed my Attack : " + p.Name + " - " + name);
+        }
+        public override void OnSucceedEsquive(Player p)
+        {
+            Debug.Log("I Have succeed my Esquive : " + p.Name + " - " + name);
+        }
+        public override void OnFailedAttack(Player p)
+        {
+            Debug.Log("I Have failed my Esquive : " + p.Name + " - " + name);
+        }
+        public override void OnFailedEsquive(Player p)
+        {
+            Debug.Log("I Have failed my Esquive : " + p.Name + " - " + name);
+        }
 
-		public override void OnStartAnimation(){
-			PlayerAction action = new PlayerAction (0, this.PointDeplacement, this.PointPasse, this.Player.Button_Values);
-			ReplayController controller = GameObject.Find ("Main").GetComponent<ReplayController> ();
-			controller.setPlayerAction (this.Player, action);
+        public override void OnStartAnimation()
+        {
+            PlayerAction action = new PlayerAction(0, this.PointDeplacement, this.PointPasse, this.Player.Button_Values);
+            ReplayController controller = GameObject.Find("Main").GetComponent<ReplayController>();
+            controller.setPlayerAction(this.Player, action);
 
-//			MainController controllerMain = GameObject.Find ("Main").GetComponent<GameScene.Replay.MainController> ();
-//			GetMyParam(controllerMain.getPlayerAction (this.player));
-			start_Anim ();
-		}
-		public override void OnStartReflexion(){
-			end_Anim();
-		}
+            //			MainController controllerMain = GameObject.Find ("Main").GetComponent<GameScene.Replay.MainController> ();
+            //			GetMyParam(controllerMain.getPlayerAction (this.player));
+            start_Anim();
+        }
+        public override void OnStartReflexion()
+        {
+            end_Anim();
+        }
 
 
 
-		// -- En développement
-		private void GetMyParam(PlayerAction action)
-		{
-			this.PointDeplacement = action.Deplacement;
-			this.PointPasse = action.Passe;
-			this.Player.Button_Values = action.ButtonValues;
-			start_Anim(false);
-		}
-		// --
+        // -- En développement
+        private void GetMyParam(PlayerAction action)
+        {
+            this.PointDeplacement = action.Deplacement;
+            this.PointPasse = action.Passe;
+            this.Player.Button_Values = action.ButtonValues;
+            start_Anim(false);
+        }
+        // --
 
 
 
