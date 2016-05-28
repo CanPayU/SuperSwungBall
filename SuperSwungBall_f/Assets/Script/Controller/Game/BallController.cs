@@ -65,7 +65,7 @@ namespace GameScene
         [PunRPC]
         private void ExecutePasse()
         {
-            deplacement = transform.parent.parent.GetComponent<PlayerController>().passe(ref arrivalPoint); //Renvoit true si la passe est possible
+            deplacement = transform.parent.parent.GetComponent<BasicPlayerController>().passe(ref arrivalPoint); //Renvoit true si la passe est possible
             if (deplacement)//debut de la passe
             {
                 GetComponent<Collider>().enabled = true;
@@ -77,7 +77,7 @@ namespace GameScene
                 // animation passe
                 passeur.transform.FindChild("perso").LookAt(new Vector3(arrivalPoint.x, passeur.transform.FindChild("perso").position.y, arrivalPoint.z));
                 passeur.transform.FindChild("perso").GetComponent<Animator>().Play("Passe");
-                passeur.GetComponent<PlayerController>().Pause = 0.7f;
+                passeur.GetComponent<BasicPlayerController>().Pause = 0.7f;
             }
         }
     }
