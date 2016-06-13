@@ -568,8 +568,8 @@ GameObject:
   m_Component:
   - 224: {fileID: 546248408}
   - 222: {fileID: 546248411}
-  - 114: {fileID: 546248410}
   - 95: {fileID: 546248409}
+  - 114: {fileID: 546248410}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -619,7 +619,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 546248407}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Script: {fileID: 11500000, guid: 73e6e5491d48a48218e5aaa5a7e2487f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
@@ -635,17 +635,16 @@ MonoBehaviour:
     m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 0
-    m_MaxSize: 200
+    m_MinSize: 3
+    m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Press any key to start
-
-'
+  m_Text: Press any key to start
+  trad: standingTitle
 --- !u!222 &546248411
 CanvasRenderer:
   m_ObjectHideFlags: 0
