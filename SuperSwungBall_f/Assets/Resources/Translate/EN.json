@@ -1,0 +1,239 @@
+{
+	"language": "EN",
+	"data": {
+
+		"SCENE" : "standing",
+
+		"standingTitle" : "Press any key to start",
+		"classicConnectionButton" : "Connection",
+		"msgstandingrandom1" : "Fall asleep in full game can have fatal consequences on the keyboard",  
+		"msgstandingrandom2" : "Create your own teams to be stronger",
+		"msgstandingrandom3" : "It seems that Playwithcube is at the origin of a legend",
+		"msgstandingrandom4" : "GPasDNom really don't have one",
+		"msgstandingrandom5" : "a zen game",
+		"msgstandingrandom6" : "The pass also allows to intercept",
+		"msgstandingrandom7" : "Due to making you tackle, you will eventually meet Lombrix",
+		"msgstandingrandom8" : "To bang the head against the keyboard can have fatal consequences on the players",
+		"msgstandingrandom9" : "A player has to be in the purpose with the ball to validate the point",
+		"msgstandingrandom10" : "What shall arrive if five Itectori was together ? ",
+		"msgstandingrandom11" : "The more you have of dodge, the less you will lose the ball ",
+		"msgstandingrandom12" : "The legend tells that there are secret combinations of touches in the game",
+		"msgstandingrandom13" : "We can juggle in the menu!",
+		
+
+
+		"SCENE" : "Menu",
+
+		"plus de phi" : "more phi",
+		"jouerenligne" : "play online",
+		"jouerenligneligne1" : "each game played online ",
+		"jouerenligneligne2" : "give you Phi",
+		"jouerenligneligne3" : "Gain until... Phi",
+		"acheterligne1" : "buy Phi to unlock ",
+		"acheterligne2" : "always more characters!",
+		"touche passe" : "touche passe",
+		"plusinfomenu1" : "settings",
+		"plusinfomenu2" : "Replay",
+		"plusinfomenu3" : "allow saved ",
+		"plusinfomenu4" : "save your games on our devices to ",
+		"plusinfomenu5" : " watch them in offline mode.",
+		"plusinfomenu6" : "delete your save",
+		"plusinfomenu7" : "delete all your replays",
+		"plusinfomenu8" : "which are on your computer",
+		"plusinfomenu9langue" : "language",
+		
+
+
+		"SCENE" : "create_team",
+		
+		"selectionjoueurtext" : "Select a player",
+		"choisirteamtext" : "Choose a team",
+		"choirircompotext" : "Choose a composition",
+		"enregistrer" : "Save", 
+		"personnaliséequipetext" : "Personalize your team",
+		"creeruneequipe" : "Create a team",
+		"choissierlenom" : "Choose the name of your team.",
+		"ok" : "ok",
+		"plus d'information" : "more information",
+		"phraseinfo1" : "Create, modify your team!",
+		"phraseinfo2" : "Add the players whom you have just gained or",
+		"phraseinfo3" : "Buy!",
+		"phraseinfo4" : "Ducats allows to create a team",
+		"phraseinfo5" : "Well-balanced. Every players cost maximum 10",
+		"phraseinfo6" : "Ducats. You can count it until 25",
+		"phraseinfo7" : "In a same team!",
+		"plus de phi" : "more phi",
+		"jouerenligne" : "play online",
+		"jouerenligneligne1" : "each game played online ",
+		"jouerenligneligne2" : "give you Phi",
+		"jouerenligneligne3" : "Gain until... Phi",
+		"acheterligne1" : "buy Phi to unlock ",
+		"acheterligne2" : "always more characters!",
+
+
+
+		"SCENE" : "Gestion",
+
+		"coffre": "Chest",	
+		"infocoffre1" :"Chests contain",
+		"infocoffre2" :"SwungMens",
+		"infocoffre3" :"unique and secret.",
+		"infocoffre4" :"Impossible to ",
+		"infocoffre5" :"unlock them with a",
+		"infocoffre6" :"different way!",
+		"msgNtificationBox1" : "New SwungMen",
+		"msgNtificationBox2" : "Contain of the chest",
+		"msgNtificationBox3" : "You unlock ",
+		"plus de phi" : "more phi",
+		"jouerenligne" : "play online",
+		"jouerenligneligne1" : "each game played online ",
+		"jouerenligneligne2" : "give you Phi",
+		"jouerenligneligne3" : "Gain until... Phi",
+		"acheterligne1" : "buy Phi to unlock ",
+		"acheterligne2" : "always more characters!",
+		"defi" : "challenge",
+		"bloque" : "locked",
+		"touche passe" : "touche passe",
+		"plusinfomenu1" : "settings",
+		"plusinfomenu2" : "Replay",
+		"plusinfomenu3" : "allow saved ",
+		"plusinfomenu4" : "save your games on our devices to ",
+		"plusinfomenu5" : " watch them in offline mode.",
+		"plusinfomenu6" : "delete your save",
+		"plusinfomenu7" : "delete all your replays",
+		"plusinfomenu8" : "which are on your computer",
+		"plusinfomenu9langue" : "language",
+		"achatimpomsg1" : "Impossible purchase",
+		"achatimpomsg2" : " You haven't got enough Phi or",
+		"achatimpomsg3" : "you already have this SwungMen",
+		
+
+
+		"SCENE" : "Solo game",
+
+		"plus de phi" : "more phi",
+		"jouerenligne" : "play online",
+		"jouerenligneligne1" : "each game played online ",
+		"jouerenligneligne2" : "give you Phi",
+		"jouerenligneligne3" : "Gain until... Phi",
+		"acheterligne1" : "buy Phi to unlock ",
+		"acheterligne2" : "always more characters!",
+		
+
+
+		"SCENE" : "game",
+
+		"statue" : "profiles",
+		"entrer le texte" : "enter text...",
+		"eme" : "place",
+		"plus de phi" : "more phi",
+		"jouerenligne" : "play online",
+		"jouerenligneligne1" : "each game played online ",
+		"jouerenligneligne2" : "give you Phi",
+		"jouerenligneligne3" : "Gain until... Phi",
+		"acheterligne1" : "buy Phi to unlock ",
+		"acheterligne2" : "always more characters!",
+
+
+
+		"SCENE" : "Network",
+
+		"infosurjoueurs" : "information about the player",
+		"infoduchargement" : "information of the loading",
+		"partie privée" : "private LAN",
+		"joined" :"join",
+		"joueurstrouvé" : "players found",
+		"creerchambre" : "create room",
+		"nomchambre" :"name of the room",
+		"rejointrelaroom" : "join room",
+		"plus de phi" : "more phi",
+		"jouerenligne" : "play online",
+		"jouerenligneligne1" : "each game played online ",
+		"jouerenligneligne2" : "give you Phi",
+		"jouerenligneligne3" : "Gain until... Phi",
+		"acheterligne1" : "buy Phi to unlock ",
+		"acheterligne2" : "always more characters!", 
+		
+
+
+
+		"SCENE" : "Didacticiel",
+
+		"msgdicdac1" : "Welcome to the tutorial",
+		"msgdicdac2" : "press 'space to start the travel",
+		"msgdicdac3" : "How play ?",
+		"msgdicdac4" : "The purpose of the game is to mark 3 points",
+		"msgdicdac5" : "Each player controls his team",
+		"msgdicdac6" : "Let us begin by seeing the controls \n of Swungman",
+		"msgdicdac7" : "The capacities of travels are represented\n by the color blue",
+		"msgdicdac8" : "Press on the blue button 3 times to make him \n run faster and farthest possible",
+		"msgdicdac9" : "Click the (blue) zone of travel for contoller \n the movement",
+		"msgdicdac10" : "Well, now we will see how take the ball",
+		"msgdicdac11" : "To get back the ball and make a pass, \n is needed at least a point of pass",
+		"msgdicdac12" : "Puts 1 point of control in the pass and \n 2 points in the running",
+		"msgdicdac13" : "We have now the ball, let us send her somewhere",
+		"msgdicdac14" : "To send the ball,\n is needed at least a point of control of pass",
+		"msgdicdac15" : "Put 3 points of control in the pass to make one pass very far",
+		"msgdicdac16" : "Click on the pink zone, then moves the cursor \n to mark the direction of the pass",
+		"msgdicdac17" : "Move the Swungman up to here \n and press 'Espace' to launch the travel",
+		"msgdicdac18" : "Move you towards the ball, ('Space' to launch the travel)",
+		"plus de phi" : "more phi",
+		"jouerenligne" : "play online",
+		"jouerenligneligne1" : "Each game played online ",
+		"jouerenligneligne2" : "give you Phi.",
+		"jouerenligneligne3" : "gain until... Phi", 
+		"acheterligne1" : "buy Phi to unlock",
+		"acheterligne2" : "always more characters!",
+		
+
+
+
+		"SCENE" : "Generale",
+
+		"acheter" : "buy",
+		"jouer" : "play",
+		"aucun" : "nothing",
+		"notification" : "notification",
+		"prive" : "private",
+		"home" :"home",
+		"reglages" : "settings",
+		"compte" : "account",
+		"deconnexion" : "deconnection",
+		"son" : "song",
+		"musique" : "music",
+		"tout" : "all",
+		"effect" : "effcets",
+		"passe" : "pass",
+		"course" : "run",
+		"esquive" : "dodge",
+		"tacle" : "tackle",
+		"equipe" : "team",
+		"tuto" : "tuto",
+		"boutique" : "shop",
+		"multi" : "multi",
+		"plus" : "more",
+		"quitter" : "leave",
+		"amis" :"friends",
+		"charge" : "loading",
+		"points" : "points",
+		"pseudo" : "username",
+		"ducats" : "ducats",
+		"vider" : "clear",
+		"choisir" : "choose",
+
+	}
+}
+// Utilise les SCENE pour mettre les nom scene
+// Laisse 3 retour à la ligne entre chaques scenes
+// ATTENTION - ATTENTION - ATTENTION - ATTENTION - ATTENTION - ATTENTION
+// N'oublie pas de supprimer la virgule pour la dernière option
+// Il faut que les clées ("NameOfMyField") soient les mêmes entre les différentes langues !!
+
+// "FR":"Bonne chance !"
+// "EN":"Good Luck !"
+
+// Et en bonus, peut-etre ude l'espagnol ? allemand ? ;) 
+
+
+
+

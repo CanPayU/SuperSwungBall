@@ -20,11 +20,11 @@ namespace OptionButton.MoreSettings {
 			this.en = transform.Find ("Container").Find ("Language").Find("EN").GetComponent<Button>();
 			this.en.onClick.AddListener (delegate() { OnSelectLanguage (AvailableLanguage.EN); });
 
-			switch (Settings.Instance.SelectedLanguage) {
-			case AvailableLanguage.EN:
+			switch (Settings.Instance.SelectedLanguage.Value) {
+			case "EN":
 				this.en.interactable = false;
 				break;
-			case AvailableLanguage.FR:
+			case "FR":
 				this.fr.interactable = false;
 				break;
 			}

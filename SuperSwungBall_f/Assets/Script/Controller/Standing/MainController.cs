@@ -17,14 +17,17 @@ namespace Standing
         private bool authenticate;
         private bool sync_ended;
 
+		public MainController(){
+		}
+
         // Use this for initialization
-        void Start()
+        void Awake()
         {
             //SaveLoad.save_user ();
-            //SaveLoad.save_setting ();
-            SaveLoad.load_settings();
-            this.authenticate = SaveLoad.load_user();
-
+			//SaveLoad.save_setting ();
+			SaveLoad.load_settings();
+			this.authenticate = SaveLoad.load_user();
+			TranslateKit.Language.LoadLanguage (Settings.Instance.SelectedLanguage);
             if (this.authenticate)
             {
                 HTTP.SyncUser((success) =>

@@ -1,24 +1,34 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 using System;
+
+using Extension;
+using TranslateKit;
 
 namespace OptionButton
 {
 	public class NotificationController : MonoBehaviour
 	{
-		private Text text;
 		private Button btn;
 		private NotificationState actualNotificationState;
 
 		private int pressId = 0;
+
 		private string defaultText = "Notification";
+		private Dictionary<string, string> transKeys = new Dictionary<string, string>()
+		{
+			{"default", "Notification"},
+			{"state1", Language.GetValue(TradValues.General.All)},
+			{"state2", Language.GetValue(TradValues.General.Private)},
+			{"state3", Language.GetValue(TradValues.General.Nothing)}
+		};
 
 		// Use this for initialization
 		void Start()
 		{
 			this.btn = gameObject.GetComponent<Button> ();
-			this.text = transform.Find("Text").GetComponent<Text>();
 			actualNotificationState = Settings.Instance.NotificationState;
 			if (this.btn != null)
 			{
@@ -27,13 +37,13 @@ namespace OptionButton
 						OnChangeNotificationState();
 					});
 				updateView();
-				this.text.text = this.defaultText;
+				this.btn.EditText(this.transKeys["default"]);
 			}
 		}
 
 		void OnDisable(){
-			if (this.text != null)
-				this.text.text = this.defaultText;
+			if (this.btn != null)
+				this.btn.EditText(this.transKeys["default"]);
 		}
 
 		private void OnChangeNotificationState()
@@ -49,7 +59,7 @@ namespace OptionButton
 		private IEnumerator defaultSetUp(int id){
 			yield return new WaitForSeconds (5);
 			if (id == this.pressId)
-				this.text.text = this.defaultText;
+				this.btn.EditText(this.transKeys["default"]);
 		}
 
 		private void updateView()
@@ -58,15 +68,15 @@ namespace OptionButton
 			{
 			case NotificationState.All:
 				this.btn.colors = Colors.Block.Green;
-				text.text = "Tout";
+				this.btn.EditText(this.transKeys["state1"]);
 				break;
 			case NotificationState.Private:
 				this.btn.colors = Colors.Block.Orange;
-				text.text = "Prive";
+				this.btn.EditText(this.transKeys["state2"]);
 				break;
 			case NotificationState.Nothing:
 				this.btn.colors = Colors.Block.Red;
-				text.text = "Aucune";
+				this.btn.EditText(this.transKeys["state3"]);
 				break;
 			default:
 				break;

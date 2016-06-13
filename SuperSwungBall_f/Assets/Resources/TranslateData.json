@@ -13,7 +13,7 @@
 		"msgstandingrandom1" : "S'endormir en plein jeu peut avoir des conséquences néfastes sur le clavier",  
 		"msgstandingrandom2" : "creer vos propres equipes pour être plus fort",
 		"msgstandingrandom3" : "il se dit que Playwithcube est à l'origine d'une légende",
-		"msgstandingrandom4" : "GPasDNom n'en a vraiment pas"
+		"msgstandingrandom4" : "GPasDNom n'en a vraiment pas",
 		"msgstandingrandom5" : "Un jeu zen",
 		"msgstandingrandom6" : "La passe permet également d'intercepter",
 		"msgstandingrandom7" : "A force de vous faire taclez, vous finirez par rencontrer Lombrix",
@@ -22,7 +22,7 @@
 		"msgstandingrandom10" : "Et si cinq Itectori étaient réunis?",
 		"msgstandingrandom11" : "Plus vous avez d'esquive, moins vous perdrez la balle ",
 		"msgstandingrandom12" : "La légende raconte qu'il existe des combinaisons secrètes de touches dans le jeu",
-		"msgstandingrandom13" : "On peut jongler dans le menu!"
+		"msgstandingrandom13" : "On peut jongler dans le menu!",
 
 
 
@@ -32,7 +32,7 @@
 		"equipe" : "equipe",
 		"tuto" : "tuto",
 		"boutique" : "boutique",
-		"multi" : "multi"
+		"multi" : "multi",
 		"compte" : "compte",
 		"plus de phi" : "plus de phi",
 		"jouerenligne" : "jouer en ligne",
@@ -44,7 +44,7 @@
 		"acheterligne2" : "toujours plus de personnages !",
 		"jouer" : "jouer",
 		"aucun" : "aucun",
-		"deconnexion" : "deconnexion"
+		"deconnexion" : "deconnexion",
 		"son" : "son",
 		"musique" : "musique",
 		"tout" : "tout",
@@ -56,7 +56,7 @@
 		"plus" : "plus",
 		"quitter" : "quitter",
 		"plusinfomenu1" : "reglages",
-		"plusinfomenu2" : "Replay" : "Replay",
+		"plusinfomenu2" : "Replay",
 		"plusinfomenu3" : "autoriser la sauvegarde ",
 		"plusinfomenu4" : "sauvegarder vos parties sur votre machine afin de les ",
 		"plusinfomenu5" : " regarder en replay hors-ligne.",
@@ -66,8 +66,8 @@
 		"plusinfomenu9langue" : "langue", 
 		"fr" : "fr",
 		"en" :"en",
-		"vider" , "vider",
-		"amis" :"amis"
+		"vider" : "vider",
+		"amis" :"amis",
 		
 
 
@@ -108,14 +108,14 @@
 		"acheterligne2" : "toujours plus de personnages !",
 		"jouer" : "jouer",
 		"aucun" : "aucun",
-		"deconnexion" : "deconnexion"
+		"deconnexion" : "deconnexion",
 		"son" : "son",
 		"musique" : "musique",
 		"tout" : "tout",
 		"effect" : "effets",
 		"aucun" : "aucun",
 		"notification" : "notification",
-		"prive" : "prive" 
+		"prive" : "prive", 
 
 
 
@@ -145,7 +145,7 @@
 		"effect" : "effets",
 		"aucun" : "aucun",
 		"notification" : "notification",
-		"prive" : "prive" 
+		"prive" : "prive", 
 
 
 
@@ -189,7 +189,7 @@
 		"plus" : "plus",
 		"quitter" : "quitter",
 		"plusinfomenu1" : "reglages",
-		"plusinfomenu2" : "Replay" : "Replay",
+		"plusinfomenu2" : "Replay",
 		"plusinfomenu3" : "autoriser la sauvegarde ",
 		"plusinfomenu4" : "sauvegarder vos parties sur votre machine afin de les ",
 		"plusinfomenu5" : " regarder en replay hors-ligne.",
@@ -199,14 +199,14 @@
 		"plusinfomenu9langue" : "langue", 
 		"fr" : "fr",
 		"en" :"en",
-		"vider" , "vider",
+		"vider" : "vider",
 		"achatimpomsg1" : "Achat impossible",
 		"achatimpomsg2" : "Vous n'avez pas assez de Phi ou",
 		"achatimpomsg3" : "vous possédez deja ce SwungMen",
 		"passe" : "passe",
 		"course" : "sprint",
 		"esquive" : "esquive",
-		"tacle" : "tacle"
+		"tacle" : "tacle",
 
 
 
@@ -241,7 +241,7 @@
 		"effect" : "effets",
 		"aucun" : "aucun",
 		"notification" : "notification",
-		"prive" : "prive" 
+		"prive" : "prive",
 
 
 
@@ -276,7 +276,7 @@
 		"jouer" : "jouer",
 		"aucun" : "aucun",
 		"notification" : "notification",
-		"prive" : "prive" 
+		"prive" : "prive",
 
 
 
@@ -324,7 +324,7 @@
 		"jouer" : "jouer",
 		"aucun" : "aucun",
 		"notification" : "notification",
-		"prive" : "prive" 
+		"prive" : "prive", 
 		"..." : "...",
 		
 
@@ -348,7 +348,7 @@
 		"msgstandingrandom10" : "What shall arrive if five Itectori was together ? ",
 		"msgstandingrandom11" : "The more you have of dodge, the less you will lose the ball ",
 		"msgstandingrandom12" : "The legend tells that there are secret combinations of touches in the game",
-		"msgstandingrandom13" : "We can juggle in the menu!"
+		"msgstandingrandom13" : "We can juggle in the menu!",
 		
 
 
@@ -381,7 +381,7 @@
 		"plus" : "more",
 		"quitter" : "leave",
 		"plusinfomenu1" : "settings",
-		"plusinfomenu2" : "Replay" : "Replay",
+		"plusinfomenu2" : "Replay",
 		"plusinfomenu3" : "allow saved ",
 		"plusinfomenu4" : "save your games on our devices to ",
 		"plusinfomenu5" : " watch them in offline mode.",
@@ -391,8 +391,8 @@
 		"plusinfomenu9langue" : "language", 
 		"fr" : "fr",
 		"en" :"en",
-		"vider" , "clear",
-		"amis" :"friends"
+		"vider" : "clear",
+		"amis" :"friends",
 		
 
 
@@ -439,7 +439,7 @@
 		"effect" : "effects",
 		"aucun" : "nothing",
 		"notification" : "notification",
-		"prive" : "private" 
+		"prive" : "private", 
 
 
 
@@ -482,7 +482,7 @@
 		"plus" : "more",
 		"quitter" : "leave",
 		"plusinfomenu1" : "settings",
-		"plusinfomenu2" : "Replay" : "Replay",
+		"plusinfomenu2" : "Replay",
 		"plusinfomenu3" : "allow saved ",
 		"plusinfomenu4" : "save your games on our devices to ",
 		"plusinfomenu5" : " watch them in offline mode.",
@@ -492,14 +492,14 @@
 		"plusinfomenu9langue" : "language",
 		"fr" : "fr",
 		"en" :"en",
-		"vider" , "vider",
+		"vider" : "empty",
 		"achatimpomsg1" : "Impossible purchase",
 		"achatimpomsg2" : " You haven't got enough Phi or",
 		"achatimpomsg3" : "you already have this SwungMen",
 		"passe" : "pass",
 		"course" : "run",
 		"esquive" : "dodge",
-		"tacle" : "tackle"
+		"tacle" : "tackle",
 		
 
 
@@ -528,7 +528,7 @@
 		"effect" : "effects",
 		"aucun" : "nothing",
 		"notification" : "notification",
-		"prive" : "private" 
+		"prive" : "private", 
 		
 
 
@@ -543,7 +543,7 @@
 		"statue" : "profiles",
 		"speudo" : "username",
 		"entrer le texte" : "enter text...",
-		"points" = "points",
+		"points" : "points",
 		"eme" : "place",
 		"compte" : "Account",
 		"plus de phi" : "more phi",
@@ -562,7 +562,7 @@
 		"effect" : "effects",
 		"aucun" : "nothing",
 		"notification" : "notification",
-		"prive" : "private" 
+		"prive" : "private", 
 
 
 
@@ -575,7 +575,7 @@
 		"partie privée" : "private LAN",
 		"joined" :"join",	
 		"reglages" : "settings",
-		"joueurstrouvé" : "players found"
+		"joueurstrouvé" : "players found",
 		"creerchambre" : "create room",
 		"nomchambre" :"name of the room",
 		"rejointrelaroom" : "join room",
@@ -596,7 +596,7 @@
 		"jouer" : "play",
 		"aucun" : "nothing",
 		"notification" : "notification",
-		"prive" : "private" 
+		"prive" : "private", 
 		
 
 
