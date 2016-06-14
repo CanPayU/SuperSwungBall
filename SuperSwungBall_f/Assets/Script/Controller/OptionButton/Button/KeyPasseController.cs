@@ -1,19 +1,27 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
+
+using Extension;
+using TranslateKit;
 
 namespace OptionButton {
 
 	public class KeyPasseController : MonoBehaviour {
 
-		private Text text;
 		private Button btn;
 		private KeyCode actualKeyCode;
 		private KeyboardAction action = KeyboardAction.Passe;
 		private Animator animator;
 
 		private int pressId = 0;
-		private string defaultText = "Touche Passe";
+		private Dictionary<string, string> transKeys = new Dictionary<string, string>()
+		{
+			{"default", Language.GetValue(TradValues.Menu.TouchPass)},
+			{"cancel", Language.GetValue(TradValues.General.Cancel)},
+			{"sync", Language.GetValue(TradValues.General.Sync)}
+		};
 		private bool listening = false;
 
 		// Use this for initialization
@@ -21,7 +29,6 @@ namespace OptionButton {
 		{
 			this.animator = GetComponent<Animator>();
 			this.btn = GetComponent<Button> ();
-			this.text = transform.Find("Text").GetComponent<Text>();
 			this.actualKeyCode = Settings.Instance.Keyboard[this.action];
 			if (this.btn != null)
 			{
@@ -29,13 +36,13 @@ namespace OptionButton {
 					{
 						OnChange();
 					});
-				this.text.text = this.defaultText;
+				this.btn.EditText(this.transKeys["default"]);
 			}
 		}
 
 		void OnDisable(){
-			if (this.text != null)
-				this.text.text = this.defaultText;
+			if (this.btn != null)
+				this.btn.EditText(this.transKeys["default"]);
 			this.listening = false;
 		}
 
@@ -53,12 +60,12 @@ namespace OptionButton {
 			this.listening = false;
 			if (code != KeyCode.None) {
 				this.actualKeyCode = code;
-				this.text.text = actualKeyCode.ToString ();
+				this.btn.EditText(actualKeyCode.ToString ());
 				Settings.Instance.UpdateKeyboard(this.action, this.actualKeyCode);
 				SaveLoad.save_setting ();
 			}
 			else 
-				this.text.text = "Annule";
+				this.btn.EditText(this.transKeys["cancel"]);
 			this.pressId++;
 			StartCoroutine (defaultSetUp (this.pressId));
 		}
@@ -70,14 +77,14 @@ namespace OptionButton {
 				endListenning (KeyCode.None);
 			} else {
 				this.animator.Play ("LoadColor");
-				text.text = "Synchro";
+				this.btn.EditText(this.transKeys["sync"]);
 			}
 		}
 
 		private IEnumerator defaultSetUp(int id){
 			yield return new WaitForSeconds (5);
 			if (id == this.pressId)
-				this.text.text = this.defaultText;
+				this.btn.EditText(this.transKeys["default"]);
 		}
 	}
 }

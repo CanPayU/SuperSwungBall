@@ -3699,7 +3699,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1109228776}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Script: {fileID: 11500000, guid: 73e6e5491d48a48218e5aaa5a7e2487f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
@@ -3723,7 +3723,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Choose Compo
+  m_Text: choose
+  trad: choirircompotext
 --- !u!222 &1109228779
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4063,7 +4064,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1214410858}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Script: {fileID: 11500000, guid: 73e6e5491d48a48218e5aaa5a7e2487f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
@@ -4087,7 +4088,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Enregistrer
+  m_Text: Save
+  trad: enregistrer
 --- !u!222 &1214410861
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4802,13 +4804,12 @@ RectTransform:
 --- !u!114 &1480402036
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11489104, guid: 053d2ac4b207740268f7adfbd3756021,
-    type: 2}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1480402034}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Script: {fileID: 11500000, guid: 73e6e5491d48a48218e5aaa5a7e2487f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
@@ -4832,7 +4833,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Choisir
+  m_Text: Choose
+  trad: choisir
 --- !u!222 &1480402037
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5425,7 +5427,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1650034892}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Script: {fileID: 11500000, guid: 73e6e5491d48a48218e5aaa5a7e2487f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
@@ -5438,18 +5440,19 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: ad4b55dce979ebe4c9e4cfc16b1f80fe, type: 3}
-    m_FontSize: 40
+    m_FontSize: 42
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 3
-    m_MaxSize: 40
+    m_MinSize: 4
+    m_MaxSize: 42
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Selectionnez un joueur
+  m_Text: Select Player
+  trad: selectionjoueurtext
 --- !u!222 &1650034895
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7153,7 +7156,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2070641936}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Script: {fileID: 11500000, guid: 73e6e5491d48a48218e5aaa5a7e2487f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
@@ -7169,7 +7172,7 @@ MonoBehaviour:
     m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 2
+    m_MinSize: 4
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -7177,7 +7180,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Personalise ta team
+  m_Text: Create Team Title
+  trad: createTTitle
 --- !u!222 &2070641939
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7311,7 +7315,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2119718820}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Script: {fileID: 11500000, guid: 73e6e5491d48a48218e5aaa5a7e2487f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
@@ -7335,7 +7339,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Create team
+  m_Text: create
+  trad: creeruneequipe
 --- !u!222 &2119718823
 CanvasRenderer:
   m_ObjectHideFlags: 0

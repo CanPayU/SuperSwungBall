@@ -3,6 +3,8 @@ using UnityEngine.UI;
 using System.Linq;
 using System.Collections;
 
+using TranslateKit;
+
 namespace Create_Team
 {
     public class MainController : MonoBehaviour
@@ -68,10 +70,8 @@ namespace Create_Team
         }
 
 		public void moreInformation(){
-			string title = "Plus d'information";
-			string content = "Créez, modifiez votre équipe !\n" +
-				"Ajoutez les joueurs que vous venez de gagner ou acheter !\n" +
-				"Les Ducats permettent de créer une équipe équilibrée. Chaques joueurs coute maximum 10 Ducats. Vous pouvez en comptabiliser jusqu'a 25 dans une équipe !";
+			string title = Language.GetValue (TradValues.CreateTeam.MoreInfo);
+			string content = Language.GetValue (TradValues.CreateTeam.MoreInfoDesc);
 			Notification.SimpleAlert (title, content);
 		}
     }

@@ -31,15 +31,6 @@
 		"jouerenligneligne3" : "Gagner jusqu'à phi",
 		"acheterligne1" : "Acheter des Phis pour débloquer",
 		"acheterligne2" : "toujours plus de personnages !",
-		"plusinfomenu1" : "reglages",
-		"plusinfomenu2" : "Replay",
-		"plusinfomenu3" : "autoriser la sauvegarde ",
-		"plusinfomenu4" : "sauvegarder vos parties sur votre machine afin de les ",
-		"plusinfomenu5" : " regarder en replay hors-ligne.",
-		"plusinfomenu6" : " Vider les sauvegardes",
-		"plusinfomenu7" : "Supprime toutes les sauvegardes de replays",
-		"plusinfomenu8" : "présentent sur votre ordinateur",
-		"plusinfomenu9langue" : "langue",
 		
 
 
@@ -51,27 +42,11 @@
 		"selectionjoueurtext" : "Selectionnez un joueur",
 		"choisirteamtext" : "choisir une equipe",
 		"choirircompotext" : "choisir une composition",
-		"enregistrer" : "enregistrer", 
-		"personnaliséequipetext" : "personnalise ta team",
+		"createTTitle" : "personnalise ta team",
 		"creeruneequipe" : "Creer une equipe",
 		"choissierlenom" : "chossissez le nom de votre équipe.",
-		"ok" : "ok",
-		"plus d'information" : "plus d'informations",
-		"phraseinfo1" : "Créez, modifiez votre équipe!",
-		"phraseinfo2" : "Ajoutez les joueurs que vous venez de gagner ou",
-		"phraseinfo3" : "Acheter!",
-		"phraseinfo4" : "Les Ducats permettent de créer une équipe",
-		"phraseinfo5" : "équilibrée. Chaques joueurs coute maximum 10",
-		"phraseinfo6" : "Ducats. Vous pouvez en comptabiliser jusqu'à 25",
-		"phraseinfo7" : "dans une équipe!",
-		"plus de phi" : "plus de phi",
-		"jouerenligne" : "jouer en ligne",
-		"jouerenligneligne1" : "Chaque partie jouée en ligne ",
-		"jouerenligneligne2" : "vous rapporte des Phi.",
-		"jouerenligneligne3" : "Gagner jusqu'à phi", 
-		"acheter" : "acheter", 
-		"acheterligne1" : "Acheter des Phis pour débloquer",
-		"acheterligne2" : "toujours plus de personnages !",
+		"moreInfo" : "plus d'informations",
+		"moreInfoDesc" : "Créez, modifiez votre équipe ! \n Ajoutez les joueurs que vous venez de gagner ou acheter ! \n Les Ducats permettent de créer une équipe équilibrée. Chaques joueurs coute maximum 10 Ducats. Vous pouvez en comptabiliser jusqu'a 25 dans une équipe !",
 		
 
 
@@ -111,20 +86,20 @@
 		"acheterligne2" : "toujours plus de personnages !",
 		"defi" :"defi",
 		"bloque" : "bloque",
-		"touche passe" : "touche passe",
-		"plusinfomenu1" : "reglages",
-		"plusinfomenu2" : "Replay",
-		"plusinfomenu3" : "autoriser la sauvegarde ",
-		"plusinfomenu4" : "sauvegarder vos parties sur votre machine afin de les ",
-		"plusinfomenu5" : " regarder en replay hors-ligne.",
-		"plusinfomenu6" : " Vider les sauvegardes",
-		"plusinfomenu7" : "Supprime toutes les sauvegardes de replays",
-		"plusinfomenu8" : "présentent sur votre ordinateur",
-		"plusinfomenu9langue" : "langue",
+		"touchepasse" : "touche passe",
 		"achatimpomsg1" : "Achat impossible",
 		"achatimpomsg2" : "Vous n'avez pas assez de Phi ou",
 		"achatimpomsg3" : "vous possédez deja ce SwungMen",
 		
+
+
+
+		"SCENE" : "Settings",
+
+		"autoriseSave" : "autoriser la sauvegarde",
+		"autoriseSaveDesc" : "sauvegarder vos parties sur votre machine afin de les regarder en replay hors-ligne.",
+		"cleanSave" : " Vider les sauvegardes",
+		"cleanSaveDesc" : "Supprime toutes les sauvegardes de replays présentent sur votre ordinateur",
 
 
 
@@ -234,6 +209,10 @@
 		"ducats" : "ducats",
 		"vider" : "vider",
 		"choisir" : "choisir",
+		"cancel" : "annule",
+		"sync" : "synchro",
+		"langue" : "langue",
+		"enregistrer" : "enregistrer"
 		
 	}
 }

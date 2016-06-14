@@ -31,16 +31,7 @@
 		"jouerenligneligne3" : "Gain until... Phi",
 		"acheterligne1" : "buy Phi to unlock ",
 		"acheterligne2" : "always more characters!",
-		"touche passe" : "touche passe",
-		"plusinfomenu1" : "settings",
-		"plusinfomenu2" : "Replay",
-		"plusinfomenu3" : "allow saved ",
-		"plusinfomenu4" : "save your games on our devices to ",
-		"plusinfomenu5" : " watch them in offline mode.",
-		"plusinfomenu6" : "delete your save",
-		"plusinfomenu7" : "delete all your replays",
-		"plusinfomenu8" : "which are on your computer",
-		"plusinfomenu9langue" : "language",
+		"touchepasse" : "pass touch",
 		
 
 
@@ -49,26 +40,12 @@
 		"selectionjoueurtext" : "Select a player",
 		"choisirteamtext" : "Choose a team",
 		"choirircompotext" : "Choose a composition",
-		"enregistrer" : "Save", 
-		"personnaliséequipetext" : "Personalize your team",
+		"createTTitle" : "Personalize your team",
 		"creeruneequipe" : "Create a team",
 		"choissierlenom" : "Choose the name of your team.",
-		"ok" : "ok",
-		"plus d'information" : "more information",
-		"phraseinfo1" : "Create, modify your team!",
-		"phraseinfo2" : "Add the players whom you have just gained or",
-		"phraseinfo3" : "Buy!",
-		"phraseinfo4" : "Ducats allows to create a team",
-		"phraseinfo5" : "Well-balanced. Every players cost maximum 10",
-		"phraseinfo6" : "Ducats. You can count it until 25",
-		"phraseinfo7" : "In a same team!",
-		"plus de phi" : "more phi",
-		"jouerenligne" : "play online",
-		"jouerenligneligne1" : "each game played online ",
-		"jouerenligneligne2" : "give you Phi",
-		"jouerenligneligne3" : "Gain until... Phi",
-		"acheterligne1" : "buy Phi to unlock ",
-		"acheterligne2" : "always more characters!",
+		"moreInfo" : "more information",
+		"moreInfoDesc" : "Create, modify your team ! \n Add the players whom you have just gained or buy ! \n Ducats allows to create a team well-balanced. Every players cost maximum 10 Ducats. You can count it until 25 in a same team!",
+
 
 
 
@@ -94,19 +71,19 @@
 		"defi" : "challenge",
 		"bloque" : "locked",
 		"touche passe" : "touche passe",
-		"plusinfomenu1" : "settings",
-		"plusinfomenu2" : "Replay",
-		"plusinfomenu3" : "allow saved ",
-		"plusinfomenu4" : "save your games on our devices to ",
-		"plusinfomenu5" : " watch them in offline mode.",
-		"plusinfomenu6" : "delete your save",
-		"plusinfomenu7" : "delete all your replays",
-		"plusinfomenu8" : "which are on your computer",
-		"plusinfomenu9langue" : "language",
 		"achatimpomsg1" : "Impossible purchase",
 		"achatimpomsg2" : " You haven't got enough Phi or",
 		"achatimpomsg3" : "you already have this SwungMen",
 		
+
+
+
+		"SCENE" : "Settings",
+
+		"autoriseSave" : "allow saved ",
+		"autoriseSaveDesc" : "save your games on our devices to watch them in offline mode.",
+		"cleanSave" : "delete your save",
+		"cleanSaveDesc" : "delete all your replays which are on your computer",
 
 
 		"SCENE" : "Solo game",
@@ -220,6 +197,10 @@
 		"ducats" : "ducats",
 		"vider" : "clear",
 		"choisir" : "choose",
+		"cancel" : "canceled",
+		"sync" : "sync",
+		"langue" : "language",
+		"enregistrer" : "save"
 
 	}
 }

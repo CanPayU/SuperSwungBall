@@ -9,7 +9,7 @@ GameObject:
   m_Component:
   - 224: {fileID: 22415304}
   - 222: {fileID: 22280390}
-  - 114: {fileID: 11470234}
+  - 114: {fileID: 11472590}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -171,7 +171,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &11470234
+--- !u!114 &11472590
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -179,7 +179,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 124116}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Script: {fileID: 11500000, guid: 73e6e5491d48a48218e5aaa5a7e2487f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
@@ -203,7 +203,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Setting
+  m_Text: dsdsq
+  trad: reglages
 --- !u!114 &11474248
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -286,7 +287,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -70, y: -35}
-  m_SizeDelta: {x: 80, y: 40}
+  m_SizeDelta: {x: 90, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22490414
 RectTransform:

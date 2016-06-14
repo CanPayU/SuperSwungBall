@@ -28,7 +28,7 @@ GameObject:
   m_Component:
   - 224: {fileID: 22431684}
   - 222: {fileID: 22226098}
-  - 114: {fileID: 11454164}
+  - 114: {fileID: 11463510}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -77,7 +77,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &11454164
+--- !u!114 &11463510
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -85,7 +85,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 181576}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Script: {fileID: 11500000, guid: 73e6e5491d48a48218e5aaa5a7e2487f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
@@ -109,7 +109,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Quitter
+  m_Text: 
+  trad: quitter
 --- !u!114 &11472746
 MonoBehaviour:
   m_ObjectHideFlags: 1
