@@ -6,7 +6,7 @@ using GameKit;
 
 namespace GameScene
 {
-	public class InfoJoueurController : GameBehavior
+    public class InfoJoueurController : GameBehavior
     {
 
         Vector3 open;
@@ -24,9 +24,10 @@ namespace GameScene
         bool movement;
 
 
-		public InfoJoueurController(){
-			this.eventType = GameKit.EventType.Global;
-		}
+        public InfoJoueurController()
+        {
+            this.eventType = GameKit.EventType.Global;
+        }
 
         void Start()
         {
@@ -123,21 +124,24 @@ namespace GameScene
             float esquive = p.EsquiveBase * scaleStats;
 
             Stats["sprint"][0].transform.localScale = new Vector3(speed, Stats["sprint"][0].transform.localScale.y, Stats["sprint"][0].transform.localScale.z);
-            Stats["sprint"][0].transform.localPosition = new Vector3(20, Stats["sprint"][0].transform.localPosition.y, Stats["sprint"][0].transform.localPosition.z);
-            for (int i = 0; i < 3; i++)
+            Stats["sprint"][1].transform.localPosition = new Vector3(25 + speed * 100, Stats["sprint"][0].transform.localPosition.y, Stats["sprint"][0].transform.localPosition.z);
+            Stats["sprint"][1].GetComponent<CanvasRenderer>().SetAlpha(0.2f);
+            Stats["passe"][0].transform.localScale = new Vector3(passe, Stats["passe"][0].transform.localScale.y, Stats["passe"][0].transform.localScale.z);
+            Stats["passe"][0].GetComponent<CanvasRenderer>().SetAlpha(0.2f);
+            Stats["tacle"][0].transform.localScale = new Vector3(tacle, Stats["tacle"][0].transform.localScale.y, Stats["tacle"][0].transform.localScale.z);
+            Stats["tacle"][0].GetComponent<CanvasRenderer>().SetAlpha(0.2f);
+            Stats["esquive"][0].transform.localScale = new Vector3(esquive, Stats["esquive"][0].transform.localScale.y, Stats["esquive"][0].transform.localScale.z);
+            Stats["esquive"][0].GetComponent<CanvasRenderer>().SetAlpha(0.2f);
+            for (int i = 1; i < 3; i++)
             {
-                Stats["sprint"][i + 1].transform.localScale = new Vector3(speed, Stats["sprint"][i].transform.localScale.y, Stats["sprint"][i].transform.localScale.z);
-                Stats["sprint"][i + 1].transform.localPosition = new Vector3(20 + (i + 1) * (speed * 100 + 5), Stats["sprint"][i].transform.localPosition.y, Stats["sprint"][i].transform.localPosition.z);
-                Stats["sprint"][i + 1].GetComponent<CanvasRenderer>().SetAlpha(0.3f);
-                Stats["passe"][i].transform.localScale = new Vector3(passe, Stats["passe"][i].transform.localScale.y, Stats["passe"][i].transform.localScale.z);
-                Stats["passe"][i].transform.localPosition = new Vector3(20 + i * (passe * 100 + 5), Stats["passe"][i].transform.localPosition.y, Stats["passe"][i].transform.localPosition.z);
-                Stats["passe"][i].GetComponent<CanvasRenderer>().SetAlpha(0.3f);
-                Stats["tacle"][i].transform.localScale = new Vector3(tacle, Stats["tacle"][i].transform.localScale.y, Stats["tacle"][i].transform.localScale.z);
-                Stats["tacle"][i].transform.localPosition = new Vector3(20 + i * (tacle * 100 + 5), Stats["tacle"][i].transform.localPosition.y, Stats["tacle"][i].transform.localPosition.z);
-                Stats["tacle"][i].GetComponent<CanvasRenderer>().SetAlpha(0.3f);
-                Stats["esquive"][i].transform.localScale = new Vector3(esquive, Stats["esquive"][i].transform.localScale.y, Stats["esquive"][i].transform.localScale.z);
-                Stats["esquive"][i].transform.localPosition = new Vector3(20 + i * (esquive * 100 + 5), Stats["esquive"][i].transform.localPosition.y, Stats["esquive"][i].transform.localPosition.z);
-                Stats["esquive"][i].GetComponent<CanvasRenderer>().SetAlpha(0.3f);
+                Stats["sprint"][1 + i].transform.localPosition = new Vector3(speed * 100 + (i + 1) * 25, Stats["sprint"][0].transform.localPosition.y, Stats["sprint"][0].transform.localPosition.z);
+                Stats["sprint"][1 + i].GetComponent<CanvasRenderer>().SetAlpha(0.2f);
+                Stats["passe"][i].transform.localPosition = new Vector3(passe * 100 + i * 25, Stats["passe"][0].transform.localPosition.y, Stats["passe"][0].transform.localPosition.z);
+                Stats["passe"][i].GetComponent<CanvasRenderer>().SetAlpha(0.2f);
+                Stats["tacle"][i].transform.localPosition = new Vector3(tacle * 100 + i * 25, Stats["tacle"][0].transform.localPosition.y, Stats["tacle"][0].transform.localPosition.z);
+                Stats["tacle"][i].GetComponent<CanvasRenderer>().SetAlpha(0.2f);
+                Stats["esquive"][i].transform.localPosition = new Vector3(esquive * 100 + i * 25, Stats["esquive"][0].transform.localPosition.y, Stats["esquive"][0].transform.localPosition.z);
+                Stats["esquive"][i].GetComponent<CanvasRenderer>().SetAlpha(0.2f);
             }
             playername.text = p.Name;
         }
@@ -156,8 +160,9 @@ namespace GameScene
             Stats.Add(key, component);
         }
 
-		public override void OnStartAnimation(){
-			this.Close ();
-		}
+        public override void OnStartAnimation()
+        {
+            this.Close();
+        }
     }
 }
