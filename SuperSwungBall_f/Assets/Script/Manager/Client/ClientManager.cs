@@ -70,8 +70,8 @@ public class ClientManager : MonoBehaviour, IClientListener
         {
 			if (success)
             {
-                PlayerPrefs.SetInt("Net_State", 2);
-                PlayerPrefs.SetString("Net_RoomID", roomID);
+				ApplicationModel.NetState = Network.NetSate.InviteByFriend;
+				ApplicationModel.RoomID = roomID;
 				FadingManager.Instance.Fade("network");
             }
             else

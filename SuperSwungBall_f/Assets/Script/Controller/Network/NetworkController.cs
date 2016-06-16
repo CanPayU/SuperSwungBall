@@ -10,6 +10,13 @@ using ExitGames.Client.Photon;
 
 namespace Network
 {
+	public enum NetSate
+	{
+		Default,
+		InviteFriend,
+		InviteByFriend
+	}
+
     public class NetworkController : MonoBehaviour
     {
         private string game_version_ = "2.0";
@@ -55,17 +62,15 @@ namespace Network
 
         void OnConnectedToMaster()
         {
-            int state = PlayerPrefs.GetInt("Net_State", -1); // -1 => Default | 1 => InviteFirend | 2 => InvitedByFriend
-
-            if (state == -1)
+			if (ApplicationModel.NetState == NetSate.Default)
             {
                 Debug.Log("JoinRandomRoom");
                 PhotonNetwork.JoinRandomRoom(); // création de la room
                 return;
             }
-            Debug.Log("JoinNanRandomRoom : " + state);
-            string RoomID = PlayerPrefs.GetString("Net_RoomID", "NULL");
-            if (RoomID != "NULL")
+			Debug.Log("JoinNanRandomRoom : " + ApplicationModel.NetState);
+			string RoomID = ApplicationModel.RoomID;
+            if (RoomID != null)
                 this.room_name = RoomID;
             else
             {
@@ -73,24 +78,21 @@ namespace Network
                 return;
             }
 
-            if (state == 1)
+			if (ApplicationModel.NetState == NetSate.InviteFriend)
             {
                 RoomOptions roomOptions = new RoomOptions() { isVisible = false, maxPlayers = 2 }; // isVisible Random can join or not (ici non)
                 PhotonNetwork.JoinOrCreateRoom(this.room_name, roomOptions, TypedLobby.Default);
             }
-            if (state == 2)
+			else if (ApplicationModel.NetState == NetSate.InviteByFriend)
             {
                 PhotonNetwork.JoinRoom(this.room_name);
             }
             PlayerPrefs.DeleteAll();
-            state = PlayerPrefs.GetInt("Net_State", -1);
-            Debug.Log("JoinNanRandomRoom : " + state);
 
         }
         void OnPhotonJoinRoomFailed()
         {
-            string roomName = PlayerPrefs.GetString("", "NULL");
-            Notification.Create(NotificationType.Slide, "Room introuvable : " + roomName, null);
+			Notification.Create(NotificationType.Slide, "Room introuvable : " + this.room_name, null);
         }
         void OnPhotonRandomJoinFailed()
         {
@@ -102,13 +104,15 @@ namespace Network
             this.client.JoinRoom(this.room_name);
             if (PhotonNetwork.playerList.Length > 1)
             {
+				ApplicationModel.TypeToInstanciate = GameType.Multi;
 				FadingManager.Instance.Fade(scene);
             }
         }
         void OnPhotonPlayerConnected(PhotonPlayer other)
         {
             if (PhotonNetwork.playerList.Length > 1)
-            {
+			{
+				ApplicationModel.TypeToInstanciate = GameType.Multi;
 				FadingManager.Instance.Fade(scene);
             }
         }
