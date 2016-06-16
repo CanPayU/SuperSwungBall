@@ -109,7 +109,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 4225438}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.28, y: -0.06, z: 8.35}
+  m_LocalPosition: {x: 13.5, y: 0.31, z: 8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1047572078}
@@ -131,8 +131,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   screentext: {fileID: 2010317798}
-  player1_prefab: {fileID: 165034, guid: cd08ef288c8249a4e95f447dbddb5a86, type: 2}
-  player2_prefab: {fileID: 170820, guid: b22b788ffeff4ff419c05bf47d969887, type: 2}
+  player1_prefab: {fileID: 160584, guid: 90f958c964fb7404b9368e6d82e09ee5, type: 2}
+  player2_prefab: {fileID: 128906, guid: 7c05f3e8c5ea80c4ca489da02e985edb, type: 2}
 --- !u!136 &4225441
 CapsuleCollider:
   m_ObjectHideFlags: 0

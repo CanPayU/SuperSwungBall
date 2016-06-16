@@ -10,14 +10,22 @@ namespace GameScene.Didacticiel
     {
         [SerializeField]
         private Text screentext;
+        [SerializeField]
         private GameObject player1_prefab;
+        [SerializeField]
         private GameObject player2_prefab;
 
+        GameObject play0; //le player
+        GameObject BouttonEsquive;
+        GameObject BouttonTacle;
+        GameObject BouttonPasse;
+        GameObject BouttonCourse;
 
         CameraController cameraController;
         InfoJoueurController infoJoueur;
         Collider thisCollider; //collider de ce game object
-        Renderer[] flechesRenderer = new Renderer[4]; //renderer de ce game object
+        Renderer[] flechesRenderer = new Renderer[4]; //renderer des 4 flèches de ce game object
+        Renderer RondBlanc; //rond blanc sur ce game object
         Renderer ballRenderer; //renderer de la balle 
         Timer time;
 
@@ -37,7 +45,11 @@ namespace GameScene.Didacticiel
         {
             this.player1_prefab = Resources.Load("Prefabs/Solo/Player_1") as GameObject;
             this.player2_prefab = Resources.Load("Prefabs/Solo/Player_2") as GameObject;
+
             // -- Renderers / Collider
+            RondBlanc = this.transform.FindChild("Plane").GetComponent<Renderer>();
+            RondBlanc.enabled = false;
+
             for (int i = 0; i < 4; i++)
             {
                 flechesRenderer[i] = transform.FindChild("fleche" + (i + 1)).FindChild("flecheTuto").GetComponent<Renderer>();
@@ -55,11 +67,11 @@ namespace GameScene.Didacticiel
             // --
 
 
-
             // --
             cameraController = GameObject.Find("Main Camera").GetComponent<CameraController>();
             time = new Timer(10.0F, end_time);
             // --
+
 
             // -- text
             phase = 1;
@@ -90,7 +102,7 @@ namespace GameScene.Didacticiel
                 {"Nous avons désormais la balle, envoyons-la quelque part", "1" },
              //   {"Pour envoyer la balle,\n il faut au moins un point de maîtrise de passe", "1"},
              //   {"Met 3 ponts de maîtrise dans la passe pour faire un passe très loin", "1"},
-             //   {"Clique sur la zone rose, puis déplace le curseur \n pour marquer la direction de la passe", "1" },
+             //   {"Clique sur la zone rose, puis déplace le point rose \n pour marquer l'emplacement de la passe", "1" },
                 { "", "0" } };
             // --
         }
@@ -100,32 +112,35 @@ namespace GameScene.Didacticiel
             switch (phase)
             {
                 case 1:
-                    phase1();
+                    phase1(); //affichage premier texte
                     break;
                 case 2:
-                    phase2();
+                    phase2(); //création du player & changement emplacement du texte
                     break;
                 case 3:
-                    phase3();
+                    phase3(); //affichage deuxième texte
                     break;
                 case 4:
-                    phase4();
+                    phase4(); //phrase permanente en attendant le déplacement & flèches main + rond blanc visibles
+                    break; //5 = collision main & activation maitrise de la balle
+                case 6:
+                    phase6(); //affichage troisième tableau
                     break;
-                case 5:
-                    phase5();
+                case 7:
+                    phase7(); //phrase permanente en attendant la récup' de la balle & balle visile & flèches main + rond blanc non visibles
+                    break; //8 = récupération balle
+                case 9:
+                    phase9(); //affichage quatrième tableau
                     break;
-                case 7: //6 = collision main
-                    phase7();
+                case 10:
+                    phase10(); //affichage des 4 flèches + rond blanc
+                    break;//11 = passe : collision balle & activation esquive
+                case 12:
+                    phase12();
                     break;
-                case 8:
-                    phase8();
-                    break;
-                case 10: //9 = collision balle
-                    phase10();
-                    break;
-                case 11:
-                    phase11();
-                    break;
+                    /*   case 20:
+                           phase20();
+                           break; */
             }
             time.update();
             if (Input.GetKeyDown(KeyCode.Space) && !annim_started)
@@ -141,57 +156,69 @@ namespace GameScene.Didacticiel
         }
         void phase2()
         {
-            //Team team_0 = Game.Instance.Teams[0];
             Player play_t0 = Settings.Instance.Default_player["gpdn"];
-            GameObject play0 = Instantiate(player1_prefab, new Vector3(1F, 1F, 0F), Quaternion.identity) as GameObject;
+            play0 = Instantiate(player1_prefab, new Vector3(1F, 1F, 0F), Quaternion.identity) as GameObject;
             play_t0.Team_id = 0;
             play_t0.Name += "";
             play0.name = play_t0.Name + "-" + play_t0.Team_id;
             this.player_phase_2 = (BasicPlayerController)play0.AddComponent(typeof(GameScene.Solo.PlayerController));
             this.player_phase_2.Player = play_t0;
             this.player_phase_2.IsMine = true;
+
+            screentext.transform.position = new Vector2(960, 700);
             phase++;
-            Debug.Log(play0.name);
         }
         void phase3()
         {
-            screentext.transform.position = new Vector2(930, 700);
-            phase++;
+            text(tableau_2);
         }
         void phase4()
         {
-            text(tableau_2);
-        }
-        void phase5()
-        {
+            BouttonEsquive = play0.transform.FindChild("menu(Clone)").FindChild("boutton1").gameObject;
+            BouttonTacle = play0.transform.FindChild("menu(Clone)").FindChild("boutton2").gameObject;
+            BouttonPasse = play0.transform.FindChild("menu(Clone)").FindChild("boutton3").gameObject;
+            BouttonCourse = play0.transform.FindChild("menu(Clone)").FindChild("boutton4").gameObject;
+
+            BouttonEsquive.SetActive(false);
+            BouttonPasse.SetActive(false);
+            BouttonTacle.SetActive(false);
+
             screentext.text = "Déplace le Swungman jusqu'ici \n et appuie sur 'Espace' pour lancer le déplacement";
             foreach (Renderer r in flechesRenderer)
                 r.enabled = true;
+            RondBlanc.enabled = true;
             phase++;
         }
-        void phase7()
+        void phase6()
         {
             text(tableau_3);
         }
-        void phase8()
+        void phase7()
         {
             screentext.text = "Déplace toi maintenant vers la balle, ('Espace' pour lancer le déplacement)";
             ballRenderer.enabled = true;
             this.transform.position = new Vector3(5, 0);
             foreach (Renderer r in flechesRenderer)
-                r.enabled = true; //remplacer par false
+                r.enabled = false;
+            RondBlanc.enabled = false;
             phase++;
         }
-        void phase10()
+        void phase9()
         {
             text(tableau_4);
         }
-        void phase11()
+        void phase10()
         {
             foreach (Renderer r in flechesRenderer)
                 r.enabled = true;
+            RondBlanc.enabled = true;
+        }
+        void phase12()
+        {
+
         }
         // --
+
 
         // -- Text
         void text(string[,] tableau)
@@ -199,9 +226,7 @@ namespace GameScene.Didacticiel
             float temps = float.Parse(tableau[place, 1]);
 
             if (place == 0) //premier passage
-            {
                 screentext.text = message(tableau);
-            }
 
             if (temps == 0) //dernier passage
             {
@@ -229,21 +254,35 @@ namespace GameScene.Didacticiel
             GameObject objet = other.gameObject;
             if (objet.name == "GPasDNom-0") //collision avec un Player ?
             {
-                if (phase == 6)
+                if (phase == 5) //premier déplacement
                 {
-                    phase++;
+                    RondBlanc.enabled = false;
                     foreach (Renderer r in flechesRenderer)
-                        r.enabled = true; //a changer en false
-                    this.transform.position = new Vector3(5, 0);
+                        r.enabled = false;
+                    BouttonPasse.SetActive(true);
+                    this.transform.position = new Vector3(6, 0, 0);
                     end_time();
-                }
-                if (phase == 9)
-                {
                     phase++;
+                }
+                if (phase == 8) //récupérer la balle première fois
+                {
                     this.transform.position = new Vector3(0, 0);
                     end_time();
+                    phase++;
                 }
             }
+            if (objet.name == "Ball") //collision avec la balle ?
+            {
+                if (phase == 11) //lancer la balle première fois
+                {
+                    this.transform.position = new Vector3(0, 0, 5);
+                    BouttonEsquive.SetActive(true);
+                    phase++;
+                }
+            }
+
+
+
         }
         // --
 
