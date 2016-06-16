@@ -76,15 +76,15 @@ namespace GameScene.Multi
 		}
 
 
-		void OnGUI()
-		{
-			if (!annim_started)
-			{
-				float h = 30;
-				float w = 200;
-				GUI.Box(new Rect(0, 0, w, h), "Timer : " + (time.Time_remaining).ToString("0"));
-			}
-		}
+//		void OnGUI()
+//		{
+//			if (!annim_started)
+//			{
+//				float h = 30;
+//				float w = 200;
+//				GUI.Box(new Rect(0, 0, w, h), "Timer : " + (time.Time_remaining).ToString("0"));
+//			}
+//		}
 
 		protected override void instantiate_team()
 		{

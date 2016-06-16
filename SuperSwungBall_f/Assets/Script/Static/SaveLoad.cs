@@ -77,6 +77,7 @@ public static class SaveLoad
         {
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open(Application.persistentDataPath + "/settings.txt", FileMode.Open);
+			Debug.Log (file);
             try
             {
                 SaveLoad.setting = (Settings)bf.Deserialize(file);
@@ -95,12 +96,12 @@ public static class SaveLoad
         }
         else
         {
-            BinaryFormatter bf = new BinaryFormatter();
-            TextAsset asset = Resources.Load("settings") as TextAsset;
-            Stream file = new MemoryStream(asset.bytes);
-            SaveLoad.setting = (Settings)bf.Deserialize(file);
-            Settings.Instance = setting;
-            file.Close();
+//            BinaryFormatter bf = new BinaryFormatter();
+//            TextAsset asset = Resources.Load("settings") as TextAsset;
+//            Stream file = new MemoryStream(asset.bytes);
+//            SaveLoad.setting = (Settings)bf.Deserialize(file);
+			Settings.Instance = new Settings();
+//            file.Close();
             save_setting();
         }
     }

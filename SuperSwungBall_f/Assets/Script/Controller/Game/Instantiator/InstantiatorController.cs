@@ -16,9 +16,9 @@ namespace GameScene.Instantiator {
 
 		private bool instanciated = false;
 
-		private bool gameIsReplay = false;
-		private bool gameIsSolo = true;
-		private bool gameIsMulti = true;
+//		private bool gameIsReplay = false;
+//		private bool gameIsSolo = false;
+//		private bool gameIsMulti = true;
 
 		// Use this for initialization
 		public void Awake () {
@@ -27,34 +27,28 @@ namespace GameScene.Instantiator {
 
 			initialiseType();
 
-			if (gameIsReplay) 
+			if (type == InstanciatorType.Replay) 
 				gameObject.AddComponent (this.replay);
-			else if (gameIsSolo)
+			else if (type == InstanciatorType.Solo) 
 				gameObject.AddComponent (this.solo);
-			else if (gameIsMulti)
+			else if (type == InstanciatorType.Multi) 
 				gameObject.AddComponent (this.multi);
 
 		}
 
 		private void initialiseType(){
-			if (type == InstanciatorType.MainController) {
-				this.solo = typeof(GameScene.Solo.Main_Controller);
-				this.multi = typeof(GameScene.Multi.MainController);
-				this.replay = typeof(GameScene.Replay.MainController);
-			}
-//			else if (type == InstanciatorType.PlayerController) {
-//				this.instanciated = true;
-//				this.solo = typeof(GameScene.Solo.PlayerController);
-//				this.multi = typeof(GameScene.Multi.PlayerController);
-//				this.replay = typeof(GameScene.Replay.PlayerController);
-//			}
+			this.solo = typeof(GameScene.Solo.Main_Controller);
+			this.multi = typeof(GameScene.Multi.MainController);
+			this.replay = typeof(GameScene.Replay.MainController);
+
 		}
 
 	}
 
 	public enum InstanciatorType {
-		MainController,
-		PlayerController
+		Replay,
+		Solo,
+		Multi
 	}
 
 }
