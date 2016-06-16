@@ -8,7 +8,7 @@ namespace GameScene.Instantiator {
 	public class InstantiatorController : MonoBehaviour
 	{
 		[SerializeField]
-		private InstanciatorType type;
+		private GameType type;
 
 		private Type solo;
 		private Type multi;
@@ -27,12 +27,10 @@ namespace GameScene.Instantiator {
 
 			initialiseType();
 
-			if (type == InstanciatorType.Replay) 
-				gameObject.AddComponent (this.replay);
-			else if (type == InstanciatorType.Solo) 
-				gameObject.AddComponent (this.solo);
-			else if (type == InstanciatorType.Multi) 
-				gameObject.AddComponent (this.multi);
+			if (ApplicationModel.TypeToInstanciate != null)
+				instanciateMain (ApplicationModel.TypeToInstanciate);
+			else
+				instanciateMain (type);
 
 		}
 
@@ -40,15 +38,18 @@ namespace GameScene.Instantiator {
 			this.solo = typeof(GameScene.Solo.Main_Controller);
 			this.multi = typeof(GameScene.Multi.MainController);
 			this.replay = typeof(GameScene.Replay.MainController);
+		}
 
+		private void instanciateMain(GameType type) {
+			if (type == GameType.Replay) 
+				gameObject.AddComponent (this.replay);
+			else if (type == GameType.Solo) 
+				gameObject.AddComponent (this.solo);
+			else if (type == GameType.Multi) 
+				gameObject.AddComponent (this.multi);
+
+			this.instanciated = true;
 		}
 
 	}
-
-	public enum InstanciatorType {
-		Replay,
-		Solo,
-		Multi
-	}
-
 }

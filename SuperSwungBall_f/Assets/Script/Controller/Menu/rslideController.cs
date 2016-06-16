@@ -135,8 +135,8 @@ public class RslideController : MonoBehaviour
 				if (autorised)
 				{
 					string RoomID = (rand.Next(1000, 9999)).ToString();
-					PlayerPrefs.SetInt("Net_State", 1);
-					PlayerPrefs.SetString("Net_RoomID", RoomID);
+					ApplicationModel.NetState = Network.NetSate.InviteFriend;
+					ApplicationModel.RoomID = RoomID;
 					client.InviteFriend(friend, RoomID);
 					FadingManager.Instance.Fade("network");
 				}

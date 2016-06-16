@@ -32,6 +32,8 @@ namespace Menu
         {
             if (other.gameObject.name == "Choice")
             {
+				if (this.scene == "SoloGame")
+					ApplicationModel.TypeToInstanciate = GameType.Solo;
 				FadingManager.Instance.Fade(scene);
             }
         }

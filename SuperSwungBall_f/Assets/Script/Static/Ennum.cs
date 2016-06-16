@@ -23,6 +23,13 @@ public enum NotificationType
     Slide = 1 		// Title
 }
 
+public enum GameType 
+{
+	Replay,
+	Multi,
+	Solo
+}
+
 public enum PlayerType
 {
 	Buy,			// Purchasable
