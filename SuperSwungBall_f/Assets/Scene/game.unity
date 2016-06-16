@@ -18105,10 +18105,8 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
-<<<<<<< HEAD
 --- !u!4 &1695435370
 Transform:
-=======
 --- !u!114 &688016388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18160,7 +18158,6 @@ MonoBehaviour:
   type: 1
 --- !u!114 &688016391
 MonoBehaviour:
->>>>>>> origin/master
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 400214, guid: 6e165143e09332142bd2e2d860f94ba4, type: 3}
   m_PrefabInternal: {fileID: 0}
