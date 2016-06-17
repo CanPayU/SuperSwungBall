@@ -94,6 +94,7 @@ namespace GameScene
             }
         }
         #endregion
+
         #region pointeurs
         public void update_zoneDeplacement(float zone_deplacement, float zone_passe) // Modifie la taille des zones
         {

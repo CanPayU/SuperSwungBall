@@ -21,9 +21,8 @@ namespace GameScene.Didacticiel
 
         [SerializeField]
         private Text screentext;
-        [SerializeField]
+
         private GameObject player1_prefab;
-        [SerializeField]
         private GameObject player2_prefab;
 
         GameObject play0; //le player
@@ -31,10 +30,10 @@ namespace GameScene.Didacticiel
         GameObject BouttonTacle;
         GameObject BouttonPasse;
         GameObject BouttonCourse;
-        private BasicPlayerController MyPlayer_Controller;
+        private PlayerController MyPlayer_Controller;
 
         GameObject enemyPlayer; //ne peut être controllé par le joueur
-        private BasicPlayerController EnemyPlayer_Controller;
+        private PlayerController EnemyPlayer_Controller;
 
         GameObject ball;
         Renderer ballRenderer; //renderer de la balle 
@@ -61,8 +60,8 @@ namespace GameScene.Didacticiel
         // Use this for initialization
         void Start()
         {
-            this.player1_prefab = Resources.Load("Prefabs/Solo/Player_1") as GameObject;
-            this.player2_prefab = Resources.Load("Prefabs/Solo/Player_2") as GameObject;
+            this.player1_prefab = Resources.Load("Prefabs/Didacticiel/Player_1") as GameObject;
+            this.player2_prefab = Resources.Load("Prefabs/Didacticiel/Player_2") as GameObject;
 
             // -- Renderers / Collider
             RondBlanc = this.transform.FindChild("Plane").GetComponent<Renderer>();
@@ -121,13 +120,13 @@ namespace GameScene.Didacticiel
                 {"Nous avons désormais la balle, envoyons-la quelque part", "1" },
              //   {"Pour envoyer la balle,\n il faut au moins un point de maîtrise de passe", "1"},
              //   {"Met 3 ponts de maîtrise dans la passe pour faire un passe très loin", "1"},
-             //   {"Clique sur la zone rose, puis déplace le point rose \n pour marquer l'emplacement de la passe", "1" },
-                {"", "0" } };
+             //   {"Clique sur l'extrémité de la zone rose, puis déplace le point rose \n pour marquer l'emplacement de la passe", "1" },
+                {"Tu peux désormais lancer l'action (touche 'espace') \n et appuyer sur 'a' pour faire la passe", "0" } };
 
             tableau_5 = new string[,] {
                 {"Quelle passe ! Mais attention à toi, \n un ennemi arrive","1"},
               //  {"Il a sûrement envie de te tacler, \n même si tu n'as pas la balle","1" },
-                {"Met donc un maximum de point dans ta capacité d'esquive \n et attend le ici (espace pour lancer l'action)","0" } };
+                {"Met donc un maximum de point dans ta capacité d'esquive \n et fonce vers lui ('espace' pour lancer l'action)","0" } };
             // --
         }
         // Update is called once per frame
@@ -146,7 +145,8 @@ namespace GameScene.Didacticiel
                     break;
                 case 4:
                     phase4(); //flèches main + rond blanc visibles
-                    break; //5 = collision main & activation maitrise de la balle
+                    break;
+                //5 = collision main & activation maitrise de la balle
                 case 6:
                     phase6(); //affichage troisième tableau
                     break;
@@ -161,9 +161,10 @@ namespace GameScene.Didacticiel
                     break;
                 case 10:
                     phase10(); //affichage des 4 flèches + rond blanc
-                    break;//11 = passe : collision balle & activation esquive
+                    break;
+                //11 = passe : collision balle & activation esquive + désactivation des autres & création joueur adverse & 3 courses pour le joueur
                 case 12:
-                    phase12();
+                    phase12(); //affichage cinquième tableau
                     break;
             }
             time.update();
@@ -180,14 +181,15 @@ namespace GameScene.Didacticiel
         }
         void phase2()
         {
+            Debug.Log("phase 2 entrée");
             Player play_t0 = Settings.Instance.Default_player["gpdn"];
             play0 = Instantiate(player1_prefab, new Vector3(1F, 1F, 0F), Quaternion.identity) as GameObject;
             play_t0.Team_id = 0;
             play_t0.Name += "";
             play0.name = play_t0.Name + "-" + play_t0.Team_id;
-            this.MyPlayer_Controller = (BasicPlayerController)play0.AddComponent(typeof(GameScene.Solo.PlayerController));
-            this.MyPlayer_Controller.Player = play_t0;
-            this.MyPlayer_Controller.IsMine = true;
+            MyPlayer_Controller = (PlayerController)play0.AddComponent(typeof(PlayerController));
+            MyPlayer_Controller.Player = play_t0;
+            MyPlayer_Controller.IsMine = true;
 
             screentext.transform.position = new Vector2(960, 700);
             phase++;
@@ -218,7 +220,6 @@ namespace GameScene.Didacticiel
         }
         void phase7()
         {
-            //screentext.text = "Déplace toi maintenant vers la balle, ('Espace' pour lancer le déplacement)";
             ballRenderer.enabled = true;
             this.transform.position = new Vector3(5, 0);
             foreach (Renderer r in flechesRenderer)
@@ -230,8 +231,9 @@ namespace GameScene.Didacticiel
         {
             if (ball.transform.IsChildOf(play0.transform))
             {
-                this.transform.position = new Vector3(0, 0);
                 end_time();
+                this.transform.position = new Vector3(0, 0);
+                BouttonCourse.SetActive(false);
                 phase++;
             }
         }
@@ -258,22 +260,31 @@ namespace GameScene.Didacticiel
         {
             float temps = float.Parse(tableau[place, 1]);
 
-            if (place == 0) //premier passage
+            if (place == 0) // premier passage ? -> changer direct le texte
                 screentext.text = message(tableau);
 
-            if (temps == 0) //dernier passage
+            if (temps == 0) // message qui reste à l'écran ? laisser le texte à l'écran et passer à la phase suivante
             {
                 screentext.text = message(tableau);
                 phase++;
-                current_time = 0;
                 place = 0;
+                current_time = 0;
             }
             else if (current_time < temps) // temps pas atteint ? -> continuer à afficher
                 current_time += Time.deltaTime;
-            else // temps atteint ? -> changer de texte
+            else // temps atteint ? -> réinitialiser le temps et voir si on continue de lire le tableau
             {
                 current_time = 0;
-                place += 1;
+                if (tableau.Length == place + 1) // dernier passage-> réinitialiser le texte et passer à la phase suivante
+                {
+                    screentext.text = "";
+                    phase++;
+                    place = 0;
+                }
+                else // sinon passer au message suivant
+                {
+                    place += 1;
+                }
             }
         }
         string message(string[,] tableau)
@@ -285,32 +296,29 @@ namespace GameScene.Didacticiel
         // Collisions
         void OnTriggerEnter(Collider other)
         {
+            Debug.Log("collision");
             GameObject objet = other.gameObject;
             if (objet.name == "GPasDNom-0") //collision avec le Player ?
             {
                 if (phase == 5) //premier déplacement
                 {
+                    end_time();
                     foreach (Renderer r in flechesRenderer)
                         r.enabled = false;
                     RondBlanc.enabled = false;
                     BouttonPasse.SetActive(true);
                     this.transform.position = new Vector3(6, 0, 0);
-                    end_time();
                     phase++;
                 }
-                /*
-                if (phase == 8) //récupérer la balle première fois
-                {
-                    this.transform.position = new Vector3(0, 0);
-                    end_time();
-                    phase++;
-                }
-                */
             }
             if (objet.name == "Ball") //collision avec la balle ?
             {
+                Debug.Log("balle");
                 if (phase == 11) //lancer la balle première fois
                 {
+                    Debug.Log("phase11");
+                    end_time();
+
                     this.transform.position = new Vector3(0, 0, 5);
                     foreach (Renderer r in flechesRenderer)
                         r.enabled = false;
@@ -325,13 +333,21 @@ namespace GameScene.Didacticiel
                     play_t1.Team_id = 1;
                     play_t1.Name += "";
                     enemyPlayer.name = play_t1.Name + "-" + play_t1.Team_id;
-                    this.EnemyPlayer_Controller = (BasicPlayerController)enemyPlayer.AddComponent(typeof(GameScene.Solo.PlayerController));
+                    this.EnemyPlayer_Controller = (PlayerController)enemyPlayer.AddComponent(typeof(PlayerController));
                     this.EnemyPlayer_Controller.Player = play_t1;
                     this.EnemyPlayer_Controller.IsMine = false;
 
-                    EnemyPlayer_Controller.PointDeplacement = new Vector3(3F, 1F, 3F);
+                    EnemyPlayer_Controller.PointDeplacement = new Vector3(3F, enemyPlayer.transform.position.y, 3F);
 
-                    end_time();
+                    Color c = MyPlayer_Controller.menucontroller.GetButtonsColor[3]; //couleur de la course
+                    MyPlayer_Controller.updateValuesPlayer(c);
+                    MyPlayer_Controller.updateValuesPlayer(c);
+                    MyPlayer_Controller.updateValuesPlayer(c);
+
+                    MyPlayer_Controller.menucontroller.update_Color(c);
+                    MyPlayer_Controller.menucontroller.update_Color(c);
+                    MyPlayer_Controller.menucontroller.update_Color(c);
+
                     phase++;
                 }
             }
@@ -358,7 +374,7 @@ namespace GameScene.Didacticiel
             time.start();
             MyPlayer_Controller.start_Anim();
             if (EnemyPlayer_Controller != null)
-                EnemyPlayer_Controller.start_Anim();
+                EnemyPlayer_Controller.start_Anim(false);
         }
         // --
 
