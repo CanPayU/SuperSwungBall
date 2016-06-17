@@ -13,7 +13,8 @@ namespace Extension.UI
 		protected override void Start ()
 		{
 			base.OnEnable ();
-			this.text = Language.GetValue (this.trad);
+			if(this.trad != null && this.trad != "")
+				this.text = Language.GetValue (this.trad);
 		}
 	}
 }

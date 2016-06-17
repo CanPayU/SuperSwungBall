@@ -34,6 +34,14 @@ public class AccountController : MonoBehaviour
 		FadingManager.Instance.Fade("standing");
 	}
 
+	public void OnViewReplay()
+	{
+		var replays = Resources.Load("Prefabs/OptionButton/Replay/View") as GameObject;
+		var gm = GameObject.Instantiate(replays);
+		Transform Canvas = GameObject.FindObjectOfType<Canvas>().transform;
+		gm.transform.SetParent(Canvas, false);
+	}
+
 	private void SetUp()
 	{
 		var nfi = (NumberFormatInfo)CultureInfo.InvariantCulture.NumberFormat.Clone();
