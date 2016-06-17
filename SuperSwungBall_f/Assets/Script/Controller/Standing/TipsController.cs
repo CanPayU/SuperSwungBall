@@ -23,7 +23,7 @@ namespace Standing
 
 //            r_ = rand.Next(tips.Length);
 //			tip_text.text = tips[r_];
-			var name = "tips"+ rand.Next(12);
+			var name = "tips"+ (rand.Next(12) + 1);
 			var value = (TradValues)(typeof(TradValues.Standing).GetField (name).GetValue(null));
 			tip_text.text = Language.GetValue(value);
         }
