@@ -310,6 +310,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 139080, guid: 53e01dbd34b44794bad0f63f468da40e, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 53e01dbd34b44794bad0f63f468da40e, type: 2}
   m_IsPrefabParent: 0
@@ -1585,7 +1589,7 @@ Transform:
   m_LocalRotation: {x: 0.2942962, y: -0.6311204, z: 0.69274884, w: 0.18755263}
   m_LocalPosition: {x: 0, y: 30, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 80, y: 80, z: -140}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5

@@ -100,24 +100,23 @@ namespace GameScene.Didacticiel
            //     {"Comment jouer ?", "1"},
            //     {"Le but du jeu est de marquer 3 points", "1"},
            //     {"Chaque joueur contrôle son équipe", "1"},
-           //     {"Commençons par voir les contrôles \n d'un Swungman", "1"},
-                {"", "0" }};
+                {"Commençons par voir les contrôles \n d'un Swungman", "0.5"} };
 
             tableau_2 = new string[,] {
-                {"Ca c'est un Swungman, \n appuie dessus pour pouvoir le contrôler", "1" },
+                {"Ca c'est un Swungman, \n appuie dessus pour pouvoir le contrôler", "0.5" },
             //    {"Les capacités de déplacements sont représentées \n par la couleur bleu", "1"},
             //    {"Appuie sur le bouton bleu 3 fois pour le faire \n courire le plus vite et le plus loin possible", "1"},
             //    {"Clique sur la zone de déplacement (bleue) pour contoller \n le déplacement","1" },
                 {"Déplace le Swungman jusqu'ici \n et appuie sur 'Espace' pour lancer le déplacement", "0" } };
 
             tableau_3 = new string[,] {
-                {"Bien, maintenant nous allons voir comment récupérer la balle", "1"},
+                {"Bien, maintenant nous allons voir comment récupérer la balle", "0.5"},
              //   {"Pour récupérer la balle et faire une passe, \n il faut au moins un point de passe", "1"},
              //   {"Met 1 point de maîtrise dans la passe et \n 2 points dans la course", "1"},
                 {"Déplace toi maintenant vers la balle, ('Espace' pour lancer le déplacement)", "0" } };
 
             tableau_4 = new string[,] {
-                {"Nous avons désormais la balle, envoyons-la quelque part", "1" },
+                {"Nous avons désormais la balle, envoyons-la quelque part", "0.5" },
              //   {"Pour envoyer la balle,\n il faut au moins un point de maîtrise de passe", "1"},
              //   {"Met 3 ponts de maîtrise dans la passe pour faire un passe très loin", "1"},
              //   {"Clique sur l'extrémité de la zone rose, puis déplace le point rose \n pour marquer l'emplacement de la passe", "1" },
