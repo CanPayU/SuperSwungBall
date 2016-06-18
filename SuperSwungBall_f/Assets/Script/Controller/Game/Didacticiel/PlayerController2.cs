@@ -6,7 +6,6 @@ using System.Runtime.Serialization.Formatters.Binary;
 using GameKit;
 using GameScene;
 using GameScene.Replay;
-using GameScene.Multi.Replay;
 
 namespace GameScene.Didacticiel
 {
