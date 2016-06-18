@@ -342,13 +342,14 @@ namespace GameScene.Didacticiel
                     Player play_t1 = Settings.Instance.Default_player["epta"];
                     enemyPlayer = Instantiate(player2_prefab, new Vector3(2F, 1F, 2F), Quaternion.identity) as GameObject;
                     play_t1.Team_id = 1;
-                    play_t1.Name += "";
+                    play_t1.Name += "Bot";
                     enemyPlayer.name = play_t1.Name + "-" + play_t1.Team_id;
                     this.EnemyPlayer_Controller = (PlayerController)enemyPlayer.AddComponent(typeof(PlayerController));
                     this.EnemyPlayer_Controller.Player = play_t1;
-                    this.EnemyPlayer_Controller.IsMine = false;
+					this.EnemyPlayer_Controller.IsMine = false;
+					this.EnemyPlayer_Controller.settablePointDeplacement = true;
 
-                    EnemyPlayer_Controller.PointDeplacement = new Vector3(3F, enemyPlayer.transform.position.y, 3F);
+					EnemyPlayer_Controller.PointDeplacement = new Vector3(3F, enemyPlayer.transform.position.y, 3F);
 
                     Color c = MyPlayer_Controller.menucontroller.GetButtonsColor[3]; //couleur de la course
                     MyPlayer_Controller.updateValuesPlayer(c);

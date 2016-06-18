@@ -111,7 +111,7 @@ namespace GameScene
 
 			arrivalPointPasse = new Vector3(0, 0, 0);
 			arrivalPoint = new Vector3(0, 0, 0);
-
+			Debug.Log ("start");
 			myCollider = GetComponent<Collider>();
 			limiteTerrain = GameObject.Find("terrain").transform.FindChild("limites").gameObject;
 
@@ -252,7 +252,7 @@ namespace GameScene
 			anim.Play(animation);
 		}
 
-		public void start_Anim(bool setPoint = true) // debut de l'animation
+		public virtual void start_Anim(bool setPoint = true) // debut de l'animation
 		{
 			myCollisionController.start_anim();
 			flecheController.display(false);
@@ -266,9 +266,13 @@ namespace GameScene
 
 			if (setPoint)
 			{
+				if (!isMine)
+					Debug.Log ("ERROR");
 				arrivalPoint = new Vector3(menuController.Get_Coordsdeplacement[0], transform.position.y, menuController.Get_Coordsdeplacement[1]); // point d'arrivé du déplacement
 				arrivalPointPasse = new Vector3(menuController.Get_CoordsPasse[0], 0.2f, menuController.Get_CoordsPasse[1]); // point d'arrivé de la passe
 			}
+
+			Debug.Log (arrivalPoint + " -- " + setPoint);
 
 			//animation course
 			if (arrivalPoint != transform.position)
