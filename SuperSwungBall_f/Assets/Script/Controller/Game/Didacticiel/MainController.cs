@@ -15,6 +15,7 @@ namespace GameScene.Didacticiel
         }
         public override void OnSucceedEsquive(Player p)
         {
+            Debug.Log("la bonne esquive");
             phase++;
             //InstanciateMessage(p.Name + " réussit son esquive !", ChatController.Chat.EVENT);
         }
@@ -97,9 +98,9 @@ namespace GameScene.Didacticiel
             current_time = 0;
             tableau_1 = new string[,] {
                {"Bienvenue dans le didacticiel", "1"},
-           //     {"Comment jouer ?", "1"},
-           //     {"Le but du jeu est de marquer 3 points", "1"},
-           //     {"Chaque joueur contrôle son équipe", "1"},
+                {"Comment jouer ?", "1"},
+                {"Le but du jeu est de marquer 3 points", "1"},
+                {"Chaque joueur contrôle son équipe", "1"},
                 {"Commençons par voir les contrôles \n d'un Swungman", "0.5"} };
 
             tableau_2 = new string[,] {
@@ -259,30 +260,41 @@ namespace GameScene.Didacticiel
         {
             float temps = float.Parse(tableau[place, 1]);
 
-            if (place == 0) // premier passage ? -> changer direct le texte
-                screentext.text = message(tableau);
+            if (place == 0 && current_time == 0) // premier passage ? -> changer direct le texte
+            {
+                Debug.Log("je rentre dans la fontion pour écrire le premier texte");
+                message(tableau);
+                Debug.Log("j'ai écrit le premier message");
+            }
 
             if (temps == 0) // message qui reste à l'écran ? laisser le texte à l'écran et passer à la phase suivante
             {
-                screentext.text = message(tableau);
+                Debug.Log("je rentre dans la fonction pour écrire un message permanent");
+                message(tableau);
                 phase++;
                 place = 0;
                 current_time = 0;
+                Debug.Log("écriture du message permanent réussie");
             }
             else if (current_time < temps) // temps pas atteint ? -> continuer à afficher
                 current_time += Time.deltaTime;
             else // temps atteint ? -> réinitialiser le temps et voir si on continue de lire le tableau
             {
+                Debug.Log("le temps est atteint");
                 current_time = 0;
-                if (tableau.Length == place + 1) // dernier passage-> réinitialiser le texte et passer à la phase suivante
+                Debug.Log("tableau length : " + tableau.GetLongLength(0) + " et place : " + place);
+                if (tableau.GetLongLength(0) == place + 1) // dernier passage-> réinitialiser le texte et passer à la phase suivante
                 {
+                    Debug.Log("je suis au dernier passage, je vais passer à la phase suivante");
                     screentext.text = "";
                     phase++;
                     place = 0;
                 }
                 else // sinon passer au message suivant
                 {
+                    Debug.Log("je ne suis pas au dernier passage, je vais donc lire la phrase suivante");
                     place += 1;
+                    message(tableau);
                 }
             }
         }
