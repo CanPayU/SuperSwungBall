@@ -4,51 +4,49 @@ using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters.Binary;
 
 using GameKit;
+using GameScene;
 using GameScene.Replay;
-using GameScene.Multi.Replay;
 
-namespace GameScene
+namespace GameScene.Didacticiel
 {
-    public class PlayerController : GameBehavior
+    public class PlayerController2 : GameBehavior
     {
         [SerializeField]
-        private GameObject Menu;
+        protected GameObject Menu;
         [SerializeField]
-        private int team_id;
+        protected int team_id;
 
-        private Player player; //gere les stats
-        private bool isMine; // je peux le controller ?
+        protected Player player; //gere les stats
+        protected bool isMine; // je peux le controller ?
 
         // Event Click
-        private bool menuDisplayed;
-        private RaycastHit hit;
-        private Renderer selection; //cercle de sélection lors du passage de la souris
-        InfoJoueurController infoJoueur; // Panel info joueur
+        protected bool menuDisplayed;
+        protected RaycastHit hit;
+        protected Renderer selection; //cercle de sélection lors du passage de la souris
+        protected InfoJoueurController infoJoueur; // Panel info joueur
 
         //Evite le "GetComponent<>"
-        private Collider myCollider;
-        private MenuController menuController;
-        private CollisionController myCollisionController;
+        protected Collider myCollider;
+        protected MenuController menuController;
+        protected CollisionController myCollisionController;
 
         //phaseAnimation
-        private bool phaseAnimation;
-        private float speed = 0;
-        private Vector3 arrivalPoint;
-        private bool movement;
-        private float pause = 0; //temps de pause du deplacement (en secondes), quand le player se fait plaquer par exemple
-        private Animator anim; //évite le getComponent - anim.Play("animation_name") pour jouer une animation
-        private string animationDeplacement; //nom de l'animation de déplacement du player. Varie en fonction de la vitesse
+        protected bool phaseAnimation;
+        protected float speed = 0;
+        protected Vector3 arrivalPoint;
+        protected bool movement;
+        protected float pause = 0; //temps de pause du deplacement (en secondes), quand le player se fait plaquer par exemple
+        protected Animator anim; //évite le getComponent - anim.Play("animation_name") pour jouer une animation
+        protected string animationDeplacement; //nom de l'animation de déplacement du player. Varie en fonction de la vitesse
 
         //Pointeur
-        private bool mouseState = false; //clic souris enfoncée
-        private FlecheController flecheController; //fleche de déplacement (suit le pointeur de deplacement)
-        private GameObject limiteTerrain; //limites autours du terrain
+        protected bool mouseState = false; //clic souris enfoncée
+        protected FlecheController flecheController; //fleche de déplacement (suit le pointeur de deplacement)
+        protected GameObject limiteTerrain; //limites autours du terrain
 
         //passe
-        private Vector3 arrivalPointPasse;
+        protected Vector3 arrivalPointPasse;
 
-        //Network
-        private PhotonView view;
 
 
         #region Getters / Setters
@@ -85,15 +83,22 @@ namespace GameScene
             }
             set { arrivalPoint = value; }
         }
+        public MenuController menucontroller
+        {
+            get { return menuController; }
+        }
+
         #endregion
 
-        public PlayerController()
+        public PlayerController2()
         {
             this.eventType = GameKit.EventType.All;
         }
 
-        void Start()
+        protected virtual void Start()
         {
+            this.Menu = Resources.Load("Prefabs/menu") as GameObject;
+
             //initialisation menu
             Menu = Instantiate(Menu, new Vector3(), Quaternion.Euler(0, -90, 0)) as GameObject;
             Menu.transform.parent = transform;
@@ -105,7 +110,6 @@ namespace GameScene
             infoJoueur = GameObject.Find("Canvas").transform.FindChild("InfoJoueur").GetComponent<InfoJoueurController>();
             flecheController = transform.FindChild("fleche").GetComponent<FlecheController>();
 
-            view = GetComponent<PhotonView>();
 
             // A set dans le instanciate (Main)
             //player = new Player(5, 5, 15, 5, gameObject.name, team_id); 
@@ -122,12 +126,8 @@ namespace GameScene
             phaseAnimation = false;
             movement = false;
         }
-        void Update()
+        protected virtual void Update()
         {
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                Caller.SuccessAttack(this.player);
-            }
             if (!phaseAnimation)
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -226,7 +226,7 @@ namespace GameScene
             selection.enabled = false;
         }
 
-        public void updateValuesPlayer(Color c) //Activation clic boutton
+        public virtual void updateValuesPlayer(Color c) //Activation clic boutton
         {
             player.updateValues(convertColorToValue(c)); // Change les Stats du player 
             flecheController.changeColor(c); // change les couleurs de la flèche de déplacement
@@ -328,12 +328,6 @@ namespace GameScene
 
         public override void OnStartAnimation()
         {
-            PlayerAction action = new PlayerAction(0, this.PointDeplacement, this.PointPasse, this.Player.Button_Values);
-            ReplayController controller = GameObject.Find("Main").GetComponent<ReplayController>();
-            controller.setPlayerAction(this.Player, action);
-
-            //			MainController controllerMain = GameObject.Find ("Main").GetComponent<GameScene.Replay.MainController> ();
-            //			GetMyParam(controllerMain.getPlayerAction (this.player));
             start_Anim();
         }
         public override void OnStartReflexion()
@@ -352,71 +346,5 @@ namespace GameScene
             start_Anim(false);
         }
         // --
-
-
-
-        // -- Network
-        public void SyncValues()
-        {
-            if (!isMine)
-                return;
-
-            var player_values = new Dictionary<string, object>();
-            player_values.Add("PointDep", serialize_vector3(this.PointDeplacement));
-            player_values.Add("PointPasse", serialize_vector3(this.PointPasse));
-            player_values.Add("BtnValues", this.Player.Button_Values);
-
-            view.RPC("GetMyParam", PhotonTargets.Others, view.viewID, (byte[])ObjectToByteArray(player_values));
-            start_Anim(false);
-        }
-
-        [PunRPC]
-        private void GetMyParam(int viewID, byte[] param)
-        {
-            if (viewID != view.viewID)
-                return;
-            Dictionary<string, object> values = (Dictionary<string, object>)ByteToObject(param);
-            this.PointDeplacement = deserialize_vector3((float[])values["PointDep"]);
-            this.PointPasse = deserialize_vector3((float[])(values["PointPasse"]));
-            this.Player.Button_Values = (List<string>)(values["BtnValues"]);
-            start_Anim(false);
-        }
-
-        #region Serialization
-        private byte[] ObjectToByteArray(object obj)
-        {
-            if (obj == null)
-                return null;
-            BinaryFormatter bf = new BinaryFormatter();
-            using (MemoryStream ms = new MemoryStream())
-            {
-                bf.Serialize(ms, obj);
-                return ms.ToArray();
-            }
-        }
-        private object ByteToObject(byte[] arrBytes)
-        {
-            MemoryStream memStream = new MemoryStream();
-            BinaryFormatter binForm = new BinaryFormatter();
-            memStream.Write(arrBytes, 0, arrBytes.Length);
-            memStream.Seek(0, SeekOrigin.Begin);
-            object obj = (object)binForm.Deserialize(memStream);
-
-            return obj;
-        }
-        private float[] serialize_vector3(Vector3 v)
-        {
-            float[] result = new float[3];
-            result[0] = v.x;
-            result[1] = v.y;
-            result[2] = v.z;
-            return result;
-        }
-        private Vector3 deserialize_vector3(float[] values)
-        {
-            return new Vector3(values[0], values[1], values[2]);
-        }
-        #endregion
-
     }
 }

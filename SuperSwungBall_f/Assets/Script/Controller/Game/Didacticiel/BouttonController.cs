@@ -40,9 +40,9 @@ namespace GameScene.Didacticiel
                 {
                     if (hit.collider == myCollider) // Collision clic
                     {
-                        // normalement c'est géré   myMenu.update_Color(myColor); // Change la couleur des valeurs
-                        Debug.Log("ButtonController du didact");
-                        GetComponent<Transform>().parent.parent.gameObject.GetComponent<BasicPlayerController>().updateValuesPlayer(myColor);
+                        myMenu.update_Color(myColor); // Change la couleur des valeurs
+
+                        GetComponent<Transform>().parent.parent.gameObject.GetComponent<PlayerController>().updateValuesPlayer(myColor);
                         /*
 						if (PhotonNetwork.inRoom) {
 							GetComponent<Transform> ().parent.parent.gameObject.GetComponent<PlayerController> ().updateValuesPlayer (myColor);

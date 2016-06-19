@@ -40,10 +40,9 @@ namespace GameScene
                 {
                     if (hit.collider == myCollider) // Collision clic
                     {
-                        // myMenu.update_Color(myColor); 
-                        // Change la couleur des valeurs -> est maintenant directement géré depuis le updateValuesPlayer du playerController
+                        myMenu.update_Color(myColor); // Change la couleur des valeurs
 
-                        GetComponent<Transform>().parent.parent.gameObject.GetComponent<BasicPlayerController>().updateValuesPlayer(myColor);
+						GetComponent<Transform>().parent.parent.gameObject.GetComponent<BasicPlayerController>().updateValuesPlayer(myColor);
                         /*
 						if (PhotonNetwork.inRoom) {
 							GetComponent<Transform> ().parent.parent.gameObject.GetComponent<PlayerController> ().updateValuesPlayer (myColor);
