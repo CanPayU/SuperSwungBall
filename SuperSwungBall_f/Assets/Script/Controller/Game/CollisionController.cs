@@ -5,11 +5,11 @@ using GameKit;
 
 namespace GameScene
 {
-	public class CollisionController : GameBehavior
+    public class CollisionController : GameBehavior
     {
-		ChatController chatController;
+        ChatController chatController;
         Player player;
-		BasicPlayerController playerController; // évite le GetComponent<>()
+        BasicPlayerController playerController; // évite le GetComponent<>()
         List<Collider> playerMet; // joueurs rencontré (uniquement ceux combattus) lors du tour. Un player de peut pas tacler 2 fois le même adversaire en 1 seul tour.
         bool goal;
         int premiereFrames;
@@ -17,9 +17,9 @@ namespace GameScene
 
         void Start()
         {
-			if (PhotonNetwork.inRoom)
-				chatController = GameObject.Find ("Main").GetComponent<ChatController> ();
-			playerController = GetComponent<BasicPlayerController>();
+            if (PhotonNetwork.inRoom)
+                chatController = GameObject.Find("Main").GetComponent<ChatController>();
+            playerController = GetComponent<BasicPlayerController>();
             player = playerController.Player;
             premiereFrames = 5;
             goal = false;
@@ -28,7 +28,7 @@ namespace GameScene
 
         public void OnTriggerStay(Collider other)
         {
-			if (playerController != null && playerController.PhaseAnimation)
+            if (playerController != null && playerController.PhaseAnimation)
             {
                 if (premiereFrames > 0)
                 {
@@ -47,7 +47,7 @@ namespace GameScene
         }
         public void OnTriggerEnter(Collider other)
         {
-			if (playerController != null && playerController.PhaseAnimation)
+            if (playerController != null && playerController.PhaseAnimation)
             {
                 interception(other);
                 if (other.tag == "Player")
@@ -77,12 +77,12 @@ namespace GameScene
                 GoalController g_controller = goalCollider.GetComponent<GoalController>();
                 g_controller.goal();
                 goal = true;
-				Caller.Goal (g_controller);
+                Caller.Goal(g_controller);
             }
         }
         private void combat(Collider adversaireCollider)
         {
-			Player adversaire = adversaireCollider.GetComponent<BasicPlayerController>().Player;
+            Player adversaire = adversaireCollider.GetComponent<BasicPlayerController>().Player;
             // collision adversaire et déclenchement combat
             if (adversaire.Team_id != player.Team_id && (adversaire.Tacle != 0 || player.Tacle != 0) && !playerMet.Contains(adversaireCollider))
             {
@@ -91,58 +91,55 @@ namespace GameScene
                 transform.FindChild("perso").transform.LookAt(new Vector3(adversaireCollider.transform.position.x, transform.FindChild("perso").position.y, adversaireCollider.transform.position.z));
 
                 float attaqueAdverse = Mathf.Max(adversaire.Tacle, adversaire.Esquive);
-                if (player.Tacle > player.Esquive)
+                float attaqueAliee = Mathf.Max(player.Tacle, player.Esquive);
+
+                if (attaqueAliee > attaqueAdverse)// détermine le gagnant de l'affrontement et l'affiche dans le chat
                 {
-                    if (player.Tacle > attaqueAdverse)
-                    {
-						//Attaque Réussit
-                        Debug.Log(name + "réussit son tacle!");
-                        playerController.Animation("Attaque Reussit", 2f);
-                        adversaireCollider.gameObject.GetComponent<CollisionController>().echec("Esquive");
-						Caller.SuccessAttack (player);
-					} else {
-						Caller.FailedAttack (player);
-					}
+                    playerController.Animation("Reussite", 1f);
+                    if (player.Tacle > player.Esquive)
+                        Caller.SuccessAttack(player);
+                    else
+                        Caller.SuccessEsquive(player);
                 }
-                else
+                else if (attaqueAliee < attaqueAdverse)
                 {
-					if (player.Esquive > attaqueAdverse) {
-						//Esquive Réussit
-						Debug.Log (name + "réussit son esquive!");
-						playerController.Animation ("Esquive Reussit", 0.7f);
-						adversaireCollider.gameObject.GetComponent<CollisionController> ().echec ("Attaque");
-						Caller.SuccessEsquive (player);
-					} else {
-						Caller.FailedEsquive (player);
-					}
+                    echec(attaqueAdverse > attaqueAliee * 2);
+                    if (player.Tacle > player.Esquive)
+                        Caller.FailedAttack(player);
+                    else
+                        Caller.FailedEsquive(player);
+                }
+                else // en cas d'égalité, les deux joueurs perdent le combat
+                {
+                    echec(attaqueAdverse > attaqueAliee * 2);
                 }
             }
         }
 
-        public void echec(string animation)
+        public void echec(bool critique)
         {
             bool porteurDeBall = transform.FindChild("perso").transform.FindChild("Ball") != null;
-            playerController.Animation(animation + " Echec", 4);
-            Debug.Log(name + " rate son" + animation);
+            if (critique)
+                playerController.Animation("Echec critique", 60f);
+            else
+                playerController.Animation("Echec", 4f);
             if (porteurDeBall)
-			{
-				if (PhotonNetwork.inRoom)
-					chatController.InstanciateMessage (player.Name + " perd la balle !", ChatController.Chat.EVENT);
+            {
+                if (PhotonNetwork.inRoom)
+                    chatController.InstanciateMessage(player.Name + " perd la balle !", ChatController.Chat.EVENT);
+                transform.FindChild("perso").FindChild("Ball").GetComponent<BallController>().LacheBalle();
                 Debug.Log(name + "perd la balle!");
-                
-				GameObject ball = transform.FindChild("perso").transform.FindChild("Ball").gameObject;
-                ball.transform.localPosition = new Vector3(3.5f, 1.5f, -10f);
-                ball.transform.parent = null;
-                ball.GetComponent<Collider>().enabled = true;
             }
         }
 
-		public override void OnFailedAttack(Player p){
-			// ... Mettre echec ici
-		}
-		public override void OnFailedEsquive(Player p){
-			// ... Mettre echec ici
-		}
+        public override void OnFailedAttack(Player p)
+        {
+            // ... Mettre echec ici
+        }
+        public override void OnFailedEsquive(Player p)
+        {
+            // ... Mettre echec ici
+        }
 
         public void start_anim()
         {

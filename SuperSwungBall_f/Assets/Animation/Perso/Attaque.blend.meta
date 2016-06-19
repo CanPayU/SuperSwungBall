@@ -1,12 +1,12 @@
 fileFormatVersion: 2
-guid: c947059a1fa5aa0439d20d6417cff683
-timeCreated: 1462118307
+guid: af2ca592b1bdf8e4d97f695d56231a2f
+timeCreated: 1466349491
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: //RootNode
-    100002: armature
+    100000: armature
+    100002: //RootNode
     100004: avantBras_D
     100006: avantBras_G
     100008: bras_D
@@ -23,8 +23,8 @@ ModelImporter:
     100030: pied_G
     100032: tete
     100034: ventre
-    400000: //RootNode
-    400002: armature
+    400000: armature
+    400002: //RootNode
     400004: avantBras_D
     400006: avantBras_G
     400008: bras_D

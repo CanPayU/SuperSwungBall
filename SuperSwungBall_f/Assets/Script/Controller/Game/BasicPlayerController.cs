@@ -297,6 +297,7 @@ namespace GameScene
 
 			//animation repos
 			anim.Play("Repos");
+            myCollider.enabled = true;
 			movement = false;
 		}
 

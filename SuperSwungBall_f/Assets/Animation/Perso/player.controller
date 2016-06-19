@@ -96,13 +96,13 @@ AnimatorState:
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
---- !u!1102 &110235172
+--- !u!1102 &110233820
 AnimatorState:
   serializedVersion: 5
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Attaque Reussit
+  m_Name: Echec critique
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -114,7 +114,7 @@ AnimatorState:
   m_SpeedParameterActive: 0
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: cfc76602717fffe4eb9ac9250e879d95, type: 3}
+  m_Motion: {fileID: 7400004, guid: 991c141a22f8a1f4c8ef01585bffbbd3, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -188,13 +188,13 @@ AnimatorState:
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
---- !u!1102 &110267122
+--- !u!1102 &110280962
 AnimatorState:
   serializedVersion: 5
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Esquive Echec
+  m_Name: Echec
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -206,18 +206,18 @@ AnimatorState:
   m_SpeedParameterActive: 0
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 37b40f7a32a35544f833121b1300a656, type: 3}
+  m_Motion: {fileID: 7400002, guid: 991c141a22f8a1f4c8ef01585bffbbd3, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
---- !u!1102 &110268900
+--- !u!1102 &110291536
 AnimatorState:
   serializedVersion: 5
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Esquive Reussit
+  m_Name: Reussite
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -229,30 +229,7 @@ AnimatorState:
   m_SpeedParameterActive: 0
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: c947059a1fa5aa0439d20d6417cff683, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
---- !u!1102 &110287360
-AnimatorState:
-  serializedVersion: 5
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: Attaque Echec
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: fbfd2cf1f1917fe4ab06524f7db45f3d, type: 3}
+  m_Motion: {fileID: 7400002, guid: af2ca592b1bdf8e4d97f695d56231a2f, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -272,26 +249,23 @@ AnimatorStateMachine:
     m_State: {fileID: 110219458}
     m_Position: {x: 432, y: 0, z: 0}
   - serializedVersion: 1
-    m_State: {fileID: 110267122}
-    m_Position: {x: 864, y: 144, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 110235172}
-    m_Position: {x: 864, y: 0, z: 0}
-  - serializedVersion: 1
     m_State: {fileID: 110248376}
     m_Position: {x: 216, y: 0, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 110268900}
-    m_Position: {x: 864, y: 96, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 110214852}
     m_Position: {x: 648, y: 48, z: 0}
   - serializedVersion: 1
-    m_State: {fileID: 110287360}
-    m_Position: {x: 864, y: 48, z: 0}
-  - serializedVersion: 1
     m_State: {fileID: 110235604}
     m_Position: {x: 432, y: 48, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 110291536}
+    m_Position: {x: 864, y: 0, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 110280962}
+    m_Position: {x: 864, y: 48, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 110233820}
+    m_Position: {x: 864, y: 96, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []

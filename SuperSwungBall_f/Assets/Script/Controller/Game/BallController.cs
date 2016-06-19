@@ -10,11 +10,11 @@ namespace GameScene
         private Vector3 arrivalPoint; // point d'arrivée de la passe
         private bool deplacement; // Balle en l'air
 
-		private KeyCode keyPasse; // Touche utilisé pour la passe
+        private KeyCode keyPasse; // Touche utilisé pour la passe
 
         void Start()
         {
-			this.keyPasse = Settings.Instance.Keyboard [KeyboardAction.Passe];
+            this.keyPasse = Settings.Instance.Keyboard[KeyboardAction.Passe];
             deplacement = false;
             if (transform.parent != null)
             {
@@ -27,7 +27,7 @@ namespace GameScene
         {
             if (!deplacement)
             {
-				if (Input.GetKeyDown(keyPasse) && transform.parent != null)
+                if (Input.GetKeyDown(keyPasse) && transform.parent != null)
                 {
                     TriggerPasse();
                 }
@@ -40,7 +40,8 @@ namespace GameScene
                 }
                 if (deplacement)
                 {
-                    transform.position = Vector3.MoveTowards(transform.position, arrivalPoint, Time.deltaTime * 20);// mouvement de la passe
+                    Debug.Log("Deplacement");
+                    transform.position = Vector3.MoveTowards(transform.position, arrivalPoint, Time.deltaTime * 15f);// mouvement de la passe
                 }
             }
 
@@ -76,9 +77,19 @@ namespace GameScene
 
                 // animation passe
                 passeur.transform.FindChild("perso").LookAt(new Vector3(arrivalPoint.x, passeur.transform.FindChild("perso").position.y, arrivalPoint.z));
-                passeur.transform.FindChild("perso").GetComponent<Animator>().Play("Passe");
-                passeur.GetComponent<BasicPlayerController>().Pause = 0.7f;
+                passeur.GetComponent<BasicPlayerController>().Animation("Passe", 0.7f);
             }
+        }
+        public void LacheBalle()
+        {
+            deplacement = true;
+            GetComponent<Collider>().enabled = true;
+            passeur = transform.parent.parent.gameObject;
+            transform.localPosition = new Vector3(3.5f, 1.5f, -10f);
+            arrivalPoint = transform.position;
+            transform.localPosition = new Vector3(1.3f, 3, 0);
+            transform.parent = null; // Detache la balle du joueur
+            Debug.Log("perd la balle");
         }
     }
 }
