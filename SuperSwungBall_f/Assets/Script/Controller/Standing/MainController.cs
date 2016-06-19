@@ -28,6 +28,11 @@ namespace Standing
 			SaveLoad.load_settings();
 			this.authenticate = SaveLoad.load_user();
 			TranslateKit.Language.LoadLanguage (Settings.Instance.SelectedLanguage);
+
+//			HTTP.WinGame(3, "antoine", 1, (success)=>{
+//				Debug.Log(success);
+//			});
+
             if (this.authenticate)
             {
                 HTTP.SyncUser((success) =>
