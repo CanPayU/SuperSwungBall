@@ -228,6 +228,7 @@ namespace GameScene
 
         public void updateValuesPlayer(Color c) //Activation clic boutton
         {
+            menuController.update_Color(c); //change la couleur des trois bouttons "valeur"
             player.updateValues(convertColorToValue(c)); // Change les Stats du player 
             flecheController.changeColor(c); // change les couleurs de la flèche de déplacement
             menuController.update_zoneDeplacement(player.ZoneDeplacement, player.ZonePasse); // Change la tailles des zones

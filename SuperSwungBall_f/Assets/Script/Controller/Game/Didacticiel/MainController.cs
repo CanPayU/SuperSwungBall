@@ -261,38 +261,28 @@ namespace GameScene.Didacticiel
             float temps = float.Parse(tableau[place, 1]);
 
             if (place == 0 && current_time == 0) // premier passage ? -> changer direct le texte
-            {
-                Debug.Log("je rentre dans la fontion pour écrire le premier texte");
                 message(tableau);
-                Debug.Log("j'ai écrit le premier message");
-            }
 
             if (temps == 0) // message qui reste à l'écran ? laisser le texte à l'écran et passer à la phase suivante
             {
-                Debug.Log("je rentre dans la fonction pour écrire un message permanent");
                 message(tableau);
                 phase++;
                 place = 0;
                 current_time = 0;
-                Debug.Log("écriture du message permanent réussie");
             }
             else if (current_time < temps) // temps pas atteint ? -> continuer à afficher
                 current_time += Time.deltaTime;
             else // temps atteint ? -> réinitialiser le temps et voir si on continue de lire le tableau
             {
-                Debug.Log("le temps est atteint");
                 current_time = 0;
-                Debug.Log("tableau length : " + tableau.GetLongLength(0) + " et place : " + place);
                 if (tableau.GetLongLength(0) == place + 1) // dernier passage-> réinitialiser le texte et passer à la phase suivante
                 {
-                    Debug.Log("je suis au dernier passage, je vais passer à la phase suivante");
                     screentext.text = "";
                     phase++;
                     place = 0;
                 }
                 else // sinon passer au message suivant
                 {
-                    Debug.Log("je ne suis pas au dernier passage, je vais donc lire la phrase suivante");
                     place += 1;
                     message(tableau);
                 }
@@ -324,10 +314,8 @@ namespace GameScene.Didacticiel
             }
             if (objet.name == "Ball") //collision avec la balle ?
             {
-                Debug.Log("balle");
                 if (phase == 11) //lancer la balle première fois
                 {
-                    Debug.Log("phase11");
                     end_time();
 
                     this.transform.position = new Vector3(0, 0, 5);
@@ -346,19 +334,22 @@ namespace GameScene.Didacticiel
                     enemyPlayer.name = play_t1.Name + "-" + play_t1.Team_id;
                     this.EnemyPlayer_Controller = (PlayerController)enemyPlayer.AddComponent(typeof(PlayerController));
                     this.EnemyPlayer_Controller.Player = play_t1;
-					this.EnemyPlayer_Controller.IsMine = false;
-					this.EnemyPlayer_Controller.settablePointDeplacement = true;
+                    this.EnemyPlayer_Controller.IsMine = false;
+                    this.EnemyPlayer_Controller.settablePointDeplacement = true;
 
-					EnemyPlayer_Controller.PointDeplacement = new Vector3(3F, enemyPlayer.transform.position.y, 3F);
+                    EnemyPlayer_Controller.PointDeplacement = new Vector3(
+                        enemyPlayer.transform.position.x,
+                        enemyPlayer.transform.position.y,
+                        enemyPlayer.transform.position.z);
 
                     Color c = MyPlayer_Controller.menucontroller.GetButtonsColor[3]; //couleur de la course
                     MyPlayer_Controller.updateValuesPlayer(c);
                     MyPlayer_Controller.updateValuesPlayer(c);
                     MyPlayer_Controller.updateValuesPlayer(c);
 
-                    MyPlayer_Controller.menucontroller.update_Color(c);
-                    MyPlayer_Controller.menucontroller.update_Color(c);
-                    MyPlayer_Controller.menucontroller.update_Color(c);
+                    //MyPlayer_Controller.menucontroller.update_Color(c);
+                    //MyPlayer_Controller.menucontroller.update_Color(c);
+                    //MyPlayer_Controller.menucontroller.update_Color(c);
 
                     phase++;
                 }
