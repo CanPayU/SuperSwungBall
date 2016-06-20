@@ -3,7 +3,7 @@ using System.Collections;
 using GameScene.Solo;
 using GameScene.Multi;
 
-namespace GameScene
+namespace GameScene.Didacticiel
 {
     public class ButtonController : MonoBehaviour
     {
@@ -40,9 +40,8 @@ namespace GameScene
                 {
                     if (hit.collider == myCollider) // Collision clic
                     {
-                        // myMenu.update_Color(myColor); 
-                        // Change la couleur des valeurs -> est maintenant directement géré depuis le updateValuesPlayer du playerController
-
+                        // normalement c'est géré   myMenu.update_Color(myColor); // Change la couleur des valeurs
+                        Debug.Log("ButtonController du didact");
                         GetComponent<Transform>().parent.parent.gameObject.GetComponent<BasicPlayerController>().updateValuesPlayer(myColor);
                         /*
 						if (PhotonNetwork.inRoom) {

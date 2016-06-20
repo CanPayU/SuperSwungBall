@@ -15,14 +15,9 @@ namespace GameScene.Didacticiel
         }
         public override void OnSucceedEsquive(Player p)
         {
+            Debug.Log("la bonne esquive");
             phase++;
-            BouttonEsquive.SetActive(false);
-            BouttonTacle.SetActive(true);
             //InstanciateMessage(p.Name + " réussit son esquive !", ChatController.Chat.EVENT);
-        }
-        public override void OnSucceedAttack(Player pl)
-        {
-            phase++;
         }
 
         [SerializeField]
@@ -31,7 +26,7 @@ namespace GameScene.Didacticiel
         private GameObject player1_prefab;
         private GameObject player2_prefab;
 
-        GameObject myPlayer; //le player
+        GameObject play0; //le player
         GameObject BouttonEsquive;
         GameObject BouttonTacle;
         GameObject BouttonPasse;
@@ -44,8 +39,8 @@ namespace GameScene.Didacticiel
         GameObject ball;
         Renderer ballRenderer; //renderer de la balle 
 
-        //CameraController cameraController;
-        //InfoJoueurController infoJoueur;
+        CameraController cameraController;
+        InfoJoueurController infoJoueur;
         Collider thisCollider; //collider de ce game object
         Renderer[] flechesRenderer = new Renderer[4]; //renderer des 4 flèches de ce game object
         Renderer RondBlanc; //rond blanc sur ce game object
@@ -92,7 +87,7 @@ namespace GameScene.Didacticiel
 
 
             // --
-            //cameraController = GameObject.Find("Main Camera").GetComponent<CameraController>();
+            cameraController = GameObject.Find("Main Camera").GetComponent<CameraController>();
             time = new Timer(10.0F, end_time);
             // --
 
@@ -101,56 +96,37 @@ namespace GameScene.Didacticiel
             phase = 1;
             place = 0;
             current_time = 0;
-            //mettre "0" en temps pour que le message reste à l'écran
-            tableau_1 = new string[,]
-            {
-               {"Bienvenue dans le didacticiel", "1" },
-                //{"Comment jouer ?", "1" },
-                //{"Le but du jeu est de marquer 3 points", "1" },
-                //{"Chaque joueur contrôle son équipe", "1" },
-                //{"Commençons par voir les contrôles \n d'un Swungman", "0.5" } 
-            };
+            tableau_1 = new string[,] {
+               {"Bienvenue dans le didacticiel", "1"},
+                {"Comment jouer ?", "1"},
+                {"Le but du jeu est de marquer 3 points", "1"},
+                {"Chaque joueur contrôle son équipe", "1"},
+                {"Commençons par voir les contrôles \n d'un Swungman", "0.5"} };
 
-            tableau_2 = new string[,]
-            {
-                //{"Ca c'est un Swungman, \n appuie dessus pour pouvoir le contrôler", "0.5" },
-                //{"Les capacités de déplacements sont représentées \n par la couleur bleu", "1" },
-                //{"Appuie sur le bouton bleu 3 fois pour le faire \n courire le plus vite et le plus loin possible", "1" },
-                //{"Clique sur la zone de déplacement (bleue) pour contoller \n le déplacement","1" },
-                {"Déplace le Swungman jusqu'ici \n et appuie sur 'Espace' pour lancer le déplacement", "0" }
-            };
+            tableau_2 = new string[,] {
+                {"Ca c'est un Swungman, \n appuie dessus pour pouvoir le contrôler", "0.5" },
+            //    {"Les capacités de déplacements sont représentées \n par la couleur bleu", "1"},
+            //    {"Appuie sur le bouton bleu 3 fois pour le faire \n courire le plus vite et le plus loin possible", "1"},
+            //    {"Clique sur la zone de déplacement (bleue) pour contoller \n le déplacement","1" },
+                {"Déplace le Swungman jusqu'ici \n et appuie sur 'Espace' pour lancer le déplacement", "0" } };
 
-            tableau_3 = new string[,]
-            {
-                //{"Bien, maintenant nous allons voir comment récupérer la balle", "0.5"} ,
-                //{"Pour récupérer la balle et faire une passe, \n il faut au moins un point de passe", "1" },
-                //{"Met 1 point de maîtrise dans la passe et \n 2 points dans la course", "1" },
-                {"Déplace toi maintenant vers la balle, ('Espace' pour lancer le déplacement)", "0" } }
-            ;
+            tableau_3 = new string[,] {
+                {"Bien, maintenant nous allons voir comment récupérer la balle", "0.5"},
+             //   {"Pour récupérer la balle et faire une passe, \n il faut au moins un point de passe", "1"},
+             //   {"Met 1 point de maîtrise dans la passe et \n 2 points dans la course", "1"},
+                {"Déplace toi maintenant vers la balle, ('Espace' pour lancer le déplacement)", "0" } };
 
-            tableau_4 = new string[,]
-            {
-                //{"Nous avons désormais la balle, envoyons-la quelque part", "0.5" },
-                //{"Pour envoyer la balle,\n il faut au moins un point de maîtrise de passe", "1" },
-                //{"Met 3 ponts de maîtrise dans la passe pour faire un passe très loin", "1" },
-                //{"Clique sur l'extrémité de la zone rose, puis déplace le point rose \n pour marquer l'emplacement de la passe", "1" },
-                {"Tu peux désormais lancer l'action (touche 'espace') \n et appuyer sur 'a' pour faire la passe", "0" }
-            };
+            tableau_4 = new string[,] {
+                {"Nous avons désormais la balle, envoyons-la quelque part", "0.5" },
+             //   {"Pour envoyer la balle,\n il faut au moins un point de maîtrise de passe", "1"},
+             //   {"Met 3 ponts de maîtrise dans la passe pour faire un passe très loin", "1"},
+             //   {"Clique sur l'extrémité de la zone rose, puis déplace le point rose \n pour marquer l'emplacement de la passe", "1" },
+                {"Tu peux désormais lancer l'action (touche 'espace') \n et appuyer sur 'a' pour faire la passe", "0" } };
 
-            tableau_5 = new string[,]
-            {
-                //{"Quelle passe ! Mais attention à toi, \n un ennemi arrive","0.5" },
-                //{"Il a sûrement envie de te tacler, \n même si tu n'as pas la balle","1" },
-                {"Met donc un maximum de points dans ta capacité d'esquive \n et fonce vers lui ('espace' pour lancer l'action)","0" }
-            };
-
-            tableau_6 = new string[,]
-            {
-                //{"En voilà un belle esquive ! \n Rappel toi que l'esquive est une compétence à ne pas sous-estimer","0.5" },
-                //{"Mais désormais ça va être à toi d'attaquer \n car l'ennemi a la balle et fonc pour marquer !","0.5" },
-                {"Met un maximum de points dans le tacle \n et fonce vers lui ('espace' pour lancer l'action)","0" }
-            };
-
+            tableau_5 = new string[,] {
+                {"Quelle passe ! Mais attention à toi, \n un ennemi arrive","1"},
+              //  {"Il a sûrement envie de te tacler, \n même si tu n'as pas la balle","1" },
+                {"Met donc un maximum de point dans ta capacité d'esquive \n et fonce vers lui ('espace' pour lancer l'action)","0" } };
             // --
         }
         // Update is called once per frame
@@ -190,13 +166,6 @@ namespace GameScene.Didacticiel
                 case 12:
                     phase12(); //affichage cinquième tableau
                     break;
-                //13 = déplacement joueur adverse + esquive
-                case 14:
-                    phase14();
-                    break;
-                case 15:
-                    phase15();
-                    break;
             }
             time.update();
             if (Input.GetKeyDown(KeyCode.Space) && !annim_started)
@@ -212,12 +181,13 @@ namespace GameScene.Didacticiel
         }
         void phase2()
         {
+            Debug.Log("phase 2 entrée");
             Player play_t0 = Settings.Instance.Default_player["gpdn"];
-            myPlayer = Instantiate(player1_prefab, new Vector3(1F, 1F, 0F), Quaternion.identity) as GameObject;
+            play0 = Instantiate(player1_prefab, new Vector3(1F, 1F, 0F), Quaternion.identity) as GameObject;
             play_t0.Team_id = 0;
             play_t0.Name += "";
-            myPlayer.name = play_t0.Name + "-" + play_t0.Team_id;
-            MyPlayer_Controller = (PlayerController)myPlayer.AddComponent(typeof(PlayerController));
+            play0.name = play_t0.Name + "-" + play_t0.Team_id;
+            MyPlayer_Controller = (PlayerController)play0.AddComponent(typeof(PlayerController));
             MyPlayer_Controller.Player = play_t0;
             MyPlayer_Controller.IsMine = true;
 
@@ -230,10 +200,10 @@ namespace GameScene.Didacticiel
         }
         void phase4()
         {
-            BouttonEsquive = myPlayer.transform.FindChild("menu(Clone)").FindChild("boutton1").gameObject;
-            BouttonTacle = myPlayer.transform.FindChild("menu(Clone)").FindChild("boutton2").gameObject;
-            BouttonPasse = myPlayer.transform.FindChild("menu(Clone)").FindChild("boutton3").gameObject;
-            BouttonCourse = myPlayer.transform.FindChild("menu(Clone)").FindChild("boutton4").gameObject;
+            BouttonEsquive = play0.transform.FindChild("menu(Clone)").FindChild("boutton1").gameObject;
+            BouttonTacle = play0.transform.FindChild("menu(Clone)").FindChild("boutton2").gameObject;
+            BouttonPasse = play0.transform.FindChild("menu(Clone)").FindChild("boutton3").gameObject;
+            BouttonCourse = play0.transform.FindChild("menu(Clone)").FindChild("boutton4").gameObject;
 
             BouttonEsquive.SetActive(false);
             BouttonPasse.SetActive(false);
@@ -259,7 +229,7 @@ namespace GameScene.Didacticiel
         }
         void phase8()
         {
-            if (ball.transform.IsChildOf(myPlayer.transform))
+            if (ball.transform.IsChildOf(play0.transform))
             {
                 end_time();
                 this.transform.position = new Vector3(0, 0);
@@ -281,15 +251,6 @@ namespace GameScene.Didacticiel
         void phase12()
         {
             text(tableau_5);
-        }
-        void phase14()
-        {
-            text(tableau_6);
-        }
-        void phase15()
-        {
-
-            phase++;
         }
         // --
 
@@ -336,6 +297,7 @@ namespace GameScene.Didacticiel
         // Collisions
         void OnTriggerEnter(Collider other)
         {
+            Debug.Log("collision");
             GameObject objet = other.gameObject;
             if (objet.name == "GPasDNom-0") //collision avec le Player ?
             {
@@ -355,28 +317,39 @@ namespace GameScene.Didacticiel
                 if (phase == 11) //lancer la balle première fois
                 {
                     end_time();
-                    //main
+
                     this.transform.position = new Vector3(0, 0, 5);
                     foreach (Renderer r in flechesRenderer)
                         r.enabled = false;
                     RondBlanc.enabled = false;
-                    //myPlayer
+
                     BouttonEsquive.SetActive(true);
                     BouttonPasse.SetActive(false);
                     BouttonCourse.SetActive(false);
-                    Color cCourse = MyPlayer_Controller.menucontroller.GetButtonsColor[3]; //couleur de la course
-                    MyPlayer_Controller.updateValuesPlayer(cCourse);
-                    MyPlayer_Controller.updateValuesPlayer(cCourse);
-                    MyPlayer_Controller.updateValuesPlayer(cCourse);
-                    //enemyPlayer
+
                     Player play_t1 = Settings.Instance.Default_player["epta"];
                     enemyPlayer = Instantiate(player2_prefab, new Vector3(2F, 1F, 2F), Quaternion.identity) as GameObject;
                     play_t1.Team_id = 1;
+                    play_t1.Name += "Bot";
                     enemyPlayer.name = play_t1.Name + "-" + play_t1.Team_id;
-                    EnemyPlayer_Controller = (PlayerController)enemyPlayer.AddComponent(typeof(PlayerController));
-                    EnemyPlayer_Controller.Player = play_t1;
-                    EnemyPlayer_Controller.IsMine = false;
-                    EnemyPlayer_Controller.settablePointDeplacement = true;
+                    this.EnemyPlayer_Controller = (PlayerController)enemyPlayer.AddComponent(typeof(PlayerController));
+                    this.EnemyPlayer_Controller.Player = play_t1;
+                    this.EnemyPlayer_Controller.IsMine = false;
+                    this.EnemyPlayer_Controller.settablePointDeplacement = true;
+
+                    EnemyPlayer_Controller.PointDeplacement = new Vector3(
+                        enemyPlayer.transform.position.x,
+                        enemyPlayer.transform.position.y,
+                        enemyPlayer.transform.position.z);
+
+                    Color c = MyPlayer_Controller.menucontroller.GetButtonsColor[3]; //couleur de la course
+                    MyPlayer_Controller.updateValuesPlayer(c);
+                    MyPlayer_Controller.updateValuesPlayer(c);
+                    MyPlayer_Controller.updateValuesPlayer(c);
+
+                    //MyPlayer_Controller.menucontroller.update_Color(c);
+                    //MyPlayer_Controller.menucontroller.update_Color(c);
+                    //MyPlayer_Controller.menucontroller.update_Color(c);
 
                     phase++;
                 }
@@ -392,10 +365,7 @@ namespace GameScene.Didacticiel
             {
                 MyPlayer_Controller.end_Anim();
                 if (EnemyPlayer_Controller != null)
-                {
-                    Debug.Log("ok c'est bien finit et la phase est : " + phase);
                     this.EnemyPlayer_Controller.end_Anim();
-                }
                 annim_started = false;
                 thisCollider.enabled = false; //désactiver le collider quand on est pas en phase d'animation
             }
@@ -407,35 +377,7 @@ namespace GameScene.Didacticiel
             time.start();
             MyPlayer_Controller.start_Anim();
             if (EnemyPlayer_Controller != null)
-            {
-                Debug.Log("start anim ennemi phase : " + phase);
-                if (phase == 13) //mettre les bonnes coordonnées pour le déplcement de l'ennemi qui essaye de tacler
-                {
-                    Color cTacle = MyPlayer_Controller.menucontroller.GetButtonsColor[1]; //couleur du tacle
-                    EnemyPlayer_Controller.updateValuesPlayer(cTacle);
-                    EnemyPlayer_Controller.PointDeplacement = new Vector3(
-                        myPlayer.transform.position.x,
-                        myPlayer.transform.position.y,
-                        myPlayer.transform.position.z);
-                }
-                if (phase == 16)
-                {
-                    ball.transform.position = new Vector3( //la balle vas sur le joueur ennemi
-                        enemyPlayer.transform.position.x,
-                        enemyPlayer.transform.position.y,
-                        enemyPlayer.transform.position.z);
-
-                    EnemyPlayer_Controller.Player.BallHolder = true; //le joueur ennemi porte la balle
-                    Color cCourse = MyPlayer_Controller.menucontroller.GetButtonsColor[3]; //couleur de la passe
-                    EnemyPlayer_Controller.updateValuesPlayer(cCourse);
-                    EnemyPlayer_Controller.PointDeplacement = new Vector3(
-                        myPlayer.transform.position.x,
-                        myPlayer.transform.position.y,
-                        myPlayer.transform.position.z);
-
-                }
                 EnemyPlayer_Controller.start_Anim(false);
-            }
         }
         // --
 
