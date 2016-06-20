@@ -83,10 +83,13 @@ namespace GameScene
         private void combat(Collider adversaireCollider)
         {
             Player adversaire = adversaireCollider.GetComponent<BasicPlayerController>().Player;
+            Debug.Log(adversaire.Team_id);
+            Debug.Log(player.Team_id);
             // collision adversaire et déclenchement combat
             if (adversaire.Team_id != player.Team_id && (adversaire.Tacle != 0 || player.Tacle != 0) && !playerMet.Contains(adversaireCollider))
             {
-                // rotation des joueurs ( face à face)
+                Debug.Log("debut combat");
+                // rotation des joueurs (face à face)
                 playerMet.Add(adversaireCollider);
                 transform.FindChild("perso").transform.LookAt(new Vector3(adversaireCollider.transform.position.x, transform.FindChild("perso").position.y, adversaireCollider.transform.position.z));
 

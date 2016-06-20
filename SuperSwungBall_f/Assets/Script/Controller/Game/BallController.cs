@@ -40,7 +40,6 @@ namespace GameScene
                 }
                 if (deplacement)
                 {
-                    Debug.Log("Deplacement");
                     transform.position = Vector3.MoveTowards(transform.position, arrivalPoint, Time.deltaTime * 15f);// mouvement de la passe
                 }
             }
