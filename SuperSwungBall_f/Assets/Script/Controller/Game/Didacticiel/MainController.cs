@@ -165,13 +165,13 @@ namespace GameScene.Didacticiel
                 //{"Bien connaître ces stats est donc primodiale pour ne pas être surpris de l'issu d'un combat","0.5" },
                 //{"Fait quand même attention à ne pas trop abuser des combats \n car plus tu gagnes un combat, plus tu seras affaibli pour le prochain","0.5" },
                 //{"Faire la passe à un coéquipier, même s'il est derrière nous, \n peux ainsi être un bon moyen de passer la défense ennemi","0.5" },
-                {"Pour finir nous allons marquer un but en faisant la passe à un coéquipier","0.5" }
+                {"Pour finir nous allons marquer un but en faisant la passe à un coéquipier","0" }
             };
 
             tableau_8 = new string[,]
             {
                 {"Tu as désormais toutes les armes en main pour te confronter aux autres joueurs !","0.5" },
-                {"Pour prouver que tu es vraiment à la hauteur tu dois passer une ultime épreuve","0.5" }
+                {"Pour prouver que tu es vraiment à la hauteur tu dois passer une ultime épreuve","0" }
             };
             // --
         }
@@ -221,7 +221,8 @@ namespace GameScene.Didacticiel
                     break;
                 //16 = déplacement joueur adverse & esquive réussie par notre joueur
                 case 17:
-                    text(tableau_7);
+                    if (!annim_started)
+                        text(tableau_7);
                     break;
                 case 18:
                     phase18(); //tout les bouttons sont visibles pour le player & le player2 est là & changement de position player + adversaire
@@ -491,8 +492,10 @@ namespace GameScene.Didacticiel
         }
         public override void OnSucceedEsquive(Player p)
         {
+            Debug.Log("succed esquive");
             if (phase == 16)
             {
+                Debug.Log("succed esquive 16");
                 phase++;
             }
         }

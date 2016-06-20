@@ -10,19 +10,27 @@ public class RpsDemoConnect : PunBehaviour
     public string previousRoom;
     private const string MainSceneName = "DemoRPS-Scene";
 
+	const string NickNamePlayerPrefsKey = "NickName";
+
+
+	void Start()
+	{
+		InputField.text = PlayerPrefs.HasKey(NickNamePlayerPrefsKey)?PlayerPrefs.GetString(NickNamePlayerPrefsKey):"";
+	}
 
     public void ApplyUserIdAndConnect()
     {
-        string nickName = "DemoNick";
+		string nickName = "DemoNick";
         if (this.InputField != null && !string.IsNullOrEmpty(this.InputField.text))
         {
             nickName = this.InputField.text;
+			PlayerPrefs.SetString(NickNamePlayerPrefsKey,nickName);
         }
         //if (string.IsNullOrEmpty(UserId))
         //{
         //    this.UserId = nickName + "ID";
         //}
-        Debug.Log("Nickname: " + nickName + " userID: " + this.UserId);
+        Debug.Log("Nickname: " + nickName + " userID: " + this.UserId,this);
 
 
         if (PhotonNetwork.AuthValues == null)
@@ -75,13 +83,9 @@ public class RpsDemoConnect : PunBehaviour
 
     public override void OnJoinedRoom()
     {
+		Debug.Log("Joined room: " + PhotonNetwork.room.name);
         this.previousRoom = PhotonNetwork.room.name;
 
-        if (SceneManagerHelper.ActiveSceneName.Equals(MainSceneName))
-        {
-            return;
-        }
-        SceneManager.LoadScene(MainSceneName);
     }
 
     public override void OnPhotonJoinRoomFailed(object[] codeAndMsg)
