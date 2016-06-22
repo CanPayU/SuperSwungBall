@@ -1673,6 +1673,7 @@ GameObject:
   - 114: {fileID: 688016393}
   - 114: {fileID: 688016390}
   - 114: {fileID: 688016392}
+  - 114: {fileID: 688016394}
   m_Layer: 0
   m_Name: Main
   m_TagString: Untagged
@@ -1764,6 +1765,23 @@ MonoBehaviour:
   panel_other_message: {fileID: 107700, guid: 237fb5b90881d4065be84a46a7b199d8, type: 2}
   panel_event: {fileID: 190696, guid: 71ebcbc97eb7f4ad0b0da8b882bbc1f1, type: 2}
   inputField: {fileID: 888112583}
+--- !u!114 &688016394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 688016387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 104685b89e6764edf862a7d4896ba8b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  status: {fileID: 887049997}
+  points: {fileID: 1884251350}
+  content: {fileID: 1675975190}
+  panel: {fileID: 107468056}
+  btn_quit: {fileID: 581609494}
+  scene: menu
 --- !u!1 &887049995
 GameObject:
   m_ObjectHideFlags: 0

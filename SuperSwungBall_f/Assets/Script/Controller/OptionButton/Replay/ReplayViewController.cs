@@ -20,22 +20,35 @@ public class ReplayViewController : MonoBehaviour {
 		this.item = Resources.Load("Prefabs/OptionButton/Replay/Item") as GameObject;
 		this.scroll_view_heigth = ((RectTransform)this.scroll_view.transform).sizeDelta.y;
 
-		InstanciateItem ("Bonjour");
-		InstanciateItem ("Comment vas-tu ?");
-		InstanciateItem ("Je vais bien ! Merci !");
 
+		HTTP.Replays ((success, json) => {
+			if (!success) { return; }
+
+			foreach (Boomlagoon.JSON.JSONValue item in json) {
+				Boomlagoon.JSON.JSONObject obj = item.Obj;
+				string winner = obj.GetObject("winner").GetString("username");
+				string loser = obj.GetObject("loser").GetString("username");
+				int id = (int)obj.GetNumber("id");
+				string fileName = winner+"VS"+loser+"-"+id+".txt";
+				InstanciateItem (winner + " VS " + loser, fileName);
+			}
+		});
 	}
 	
 	/// <summary>
 	/// Ajoute un amis a la liste
 	/// </summary>
 	/// <param name="username">Username of friend</param>
-	public void InstanciateItem(string name)
+	public void InstanciateItem(string name, string fileName)
 	{
 
 		Transform panel = Instantiate(item).transform as Transform;
 		Button btn = panel.GetComponent<Button>();
 		btn.EditText (name);
+		btn.onClick.AddListener (delegate() {
+			HTTP.downloadFile("/uploads/replay/", fileName, "/Replay/");
+				Debug.Log("Download : " + fileName);
+		});
 
 		float panel_heigth = ((RectTransform)panel).sizeDelta.y;
 

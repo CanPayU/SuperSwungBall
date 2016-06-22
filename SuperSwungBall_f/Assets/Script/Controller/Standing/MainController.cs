@@ -29,9 +29,15 @@ namespace Standing
 			this.authenticate = SaveLoad.load_user();
 			TranslateKit.Language.LoadLanguage (Settings.Instance.SelectedLanguage);
 
-//			HTTP.WinGame(3, "antoine", 1, (success)=>{
-//				Debug.Log(success);
-//			});
+//			string gameId = "3";
+//			string fileName = (Application.persistentDataPath + "/replay.txt");
+//			string uri ="http://ssb.trendspotlight.fr/upload_replay.php";
+//			NameValueCollection values = new NameValueCollection();
+//			values.Add("winner", "antoine");
+//			values.Add("looser", "ennemy");
+//			values.Add("gameId", gameId);
+//
+//			HTTP.uploadFile (values, uri, fileName);
 
             if (this.authenticate)
             {

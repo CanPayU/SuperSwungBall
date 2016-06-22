@@ -11,10 +11,13 @@ using Boomlagoon.JSON;
 public static class HTTP
 {
 
-	private const string HOST_DOMAIN_BASIC = "http://ssb.shost.ca/";
+	private const string HOST_DOMAIN_BASIC = "http://ssb.trendspotlight.fr/";
+	//private const string HOST_DOMAIN_BASIC = "http://ssb.shost.ca/";
 	//private const string HOST_DOMAIN_BASIC = "http://localhost:8888/SuperSwungBall/";
-    /// <summary> Nom de domaine principale  </summary>
-    private const string HOST_DOMAIN = "http://ssb.shost.ca/API/";
+
+	/// <summary> Nom de domaine principale  </summary>
+	private const string HOST_DOMAIN = "http://ssb.trendspotlight.fr/API/";
+    //private const string HOST_DOMAIN = "http://ssb.shost.ca/API/";
     //private const string HOST_DOMAIN = "http://localhost:8888/SuperSwungBall/web/app_dev.php/API/";
 
     /// <summary> Key d'authentification  </summary>
@@ -193,7 +196,34 @@ public static class HTTP
         {
             completion(false, null);
         }
-    }
+	}
+
+
+	/// <summary> Get les replays sur le serveur  </summary>
+	public static void Replays(Action<bool, JSONArray> completion)
+	{
+		User user = User.Instance;
+		if (!user.is_connected)
+		{
+			completion(false, null);
+			return;
+		}
+
+		string url = HOST_DOMAIN + "unity/replays/" + user.username + "/" + user.id + "/" + PRIVATE_KEY;
+		HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+		JSONObject response = execute(request);
+
+		string status = response.GetString("status");
+		if (status == "success")
+		{
+			JSONArray json = response.GetArray("replays");
+			completion(true, json);
+		}
+		else
+		{
+			completion(false, null);
+		}
+	}
 
     /// <summary> Indique l'achat sur le serveur - Doit etre co  </summary>
     public static void BuySM(string uid, Action<bool> completion)
@@ -286,7 +316,7 @@ public static class HTTP
 		Debug.Log ("File downloaded to : " + fileDestionation);
 	}
 
-	private static void uploadFile(NameValueCollection getParamters, string uri, string fileName){
+	public static void uploadFile(NameValueCollection getParamters, string uri, string fileName){
 
 		WebClient myWebClient = new WebClient();
 		myWebClient.QueryString = getParamters;
