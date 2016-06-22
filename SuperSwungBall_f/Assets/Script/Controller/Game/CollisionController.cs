@@ -7,7 +7,7 @@ namespace GameScene
 {
     public class CollisionController : GameBehavior
     {
-        ChatController chatController;
+		Multi.ChatController chatController;
         Player player;
         BasicPlayerController playerController; // évite le GetComponent<>()
         List<Collider> playerMet; // joueurs rencontré (uniquement ceux combattus) lors du tour. Un player de peut pas tacler 2 fois le même adversaire en 1 seul tour.
@@ -18,7 +18,7 @@ namespace GameScene
         void Start()
         {
             if (PhotonNetwork.inRoom)
-                chatController = GameObject.Find("Main").GetComponent<ChatController>();
+                chatController = GameObject.Find("Main").GetComponent<Multi.ChatController>();
             playerController = GetComponent<BasicPlayerController>();
             player = playerController.Player;
             premiereFrames = 5;
@@ -129,7 +129,7 @@ namespace GameScene
             if (porteurDeBall)
             {
                 if (PhotonNetwork.inRoom)
-                    chatController.InstanciateMessage(player.Name + " perd la balle !", ChatController.Chat.EVENT);
+					chatController.InstanciateMessage(player.Name + " perd la balle !", Multi.ChatController.Chat.EVENT);
                 transform.FindChild("perso").FindChild("Ball").GetComponent<BallController>().LacheBalle();
                 Debug.Log(name + "perd la balle!");
             }

@@ -19,6 +19,10 @@ public static class ApplicationModel {
 	/// Room Id at join.
 	/// </summary>
 	public static string RoomID;
+	/// <summary>
+	/// Nom du fichier si on lance un replay
+	/// </summary>
+	public static string replayName;
 
 
 	private static int subviewCount = 0;

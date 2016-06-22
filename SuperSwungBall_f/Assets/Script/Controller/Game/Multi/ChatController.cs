@@ -7,11 +7,13 @@ using AuthValues = ExitGames.Client.Photon.Chat.AuthenticationValues;
 
 using GameKit;
 
-namespace GameScene {
+namespace GameScene.Multi {
 		
 	public class ChatController : GameBehavior, IChatClientListener
 	{
 
+		[SerializeField]
+		private GameObject chatView;
 	    [SerializeField]
 	    private GameObject scroll_view;
 	    [SerializeField]
@@ -47,7 +49,7 @@ namespace GameScene {
 	    // Use this for initialization
 	    void Start()
 	    {
-
+			this.chatView.SetActive (true);
 	        Application.runInBackground = true;
 	        scroll_view_heigth = ((RectTransform)this.scroll_view.transform).sizeDelta.y;
 

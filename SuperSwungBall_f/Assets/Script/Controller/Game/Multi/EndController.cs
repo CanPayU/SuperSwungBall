@@ -43,7 +43,7 @@ namespace GameScene.Multi
         // Use this for initialization
         void Start()
         {
-            panel.SetActive(false);
+            panel.SetActive(true);
             other_player = PhotonNetwork.otherPlayers[0];
             local_player = PhotonNetwork.player;
 			ennemy = (User)other_player.allProperties ["User"];

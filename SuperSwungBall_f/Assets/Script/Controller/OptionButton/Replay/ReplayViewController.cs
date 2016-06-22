@@ -47,7 +47,9 @@ public class ReplayViewController : MonoBehaviour {
 		btn.EditText (name);
 		btn.onClick.AddListener (delegate() {
 			HTTP.downloadFile("/uploads/replay/", fileName, "/Replay/");
-				Debug.Log("Download : " + fileName);
+			ApplicationModel.replayName = fileName;
+			ApplicationModel.TypeToInstanciate = GameType.Replay;
+			FadingManager.Instance.Fade("game");
 		});
 
 		float panel_heigth = ((RectTransform)panel).sizeDelta.y;

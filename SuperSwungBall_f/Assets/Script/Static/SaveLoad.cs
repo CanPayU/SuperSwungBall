@@ -120,13 +120,13 @@ public static class SaveLoad
 		bf.Serialize(file, replay);
 		file.Close();
 	}
-	public static Replay load_replay()
+	public static Replay load_replay(string name)
 	{
 		Debug.Log("load_replay " + Application.persistentDataPath);
-		if (File.Exists(Application.persistentDataPath + "/replay.txt"))
+		if (File.Exists(Application.persistentDataPath + "/replay/"+name))
 		{
 			BinaryFormatter bf = new BinaryFormatter();
-			FileStream file = File.Open(Application.persistentDataPath + "/replay.txt", FileMode.Open);
+			FileStream file = File.Open(Application.persistentDataPath + "/replay/"+name, FileMode.Open);
 			try
 			{
 				SaveLoad.replay = (Replay)bf.Deserialize(file);

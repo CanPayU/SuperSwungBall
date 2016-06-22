@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System;
 
+using GameScene;
 
 namespace GameScene.Instantiator
 {
@@ -14,6 +15,9 @@ namespace GameScene.Instantiator
         private Type solo;
         private Type multi;
         private Type replay;
+
+		private Multi.ChatController chat;
+		private Multi.EndController end;
 
         private bool instanciated = false;
 
@@ -38,19 +42,27 @@ namespace GameScene.Instantiator
 
         private void initialiseType()
         {
-            this.solo = typeof(GameScene.Solo.Main_Controller);
-            this.multi = typeof(GameScene.Multi.MainController);
-            this.replay = typeof(GameScene.Replay.MainController);
+            this.solo = typeof(Solo.Main_Controller);
+            this.multi = typeof(Multi.MainController);
+            this.replay = typeof(Replay.MainController);
         }
 
         private void instanciateMain(GameType type)
         {
-            if (type == GameType.Replay)
-                gameObject.AddComponent(this.replay);
-            else if (type == GameType.Solo)
-                gameObject.AddComponent(this.solo);
-            else if (type == GameType.Multi)
-                gameObject.AddComponent(this.multi);
+			if (type == GameType.Replay) {
+				gameObject.AddComponent (this.replay);
+				this.end = GetComponent<Multi.EndController> ();
+				this.chat = GetComponent<Multi.ChatController> ();
+				end.enabled = false;
+				chat.enabled = false;
+			}
+			else if (type == GameType.Solo)
+				gameObject.AddComponent (this.solo);
+			else if (type == GameType.Multi) {
+				gameObject.AddComponent (this.multi);
+				//gameObject.AddComponent (typeof(GameScene.Multi.EndController));
+				//gameObject.AddComponent (typeof(GameScene.Multi.ChatController));
+			}
 
             this.instanciated = true;
         }

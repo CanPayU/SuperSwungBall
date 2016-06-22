@@ -11,6 +11,8 @@ namespace GameScene.Replay {
 
 		private Replay replay;
 
+		private GameObject ballPrefab;
+
 		public MainController(){
 			this.eventType = GameKit.EventType.Global;
 		}
@@ -18,8 +20,9 @@ namespace GameScene.Replay {
 		// Use this for initialization
 		protected override void Start()
 		{
+			this.ballPrefab = Resources.Load("Prefabs/Resources/Ball") as GameObject;
 			this.playerController = typeof(GameScene.Replay.PlayerController);
-			this.replay = SaveLoad.load_replay ();
+			this.replay = SaveLoad.load_replay (ApplicationModel.replayName);
 			this.replay.resetActualValue ();
 			Game.Instance = this.replay.Game;
 			base.Start ();
@@ -29,6 +32,13 @@ namespace GameScene.Replay {
 		{
 			this.time.reset();
 			Caller.StartAnimation();
+		}
+
+		protected override void instantiate_team()
+		{
+			base.instantiate_team ();
+			GameObject ball = Instantiate(ballPrefab, new Vector3(0, 0.5F, -0), Quaternion.identity) as GameObject;
+			ball.name = "Ball";
 		}
 
 		// ------- Event
