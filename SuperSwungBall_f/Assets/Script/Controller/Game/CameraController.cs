@@ -8,7 +8,7 @@ namespace GameScene
 	public class CameraController : GameBehavior
     {
 
-        private Vector3 POSITION_INITIALE = new Vector3(15, 40, 0); // constante position phase de reflexion
+        private Vector3 POSITION_INITIALE = new Vector3(25, 35, 0); // constante position phase de reflexion
 
         private new bool animation;
 
