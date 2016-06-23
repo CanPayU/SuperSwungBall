@@ -38,8 +38,8 @@ public class Client
     {
         this.listeners = new List<IClientListener>();
         this.listeners.Add(listener);
-        this.username = "hugo_082";
-        this.id = 1;
+		this.username = User.Instance.username;
+		this.id = User.Instance.id;
         this.state = SocketState.DISCONNECTED;
     }
 
