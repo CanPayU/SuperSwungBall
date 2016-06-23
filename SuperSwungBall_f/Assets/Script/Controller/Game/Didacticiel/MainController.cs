@@ -28,15 +28,11 @@ namespace GameScene.Didacticiel
         private PlayerController MyPlayer_Controller;
 
         GameObject myPlayer2; //le deuxième player
-        //GameObject BouttonEsquive2;
-        //GameObject BouttonTacle2;
-        //GameObject BouttonPasse2;
-        //GameObject BouttonCourse2;
         private PlayerController MyPlayer2_Controller;
-
 
         GameObject enemyPlayer; //ne peut être controllé par le joueur
         private PlayerController EnemyPlayer_Controller;
+
 
         GameObject ball;
         Renderer ballRenderer; //renderer de la balle 
@@ -56,6 +52,7 @@ namespace GameScene.Didacticiel
         private string[,] tableau_6;
         private string[,] tableau_7;
         private string[,] tableau_8;
+        private string[,] tableau_9;
         private float current_time;
         private int place;
         private int phase;
@@ -64,6 +61,7 @@ namespace GameScene.Didacticiel
 
         Color cCourse;
         Color cTacle;
+        Color cEsquive;
         // Use this for initialization
         void Start()
         {
@@ -99,10 +97,12 @@ namespace GameScene.Didacticiel
 
 
             // -- text
+            #region text
             phase = 1;
             place = 0;
             current_time = 0;
             //mettre "0" en temps pour que le message reste à l'écran
+
             tableau_1 = new string[,]
             {
                 {"Bienvenue dans le didacticiel", "1" },
@@ -116,8 +116,8 @@ namespace GameScene.Didacticiel
             {
                 {"Ça , c'est un Swungman, \n appuie dessus pour le contrôler", "1.5" },
                 {"Les capacités de déplacements sont représentées \n par la couleur bleu", "2" },
-                {"Appuie sur le bouton bleu 3 fois pour le faire \n courire le plus vite et le plus loin possible", "2" },
-                {"Clique sur la zone de déplacement (bleue) pour contoller \n le déplacement","2" },
+                {"Appuie sur le bouton bleu 3 fois pour le faire \n courir le plus vite et le plus loin possible", "2" },
+                {"Clique sur la zone de déplacement (bleue) pour contrôler \n le déplacement","2" },
                 {"Déplace le Swungman jusqu'ici \n et appuie sur 'Espace' pour lancer le déplacement", "0" }
             };
 
@@ -125,15 +125,15 @@ namespace GameScene.Didacticiel
             {
                 {"Bien, maintenant nous allons voir comment récupérer la balle", "1"} ,
                 {"Pour récupérer la balle et faire une passe, \n il faut au moins un point de maîtrise de la balle", "2" },
-                {"Met 1 point de maîtrise dans la passe (en rose) \n et 2 points dans la course", "1.5" },
-                {"Déplace toi maintenant vers la balle, ('Espace' pour lancer le déplacement)", "0" } }
+                {"Mets 1 point de maîtrise dans la passe (en rose) \n et 2 points dans la course", "1.5" },
+                {"Déplace toi maintenant vers la balle, \n ('Espace' pour lancer le déplacement)", "0" } }
             ;
 
             tableau_4 = new string[,]
             {
                 {"Nous avons désormais la balle, envoyons-la quelque part", "1.5" },
                 {"Pour envoyer la balle,\n il faut au moins un point de maîtrise de passe", "1.5" },
-                {"Met 3 ponts de maîtrise dans la passe pour faire un passe très loin", "1.5" },
+                {"Mets 3 ponts de maîtrise dans la passe pour faire une passe très loin", "1.5" },
                 {"Clique sur l'extrémité de la zone rose, puis déplace le point rose \n pour marquer l'emplacement de la passe", "2.5" },
                 {"Tu peux désormais lancer l'action \n et appuyer sur 'a' pour faire la passe", "0" }
             };
@@ -141,7 +141,7 @@ namespace GameScene.Didacticiel
             tableau_5 = new string[,]
             {
                 {"Quelle passe ! Mais attention à toi, \n un ennemi arrive","1" },
-                {"Il a récupérer la balle et veut continuer son chemin. \n Nous devons l'en empêcher","2" },
+                {"Il a récupéré la balle et veut continuer son chemin. \n Nous devons l'en empêcher","2" },
                 {"Pour engager un combat il n'y a qu'une seul moyen : \n il faut qu'au moins un des deux joueurs possède du tacle","2.5" },
                 {"Il n'a sûrement pas envie de se battre puisqu'il a la balle, \n c'est donc a nous d'engager le combat !","2.5" },
                 {"Mets deux points dans le tacle (vert) et un point dans la passe \n (pour récupérer la balle si tu le tacles) et fonce vers lui","0" }
@@ -149,12 +149,12 @@ namespace GameScene.Didacticiel
 
             tableau_6 = new string[,]
             {
-                {"En voilà un bon tacle ! \n Tu y es allé tellement fort qu'il a finit à terre et n'a pas finit son déplacement","2.5" },
-                {"En temps normal quand un ennemi finit à terre il est affaiblit pour le prochain tour","2.5" },
+                {"En voilà un bon tacle ! Tu y es allé tellement fort \n qu'il a fini à terre et n'a pas terminé son déplacement","2.5" },
+                {"En temps normal quand un ennemi finit à terre \n il est affaiblit pour le prochain tour","2.5" },
                 {"Je le soigne donc maintenant pour le bien de notre entraînement. \n La belle vie c'est pour plus tard","2.5" },
-                {"Mais désormais ça va être à toi de te défendre car tu as récupéré la balle","2" },
+                {"Mais désormais ça va être à toi de te défendre \n car tu as récupéré la balle","2" },
                 {"Il va sûrement essayer de te tacler pour te faire perdre la balle","1.5" },
-                {"Met donc un maximum de points dans ta capacité d'esquive (jaune) \n et fonce vers lui","0" }
+                {"Mets donc un maximum de points dans ta capacité d'esquive (jaune) \n et fonce vers lui","0" }
             };
 
             tableau_7 = new string[,]
@@ -162,17 +162,27 @@ namespace GameScene.Didacticiel
                 {"Comme prévu il a engagé le combat et nous avons gagné \n car nous avions plus de \"force de combat\" que lui ","2.5" },
                 {"La force de combat c'est la valeur maximale mise dans le tacle OU l'esquive \n il faut donc bien faire attention à bien agencer ces points","3" },
                 {"Chaque personnage a des stats de base différentes dans chaque maîtrise","2" },
-                {"Bien connaître ces stats est donc primodiale pour ne pas être surpris de l'issu d'un combat","2.5" },
+                {"Bien connaître ces stats est donc primordiale \n pour ne pas être surpris de l'issu d'un combat","2.5" },
                 {"Fait quand même attention à ne pas trop abuser des combats \n car plus tu gagnes un combat, plus tu seras affaibli pour le prochain","3" },
                 {"Faire la passe à un coéquipier, même s'il est derrière nous, \n peux ainsi être un bon moyen de passer la défense ennemi","2.5" },
-                {"Pour finir nous allons marquer un but en faisant la passe à un coéquipier","0" }
             };
 
             tableau_8 = new string[,]
             {
-                {"Tu as désormais toutes les armes en main pour te confronter aux autres joueurs !","2.5" },
-                {"Pour prouver que tu es vraiment à la hauteur tu dois passer une ultime épreuve","0" }
+                {"Tu as désormais toutes les armes en main \n pour te confronter aux autres joueurs !","2.5" },
+                {"Pour prouver que tu es vraiment à la hauteur, \n tu dois passer une ultime épreuve","2.5" },
+                {"Pour finir nous allons marquer un but à l'aide d'un coéquipier","2" },
+                {"Tu es libre de marquer le but comme tu veux \n c'est l'heure de mettre en pratique tout ce que tu as appris","0" }
             };
+
+            tableau_9 = new string[,]
+            {
+                {"Super but !","1.5" },
+                {"Il te reste beaucoup à apprendre pour devenir le meilleur \n mais je vois en toi un grand potentiel, tu vas réussir","2" },
+                {"Il temps de montrer ce que tu vaux en affrontant des joueurs ! \n les choses sérieuses commencent enfin","2" },
+                {"Bonne chance...","3" }
+            };
+            #endregion
             // --
         }
         // Update is called once per frame
@@ -228,7 +238,14 @@ namespace GameScene.Didacticiel
                     phase18(); //tout les bouttons sont visibles pour le player & le player2 est là & changement de position player + adversaire
                     break;
                 case 19:
-                    //phase19();
+                    text(tableau_8);
+                    break;
+                //20 = marquer un but
+                case 21:
+                    text(tableau_9);
+                    break;
+                case 22:
+                    FadingManager.Instance.Fade();
                     break;
             }
             time.update();
@@ -251,10 +268,10 @@ namespace GameScene.Didacticiel
             MyPlayer_Controller.Player = play_t0;
             MyPlayer_Controller.IsMine = true;
             //le deuxième player
-            Player play_t2 = Settings.Instance.Default_player["gpdn"];
+            Player play_t2 = Settings.Instance.Default_player["lombrix"];
             myPlayer2 = Instantiate(player1_prefab, new Vector3(40F, 1F, 40F), Quaternion.identity) as GameObject; //trop loin pour être vu
             play_t2.Team_id = 0;
-            play_t2.Name = "Too fast too furious";
+            play_t2.Name = "G1aD0s";
             myPlayer2.name = play_t2.Name + "-" + play_t2.Team_id;
             MyPlayer2_Controller = (PlayerController)myPlayer2.AddComponent(typeof(PlayerController));
             MyPlayer2_Controller.Player = play_t2;
@@ -272,8 +289,9 @@ namespace GameScene.Didacticiel
             BouttonPasse = myPlayer.transform.FindChild("menu(Clone)").FindChild("boutton3").gameObject;
             BouttonCourse = myPlayer.transform.FindChild("menu(Clone)").FindChild("boutton4").gameObject;
 
-            cCourse = MyPlayer_Controller.menucontroller.GetButtonsColor[3]; //couleur de la passe
-            cTacle = MyPlayer_Controller.menucontroller.GetButtonsColor[1]; //couleur du tacle
+            cEsquive = MyPlayer_Controller.menucontroller.GetButtonsColor[0]; //couleur de l'esquive
+            cTacle = MyPlayer_Controller.menucontroller.GetButtonsColor[1];   //couleur du tacle
+            cCourse = MyPlayer_Controller.menucontroller.GetButtonsColor[3];  //couleur de la passe
 
             BouttonEsquive.SetActive(false);
             BouttonPasse.SetActive(false);
@@ -329,9 +347,14 @@ namespace GameScene.Didacticiel
             BouttonCourse.SetActive(true);
             BouttonPasse.SetActive(true);
             BouttonTacle.SetActive(true);
-            myPlayer.transform.position = new Vector3(0, 1, 0);
+            myPlayer.transform.position = new Vector3(1, 1, 21);
+            myPlayer2.transform.position = new Vector3(5, 1, 17);
+            enemyPlayer.transform.position = new Vector3(5, 1, 24);
 
-            enemyPlayer.transform.position = new Vector3(2, 1, 2);
+            MyPlayer_Controller.Player.BallHolder = false;
+            ball.transform.position = myPlayer2.transform.position;
+            ball.transform.parent = myPlayer2.transform.FindChild("perso");
+            MyPlayer2_Controller.Player.BallHolder = true;
 
             phase++;
         }
@@ -449,54 +472,67 @@ namespace GameScene.Didacticiel
             annim_started = true;
             time.start();
             MyPlayer_Controller.start_Anim();
+            if (phase == 20)
+                MyPlayer2_Controller.start_Anim();
+
             if (EnemyPlayer_Controller != null)
             {
+                EnemyPlayer_Controller.PointDeplacement = new Vector3( //il se dirige vers le joueur #LaMeilleurIA
+                    myPlayer.transform.position.x,
+                    myPlayer.transform.position.y,
+                    myPlayer.transform.position.z);
                 Debug.Log("start anim ennemi phase : " + phase);
-                if (phase == 13) //mettre les bonnes coordonnées pour le déplcement de l'ennemi qui essaye de tacler
+                if (phase == 13)
                 {
-                    Debug.Log("ca marhce 13");
-                    //ball.transform.position = new Vector3( //la balle va sur le joueur ennemi
-                    //    enemyPlayer.transform.position.x,
-                    //    enemyPlayer.transform.position.y,
-                    //    enemyPlayer.transform.position.z);
-
-                    EnemyPlayer_Controller.Player.BallHolder = true; //le joueur ennemi porte la balle
+                    ball.transform.position = enemyPlayer.transform.position;
+                    ball.transform.parent = enemyPlayer.transform.FindChild("perso");
+                    MyPlayer2_Controller.Player.BallHolder = true;
                     EnemyPlayer_Controller.updateValuesPlayer(cCourse); //course / course / course
                     EnemyPlayer_Controller.updateValuesPlayer(cCourse);
                     EnemyPlayer_Controller.updateValuesPlayer(cCourse);
-                    EnemyPlayer_Controller.PointDeplacement = new Vector3( //il se dirige vers le joueur
-                        myPlayer.transform.position.x,
-                        myPlayer.transform.position.y,
-                        myPlayer.transform.position.z);
                 }
                 if (phase == 16)
                 {
-                    EnemyPlayer_Controller.updateValuesPlayer(cTacle); //tacle / course /course
+                    EnemyPlayer_Controller.updateValuesPlayer(cTacle);  //tacle / course /course
                     EnemyPlayer_Controller.updateValuesPlayer(cCourse);
                     EnemyPlayer_Controller.updateValuesPlayer(cCourse);
-                    EnemyPlayer_Controller.PointDeplacement = new Vector3( //il se dirige vers le joueur
-                        myPlayer.transform.position.x,
-                        myPlayer.transform.position.y,
-                        myPlayer.transform.position.z);
                 }
-                EnemyPlayer_Controller.start_Anim(false);
+                if (phase == 20)
+                {
+                    EnemyPlayer_Controller.PointDeplacement = new Vector3( //il se dirige vers le joueur2 #LaMeilleurIA
+                       myPlayer2.transform.position.x,
+                       myPlayer2.transform.position.y,
+                       myPlayer2.transform.position.z);
+
+                    EnemyPlayer_Controller.updateValuesPlayer(cTacle);  //tacle / course / course
+                    EnemyPlayer_Controller.updateValuesPlayer(cEsquive);
+                    EnemyPlayer_Controller.updateValuesPlayer(cEsquive);
+                }
+                EnemyPlayer_Controller.start_Anim(false);               //animation du joueur ennemi
             }
         }
         public override void OnSucceedAttack(Player pl)
         {
             if (phase == 13)
-            {
                 phase++;
-            }
         }
         public override void OnSucceedEsquive(Player p)
         {
-            Debug.Log("succed esquive");
             if (phase == 16)
-            {
-                Debug.Log("succed esquive 16");
                 phase++;
-            }
+        }
+
+        public override void OnGoal(GoalController goal)
+        {
+            //inutile ?
+            Debug.Log("on goal enter");
+        }
+
+        public void update_score()
+        {
+            Debug.Log("update score");
+            if (phase == 20)
+                phase++;
         }
         // --
 
