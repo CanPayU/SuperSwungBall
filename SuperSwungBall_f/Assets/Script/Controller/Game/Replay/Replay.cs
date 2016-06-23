@@ -38,8 +38,8 @@ namespace GameScene.Replay
 		// FOR EXECUTE
 		public void nextRound(){
 			this.actualId++;
-			Debug.Log (this.rounds.Count + " - " + this.actualId);
 			this.actualRound = this.rounds [actualId-1];
+			Debug.Log(this.rounds.Count + " - " + this.actualId + " / " + this.actualRound.id);
 		}
 
 		/// <summary>

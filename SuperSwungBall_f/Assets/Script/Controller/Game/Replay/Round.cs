@@ -14,7 +14,7 @@ namespace GameScene.Replay
 		/// <summary>
 		/// Identifiant du round.
 		/// </summary>
-		private int id;
+		public int id;
 
 		private Dictionary<Player, PlayerAction> actions;
 

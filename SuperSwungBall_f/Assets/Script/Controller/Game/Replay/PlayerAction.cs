@@ -36,13 +36,26 @@ namespace GameScene.Replay
 		public PlayerAction UpdateWith(PlayerAction action) {
 			this.pointDep = action.pointDep;
 			this.pointPasse = action.pointPasse;
-			this.btnValues = action.btnValues;
+			this.copyBtnValues(action.btnValues);
 			return this;
+		}
+
+		private void copyBtnValues(List<string> values) { 
+			foreach (var item in values)
+			{
+				this.btnValues.Add(item);
+			}
 		}
 
 		public override string ToString ()
 		{
-			return string.Format ("[PlayerAction: Deplacement={0}, Passe={1}, ButtonValuesCount={2}]", Deplacement, Passe, ButtonValues.Count);
+			string str = "";
+			ButtonValues.ForEach((val) =>
+			{
+				str += val + "-";
+			});
+
+			return string.Format ("[PlayerAction: Deplacement={0}, Passe={1}, ButtonValuesCount={2}]", Deplacement, Passe, str);
 		}
 
 		///

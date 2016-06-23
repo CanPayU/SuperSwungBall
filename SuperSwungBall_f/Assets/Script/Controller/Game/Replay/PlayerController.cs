@@ -18,7 +18,6 @@ namespace GameScene.Replay {
 			this.isMine = false;
 			this.mainController = GameObject.Find ("Main").GetComponent<MainController> ();
 		}
-			
 
 		// -- Event
 		public override void OnStartAnimation(){
