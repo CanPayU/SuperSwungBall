@@ -105,73 +105,73 @@ namespace GameScene.Didacticiel
 
             tableau_1 = new string[,]
             {
-                {"Bienvenue dans le didacticiel", "1" },
-                {"Comment jouer à SuperSwungBall ?", "1" },
-                {"Le but du jeu est de marquer 3 points", "1" },
-                {"Pour cela, chaque joueur contrôle les joueurs de son équipe", "1" },
+                //{"Bienvenue dans le didacticiel", "1" },
+                //{"Comment jouer à SuperSwungBall ?", "1" },
+                //{"Le but du jeu est de marquer 3 points", "1" },
+                //{"Pour cela, chaque joueur contrôle les joueurs de son équipe", "1" },
                 {"Commençons par voir les contrôles \n d'un Swungman", "1" }
             };
 
             tableau_2 = new string[,]
             {
-                {"Ça , c'est un Swungman, \n appuie dessus pour le contrôler", "1.5" },
-                {"Les capacités de déplacements sont représentées \n par la couleur bleu", "2" },
-                {"Appuie sur le bouton bleu 3 fois pour le faire \n courir le plus vite et le plus loin possible", "2" },
-                {"Clique sur la zone de déplacement (bleue) pour contrôler \n le déplacement","2" },
+                //{"Ça, c'est un Swungman, \n appuie dessus pour le contrôler", "1.5" },
+                //{"Les capacités de déplacements sont représentées \n par la couleur bleu", "2" },
+                //{"Appuie sur le bouton bleu 3 fois pour le faire \n courir le plus vite et le plus loin possible", "2" },
+                //{"Clique sur la zone de déplacement (bleue) pour contrôler \n le déplacement","2" },
                 {"Déplace le Swungman jusqu'ici \n et appuie sur 'Espace' pour lancer le déplacement", "0" }
             };
 
             tableau_3 = new string[,]
             {
-                {"Bien, maintenant nous allons voir comment récupérer la balle", "1"} ,
-                {"Pour récupérer la balle et faire une passe, \n il faut au moins un point de maîtrise de la balle", "2" },
-                {"Mets 1 point de maîtrise dans la passe (en rose) \n et 2 points dans la course", "1.5" },
+                //{"Bien, maintenant nous allons voir comment récupérer la balle", "1"} ,
+                //{"Pour récupérer la balle et faire une passe, \n il faut au moins un point de maîtrise de la balle", "2" },
+                //{"Mets 1 point de maîtrise dans la passe (en rose) \n et 2 points dans la course", "1.5" },
                 {"Déplace toi maintenant vers la balle, \n ('Espace' pour lancer le déplacement)", "0" } }
             ;
 
             tableau_4 = new string[,]
             {
-                {"Nous avons désormais la balle, envoyons-la quelque part", "1.5" },
-                {"Pour envoyer la balle,\n il faut au moins un point de maîtrise de passe", "1.5" },
-                {"Mets 3 ponts de maîtrise dans la passe pour faire une passe très loin", "1.5" },
-                {"Clique sur l'extrémité de la zone rose, puis déplace le point rose \n pour marquer l'emplacement de la passe", "2.5" },
+                //{"Nous avons désormais la balle, envoyons-la quelque part", "1.5" },
+                //{"Pour envoyer la balle,\n il faut au moins un point de maîtrise de passe", "1.5" },
+                //{"Mets 3 ponts de maîtrise dans la passe pour faire une passe très loin", "1.5" },
+                //{"Clique sur l'extrémité de la zone rose, puis déplace le point rose \n pour marquer l'emplacement de la passe", "2.5" },
                 {"Tu peux désormais lancer l'action \n et appuyer sur 'a' pour faire la passe", "0" }
             };
 
             tableau_5 = new string[,]
             {
-                {"Quelle passe ! Mais attention à toi, \n un ennemi arrive","1" },
-                {"Il a récupéré la balle et veut continuer son chemin. \n Nous devons l'en empêcher","2" },
-                {"Pour engager un combat il n'y a qu'une seul moyen : \n il faut qu'au moins un des deux joueurs possède du tacle","2.5" },
-                {"Il n'a sûrement pas envie de se battre puisqu'il a la balle, \n c'est donc a nous d'engager le combat !","2.5" },
+                //{"Quelle passe ! Mais attention à toi, \n un ennemi arrive","1" },
+                //{"Il a récupéré la balle et veut continuer son chemin. \n Nous devons l'en empêcher","2" },
+                //{"Pour engager un combat il n'y a qu'une seul moyen : \n il faut qu'au moins un des deux joueurs possède du tacle","2.5" },
+                //{"Il n'a sûrement pas envie de se battre puisqu'il a la balle, \n c'est donc a nous d'engager le combat !","2.5" },
                 {"Mets deux points dans le tacle (vert) et un point dans la passe \n (pour récupérer la balle si tu le tacles) et fonce vers lui","0" }
             };
 
             tableau_6 = new string[,]
             {
-                {"En voilà un bon tacle ! Tu y es allé tellement fort \n qu'il a fini à terre et n'a pas terminé son déplacement","2.5" },
-                {"En temps normal quand un ennemi finit à terre \n il est affaiblit pour le prochain tour","2.5" },
-                {"Je le soigne donc maintenant pour le bien de notre entraînement. \n La belle vie c'est pour plus tard","2.5" },
-                {"Mais désormais ça va être à toi de te défendre \n car tu as récupéré la balle","2" },
-                {"Il va sûrement essayer de te tacler pour te faire perdre la balle","1.5" },
+                //{"En voilà un bon tacle ! Tu y es allé tellement fort \n qu'il a fini à terre et n'a pas terminé son déplacement","2.5" },
+                //{"En temps normal quand un ennemi finit à terre \n il est affaiblit pour le prochain tour","2.5" },
+                //{"Je le soigne donc maintenant pour le bien de notre entraînement. \n La belle vie c'est pour plus tard","2.5" },
+                //{"Mais désormais ça va être à toi de te défendre \n car tu as récupéré la balle","2" },
+                //{"Il va sûrement essayer de te tacler pour te faire perdre la balle","1.5" },
                 {"Mets donc un maximum de points dans ta capacité d'esquive (jaune) \n et fonce vers lui","0" }
             };
 
             tableau_7 = new string[,]
             {
-                {"Comme prévu il a engagé le combat et nous avons gagné \n car nous avions plus de \"force de combat\" que lui ","2.5" },
-                {"La force de combat c'est la valeur maximale mise dans le tacle OU l'esquive \n il faut donc bien faire attention à bien agencer ces points","3" },
-                {"Chaque personnage a des stats de base différentes dans chaque maîtrise","2" },
-                {"Bien connaître ces stats est donc primordiale \n pour ne pas être surpris de l'issu d'un combat","2.5" },
-                {"Fait quand même attention à ne pas trop abuser des combats \n car plus tu gagnes un combat, plus tu seras affaibli pour le prochain","3" },
+                //{"Comme prévu il a engagé le combat et nous avons gagné \n car nous avions plus de \"force de combat\" que lui ","2.5" },
+                //{"La force de combat c'est la valeur maximale mise dans le tacle OU l'esquive \n il faut donc bien faire attention à bien agencer ces points","3" },
+                //{"Chaque personnage a des stats de base différentes dans chaque maîtrise","2" },
+                //{"Bien connaître ces stats est donc primordiale \n pour ne pas être surpris de l'issu d'un combat","2.5" },
+                //{"Fait quand même attention à ne pas trop abuser des combats \n car plus tu gagnes un combat, plus tu seras affaibli pour le prochain","3" },
                 {"Faire la passe à un coéquipier, même s'il est derrière nous, \n peux ainsi être un bon moyen de passer la défense ennemi","2.5" },
             };
 
             tableau_8 = new string[,]
             {
-                {"Tu as désormais toutes les armes en main \n pour te confronter aux autres joueurs !","2.5" },
-                {"Pour prouver que tu es vraiment à la hauteur, \n tu dois passer une ultime épreuve","2.5" },
-                {"Pour finir nous allons marquer un but à l'aide d'un coéquipier","2" },
+                //{"Tu as désormais toutes les armes en main \n pour te confronter aux autres joueurs !","2.5" },
+                //{"Pour prouver que tu es vraiment à la hauteur, \n tu dois passer une ultime épreuve","2.5" },
+                //{"Pour finir nous allons marquer un but à l'aide d'un coéquipier","2" },
                 {"Tu es libre de marquer le but comme tu veux \n c'est l'heure de mettre en pratique tout ce que tu as appris","0" }
             };
 
@@ -271,7 +271,7 @@ namespace GameScene.Didacticiel
             Player play_t2 = Settings.Instance.Default_player["lombrix"];
             myPlayer2 = Instantiate(player1_prefab, new Vector3(40F, 1F, 40F), Quaternion.identity) as GameObject; //trop loin pour être vu
             play_t2.Team_id = 0;
-            play_t2.Name = "G1aD0s";
+            play_t2.Name = "Captain America";
             myPlayer2.name = play_t2.Name + "-" + play_t2.Team_id;
             MyPlayer2_Controller = (PlayerController)myPlayer2.AddComponent(typeof(PlayerController));
             MyPlayer2_Controller.Player = play_t2;
@@ -347,7 +347,7 @@ namespace GameScene.Didacticiel
             BouttonCourse.SetActive(true);
             BouttonPasse.SetActive(true);
             BouttonTacle.SetActive(true);
-            myPlayer.transform.position = new Vector3(1, 1, 21);
+            myPlayer.transform.position = new Vector3(1, 1, 19);
             myPlayer2.transform.position = new Vector3(5, 1, 17);
             enemyPlayer.transform.position = new Vector3(5, 1, 24);
 
@@ -435,10 +435,10 @@ namespace GameScene.Didacticiel
                     MyPlayer_Controller.updateValuesPlayer(cCourse);
                     MyPlayer_Controller.updateValuesPlayer(cCourse);
                     //enemyPlayer
-                    Player play_t1 = Settings.Instance.Default_player["lombrix"];
+                    Player play_t1 = Settings.Instance.Default_player["pwc"];
                     enemyPlayer = Instantiate(player2_prefab, new Vector3(ball.transform.position.x, 1F, ball.transform.position.z), Quaternion.identity) as GameObject;
                     play_t1.Team_id = 1;
-                    enemyPlayer.name = play_t1.Name + "-" + play_t1.Team_id;
+                    play_t1.Name = "G1aD0s";
                     EnemyPlayer_Controller = (PlayerController)enemyPlayer.AddComponent(typeof(PlayerController));
                     EnemyPlayer_Controller.Player = play_t1;
                     EnemyPlayer_Controller.IsMine = false;
@@ -460,8 +460,13 @@ namespace GameScene.Didacticiel
                 if (EnemyPlayer_Controller != null)
                 {
                     Debug.Log("ok c'est bien finit pour l'ennemi et la phase est : " + phase);
-                    this.EnemyPlayer_Controller.end_Anim();
+                    EnemyPlayer_Controller.end_Anim();
                 }
+                if (MyPlayer2_Controller != null)
+                {
+                    MyPlayer2_Controller.end_Anim();
+                }
+
                 annim_started = false;
                 thisCollider.enabled = false; //désactiver le collider quand on est pas en phase d'animation
             }
