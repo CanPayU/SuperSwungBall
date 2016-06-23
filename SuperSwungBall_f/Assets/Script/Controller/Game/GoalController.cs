@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using GameScene.Multi;
-using GameScene.Solo;
 
 namespace GameScene
 {
@@ -10,10 +8,10 @@ namespace GameScene
         [SerializeField]
         private int team_id;
         public int Team
-        { 
-			set { team_id = value; }
-			get { return team_id; }
-		}
+        {
+            set { team_id = value; }
+            get { return team_id; }
+        }
 
         private GameObject main;
 
@@ -29,12 +27,12 @@ namespace GameScene
             if (PhotonNetwork.inRoom)
             {
                 Game.Instance.goal(team_id);
-                main.GetComponent<MainController>().update_score();
+                main.GetComponent<Multi.MainController>().update_score();
             }
             else
             {
                 Game.Instance.goal(team_id);
-                main.GetComponent<Main_Controller>().update_score();
+                main.GetComponent<Didacticiel.MainController>().update_score();
             }
         }
     }
