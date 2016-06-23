@@ -66,7 +66,7 @@ public class ClientManager : MonoBehaviour, IClientListener
     }
     public void OnReceiveInvitation(string username, int id, string roomID)
     {
-		Notification.Alert( "Invitation recus", "Tu as recus une invitation à jouer de " + username, (success) =>
+		Notification.Alert( "Invitation recue", "Tu as recu une invitation à jouer de " + username, (success) =>
         {
 			if (success)
             {
