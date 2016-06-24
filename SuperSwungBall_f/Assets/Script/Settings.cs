@@ -106,12 +106,12 @@ public class Settings
 	public void ResetDefaultPlayer()
 	{
 		this.default_player = new Dictionary<string, Player>();
-		default_player.Add("lombrix", 	new Player(4, 6, 7, 1, "Lombrix"));
-		default_player.Add("itec", 		new Player(1, 4, 2, 9, "Itectori"));
-		default_player.Add("gpdn", 		new Player(7, 4, 5, 5, "GPasDNom"));
-		default_player.Add("pwc", 		new Player(3, 2, 9, 2, "PlayWithCube"));
+		default_player.Add("lombrix", 	new Player(4, 6, 10, 10, "Lombrix"));
+		default_player.Add("itec", 		new Player(1, 5, 6, 16, "Itectori"));
+		default_player.Add("gpdn", 		new Player(7, 4, 8, 13, "GPasDNom"));
+		default_player.Add("pwc", 		new Player(3, 2, 14, 9, "PlayWithCube"));
 		default_player.Add("ept", 		new Player(1, 1, 1, 1, "Epitechien"));
-		default_player.Add("epta", 		new Player(8, 7, 5, 7, "Epiteen"));
+		default_player.Add("epta", 		new Player(8, 7, 8, 14, "Epiteen"));
 	}
 	public void ResetSpecialPlayer()
 	{
