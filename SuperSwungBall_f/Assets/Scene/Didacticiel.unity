@@ -304,7 +304,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 4225438}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4, y: 0.31, z: 6.5}
+  m_LocalPosition: {x: 5.11, y: 0.31, z: 9.56}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -327,48 +327,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7752b741b6545b4b8c3c41ccc33108d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventType: 1
   screentext: {fileID: 2010317798}
-  player1_prefab: {fileID: 0}
-  player2_prefab: {fileID: 0}
-  myPlayer: {fileID: 0}
-  BouttonEsquive: {fileID: 0}
-  BouttonTacle: {fileID: 0}
-  BouttonPasse: {fileID: 0}
-  BouttonCourse: {fileID: 0}
-  MyPlayer_Controller: {fileID: 0}
-  myPlayer2: {fileID: 0}
-  MyPlayer2_Controller: {fileID: 0}
-  enemyPlayer: {fileID: 0}
-  EnemyPlayer_Controller: {fileID: 0}
-  ball: {fileID: 0}
-  ballRenderer: {fileID: 0}
-  thisCollider: {fileID: 0}
-  flechesRenderer:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  RondBlanc: {fileID: 0}
-  current_time: 0
-  place: 0
-  phase: 0
-  annim_started: 0
-  cCourse:
-    r: 0
-    g: 0
-    b: 0
-    a: 0
-  cTacle:
-    r: 0
-    g: 0
-    b: 0
-    a: 0
-  cEsquive:
-    r: 0
-    g: 0
-    b: 0
-    a: 0
 --- !u!136 &4225441
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5252,7 +5211,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   team_id: 1
-  main: {fileID: 0}
 --- !u!23 &188671127
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -14622,10 +14580,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e417ec74167ce44e8d4ae8427a509d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passeur: {fileID: 0}
-  arrivalPoint: {x: 0, y: 0, z: 0}
-  deplacement: 0
-  keyPasse: 0
 --- !u!54 &712906592
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -21546,14 +21500,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48dc80d067d760e479db09b76c7d2910, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventType: 2
-  open: {x: 0, y: 0, z: 0}
-  close: {x: 0, y: 0, z: 0}
-  moveTo: {x: 0, y: 0, z: 0}
-  playername: {fileID: 0}
-  scaleStats: 0
-  speed: 0
-  movement: 0
 --- !u!114 &1074582655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26136,6 +26082,7 @@ GameObject:
   - 92: {fileID: 1238129650}
   - 124: {fileID: 1238129649}
   - 81: {fileID: 1238129648}
+  - 114: {fileID: 1238129653}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -26211,6 +26158,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
+--- !u!114 &1238129653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1238129647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddf04739c1fff42ff819d3c1f099b34a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1241801649
 GameObject:
   m_ObjectHideFlags: 0
@@ -40982,7 +40940,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   team_id: 0
-  main: {fileID: 0}
 --- !u!23 &1911818994
 MeshRenderer:
   m_ObjectHideFlags: 0

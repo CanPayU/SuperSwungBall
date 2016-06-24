@@ -329,7 +329,7 @@ namespace GameScene
 
         public override void OnStartAnimation()
         {
-            PlayerAction action = new PlayerAction(0, this.PointDeplacement, this.PointPasse, this.Player.Button_Values);
+            PlayerAction action = new PlayerAction(0, this.PointDeplacement, this.Player.Button_Values);
             ReplayController controller = GameObject.Find("Main").GetComponent<ReplayController>();
             controller.setPlayerAction(this.Player, action);
 

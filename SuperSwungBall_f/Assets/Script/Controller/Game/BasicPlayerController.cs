@@ -242,7 +242,7 @@ namespace GameScene
             return "course";
         }
 
-        public bool passe(ref Vector3 pointPasse) // Passe
+        public virtual bool passe(ref Vector3 pointPasse) // Passe
         {
             Debug.Log("In PC:" + Player.Name + " - point:" + arrivalPoint);
             pointPasse = arrivalPointPasse;

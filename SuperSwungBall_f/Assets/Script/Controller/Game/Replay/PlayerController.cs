@@ -8,6 +8,9 @@ namespace GameScene.Replay {
 
 		private MainController mainController;
 
+		private bool makePass;
+		private Vector3 posPass;
+
 		public PlayerController(){
 			this.eventType = GameKit.EventType.All;
 		}
@@ -17,6 +20,29 @@ namespace GameScene.Replay {
 			base.Start ();
 			this.isMine = false;
 			this.mainController = GameObject.Find ("Main").GetComponent<MainController> ();
+		}
+
+		protected override void Update()
+		{
+			base.Update();
+
+			//if (phaseAnimation)
+			//{
+			//	if (transform.position == this.posPass)
+			//		Debug.Log("PASSE OK");
+			//	if (Input.GetKeyDown(KeyCode.X) && this.player.Name == "Epiteen-3-3")
+			//	{
+			//		Debug.Log(this.makePass + " -- " + transform.position);
+			//		GameObject.Find("Ball").GetComponent<BallController>().ExecutePasse();
+			//	}
+					
+			//}
+
+			if (phaseAnimation && this.makePass && transform.position == this.posPass) {
+				Debug.Log("Fait la passe");
+				GameObject.Find("Ball").GetComponent<BallController>().ExecutePasse();
+				this.makePass = false; // Passe faite
+			}
 		}
 
 		// -- Event
@@ -32,8 +58,16 @@ namespace GameScene.Replay {
 		private void setMyParam(PlayerAction action)
 		{
 			this.PointDeplacement = action.Deplacement;
-			this.PointPasse = action.Passe;
 			this.Player.Button_Values = action.ButtonValues;
+
+			if (action.MakePasse)
+			{
+				this.makePass = true;
+				this.PointPasse = action.Passe;
+				this.posPass = action.PosPasse;
+			}
+			else
+				this.makePass = false;
 		}
 	}
 }

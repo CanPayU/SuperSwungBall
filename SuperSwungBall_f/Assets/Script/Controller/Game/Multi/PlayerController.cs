@@ -29,7 +29,7 @@ namespace GameScene.Multi
 
 		// -- Event
 		public override void OnStartAnimation(){
-			PlayerAction action = new PlayerAction (0, this.PointDeplacement, this.PointPasse, this.Player.Button_Values);
+			PlayerAction action = new PlayerAction (0, this.PointDeplacement, this.Player.Button_Values);
 			this.replayController.setPlayerAction (this.Player, action);
 			SyncValues ();
 		}
