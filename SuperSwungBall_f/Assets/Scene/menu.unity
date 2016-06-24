@@ -1329,10 +1329,6 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 0a64bacd5defe974a845bb9ab8f03721, type: 2}
-    - target: {fileID: 2300000, guid: 2ebbf3bb3c7ab5f40b4e5466dbb4ee66, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 9a02b0fff580c8b4ebba028764a36f4d, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2ebbf3bb3c7ab5f40b4e5466dbb4ee66, type: 3}
   m_IsPrefabParent: 0
@@ -1345,7 +1341,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400000, guid: d0b8a9f535409724d918bd7c27e61180, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.1
+      value: -0.09097362
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d0b8a9f535409724d918bd7c27e61180, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1353,7 +1349,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d0b8a9f535409724d918bd7c27e61180, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.1
+      value: 0.09726596
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d0b8a9f535409724d918bd7c27e61180, type: 3}
       propertyPath: m_LocalRotation.x
@@ -1415,10 +1411,6 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 62475dd8490679d4ba7f567a10f5bcf6, type: 2}
-    - target: {fileID: 2300000, guid: d0b8a9f535409724d918bd7c27e61180, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 9a02b0fff580c8b4ebba028764a36f4d, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d0b8a9f535409724d918bd7c27e61180, type: 3}
   m_IsPrefabParent: 0
@@ -2272,7 +2264,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 414906, guid: 3685feefd69044a009539b0ee701da6d, type: 2}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 164026, guid: 3685feefd69044a009539b0ee701da6d, type: 2}
       propertyPath: m_Name
@@ -2881,7 +2873,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 492612, guid: 53e01dbd34b44794bad0f63f468da40e, type: 2}
       propertyPath: m_RootOrder
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 492710, guid: 53e01dbd34b44794bad0f63f468da40e, type: 2}
       propertyPath: m_LocalPosition.y
