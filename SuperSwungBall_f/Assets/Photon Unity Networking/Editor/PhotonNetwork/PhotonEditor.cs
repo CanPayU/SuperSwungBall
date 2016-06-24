@@ -98,7 +98,7 @@ public class PhotonEditor : EditorWindow
 
     protected static string DocumentationLocation = "Assets/Photon Unity Networking/PhotonNetwork-Documentation.pdf";
 
-    protected static string UrlFreeLicense = "https://www.photonengine.com/en/OnPremise/Dashboard";
+    protected static string UrlFreeLicense = "https://www.photonengine.com/dashboard/OnPremise";
 
     protected static string UrlDevNet = "http://doc.photonengine.com/en/pun/current";
 
@@ -112,7 +112,7 @@ public class PhotonEditor : EditorWindow
 
     protected static string UrlAccountPage = "https://www.photonengine.com/Account/SignIn?email="; // opened in browser
 
-    protected static string UrlCloudDashboard = "https://www.photonengine.com/Dashboard?email=";
+    protected static string UrlCloudDashboard = "https://www.photonengine.com/dashboard?email=";
 
 
     private enum PhotonSetupStates
