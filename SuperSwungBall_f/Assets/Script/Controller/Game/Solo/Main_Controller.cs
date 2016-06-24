@@ -11,6 +11,8 @@ namespace GameScene.Solo
 	public class Main_Controller : GameScene.BasicMainController
     {
 
+		private GameObject ballPrefab;
+
 		public Main_Controller(){
 			this.eventType = GameKit.EventType.Global;
 		}
@@ -18,6 +20,7 @@ namespace GameScene.Solo
 		// Use this for initialization
 		protected override void Start()
 		{
+			this.ballPrefab = Resources.Load("Prefabs/Resources/Ball") as GameObject;
 			this.playerController = typeof(GameScene.Solo.PlayerController);
 			base.Start ();
 		}
@@ -28,6 +31,13 @@ namespace GameScene.Solo
 			base.Update ();
 			updateTimerText ();
         }
+
+		protected override void instantiate_team()
+		{
+			base.instantiate_team();
+			GameObject ball = Instantiate(ballPrefab, new Vector3(0, 0.5F, -0), Quaternion.identity) as GameObject;
+			ball.name = "Ball";
+		}
 
 		private void updateTimerText(){
 			if (this.annim_started) {

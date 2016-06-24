@@ -13,18 +13,37 @@ namespace GameScene.Replay
 		private int id;
 
 		private Vector3Serializer pointDep; // déplacement vers ...
-		private Vector3Serializer pointPasse; // passe vers ...
 		private List<string> btnValues; // atouts
 
+		private bool makePasse; // Fait une passe ?
+		private Vector3Serializer posPasse; // Position de déclenchement de la passe
+		private Vector3Serializer pointPasse; // Direction de la passe
 
-//		private bool FaitUnePasse;
-//		private Vector3 PosWhenHeDoPasse;
+		/// <summary>
+		/// Constructeurs d'action sans passe
+		/// </summary>
+		public PlayerAction(int id, Vector3 pointDep, List<string> btnValues) {
+			this.id = id;
+			this.pointDep = pointDep;
+			this.btnValues = btnValues;
+			this.makePasse = false;
+			this.posPasse = Vector3.zero;
+			this.pointPasse = Vector3.zero;
+		}
 
-		public PlayerAction(int id, Vector3 pointDep, Vector3 pointPasse, List<string> btnValues) {
+		/// <summary>
+		/// Constructeur d'action avec passe
+		/// </summary>
+		/// <param name="pointPasse">Direction de la passe</param>
+		/// <param name="posPasse">Position de déclenchement</param>
+		public PlayerAction(int id, Vector3 pointDep, Vector3 pointPasse, List<string> btnValues, Vector3 posPasse)
+		{
 			this.id = id;
 			this.pointDep = pointDep;
 			this.pointPasse = pointPasse;
 			this.btnValues = btnValues;
+			this.makePasse = true;
+			this.posPasse = posPasse;
 		}
 
 		/// <summary>
@@ -34,13 +53,16 @@ namespace GameScene.Replay
 		public void GetObject(){}
 
 		public PlayerAction UpdateWith(PlayerAction action) {
+			this.makePasse = action.makePasse;
+			this.posPasse = action.posPasse;
 			this.pointDep = action.pointDep;
 			this.pointPasse = action.pointPasse;
 			this.copyBtnValues(action.btnValues);
 			return this;
 		}
 
-		private void copyBtnValues(List<string> values) { 
+		private void copyBtnValues(List<string> values) {
+			this.btnValues = new List<string>();
 			foreach (var item in values)
 			{
 				this.btnValues.Add(item);
@@ -55,7 +77,7 @@ namespace GameScene.Replay
 				str += val + "-";
 			});
 
-			return string.Format ("[PlayerAction: Deplacement={0}, Passe={1}, ButtonValuesCount={2}]", Deplacement, Passe, str);
+			return string.Format ("[PlayerAction: MakePasse={0}, Passe={1}, ButtonValuesCount={2}]", makePasse, Passe, str);
 		}
 
 		///
@@ -69,13 +91,23 @@ namespace GameScene.Replay
 			get { return this.pointDep; }
 			set { this.pointDep = value; }
 		}
+		public List<string> ButtonValues
+		{
+			get { return this.btnValues; }
+			set { this.btnValues = value; }
+		}
 		public Vector3 Passe {
 			get { return this.pointPasse; }
 			set { this.pointPasse = value; }
 		}
-		public List<string> ButtonValues {
-			get { return this.btnValues; }
-			set { this.btnValues = value; }
+		public Vector3 PosPasse {
+			get { return this.posPasse; }
+			set { this.posPasse = value; }
+		}
+		public bool MakePasse
+		{
+			get { return this.makePasse; }
+			set { this.makePasse = value; }
 		}
 	}
 

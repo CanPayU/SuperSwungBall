@@ -63,7 +63,7 @@ namespace GameScene
             }
         }
         [PunRPC]
-        private void ExecutePasse()
+        public void ExecutePasse()
         {
             deplacement = transform.parent.parent.GetComponent<BasicPlayerController>().passe(ref arrivalPoint); //Renvoit true si la passe est possible
             if (deplacement)//debut de la passe

@@ -47,7 +47,7 @@ namespace GameScene.Replay
 			int i = 1;
 			foreach (Player player in players) {
 				int idAction = this.id * 1000 + i;
-				PlayerAction pAction = new PlayerAction (idAction, Vector3.zero, Vector3.zero, new List<string> ());
+				PlayerAction pAction = new PlayerAction (idAction, Vector3.zero, new List<string> ());
 				actions [player] = pAction;
 			}
 		}
