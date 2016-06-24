@@ -49,7 +49,7 @@ namespace GameScene.Instantiator
 
         private void instanciateMain(GameType type)
         {
-			//type = GameType.Solo;
+			type = GameType.Solo;
 			if (type == GameType.Replay) {
 				gameObject.AddComponent (this.replay);
 				this.end = GetComponent<Multi.EndController> ();

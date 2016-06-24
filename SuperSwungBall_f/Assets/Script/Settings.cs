@@ -83,7 +83,7 @@ public class Settings
         // -------------------
 
         // ----- Default Team FOR DEBUG
-        string[] def_sound = new string[] { "Musics/Team/PSG/Allez Paris [classic]" };
+        string[] def_sound = new string[] { "Musics/Team/PSG/Allez", "Musics/Team/PSG/Clap" };
         Team psg = new Team("PSG", compo_psg, def_sound, "psg");
         psg.add_player(new Player(4, 6, 7, 1, "Lombrix"));
         psg.add_player(new Player(7, 4, 5, 5, "GPasDNom"));
@@ -92,6 +92,7 @@ public class Settings
         psg.add_player(new Player(1, 4, 2, 9, "Itectori"));
         default_team.Add("psg", psg);
 
+		def_sound = new string[] { };
         Team fr = new Team("France", compo_fr, def_sound, "fr");
         fr.add_player(new Player(1, 4, 2, 9, "Itectori"));
         fr.add_player(new Player(3, 2, 9, 2, "PlayWithCube"));
