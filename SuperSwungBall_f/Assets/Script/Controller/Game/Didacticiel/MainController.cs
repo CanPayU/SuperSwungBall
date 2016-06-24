@@ -20,23 +20,31 @@ namespace GameScene.Didacticiel
         private GameObject player1_prefab;
         private GameObject player2_prefab;
 
-        GameObject myPlayer; //le player
+        Player play_t0; //le player
+        GameObject myPlayer;
         GameObject BouttonEsquive;
         GameObject BouttonTacle;
         GameObject BouttonPasse;
         GameObject BouttonCourse;
         private PlayerController MyPlayer_Controller;
 
-        GameObject myPlayer2; //le deuxième player
+        Player play_t1; //le deuxième player
+        GameObject myPlayer2;
         private PlayerController MyPlayer2_Controller;
 
+        Player play_t2;
         GameObject enemyPlayer; //ne peut être controllé par le joueur
         private PlayerController EnemyPlayer_Controller;
+
+        Player play_t3;
         GameObject enemyPlayer2; //ne peut être controllé par le joueur
+        Player play_t4;
         private PlayerController EnemyPlayer_Controller2;
         GameObject enemyPlayer3; //ne peut être controllé par le joueur
+        Player play_t5;
         private PlayerController EnemyPlayer_Controller3;
         GameObject enemyPlayer4; //ne peut être controllé par le joueur
+        Player play_t6;
         private PlayerController EnemyPlayer_Controller4;
         GameObject enemyPlayer5; //ne peut être controllé par le joueur
         private PlayerController EnemyPlayer_Controller5;
@@ -205,7 +213,7 @@ namespace GameScene.Didacticiel
 
                 case 2: //création du player + player2(mais il n'est pas disponible pour le moment) & changement emplacement du texte & 
                     //le premier player
-                    Player play_t0 = Settings.Instance.Default_player["itec"];
+                    play_t0 = Settings.Instance.Default_player["itec"];
                     myPlayer = Instantiate(player1_prefab, new Vector3(1F, 1F, 0F), Quaternion.identity) as GameObject;
                     play_t0.Team_id = 0;
                     play_t0.Name = "#Test</§!";
@@ -214,13 +222,13 @@ namespace GameScene.Didacticiel
                     MyPlayer_Controller.Player = play_t0;
                     MyPlayer_Controller.IsMine = true;
                     //le deuxième player
-                    Player play_t2 = Settings.Instance.Default_player["lombrix"];
+                    play_t1 = Settings.Instance.Default_player["lombrix"];
                     myPlayer2 = Instantiate(player1_prefab, new Vector3(40F, 1F, 40F), Quaternion.identity) as GameObject; //trop loin pour être vu
-                    play_t2.Team_id = 0;
-                    play_t2.Name = "Captain America";
-                    myPlayer2.name = play_t2.Name + "-" + play_t2.Team_id;
+                    play_t1.Team_id = 0;
+                    play_t1.Name = "Captain America";
+                    myPlayer2.name = play_t1.Name + "-" + play_t1.Team_id;
                     MyPlayer2_Controller = (PlayerController)myPlayer2.AddComponent(typeof(PlayerController));
-                    MyPlayer2_Controller.Player = play_t2;
+                    MyPlayer2_Controller.Player = play_t1;
                     MyPlayer2_Controller.IsMine = true;
 
                     screentext.transform.position = new Vector2(960, 700);
@@ -415,48 +423,48 @@ namespace GameScene.Didacticiel
                 MyPlayer_Controller.updateValuesPlayer(cCourse);
                 MyPlayer_Controller.updateValuesPlayer(cCourse);
                 //enemyPlayer 1
-                Player play_t1 = Settings.Instance.Default_player["pwc"];
+                play_t2 = Settings.Instance.Default_player["pwc"];
                 enemyPlayer = Instantiate(player2_prefab, new Vector3(ball.transform.position.x, 1F, ball.transform.position.z), Quaternion.identity) as GameObject;
-                play_t1.Team_id = 1;
-                play_t1.Name = "G1aD0s";
+                play_t2.Team_id = 1;
+                play_t2.Name = "G1aD0s";
                 EnemyPlayer_Controller = (PlayerController)enemyPlayer.AddComponent(typeof(PlayerController));
-                EnemyPlayer_Controller.Player = play_t1;
+                EnemyPlayer_Controller.Player = play_t2;
                 EnemyPlayer_Controller.IsMine = false;
                 EnemyPlayer_Controller.settablePointDeplacement = true;
                 //enemyPlayer 2
-                Player play_t2 = Settings.Instance.Default_player["pwc"];
+                play_t3 = Settings.Instance.Default_player["pwc"];
                 enemyPlayer2 = Instantiate(player2_prefab, new Vector3(40, 1, 40), Quaternion.identity) as GameObject;
-                play_t2.Team_id = 1;
-                play_t2.Name = "Manus";
+                play_t3.Team_id = 1;
+                play_t3.Name = "Manus";
                 EnemyPlayer_Controller2 = (PlayerController)enemyPlayer2.AddComponent(typeof(PlayerController));
-                EnemyPlayer_Controller2.Player = play_t2;
+                EnemyPlayer_Controller2.Player = play_t3;
                 EnemyPlayer_Controller2.IsMine = false;
                 EnemyPlayer_Controller2.settablePointDeplacement = true;
                 //enemyPlayer 3
-                Player play_t3 = Settings.Instance.Default_player["pwc"];
+                play_t4 = Settings.Instance.Default_player["pwc"];
                 enemyPlayer3 = Instantiate(player2_prefab, new Vector3(40, 1, 40), Quaternion.identity) as GameObject;
-                play_t3.Team_id = 1;
-                play_t3.Name = "Red";
+                play_t4.Team_id = 1;
+                play_t4.Name = "Red";
                 EnemyPlayer_Controller3 = (PlayerController)enemyPlayer3.AddComponent(typeof(PlayerController));
-                EnemyPlayer_Controller3.Player = play_t3;
+                EnemyPlayer_Controller3.Player = play_t4;
                 EnemyPlayer_Controller3.IsMine = false;
                 EnemyPlayer_Controller3.settablePointDeplacement = true;
                 //enemyPlayer 4
-                Player play_t4 = Settings.Instance.Default_player["pwc"];
+                play_t5 = Settings.Instance.Default_player["pwc"];
                 enemyPlayer4 = Instantiate(player2_prefab, new Vector3(40, 1F, 40), Quaternion.identity) as GameObject;
-                play_t4.Team_id = 1;
-                play_t4.Name = "ganondorf";
+                play_t5.Team_id = 1;
+                play_t5.Name = "ganondorf";
                 EnemyPlayer_Controller4 = (PlayerController)enemyPlayer4.AddComponent(typeof(PlayerController));
-                EnemyPlayer_Controller4.Player = play_t4;
+                EnemyPlayer_Controller4.Player = play_t5;
                 EnemyPlayer_Controller4.IsMine = false;
                 EnemyPlayer_Controller4.settablePointDeplacement = true;
                 //enemyPlayer 5
-                Player play_t5 = Settings.Instance.Default_player["pwc"];
+                Player play_t6 = Settings.Instance.Default_player["pwc"];
                 enemyPlayer5 = Instantiate(player2_prefab, new Vector3(40, 1F, 40), Quaternion.identity) as GameObject;
-                play_t5.Team_id = 1;
-                play_t5.Name = "B. Nashor";
+                play_t6.Team_id = 1;
+                play_t6.Name = "B. Nashor";
                 EnemyPlayer_Controller5 = (PlayerController)enemyPlayer5.AddComponent(typeof(PlayerController));
-                EnemyPlayer_Controller5.Player = play_t5;
+                EnemyPlayer_Controller5.Player = play_t6;
                 EnemyPlayer_Controller5.IsMine = false;
                 EnemyPlayer_Controller5.settablePointDeplacement = true;
                 phase++;
@@ -545,12 +553,13 @@ namespace GameScene.Didacticiel
         }
         public override void OnSucceedAttack(Player pl)
         {
-            if (phase == 12)
+            Debug.Log("attack player succeed : " + pl);
+            if (pl == play_t0 && phase == 12)
                 phase++;
         }
         public override void OnSucceedEsquive(Player p)
         {
-            if (phase == 15)
+            if (p == play_t0 && phase == 15)
                 phase++;
         }
 

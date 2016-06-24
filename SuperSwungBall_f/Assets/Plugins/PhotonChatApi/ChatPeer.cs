@@ -274,8 +274,6 @@ namespace ExitGames.Client.Photon.Chat
         /// <summary>(225) User's ID</summary>
         public const byte UserId = 225;
     }
-
-
     /// <summary>
     /// ErrorCode defines the default codes associated with Photon client/server communication.
     /// </summary>

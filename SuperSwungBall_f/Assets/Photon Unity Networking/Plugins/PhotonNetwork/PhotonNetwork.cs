@@ -28,7 +28,7 @@ using System.IO;
 public static class PhotonNetwork
 {
     /// <summary>Version number of PUN. Also used in GameVersion to separate client version from each other.</summary>
-    public const string versionPUN = "1.71";
+    public const string versionPUN = "1.72";
 
     /// <summary>Version string for your this build. Can be used to separate incompatible clients. Sent during connect.</summary>
     /// <remarks>This is only sent when you connect so that is also the place you set it usually (e.g. in ConnectUsingSettings).</remarks>
@@ -1219,7 +1219,7 @@ public static class PhotonNetwork
     /// To ignore the config file and connect anywhere call: PhotonNetwork.ConnectToMaster.
     ///
     /// To connect to the Photon Cloud, a valid AppId must be in the settings file (shown in the Photon Cloud Dashboard).
-    /// https://www.exitgames.com/dashboard
+    /// https://www.photonengine.com/dashboard
     ///
     /// Connecting to the Photon Cloud might fail due to:
     /// - Invalid AppId (calls: OnFailedToConnectToPhoton(). check exact AppId value)
@@ -1287,7 +1287,7 @@ public static class PhotonNetwork
     /// <summary>Connect to a Photon Master Server by address, port, appID and game(client) version.</summary>
     /// <remarks>
     /// To connect to the Photon Cloud, a valid AppId must be in the settings file (shown in the Photon Cloud Dashboard).
-    /// https://www.exitgames.com/dashboard
+    /// https://www.photonengine.com/dashboard
     ///
     /// Connecting to the Photon Cloud might fail due to:
     /// - Invalid AppId (calls: OnFailedToConnectToPhoton(). check exact AppId value)
@@ -1425,7 +1425,7 @@ public static class PhotonNetwork
     ///
     /// The PUN Setup Wizard stores your appID in a settings file and applies a server address/port.
     /// To connect to the Photon Cloud, a valid AppId must be in the settings file (shown in the Photon Cloud Dashboard).
-    /// https://www.exitgames.com/dashboard
+    /// https://www.photonengine.com/dashboard
     ///
     /// Connecting to the Photon Cloud might fail due to:
     /// - Invalid AppId (calls: OnFailedToConnectToPhoton(). check exact AppId value)

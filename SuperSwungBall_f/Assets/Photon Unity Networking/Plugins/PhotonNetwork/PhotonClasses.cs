@@ -330,7 +330,7 @@ public interface IPunCallbacks
     /// During development of a game, it might also fail due to wrong configuration on the server side.
     /// In those cases, logging the debugMessage is very important.
     ///
-    /// Unless you setup a custom authentication service for your app (in the [Dashboard](https://www.exitgames.com/dashboard)),
+    /// Unless you setup a custom authentication service for your app (in the [Dashboard](https://www.photonengine.com/dashboard)),
     /// this won't be called!
     /// </remarks>
     /// <param name="debugMessage">Contains a debug message why authentication failed. This has to be fixed during development time.</param>
@@ -797,7 +797,7 @@ namespace Photon
         /// During development of a game, it might also fail due to wrong configuration on the server side.
         /// In those cases, logging the debugMessage is very important.
         ///
-        /// Unless you setup a custom authentication service for your app (in the [Dashboard](https://www.exitgames.com/dashboard)),
+        /// Unless you setup a custom authentication service for your app (in the [Dashboard](https://www.photonengine.com/dashboard)),
         /// this won't be called!
         /// </remarks>
         /// <param name="debugMessage">Contains a debug message why authentication failed. This has to be fixed during development time.</param>
