@@ -1,0 +1,370 @@
+fileFormatVersion: 2
+guid: f87640042a54d1847835d06fc9b09a76
+timeCreated: 1466775629
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: armature
+    100002: avantBras_D
+    100004: avantBras_G
+    100006: //RootNode
+    100008: bras_D
+    100010: bras_G
+    100012: buste
+    100014: Cube
+    100016: cuisse_D
+    100018: cuisse_G
+    100020: main_D
+    100022: main_G
+    100024: mollet_D
+    100026: mollet_G
+    100028: pied_D
+    100030: pied_G
+    100032: tete
+    100034: ventre
+    400000: armature
+    400002: avantBras_D
+    400004: avantBras_G
+    400006: //RootNode
+    400008: bras_D
+    400010: bras_G
+    400012: buste
+    400014: Cube
+    400016: cuisse_D
+    400018: cuisse_G
+    400020: main_D
+    400022: main_G
+    400024: mollet_D
+    400026: mollet_G
+    400028: pied_D
+    400030: pied_G
+    400032: tete
+    400034: ventre
+    4300000: Cube
+    7400000: Default Take
+    7400002: armatureAction
+    7400004: Action
+    7400006: Pause
+    9500000: //RootNode
+    13700000: Cube
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Default Take
+      takeName: Default Take
+      firstFrame: 0
+      lastFrame: 0
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: armature
+        weight: 1
+      - path: armature/ventre
+        weight: 1
+      - path: armature/ventre/buste
+        weight: 1
+      - path: armature/ventre/buste/bras_D
+        weight: 1
+      - path: armature/ventre/buste/bras_D/avantBras_D
+        weight: 1
+      - path: armature/ventre/buste/bras_D/avantBras_D/main_D
+        weight: 1
+      - path: armature/ventre/buste/bras_G
+        weight: 1
+      - path: armature/ventre/buste/bras_G/avantBras_G
+        weight: 1
+      - path: armature/ventre/buste/bras_G/avantBras_G/main_G
+        weight: 1
+      - path: armature/ventre/buste/tete
+        weight: 1
+      - path: armature/ventre/cuisse_D
+        weight: 1
+      - path: armature/ventre/cuisse_D/mollet_D
+        weight: 1
+      - path: armature/ventre/cuisse_D/mollet_D/pied_D
+        weight: 1
+      - path: armature/ventre/cuisse_G
+        weight: 1
+      - path: armature/ventre/cuisse_G/mollet_G
+        weight: 1
+      - path: armature/ventre/cuisse_G/mollet_G/pied_G
+        weight: 1
+      - path: Cube
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: armatureAction
+      takeName: armatureAction
+      firstFrame: -1
+      lastFrame: 39
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: armature
+        weight: 1
+      - path: armature/ventre
+        weight: 1
+      - path: armature/ventre/buste
+        weight: 1
+      - path: armature/ventre/buste/bras_D
+        weight: 1
+      - path: armature/ventre/buste/bras_D/avantBras_D
+        weight: 1
+      - path: armature/ventre/buste/bras_D/avantBras_D/main_D
+        weight: 1
+      - path: armature/ventre/buste/bras_G
+        weight: 1
+      - path: armature/ventre/buste/bras_G/avantBras_G
+        weight: 1
+      - path: armature/ventre/buste/bras_G/avantBras_G/main_G
+        weight: 1
+      - path: armature/ventre/buste/tete
+        weight: 1
+      - path: armature/ventre/cuisse_D
+        weight: 1
+      - path: armature/ventre/cuisse_D/mollet_D
+        weight: 1
+      - path: armature/ventre/cuisse_D/mollet_D/pied_D
+        weight: 1
+      - path: armature/ventre/cuisse_G
+        weight: 1
+      - path: armature/ventre/cuisse_G/mollet_G
+        weight: 1
+      - path: armature/ventre/cuisse_G/mollet_G/pied_G
+        weight: 1
+      - path: Cube
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Action
+      takeName: Default Take
+      firstFrame: 6.1
+      lastFrame: 21
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: armature
+        weight: 1
+      - path: armature/ventre
+        weight: 1
+      - path: armature/ventre/buste
+        weight: 1
+      - path: armature/ventre/buste/bras_D
+        weight: 1
+      - path: armature/ventre/buste/bras_D/avantBras_D
+        weight: 1
+      - path: armature/ventre/buste/bras_D/avantBras_D/main_D
+        weight: 1
+      - path: armature/ventre/buste/bras_G
+        weight: 1
+      - path: armature/ventre/buste/bras_G/avantBras_G
+        weight: 1
+      - path: armature/ventre/buste/bras_G/avantBras_G/main_G
+        weight: 1
+      - path: armature/ventre/buste/tete
+        weight: 1
+      - path: armature/ventre/cuisse_D
+        weight: 1
+      - path: armature/ventre/cuisse_D/mollet_D
+        weight: 1
+      - path: armature/ventre/cuisse_D/mollet_D/pied_D
+        weight: 1
+      - path: armature/ventre/cuisse_G
+        weight: 1
+      - path: armature/ventre/cuisse_G/mollet_G
+        weight: 1
+      - path: armature/ventre/cuisse_G/mollet_G/pied_G
+        weight: 1
+      - path: Cube
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Pause
+      takeName: Default Take
+      firstFrame: 29.8
+      lastFrame: 39
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: armature
+        weight: 1
+      - path: armature/ventre
+        weight: 1
+      - path: armature/ventre/buste
+        weight: 1
+      - path: armature/ventre/buste/bras_D
+        weight: 1
+      - path: armature/ventre/buste/bras_D/avantBras_D
+        weight: 1
+      - path: armature/ventre/buste/bras_D/avantBras_D/main_D
+        weight: 1
+      - path: armature/ventre/buste/bras_G
+        weight: 1
+      - path: armature/ventre/buste/bras_G/avantBras_G
+        weight: 1
+      - path: armature/ventre/buste/bras_G/avantBras_G/main_G
+        weight: 1
+      - path: armature/ventre/buste/tete
+        weight: 1
+      - path: armature/ventre/cuisse_D
+        weight: 1
+      - path: armature/ventre/cuisse_D/mollet_D
+        weight: 1
+      - path: armature/ventre/cuisse_D/mollet_D/pied_D
+        weight: 1
+      - path: armature/ventre/cuisse_G
+        weight: 1
+      - path: armature/ventre/cuisse_G/mollet_G
+        weight: 1
+      - path: armature/ventre/cuisse_G/mollet_G/pied_G
+        weight: 1
+      - path: Cube
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -9,6 +9,7 @@ namespace GameScene
     {
 
         private Vector3 POSITION_INITIALE = new Vector3(25, 35, 0); // constante position phase de reflexion
+        private Vector3 posRelative = new Vector3();
 
         private new bool animation;
 
@@ -31,7 +32,7 @@ namespace GameScene
         {
             if (animation)
             {
-                transform.position = Vector3.Lerp(transform.position, new Vector3(ball.transform.position.x + 15, 10, ball.transform.position.z), Time.deltaTime * speed);
+                transform.position = Vector3.Lerp(transform.position, new Vector3(ball.transform.position.x, 0, ball.transform.position.z) + posRelative, Time.deltaTime * speed);
                 transform.LookAt(ball.transform.position);
             }
             else
@@ -45,7 +46,8 @@ namespace GameScene
         {
             animation = true;
             speed = 1;
-            transform.position = new Vector3(ball.transform.position.x + 15, 10, ball.transform.position.z);
+            posRelative = new Vector3(12, 5, 0);
+            transform.position = new Vector3(ball.transform.position.x, 0, ball.transform.position.z) + posRelative;
         }
         public void end_anim()
         {
@@ -56,11 +58,18 @@ namespace GameScene
 		public override void OnStartAnimation(){
 			this.animation = true;
 			this.speed = 1;
-			this.transform.position = new Vector3(ball.transform.position.x + 15, 10, ball.transform.position.z);
-		}
+            posRelative = new Vector3(12, 5, 0);
+            transform.position = new Vector3(ball.transform.position.x, 0, ball.transform.position.z) + posRelative;
+        }
 		public override void OnStartReflexion(){
 			this.animation = false;
 			this.speed = 20;
 		}
+        public override void OnGoal(GoalController goal)
+        {
+            speed = 3;
+            posRelative = new Vector3(3, 3, 3);
+            transform.position = new Vector3(ball.transform.position.x, 0, ball.transform.position.z) + posRelative;
+        }
     }
 }
