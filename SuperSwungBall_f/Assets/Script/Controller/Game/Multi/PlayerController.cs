@@ -34,6 +34,20 @@ namespace GameScene.Multi
 			SyncValues ();
 		}
 
+		public override bool passe(ref Vector3 pointPasse)
+		{
+			Debug.Log("In PC:" + Player.Name + " - point:" + arrivalPoint);
+			pointPasse = arrivalPointPasse;
+			if (phaseAnimation && Vector3.Distance(arrivalPointPasse, transform.position) < player.ZonePasse * 5)
+			{
+
+				PlayerAction action = new PlayerAction(0, this.PointDeplacement, this.arrivalPointPasse, this.Player.Button_Values, transform.position);
+				this.replayController.setPlayerAction(this.Player, action);
+				return true;
+			}
+			return false;
+		}
+
 		// -- Network
 		public void SyncValues() // A améliorer (voir Replay)
 		{
