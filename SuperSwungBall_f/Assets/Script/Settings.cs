@@ -27,38 +27,38 @@ public class Settings
     private string selected_stadium_name;
     private System.Random rand = new System.Random();
 
-	private Dictionary<string, Player> paid_player;
-	private Dictionary<string, Player> secret_player; // in Chest
-	private Dictionary<string, Player> challenge_player; // in Challenge
+    private Dictionary<string, Player> paid_player;
+    private Dictionary<string, Player> secret_player; // in Chest
+    private Dictionary<string, Player> challenge_player; // in Challenge
 
     // -- Keyboard
     private Dictionary<KeyboardAction, KeyCode> keyboard;
     // --
 
-	private NotificationState notificationState;
-	private SoundState soundState;
+    private NotificationState notificationState;
+    private SoundState soundState;
 
-	private bool allowReplayBackup;
+    private bool allowReplayBackup;
 
-	private AvailableLanguage selectedLanguage;
+    private AvailableLanguage selectedLanguage;
 
     public Settings()
     {
         this.version = VERSION;
-		this.notificationState = NotificationState.All;
-		this.soundState = SoundState.All;
+        this.notificationState = NotificationState.All;
+        this.soundState = SoundState.All;
         this.keyboard = new Dictionary<KeyboardAction, KeyCode>();
-		this.paid_player = new Dictionary<string, Player>();
-		this.secret_player = new Dictionary<string, Player>();
-		this.challenge_player = new Dictionary<string, Player>();
-		this.allowReplayBackup = true;
-		this.selectedLanguage = AvailableLanguage.FR;
+        this.paid_player = new Dictionary<string, Player>();
+        this.secret_player = new Dictionary<string, Player>();
+        this.challenge_player = new Dictionary<string, Player>();
+        this.allowReplayBackup = true;
+        this.selectedLanguage = AvailableLanguage.FR;
 
         // -- Setup Keyboard
         this.keyboard.Add(KeyboardAction.Passe, KeyCode.A);
         // --
 
-		ResetDefaultPlayer ();
+        ResetDefaultPlayer();
         this.default_team = new Dictionary<string, Team>();
         this.default_compo = new Dictionary<string, Composition>();
         this.selected_stadium_name = "Stadium_0";
@@ -85,40 +85,40 @@ public class Settings
         // ----- Default Team FOR DEBUG
         string[] def_sound = new string[] { "Musics/Team/PSG/Allez", "Musics/Team/PSG/Clap" };
         Team psg = new Team("PSG", compo_psg, def_sound, "psg");
-        psg.add_player(new Player(4, 6, 7, 1, "Lombrix"));
-        psg.add_player(new Player(7, 4, 5, 5, "GPasDNom"));
-        psg.add_player(new Player(1, 1, 1, 1, "Epitechien"));
-        psg.add_player(new Player(3, 2, 9, 2, "PlayWithCube"));
-        psg.add_player(new Player(1, 4, 2, 9, "Itectori"));
+        psg.add_player(new Player(4, 6, 10, 4, "Lombrix"));
+        psg.add_player(new Player(7, 4, 4, 8, "GPasDNom"));
+        psg.add_player(new Player(1, 1, 6, 8, "Epitechien"));
+        psg.add_player(new Player(3, 2, 10, 7, "PlayWithCube"));
+        psg.add_player(new Player(1, 4, 6, 10, "Itectori"));
         default_team.Add("psg", psg);
 
-		def_sound = new string[] { };
+        def_sound = new string[] { };
         Team fr = new Team("France", compo_fr, def_sound, "fr");
-        fr.add_player(new Player(1, 4, 2, 9, "Itectori"));
-        fr.add_player(new Player(3, 2, 9, 2, "PlayWithCube"));
+        fr.add_player(new Player(1, 4, 6, 10, "Itectori"));
+        fr.add_player(new Player(3, 2, 10, 7, "PlayWithCube"));
         fr.add_player(new Player(8, 7, 5, 7, "Epiteen"));
-        fr.add_player(new Player(7, 4, 5, 5, "GPasDNom"));
-        fr.add_player(new Player(4, 6, 7, 1, "Lombrix"));
+        fr.add_player(new Player(7, 4, 4, 8, "GPasDNom"));
+        fr.add_player(new Player(4, 6, 10, 4, "Lombrix"));
         default_team.Add("fr", fr);
         // ------------------
         selected_team = fr;
     }
 
-	public void ResetDefaultPlayer()
-	{
-		this.default_player = new Dictionary<string, Player>();
-		default_player.Add("lombrix", 	new Player(4, 6, 10, 10, "Lombrix"));
-		default_player.Add("itec", 		new Player(1, 5, 6, 16, "Itectori"));
-		default_player.Add("gpdn", 		new Player(7, 4, 8, 13, "GPasDNom"));
-		default_player.Add("pwc", 		new Player(3, 2, 14, 9, "PlayWithCube"));
-		default_player.Add("ept", 		new Player(1, 1, 1, 1, "Epitechien"));
-		default_player.Add("epta", 		new Player(8, 7, 8, 14, "Epiteen"));
-	}
-	public void ResetSpecialPlayer()
-	{
-		this.paid_player = new Dictionary<string, Player>();
-		this.secret_player = new Dictionary<string, Player>();
-	}
+    public void ResetDefaultPlayer()
+    {
+        this.default_player = new Dictionary<string, Player>();
+        default_player.Add("lombrix", new Player(4, 6, 10, 4, "Lombrix"));
+        default_player.Add("itec", new Player(1, 4, 6, 10, "Itectori"));
+        default_player.Add("gpdn", new Player(7, 4, 4, 8, "GPasDNom"));
+        default_player.Add("pwc", new Player(3, 2, 10, 7, "PlayWithCube"));
+        default_player.Add("ept", new Player(1, 1, 6, 8, "Epitechien"));
+        default_player.Add("epta", new Player(8, 7, 8, 9, "Epiteen"));
+    }
+    public void ResetSpecialPlayer()
+    {
+        this.paid_player = new Dictionary<string, Player>();
+        this.secret_player = new Dictionary<string, Player>();
+    }
 
     public void AddOrUpdate_Team(Team t)
     {
@@ -127,58 +127,61 @@ public class Settings
         else
             default_team.Add(t.Code, t);
     }
-	public void AddOrUpdate_Player(Player p)
-	{
-		var players = TypeToDict (p.Type);
-		if (players.ContainsKey(p.UID))
-			players[p.UID] = p;
-		else
-			players.Add(p.UID, p);
-	}
-	public void UpdateKeyboard(KeyboardAction action, KeyCode code)
-	{
-		this.keyboard [action] = code;
-	}
-	public void BuyPlayer(string uid, PlayerType type = PlayerType.Buy)
+    public void AddOrUpdate_Player(Player p)
     {
-		var players = TypeToDict (type);
-		Player p = players[uid];
-		default_player.Add(uid, p);
+        var players = TypeToDict(p.Type);
+        if (players.ContainsKey(p.UID))
+            players[p.UID] = p;
+        else
+            players.Add(p.UID, p);
+    }
+    public void UpdateKeyboard(KeyboardAction action, KeyCode code)
+    {
+        this.keyboard[action] = code;
+    }
+    public void BuyPlayer(string uid, PlayerType type = PlayerType.Buy)
+    {
+        var players = TypeToDict(type);
+        Player p = players[uid];
+        default_player.Add(uid, p);
     }
 
-	private Dictionary<string, Player> TypeToDict(PlayerType type)
-	{
-		switch (type) {
-		case PlayerType.Buy:
-			return paid_player;
-		case PlayerType.Secret:
-			return secret_player;
-		case PlayerType.Challenge:
-			return challenge_player;
-		default:
-			return null;
-		}
-	}
+    private Dictionary<string, Player> TypeToDict(PlayerType type)
+    {
+        switch (type)
+        {
+            case PlayerType.Buy:
+                return paid_player;
+            case PlayerType.Secret:
+                return secret_player;
+            case PlayerType.Challenge:
+                return challenge_player;
+            default:
+                return null;
+        }
+    }
 
 
-	public AvailableLanguage SelectedLanguage {
-		get { return this.selectedLanguage; }
-		set { this.selectedLanguage = value; }
-	}
-	public bool AllowReplayBackup {
-		get { return this.allowReplayBackup; }
-		set { this.allowReplayBackup = value; }
-	}
+    public AvailableLanguage SelectedLanguage
+    {
+        get { return this.selectedLanguage; }
+        set { this.selectedLanguage = value; }
+    }
+    public bool AllowReplayBackup
+    {
+        get { return this.allowReplayBackup; }
+        set { this.allowReplayBackup = value; }
+    }
     public NotificationState NotificationState
     {
         get { return notificationState; }
         set { notificationState = value; }
-	}
-	public SoundState SoundState
-	{
-		get { return soundState; }
-		set { soundState = value; }
-	}
+    }
+    public SoundState SoundState
+    {
+        get { return soundState; }
+        set { soundState = value; }
+    }
     public Dictionary<string, Team> Default_Team
     {
         get { return default_team; }
@@ -190,11 +193,11 @@ public class Settings
     public Dictionary<string, Composition> Default_compo
     {
         get { return default_compo; }
-	}
-	public Dictionary<KeyboardAction, KeyCode> Keyboard
-	{
-		get { return keyboard; }
-	}
+    }
+    public Dictionary<KeyboardAction, KeyCode> Keyboard
+    {
+        get { return keyboard; }
+    }
     public string Selected_Stadium
     {
         get { return selected_stadium_name; }
@@ -209,7 +212,7 @@ public class Settings
     {
         get
         {
-			var teams = new Dictionary<string, Team>(default_team);
+            var teams = new Dictionary<string, Team>(default_team);
             teams.Remove(selected_team.Code);
             int alea = rand.Next(teams.Count);
             int i = 0;
@@ -219,41 +222,43 @@ public class Settings
                     return team.Value;
                 i++;
             }
-			return selected_team; // Théoriquement jamais call
+            return selected_team; // Théoriquement jamais call
         }
-	}
-	public Player Random_Player
-	{
-		get
-		{
-			var players = new Dictionary<string, Player>(default_player);
-			int alea = rand.Next(players.Count);
-			int i = 0;
-			foreach (var player in players)
-			{
-				if (i == alea)
-					return player.Value;
-				i++;
-			}
-			return players.First().Value; // Théoriquement jamais call
-		}
-	}
-	public Player Random_Secret_Player
-	{
-		get 
-		{
-			int size = secret_player.Count;
-			int alea = rand.Next (size * 100);
+    }
+    public Player Random_Player
+    {
+        get
+        {
+            var players = new Dictionary<string, Player>(default_player);
+            int alea = rand.Next(players.Count);
+            int i = 0;
+            foreach (var player in players)
+            {
+                if (i == alea)
+                    return player.Value;
+                i++;
+            }
+            return players.First().Value; // Théoriquement jamais call
+        }
+    }
+    public Player Random_Secret_Player
+    {
+        get
+        {
+            int size = secret_player.Count;
+            int alea = rand.Next(size * 100);
 
-			int i = 0;
-			foreach (var item in secret_player) {
-				Player p = item.Value;
-				i += p.Proba;
-				if (alea < size * i) {
-					return p;
-				}
-			}
-			return secret_player.First ().Value; // Théoriquement jamais call
-		}
-	}
+            int i = 0;
+            foreach (var item in secret_player)
+            {
+                Player p = item.Value;
+                i += p.Proba;
+                if (alea < size * i)
+                {
+                    return p;
+                }
+            }
+            return secret_player.First().Value; // Théoriquement jamais call
+        }
+    }
 }
