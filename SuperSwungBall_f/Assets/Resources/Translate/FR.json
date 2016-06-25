@@ -1,220 +1,247 @@
 {
-	"language": "FR",
-	"data": {
-	
-		"SCENE" : "standing",
+  "language": "FR",
+  "data": {
 
-		"standingTitle" : "Appuyer sur une touche pour commencer",
-		"classicConnectionButton" : "Connexion",
-		"msgstandingrandom1" : "S'endormir en plein jeu peut avoir des conséquences néfastes sur le clavier",  
-		"msgstandingrandom2" : "creer vos propres equipes pour être plus fort",
-		"msgstandingrandom3" : "il se dit que Playwithcube est à l'origine d'une légende",
-		"msgstandingrandom4" : "GPasDNom n'en a vraiment pas",
-		"msgstandingrandom5" : "Un jeu zen",
-		"msgstandingrandom6" : "La passe permet également d'intercepter",
-		"msgstandingrandom7" : "A force de vous faire taclez, vous finirez par rencontrer Lombrix",
-		"msgstandingrandom8" : "Se taper la tête contre le clavier peut avoir des conséquences néfastes sur les joueurs",
-		"msgstandingrandom9" : "Un joueur doit être dans le but avec la balle pour que le point soit valide",
-		"msgstandingrandom10" : "Et si cinq Itectori étaient réunis?",
-		"msgstandingrandom11" : "Plus vous avez d'esquive, moins vous perdrez la balle ",
-		"msgstandingrandom12" : "La légende raconte qu'il existe des combinaisons secrètes de touches dans le jeu",
-		"msgstandingrandom13" : "On peut jongler dans le menu!",
+    "SCENE": "standing",
 
-
-
-		"SCENE" : "Menu",
-		
-		"plus de phi" : "plus de phi",
-		"jouerenligne" : "jouer en ligne",
-		"jouerenligneligne1" : "Chaque partie jouée en ligne ",
-		"jouerenligneligne2" : "vous rapporte des Phi.",
-		"jouerenligneligne3" : "Gagner jusqu'à phi",
-		"acheterligne1" : "Acheter des Phis pour débloquer",
-		"acheterligne2" : "toujours plus de personnages !",
-		
+    "standingTitle": "Appuyer sur une touche pour commencer",
+    "classicConnectionButton": "Connexion",
+    "msgstandingrandom1": "S'endormir en plein jeu peut avoir des conséquences néfastes sur le clavier",
+    "msgstandingrandom2": "creer vos propres equipes pour être plus fort",
+    "msgstandingrandom3": "il se dit que Playwithcube est à l'origine d'une légende",
+    "msgstandingrandom4": "GPasDNom n'en a vraiment pas",
+    "msgstandingrandom5": "Un jeu zen",
+    "msgstandingrandom6": "La passe permet également d'intercepter",
+    "msgstandingrandom7": "A force de vous faire taclez, vous finirez par rencontrer Lombrix",
+    "msgstandingrandom8": "Se taper la tête contre le clavier peut avoir des conséquences néfastes sur les joueurs",
+    "msgstandingrandom9": "Un joueur doit être dans le but avec la balle pour que le point soit valide",
+    "msgstandingrandom10": "Et si cinq Itectori étaient réunis?",
+    "msgstandingrandom11": "Plus vous avez d'esquive, moins vous perdrez la balle ",
+    "msgstandingrandom12": "La légende raconte qu'il existe des combinaisons secrètes de touches dans le jeu",
+    "msgstandingrandom13": "On peut jongler dans le menu!",
 
 
 
+    "SCENE": "Menu",
 
-
-		"SCENE" : "create_team",
-
-		"selectionjoueurtext" : "Selectionnez un joueur",
-		"choisirteamtext" : "choisir une equipe",
-		"choirircompotext" : "choisir une composition",
-		"createTTitle" : "personnalise ta team",
-		"creeruneequipe" : "Creer une equipe",
-		"choissierlenom" : "chossissez le nom de votre équipe.",
-		"moreInfo" : "plus d'informations",
-		"moreInfoDesc" : "Créez, modifiez votre équipe ! \n Ajoutez les joueurs que vous venez de gagner ou acheter ! \n Les Ducats permettent de créer une équipe équilibrée. Chaques joueurs coute maximum 10 Ducats. Vous pouvez en comptabiliser jusqu'a 25 dans une équipe !",
-		
-
-
-
-
-		"SCENE" : "Solo game",
-
-		"plus de phi" : "plus de phi",
-		"jouerenligne" : "jouer en ligne",
-		"jouerenligneligne1" : "Chaque partie jouée en ligne ",
-		"jouerenligneligne2" : "vous rapporte des Phi.",
-		"jouerenligneligne3" : "Gagner jusqu'à phi", 
-		"acheterligne1" : "Acheter des Phis pour débloquer",
-		"acheterligne2" : "toujours plus de personnages !",
-
-
-
-		"SCENE" : "Gestion",
-
-		"coffre": "coffre",
-		"infocoffre1" :"Les coffres contiennent",
-		"infocoffre2" :"des SwungMens",
-		"infocoffre3" :"uniques et secrets.",
-		"infocoffre4" :"Impossible de les ",
-		"infocoffre5" :"déverrouiller d'une autre",
-		"infocoffre6" :"manière!",
-		"msgNtificationBox1" : "Nouveau Swung Men",
-		"msgNtificationBox2" : "Contenu du coffre",
-		"msgNtificationBox3" : "Vous obtenu ",
-		"compte" : "compte",
-		"plus de phi" : "plus de phi",
-		"jouerenligne" : "jouer en ligne",
-		"jouerenligneligne1" : "Chaque partie jouée en ligne ",
-		"jouerenligneligne2" : "vous rapporte des Phi.",
-		"jouerenligneligne3" : "Gagner jusqu'à phi", 
-		"acheterligne1" : "Acheter des Phis pour débloquer",
-		"acheterligne2" : "toujours plus de personnages !",
-		"defi" :"defi",
-		"bloque" : "bloque",
-		"touchepasse" : "touche passe",
-		"achatimpomsg1" : "Achat impossible",
-		"achatimpomsg2" : "Vous n'avez pas assez de Phi ou",
-		"achatimpomsg3" : "vous possédez deja ce SwungMen",
-		
-
-
-
-		"SCENE" : "Settings",
-
-		"autoriseSave" : "autoriser la sauvegarde",
-		"autoriseSaveDesc" : "sauvegarder vos parties sur votre machine afin de les regarder en replay hors-ligne.",
-		"cleanSave" : " Vider les sauvegardes",
-		"cleanSaveDesc" : "Supprime toutes les sauvegardes de replays présentent sur votre ordinateur",
-
-
-
-		"SCENE" : "game",
-
-		
-		"statue" : "profils",
-		"entrer le texte" : "entrer le texte...",
-		"points" : "points",
-		"eme" : "eme", 
-		"compte" : "compte",
-		"plus de phi" : "plus de phi",
-		"jouerenligne" : "jouer en ligne",
-		"jouerenligneligne1" : "Chaque partie jouée en ligne ",
-		"jouerenligneligne2" : "vous rapporte des Phi.",
-		"jouerenligneligne3" : "Gagner jusqu'à phi", 
-		"acheterligne1" : "Acheter des Phis pour débloquer",
-		"acheterligne2" : "toujours plus de personnages !",
+    "plus de phi": "plus de phi",
+    "jouerenligne": "jouer en ligne",
+    "jouerenligneligne1": "Chaque partie jouée en ligne ",
+    "jouerenligneligne2": "vous rapporte des Phi.",
+    "jouerenligneligne3": "Gagner jusqu'à phi",
+    "acheterligne1": "Acheter des Phis pour débloquer",
+    "acheterligne2": "toujours plus de personnages !",
 
 
 
 
 
-		"SCENE" : "Network",
 
-		"infosurjoueurs" : "informations sur les joueurs",
-		"infoduchargement" : "information of the loading",
-		"partie privée" : "partie privée",
-		"joined" :"rejoint",
-		"home" :"menu",
-		"reglages" : "reglages",
-		"joueurstrouvé" : "joueurs trouvés",
-		"creerchambre" : "creer chambre",
-		"nomchambre" :"nom de la room",
-		"rejointrelaroom" : "rejointre la room",
-		"plus de phi" : "plus de phi",
-		"jouerenligne" : "jouer en ligne",
-		"jouerenligneligne1" : "Chaque partie jouée en ligne ",
-		"jouerenligneligne2" : "vous rapporte des Phi.",
-		"jouerenligneligne3" : "Gagner jusqu'à phi",
-		"acheterligne1" : "Acheter des Phis pour débloquer",
-		"acheterligne2" : "toujours plus de personnages !",
-		
+    "SCENE": "create_team",
+
+    "selectionjoueurtext": "Selectionnez un joueur",
+    "choisirteamtext": "choisir une equipe",
+    "choirircompotext": "choisir une composition",
+    "createTTitle": "personnalise ta team",
+    "creeruneequipe": "Creer une equipe",
+    "choissierlenom": "chossissez le nom de votre équipe.",
+    "moreInfo": "plus d'informations",
+    "moreInfoDesc": "Créez, modifiez votre équipe ! \n Ajoutez les joueurs que vous venez de gagner ou acheter ! \n Les Ducats permettent de créer une équipe équilibrée. Chaques joueurs coute maximum 10 Ducats. Vous pouvez en comptabiliser jusqu'a 25 dans une équipe !",
 
 
 
-		"SCENE" : "Didacticiel",
 
-		"msgdicdac1" : "Bienvenue dans le didacticiel",
-		"msgdicdac2" : "appuie sur la touche 'espace' pour lancer le déplacement ",
-		"msgdicdac3" : "Comment jouer ?",
-		"msgdicdac4" : "Le but du jeu est de marquer 3 points",
-		"msgdicdac5" : "Chaque joueur contrôle son équipe",
-		"msgdicdac6" : "Commençons par voir les contrôles \n d'un Swungman",
-		"msgdicdac7" : "Les capacités de déplacements sont représentées \n par la couleur bleu",
-		"msgdicdac8" : "Appuie sur le bouton bleu 3 fois pour le faire \n courir le plus vite et le plus loin possible",
-		"msgdicdac9" : "Clique sur la zone de déplacement (bleue) pour contoller \n le déplacement",
-		"msgdicdac10" : "Bien, maintenant nous allons voir comment récupérer la balle",
-		"msgdicdac11" : "Pour récupérer la balle et faire une passe, \n il faut au moins un point de passe",
-		"msgdicdac12" : "Met 1 point de maîtrise dans la passe et \n 2 points dans la course",
-		"msgdicdac13" : "Nous avons désormais la balle, envoyons-la quelque part",
-		"msgdicdac14" : "Pour envoyer la balle,\n il faut au moins un point de maîtrise de passe",
-		"msgdicdac15" : "Met 3 points de maîtrise dans la passe pour faire un passe très loin",
-		"msgdicdac16" : "Clique sur la zone rose, puis déplace le curseur \n pour marquer la direction de la passe",
-		"msgdicdac17" : "Déplace le Swungman jusqu'ici \n et appuie sur 'Espace' pour lancer le déplacement",
-		"msgdicdac18" : "Déplace toi maintenant vers la balle, ('Espace' pour lancer le déplacement)",
-		"plus de phi" : "plus de phi",
-		"jouerenligne" : "jouer en ligne",
-		"jouerenligneligne1" : "Chaque partie jouée en ligne ",
-		"jouerenligneligne2" : "vous rapporte des Phi.",
-		"jouerenligneligne3" : "Gagner jusqu'à phi",
-		"acheterligne1" : "Acheter des Phis pour débloquer",
-		"acheterligne2" : "toujours plus de personnages !",
-		
+
+    "SCENE": "Solo game",
+
+    "plus de phi": "plus de phi",
+    "jouerenligne": "jouer en ligne",
+    "jouerenligneligne1": "Chaque partie jouée en ligne ",
+    "jouerenligneligne2": "vous rapporte des Phi.",
+    "jouerenligneligne3": "Gagner jusqu'à phi",
+    "acheterligne1": "Acheter des Phis pour débloquer",
+    "acheterligne2": "toujours plus de personnages !",
 
 
 
-		"SCENE" : "Generale",
+    "SCENE": "Gestion",
 
-		"acheter" : "acheter",
-		"jouer" : "jouer",
-		"aucun" : "aucun",
-		"notification" : "notification",
-		"prive" : "prive",
-		"home" :"home",
-		"reglages" : "reglages",
-		"compte" : "compte",
-		"deconnexion" : "deconnexion",
-		"son" : "son",
-		"musique" : "musique",
-		"tout" : "tout",
-		"effect" : "effect",
-		"passe" : "passe",
-		"course" : "course",
-		"esquive" : "esquive",
-		"tacle" : "tacle",
-		"equipe" : "teequipeam",
-		"tuto" : "tuto",
-		"boutique" : "boutique",
-		"multi" : "multi",
-		"plus" : "plus",
-		"quitter" : "quitter",
-		"amis" : "amis",
-		"charge" : "charge",
-		"points" : "points",
-		"pseudo" : "pseudo",
-		"ducats" : "ducats",
-		"vider" : "vider",
-		"choisir" : "choisir",
-		"cancel" : "annule",
-		"sync" : "synchro",
-		"langue" : "langue",
-		"enregistrer" : "enregistrer"
-		
-	}
+    "coffre": "coffre",
+    "infocoffre1": "Les coffres contiennent",
+    "infocoffre2": "des SwungMens",
+    "infocoffre3": "uniques et secrets.",
+    "infocoffre4": "Impossible de les ",
+    "infocoffre5": "déverrouiller d'une autre",
+    "infocoffre6": "manière!",
+    "msgNtificationBox1": "Nouveau Swung Men",
+    "msgNtificationBox2": "Contenu du coffre",
+    "msgNtificationBox3": "Vous obtenu ",
+    "compte": "compte",
+    "plus de phi": "plus de phi",
+    "jouerenligne": "jouer en ligne",
+    "jouerenligneligne1": "Chaque partie jouée en ligne ",
+    "jouerenligneligne2": "vous rapporte des Phi.",
+    "jouerenligneligne3": "Gagner jusqu'à phi",
+    "acheterligne1": "Acheter des Phis pour débloquer",
+    "acheterligne2": "toujours plus de personnages !",
+    "defi": "defi",
+    "bloque": "bloque",
+    "touchepasse": "touche passe",
+    "achatimpomsg1": "Achat impossible",
+    "achatimpomsg2": "Vous n'avez pas assez de Phi ou",
+    "achatimpomsg3": "vous possédez deja ce SwungMen",
+
+
+
+
+    "SCENE": "Settings",
+
+    "autoriseSave": "autoriser la sauvegarde",
+    "autoriseSaveDesc": "sauvegarder vos parties sur votre machine afin de les regarder en replay hors-ligne.",
+    "cleanSave": " Vider les sauvegardes",
+    "cleanSaveDesc": "Supprime toutes les sauvegardes de replays présentent sur votre ordinateur",
+
+
+
+    "SCENE": "game",
+
+
+    "statue": "profils",
+    "entrer le texte": "entrer le texte...",
+    "points": "points",
+    "eme": "eme",
+    "compte": "compte",
+    "plus de phi": "plus de phi",
+    "jouerenligne": "jouer en ligne",
+    "jouerenligneligne1": "Chaque partie jouée en ligne ",
+    "jouerenligneligne2": "vous rapporte des Phi.",
+    "jouerenligneligne3": "Gagner jusqu'à phi",
+    "acheterligne1": "Acheter des Phis pour débloquer",
+    "acheterligne2": "toujours plus de personnages !",
+
+
+
+
+
+    "SCENE": "Network",
+
+    "infosurjoueurs": "informations sur les joueurs",
+    "infoduchargement": "information of the loading",
+    "partie privée": "partie privée",
+    "joined": "rejoint",
+    "home": "menu",
+    "reglages": "reglages",
+    "joueurstrouvé": "joueurs trouvés",
+    "creerchambre": "creer chambre",
+    "nomchambre": "nom de la room",
+    "rejointrelaroom": "rejointre la room",
+    "plus de phi": "plus de phi",
+    "jouerenligne": "jouer en ligne",
+    "jouerenligneligne1": "Chaque partie jouée en ligne ",
+    "jouerenligneligne2": "vous rapporte des Phi.",
+    "jouerenligneligne3": "Gagner jusqu'à phi",
+    "acheterligne1": "Acheter des Phis pour débloquer",
+    "acheterligne2": "toujours plus de personnages !",
+
+
+
+
+    "SCENE": "Didacticiel",
+
+    "msgdicdac1": "Bienvenue dans le didacticiel",
+    "msgdicdac2": "C'est ici que je vais t'apprendre \n comment jouer a SuperSwungBall ",
+    "msgdicdac3": "Le but du jeu est de marquer un touchdown \n derriere la ligne d'en-but adversaire ",
+    "msgdicdac4": "Pour cela, chaque joueur controle \n les Swungmen de son equipe",
+    "msgdicdac5": "Commencons par voir les controles \n d'un Swungman",
+    "msgdicdac6": "Ca, c'est un Swungman, \n tu peux cliquer dessus pour le controler",
+    "msgdicdac7": "Tout les Swungmen ont quatre capacites \n que nous decouvrirons petit a petit",
+    "msgdicdac8": "Pour commencer, la capacites de deplacement \n est representee par la couleur bleu",
+    "msgdicdac9": "Appuie sur le bouton bleu 3 fois pour le faire \n courir le plus vite et le plus loin possible",
+    "msgdicdac10": "Tu peux cliquer sur la zone de deplacement (en bleu) \n pour controler son deplacement",
+    "msgdicdac11": "Bien, maintenant nous allons voir comment recuperer la balle",
+    "msgdicdac12": "Pour cela, \n il faut au moins un point de maitrise de la balle",
+    "msgdicdac13": "Mets 1 point dans la maitrise de la balle (en rose) \n et 2 points dans la course",
+    "msgdicdac14": "Deplace toi maintenant vers la balle, \n ('Espace' pour lancer le deplacement)",
+    "msgdicdac15": "Nous avons desormais la balle, envoyons-la quelque part",
+    "msgdicdac16": "Pour envoyer la balle,\n il faut au moins un point de maitrise de la balle",
+    "msgdicdac17": "Mets 3 points de maitrise dans la passe (toujours en rose) \n pour faire une passe le plus loin possible",
+    "msgdicdac18": "Clique dans la zone rose, puis deplace le point rose \n pour marquer l'emplacement de la passe",
+    "msgdicdac19": "Tu peux desormais lancer l'action \n et appuyer sur 'a' pour faire la passe",
+    "msgdicdac20": "Quelle passe ! Mais attention a toi, \n un ennemi arrive",
+    "msgdicdac21": "Il a recupere la balle et veut continuer son chemin. \n Nous devons l'en empecher",
+    "msgdicdac22": "Pour engager un combat il n'y a qu'une seul moyen : \n il faut qu'au moins un des deux joueurs possede du tacle",
+    "msgdicdac23": "Il n'a sûrement pas envie de se battre puisqu'il a la balle, \n c'est donc a nous d'engager le combat !",
+    "msgdicdac24": "Mets deux points dans le tacle (en vert) \n et un point dans la passe (pour recuperer la balle si tu le tacles) \n et fonce vers lui",
+    "msgdicdac25": "En voila un bon tacle ! \n Tu y es alle tellement fort \n qu'il a fini a terre et n'a pas termine son deplacement",
+    "msgdicdac26": "En temps normal quand un ennemi finit a terre \n il est affaiblit pour le prochain tour",
+    "msgdicdac27": "Je le soigne donc pour le bien de notre entrainement. \n La belle vie c'est pour plus tard",
+    "msgdicdac28": "Il va sûrement essayer de te tacler \n pour te faire perdre la balle",
+    "msgdicdac29": "Mets donc un maximum de points dans ta capacite d'esquive \n (en jaune) et fonce vers lui",
+    "msgdicdac30": "Comme prevu il a engage le combat et nous avons gagne \n car nous avions plus de \"force de combat\" que lui",
+    "msgdicdac31": "La force de combat c'est la valeur maximale \n mise dans le tacle OU l'esquive ",
+    "msgdicdac32": "Il faut donc faire attention a bien agencer ces points",
+    "msgdicdac33": "Chaque personnage a des stats de base \n differentes dans chaque maitrise",
+    "msgdicdac34": "Bien connaitre ces stats est donc primordiale \n pour ne pas etre surpris de l'issu d'un combat",
+    "msgdicdac35": "Fait quand meme attention a ne pas trop abuser des combats \n car plus tu gagnes de combats, \n plus tu seras affaibli pour le prochain",
+    "msgdicdac36": "Faire la passe a un coequipier, \n meme s'il est derriere nous, \n peux ainsi etre un bon moyen de passer la defense ennemi",
+    "msgdicdac37": "Tu as desormais toutes les armes en main \n pour te confronter aux autres joueurs !",
+    "msgdicdac38": "Pour prouver que tu es vraiment a la hauteur, \n tu dois passer une ultime epreuve",
+    "msgdicdac39": "Tu dois simplement marquer un but",
+    "msgdicdac40": "J'ai aussi fait apparaitre un nouveau Swungman, \n il est dans ton equipe, \n libre a toi de l'utiliser",
+    "msgdicdac41": "Tu es libre de marquer le but comme tu veux \n c'est l'heure de mettre en pratique tout ce que tu as appris",
+    "msgdicdac42": "Super but !",
+    "msgdicdac43": "Il te reste beaucoup a apprendre pour devenir le meilleur \n mais je vois en toi un grand potentiel, tu vas reussir",
+    "msgdicdac44": "Il temps de montrer ce que tu vaux en affrontant des joueurs ! \n les choses serieuses commencent enfin",
+    "msgdicdac45": "Bonne chance...",
+    "plus de phi": "plus de phi",
+    "jouerenligne": "jouer en ligne",
+    "jouerenligneligne1": "Chaque partie jouée en ligne ",
+    "jouerenligneligne2": "vous rapporte des Phi.",
+    "jouerenligneligne3": "Gagner jusqu'à phi",
+    "acheterligne1": "Acheter des Phis pour débloquer",
+    "acheterligne2": "toujours plus de personnages !",
+
+
+
+
+    "SCENE": "Generale",
+
+    "acheter": "acheter",
+    "jouer": "jouer",
+    "aucun": "aucun",
+    "notification": "notification",
+    "prive": "prive",
+    "home": "home",
+    "reglages": "reglages",
+    "compte": "compte",
+    "deconnexion": "deconnexion",
+    "son": "son",
+    "musique": "musique",
+    "tout": "tout",
+    "effect": "effect",
+    "passe": "passe",
+    "course": "course",
+    "esquive": "esquive",
+    "tacle": "tacle",
+    "equipe": "teequipeam",
+    "tuto": "tuto",
+    "boutique": "boutique",
+    "multi": "multi",
+    "plus": "plus",
+    "quitter": "quitter",
+    "amis": "amis",
+    "charge": "charge",
+    "points": "points",
+    "pseudo": "pseudo",
+    "ducats": "ducats",
+    "vider": "vider",
+    "choisir": "choisir",
+    "cancel": "annule",
+    "sync": "synchro",
+    "langue": "langue",
+    "enregistrer": "enregistrer"
+
+  }
 }
 // Utilise les SCENE pour mettre les nom scene
 // Laisse 3 retour à la ligne entre chaques scenes
@@ -225,7 +252,7 @@
 // "FR":"Bonne chance !"
 // "EN":"Good Luck !"
 
-// Et en bonus, peut-etre ude l'espagnol ? allemand ? ;) 
+// Et en bonus, peut-etre ude l'espagnol ? allemand ? ;)
 
 
 
