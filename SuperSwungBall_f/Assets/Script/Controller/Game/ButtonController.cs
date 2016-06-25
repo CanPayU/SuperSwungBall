@@ -10,7 +10,7 @@ namespace GameScene
         //evite les "GetComponent<>"
         Color myColor;
         Collider myCollider;
-        MenuController myMenu;
+        //MenuController myMenu; -> voir ligne 43 / 44
 
         //Clic event
         Ray ray;
@@ -20,7 +20,7 @@ namespace GameScene
         {
             myColor = GetComponent<Renderer>().material.color;
             myCollider = GetComponent<Collider>();
-            myMenu = GetComponent<Transform>().parent.gameObject.GetComponent<MenuController>();
+            //myMenu = GetComponent<Transform>().parent.gameObject.GetComponent<MenuController>(); -> voir ligne 43 / 44
             transform.TransformPoint(1, 0, 0);
         }
 

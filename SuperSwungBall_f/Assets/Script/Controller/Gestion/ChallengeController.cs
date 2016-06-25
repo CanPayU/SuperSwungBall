@@ -6,7 +6,7 @@ namespace Gestion
 {
 	public class ChallengeController : MonoBehaviour
 	{
-		private PhiManager manager;
+		private PhiManager manager; //inutile ?
 		private Player player;
 
 		private GameObject swungMen;

@@ -16,7 +16,7 @@ namespace OptionButton
 
 		private int pressId = 0;
 
-		private string defaultText = "Notification";
+		private string defaultText = "Notification"; //inutile ?
 		private Dictionary<string, string> transKeys = new Dictionary<string, string>()
 		{
 			{"default", "Notification"},
