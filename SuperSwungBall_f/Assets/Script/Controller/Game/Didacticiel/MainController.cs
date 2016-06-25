@@ -161,7 +161,7 @@ namespace GameScene.Didacticiel
                 {"Quelle passe ! Mais attention a toi, \n un ennemi arrive","4" },
                 {"Il a recupere la balle et veut continuer son chemin. \n Nous devons l'en empecher","5" },
                 {"Pour engager un combat il n'y a qu'une seul moyen : \n il faut qu'au moins un des deux joueurs possede du tacle","6" },
-                {"Il n'a sûrement pas envie de se battre puisqu'il a la balle, \n c'est donc a nous d'engager le combat !","5.5" },
+                {"Il n'a surement pas envie de se battre puisqu'il a la balle, \n c'est donc a nous d'engager le combat !","5.5" },
                 {"Mets deux points dans le tacle (en vert) \n et un point dans la passe (pour recuperer la balle si tu le tacles) \n et fonce vers lui","0" }
             };
 
@@ -171,7 +171,7 @@ namespace GameScene.Didacticiel
                 {"En temps normal quand un ennemi finit a terre \n il est affaiblit pour le prochain tour","5.5" },
                 {"Je le soigne donc pour le bien de notre entrainement. \n La belle vie c'est pour plus tard","5.5" },
                 {"Mais desormais ca va etre a toi de te defendre \n car tu as recupere la balle","5" },
-                {"Il va sûrement essayer de te tacler \n pour te faire perdre la balle","4.5" },
+                {"Il va surement essayer de te tacler \n pour te faire perdre la balle","4.5" },
                 {"Mets donc un maximum de points dans ta capacite d'esquive \n (en jaune) et fonce vers lui","0" }
             };
 
@@ -234,8 +234,8 @@ namespace GameScene.Didacticiel
                     MyPlayer2_Controller.Player = play_t1;
                     MyPlayer2_Controller.IsMine = true;
 
-                    screentext.transform.position = new Vector2(960, 700);
-                    screetext2.transform.position = new Vector2(963, 697);
+                    screentext.transform.position = new Vector2(screentext.transform.position.x, 700);
+                    screetext2.transform.position = new Vector2(screentext.transform.position.x, 697);
                     phase++;
                     break;
 

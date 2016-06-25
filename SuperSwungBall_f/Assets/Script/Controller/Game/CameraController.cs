@@ -69,6 +69,7 @@ namespace GameScene
         {
             speed = 3;
             posRelative = new Vector3(3, 3, 3);
+            animation = true;
             transform.position = new Vector3(ball.transform.position.x, 0, ball.transform.position.z) + posRelative;
         }
     }

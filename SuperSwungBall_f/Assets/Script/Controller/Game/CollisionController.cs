@@ -60,7 +60,7 @@ namespace GameScene
         private void interception(Collider ballCollider)
         {
             // ramasse/intercepte la balle uniquement si le perso a au moins un élément "passe"
-            if (ballCollider.transform.parent == null && ballCollider.name == "Ball" && player.ZonePasse != 0 && ballCollider.GetComponent<BallController>().interceptable(gameObject))
+            if (ballCollider.transform.parent == null && ballCollider.name == "Ball" && player.Passe != 0 && ballCollider.GetComponent<BallController>().interceptable(gameObject))
             {
                 ballCollider.transform.parent = transform.FindChild("perso").transform;
                 ballCollider.GetComponent<Collider>().enabled = false;

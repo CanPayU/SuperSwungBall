@@ -23,6 +23,7 @@ public class Player
     private PlayerStats DEFAULTSTATS = new PlayerStats(0, 0, 0, 0); // Stats initiales (unique au joueur)
     private List<string> buttonsValues = new List<string> { "esquive", "esquive", "esquive" }; // Valeurs des boutons
     private PlayerStats finalStats = new PlayerStats(0, 0, 0, 0); // Stats après selection des actions dans le menu
+    private PlayerStats bonus = new PlayerStats(0, 0, 0, 0); // bonus / malus
 
     public Player(int tacle, int esquive, int passe, int course, string player_name_, string uid = "IdPlayer", int Team_Id = 0, int price = 0, int ducat = -1)
     {
@@ -83,6 +84,7 @@ public class Player
         buttonsValues[0] = "esquive";
         buttonsValues[1] = "esquive";
         buttonsValues[2] = "esquive";
+        bonus = new PlayerStats(0, 0, 0, 0);
         computeStats();
     }
 
@@ -103,7 +105,7 @@ public class Player
             }
             else
             {
-                finalStats[s] += DEFAULTSTATS[s];
+                finalStats[s] += DEFAULTSTATS[s] + bonus[s];
             }
         }
     }
@@ -173,11 +175,11 @@ public class Player
     }
     public float ZoneDeplacement
     {
-        get { return (float)finalStats.Course / 10; }
+        get { return (float)finalStats.Course / 10 + 0.5f; }
     }
     public float ZonePasse
     {
-        get { return (float)finalStats.Passe / 10; }
+        get { return Passe == 0 ? 0 : (float)finalStats.Passe / 10 + 0.3f; }
     }
     public float Ducat
     {

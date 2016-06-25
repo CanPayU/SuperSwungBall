@@ -264,7 +264,7 @@ namespace GameScene
             menuController.display(false);
             menuDisplayed = false;
             player.computeStats();
-            speed = player.Speed; // vitesse du joueur
+            speed = player.ZoneDeplacement; // vitesse du joueur
             pause = 0;
 
             if (setPoint)
