@@ -48,7 +48,7 @@ public class Game
         if (team.Points >= max_point)
         {
             finished = true;
-			GameKit.GameBehavior.Call.OnEndGame (End.TIME);
+            GameKit.GameBehavior.Call.OnEndGame(End.TIME);
         }
     }
 
