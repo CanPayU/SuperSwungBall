@@ -23,6 +23,10 @@ public static class ApplicationModel {
 	/// Nom du fichier si on lance un replay
 	/// </summary>
 	public static string replayName;
+	/// <summary>
+	/// La musique est elle en cours ?
+	/// </summary>
+	public static bool tetomaIsPlaying = false;
 
 
 	private static int subviewCount = 0;

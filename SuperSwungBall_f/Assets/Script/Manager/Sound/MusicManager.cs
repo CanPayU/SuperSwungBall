@@ -13,6 +13,13 @@ public class MusicManager : Singleton<MusicManager>
     {
         source_ = GetComponent<AudioSource>();
         clip_ = source_.clip;
+		if (ApplicationModel.tetomaIsPlaying)
+			Stop_Music();
+		else
+		{
+			ApplicationModel.tetomaIsPlaying = true;
+			Play_Music();
+		}
     }
 
     public void Stop_Music()
