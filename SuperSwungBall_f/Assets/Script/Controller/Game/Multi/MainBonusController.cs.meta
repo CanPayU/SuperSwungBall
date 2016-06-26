@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: d1a3ffe69b5c15747876c31207ffed49
+timeCreated: 1466950606
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - tripleBonus: {fileID: 185320, guid: e351c7d2bcd0ab54bb5a0c34fdbfea03, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

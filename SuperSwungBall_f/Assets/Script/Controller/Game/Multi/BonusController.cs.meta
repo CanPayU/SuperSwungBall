@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: a288e194ec3c112439f93dda78fe4acd
+timeCreated: 1466946899
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - tacle: {fileID: 169136, guid: 5fda88f7a73080b488593055af3da503, type: 2}
+  - esquive: {fileID: 159164, guid: 3bf2b0816bd46c74db46c8631b6635b4, type: 2}
+  - passe: {fileID: 175284, guid: d43caec4b6ce8fb4c85707d98828f9cf, type: 2}
+  - course: {fileID: 159280, guid: 0e8b3e2f994e32a439c4dcae6a6f08e7, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

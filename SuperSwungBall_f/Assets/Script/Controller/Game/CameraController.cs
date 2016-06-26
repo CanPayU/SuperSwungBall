@@ -8,7 +8,7 @@ namespace GameScene
 	public class CameraController : GameBehavior
     {
 
-        private Vector3 POSITION_INITIALE = new Vector3(25, 35, 0); // constante position phase de reflexion
+        private Vector3 POSITION_INITIALE = new Vector3(20, 35, 0); // constante position phase de reflexion
         private Vector3 posRelative = new Vector3();
 
         private new bool animation;
@@ -38,7 +38,7 @@ namespace GameScene
             else
             {
                 transform.position = Vector3.MoveTowards(transform.position, POSITION_INITIALE, Time.deltaTime * speed);
-                transform.LookAt(Vector3.zero);
+                transform.LookAt(new Vector3(3,0,0));
             }
         }
 
