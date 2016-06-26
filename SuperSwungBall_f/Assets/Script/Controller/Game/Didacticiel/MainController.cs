@@ -149,7 +149,7 @@ namespace GameScene.Didacticiel
 
             tableau_4 = new string[,]
             {
-                {"Nous avons desormais la balle, envoyons-la quelque part","4" },
+                {"Nous avons desormais la balle, \n envoyons-la quelque part","4" },
                 {"Pour envoyer la balle,\n il faut au moins un point de maitrise de la balle","5" },
                 {"Mets 3 points de maitrise dans la passe (toujours en rose) \n pour faire une passe le plus loin possible","6" },
                 {"Clique dans la zone rose, puis deplace le point rose \n pour marquer l'emplacement de la passe","5.5" },
@@ -168,7 +168,7 @@ namespace GameScene.Didacticiel
             tableau_6 = new string[,]
             {
                 {"En voila un bon tacle ! \n Tu y es alle tellement fort \n qu'il a fini a terre et n'a pas termine son deplacement","6" },
-                {"En temps normal quand un ennemi finit a terre \n il est affaiblit pour le prochain tour","5.5" },
+                {"En temps normal quand un ennemi fini a terre \n il est affaiblit pour le prochain tour","5.5" },
                 {"Je le soigne donc pour le bien de notre entrainement. \n La belle vie c'est pour plus tard","5.5" },
                 {"Mais desormais ca va etre a toi de te defendre \n car tu as recupere la balle","5" },
                 {"Il va surement essayer de te tacler \n pour te faire perdre la balle","4.5" },
@@ -199,7 +199,7 @@ namespace GameScene.Didacticiel
             {
                 {"Super but !","2" },
                 {"Il te reste beaucoup a apprendre pour devenir le meilleur \n mais je vois en toi un grand potentiel, tu vas reussir","6.5" },
-                {"Il temps de montrer ce que tu vaux en affrontant des joueurs ! \n les choses serieuses commencent enfin","6" },
+                {"Il est temps de montrer ce que tu vaux en affrontant des joueurs ! \n les choses serieuses commencent enfin","6" },
                 {"Bonne chance...","3" }
             };
             #endregion
