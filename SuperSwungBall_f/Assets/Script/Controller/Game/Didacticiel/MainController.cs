@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TranslateKit;
 
 namespace GameScene.Didacticiel
 {
@@ -122,85 +123,85 @@ namespace GameScene.Didacticiel
 
             tableau_1 = new string[,]
             {
-                {"Bienvenue dans le didacticiel", "3" },
-                {"C'est ici que je vais t'apprendre \n comment jouer a SuperSwungBall","4.5" },
-                {"Le but du jeu est de marquer un touchdown \n derriere la ligne d'en-but adversaire ","5" },
-                {"Pour cela, chaque joueur controle \n les Swungmen de son equipe","4" },
-                {"Commencons par voir les controles \n d'un Swungman","3.5" }
+                {Language.GetValue("msgdicdac1"), "3" },
+                {Language.GetValue("msgdicdac2"),"4.5" },
+                {Language.GetValue("msgdicdac3"),"5" },
+                {Language.GetValue("msgdicdac4"),"4" },
+                {Language.GetValue("msgdicdac5"),"3.5" }
             };
 
             tableau_2 = new string[,]
             {
-                {"Ca, c'est un Swungman, \n tu peux cliquer dessus pour le controler","4" },
-                {"Tout les Swungmen ont quatre capacites \n que nous decouvrirons petit a petit","5" },
-                {"Pour commencer, la capacites de deplacement \n est representee par la couleur bleu","5" },
-                {"Appuie sur le bouton bleu 3 fois pour le faire \n courir le plus vite et le plus loin possible","5.5" },
-                {"Tu peux cliquer sur la zone de deplacement (en bleu) \n pour controler son deplacement","5.5" },
-                {"Deplace le Swungman jusqu'ici \n et appuie sur 'Espace' pour lancer le deplacement","0" }
+                {Language.GetValue("msgdicdac6"),"4" },
+                {Language.GetValue("msgdicdac7"),"5" },
+                {Language.GetValue("msgdicdac8"),"5" },
+                {Language.GetValue("msgdicdac9"),"5.5" },
+                {Language.GetValue("msgdicdac10"),"5.5" },
+                {Language.GetValue("msgdicdac11"),"0" }
             };
 
             tableau_3 = new string[,]
             {
-                {"Bien, maintenant nous allons voir comment recuperer la balle", "4"} ,
-                {"Pour cela, \n il faut au moins un point de maitrise de la balle","5" },
-                {"Mets 1 point dans la maitrise de la balle (en rose) \n et 2 points dans la course","5" },
-                {"Deplace toi maintenant vers la balle, \n ('Espace' pour lancer le deplacement)","0" } }
+                {Language.GetValue("msgdicdac12"), "4"} ,
+                {Language.GetValue("msgdicdac13"),"5" },
+                {Language.GetValue("msgdicdac14"),"5" },
+                {Language.GetValue("msgdicdac15"),"0" } }
             ;
 
             tableau_4 = new string[,]
             {
-                {"Nous avons desormais la balle, \n envoyons-la quelque part","4" },
-                {"Pour envoyer la balle,\n il faut au moins un point de maitrise de la balle","5" },
-                {"Mets 3 points de maitrise dans la passe (toujours en rose) \n pour faire une passe le plus loin possible","6" },
-                {"Clique dans la zone rose, puis deplace le point rose \n pour marquer l'emplacement de la passe","5.5" },
-                {"Tu peux desormais lancer l'action \n et appuyer sur 'a' pour faire la passe","0" }
+                {Language.GetValue("msgdicdac16"),"4" },
+                {Language.GetValue("msgdicdac17"),"5" },
+                {Language.GetValue("msgdicdac18"),"6" },
+                {Language.GetValue("msgdicdac19"),"5.5" },
+                {Language.GetValue("msgdicdac20"),"0" }
             };
 
             tableau_5 = new string[,]
             {
-                {"Quelle passe ! Mais attention a toi, \n un ennemi arrive","4" },
-                {"Il a recupere la balle et veut continuer son chemin. \n Nous devons l'en empecher","5" },
-                {"Pour engager un combat il n'y a qu'une seul moyen : \n il faut qu'au moins un des deux joueurs possede du tacle","6" },
-                {"Il n'a surement pas envie de se battre puisqu'il a la balle, \n c'est donc a nous d'engager le combat !","5.5" },
-                {"Mets deux points dans le tacle (en vert) \n et un point dans la passe (pour recuperer la balle si tu le tacles) \n et fonce vers lui","0" }
+                {Language.GetValue("msgdicdac21"),"4" },
+                {Language.GetValue("msgdicdac22"),"5" },
+                {Language.GetValue("msgdicdac23"),"6" },
+                {Language.GetValue("msgdicdac24"),"5.5" },
+                {Language.GetValue("msgdicdac25"),"0" }
             };
 
             tableau_6 = new string[,]
             {
-                {"En voila un bon tacle ! \n Tu y es alle tellement fort \n qu'il a fini a terre et n'a pas termine son deplacement","6" },
-                {"En temps normal quand un ennemi fini a terre \n il est affaiblit pour le prochain tour","5.5" },
-                {"Je le soigne donc pour le bien de notre entrainement. \n La belle vie c'est pour plus tard","5.5" },
-                {"Mais desormais ca va etre a toi de te defendre \n car tu as recupere la balle","5" },
-                {"Il va surement essayer de te tacler \n pour te faire perdre la balle","4.5" },
-                {"Mets donc un maximum de points dans ta capacite d'esquive \n (en jaune) et fonce vers lui","0" }
+                {Language.GetValue("msgdicdac26"),"6" },
+                {Language.GetValue("msgdicdac27"),"5.5" },
+                {Language.GetValue("msgdicdac28"),"5.5" },
+                {Language.GetValue("msgdicdac29"),"5" },
+                {Language.GetValue("msgdicdac30"),"4.5" },
+                {Language.GetValue("msgdicdac31"),"0" }
             };
 
             tableau_7 = new string[,]
             {
-                {"Comme prevu il a engage le combat et nous avons gagne \n car nous avions plus de \"force de combat\" que lui","6" },
-                {"La force de combat c'est la valeur maximale \n mise dans le tacle OU l'esquive ","5" },
-                {"Il faut donc faire attention a bien agencer ces points","4" },
-                {"Chaque personnage a des stats de base \n differentes dans chaque maitrise","5" },
-                {"Bien connaitre ces stats est donc primordiale \n pour ne pas etre surpris de l'issu d'un combat","5.5" },
-                {"Fait quand meme attention a ne pas trop abuser des combats \n car plus tu gagnes de combats, \n plus tu seras affaibli pour le prochain","7.5" },
-                {"Faire la passe a un coequipier, \n meme s'il est derriere nous, \n peux ainsi etre un bon moyen de passer la defense ennemi","6.5" },
+                {Language.GetValue("msgdicdac32"),"6" },
+                {Language.GetValue("msgdicdac33"),"5" },
+                {Language.GetValue("msgdicdac34"),"4" },
+                {Language.GetValue("msgdicdac35"),"5" },
+                {Language.GetValue("msgdicdac36"),"5.5" },
+                {Language.GetValue("msgdicdac37"),"7.5" },
+                {Language.GetValue("msgdicdac38"),"6.5" },
             };
 
             tableau_8 = new string[,]
             {
-                {"Tu as desormais toutes les armes en main \n pour te confronter aux autres joueurs !","5" },
-                {"Pour prouver que tu es vraiment a la hauteur, \n tu dois passer une ultime epreuve","5" },
-                {"Tu dois simplement marquer un but","3" },
-                {"J'ai aussi fait apparaitre un nouveau Swungman, \n il est dans ton equipe, \n libre a toi de l'utiliser","6" },
-                {"Tu es libre de marquer le but comme tu veux \n c'est l'heure de mettre en pratique tout ce que tu as appris","0" }
+                {Language.GetValue("msgdicdac39"),"5" },
+                {Language.GetValue("msgdicdac40"),"5" },
+                {Language.GetValue("msgdicdac41"),"3" },
+                {Language.GetValue("msgdicdac42"),"6" },
+                {Language.GetValue("msgdicdac43"),"0" }
             };
 
             tableau_9 = new string[,]
             {
-                {"Super but !","2" },
-                {"Il te reste beaucoup a apprendre pour devenir le meilleur \n mais je vois en toi un grand potentiel, tu vas reussir","6.5" },
-                {"Il est temps de montrer ce que tu vaux en affrontant des joueurs ! \n les choses serieuses commencent enfin","6" },
-                {"Bonne chance...","3" }
+                {Language.GetValue("msgdicdac44"),"2" },
+                {Language.GetValue("msgdicdac45"),"6.5" },
+                {Language.GetValue("msgdicdac46"),"6" },
+                {Language.GetValue("msgdicdac47"),"3" }
             };
             #endregion
             // --
