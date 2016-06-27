@@ -2,6 +2,11 @@
   "language": "FR",
   "data": {
 
+    "language": "FR",
+
+
+
+
     "SCENE": "standing",
 
     "standingTitle": "Appuyer sur une touche pour commencer",
@@ -154,7 +159,7 @@
     "msgdicdac4": "Pour cela, chaque joueur controle \n les Swungmen de son equipe",
     "msgdicdac5": "Commencons par voir les controles \n d'un Swungman",
     "msgdicdac6": "Ca, c'est un Swungman, \n tu peux cliquer dessus pour le controler",
-    "msgdicdac7": "Tout les Swungmen ont quatre capacites \n que nous decouvrirons petit a petit",
+    "msgdicdac7": "Tous les Swungmen ont quatre capacites \n que nous decouvrirons petit a petit",
     "msgdicdac8": "Pour commencer, la capacites de deplacement \n est representee par la couleur bleu",
     "msgdicdac9": "Appuie sur le bouton bleu 3 fois pour le faire \n courir le plus vite et le plus loin possible",
     "msgdicdac10": "Tu peux cliquer sur la zone de deplacement (en bleu) \n pour controler son deplacement",
@@ -185,10 +190,10 @@
     "msgdicdac35": "Chaque personnage a des stats de base \n differentes dans chaque maitrise",
     "msgdicdac36": "Bien connaitre ces stats est donc primordiale \n pour ne pas etre surpris de l'issu d'un combat",
     "msgdicdac37": "Fait quand meme attention a ne pas trop abuser des combats \n car plus tu gagnes de combats, \n plus tu seras affaibli pour le prochain",
-    "msgdicdac38": "Faire la passe a un coequipier, \n meme s'il est derriere nous, \n peux ainsi etre un bon moyen de passer la defense ennemi",
+    "msgdicdac38": "Faire la passe a un coequipier, \n meme s'il est derriere toi, \n peux ainsi etre un bon moyen de passer la defense ennemi",
     "msgdicdac39": "Tu as desormais toutes les armes en main \n pour te confronter aux autres joueurs !",
     "msgdicdac40": "Pour prouver que tu es vraiment a la hauteur, \n tu dois passer une ultime epreuve",
-    "msgdicdac41": "Tu dois simplement marquer un but",
+    "msgdicdac41": "Tu dois simplement marquer un touchedown",
     "msgdicdac42": "J'ai fait apparaitre cinq nouveaux Swungman, \n dont un est dans ton equipe, \n libre a toi de l'utiliser",
     "msgdicdac43": "Tu es libre de marquer le but comme tu veux \n c'est l'heure de mettre en pratique tout ce que tu as appris",
     "msgdicdac44": "Super but !",

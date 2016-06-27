@@ -526,7 +526,8 @@ Prefab:
       propertyPath: m_UseLightProbes
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11479976, guid: 53e01dbd34b44794bad0f63f468da40e, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 53e01dbd34b44794bad0f63f468da40e, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &236171361 stripped
