@@ -2,53 +2,60 @@
 using System.Collections;
 using Boomlagoon.JSON;
 
-namespace TranslateKit {
-	
-	public static class Language {
+namespace TranslateKit
+{
 
-		private static Data data;
-		public static AvailableLanguage language; 
+    public static class Language
+    {
 
-		public static void LoadLanguage(AvailableLanguage uid){
-			string jsonString = ((TextAsset)Resources.Load("Translate\\"+uid.Value, typeof(TextAsset))).text;
-			JSONObject json = JSONObject.Parse (jsonString);
+        private static Data data;
+        public static AvailableLanguage language;
 
-			if (json.GetString("language") == uid.Value) {
-				JSONObject languageObj = json.GetObject ("data");
-				data = new Data (languageObj);
-				language = uid;
-			}
-		}
+        public static void LoadLanguage(AvailableLanguage uid)
+        {
+            string jsonString = ((TextAsset)Resources.Load("Translate\\" + uid.Value, typeof(TextAsset))).text;
+            JSONObject json = JSONObject.Parse(jsonString);
 
-		public static string GetValue(TradValues value) {
-			if (data != null)
-				return data.obj.GetString (value.Value);
-			return "";
-		}
+            if (json.GetString("language") == uid.Value)
+            {
+                JSONObject languageObj = json.GetObject("data");
+                data = new Data(languageObj);
+                language = uid;
+            }
+        }
 
-		public static string GetValue(string value) {
-			if (data != null)
-				return data.obj.GetString (value);
-			return "";
-		}
-	}
+        public static string GetValue(TradValues value)
+        {
+            if (data != null)
+                return data.obj.GetString(value.Value);
+            return "";
+        }
 
-	[System.Serializable]
-	public sealed class AvailableLanguage {
-		public static readonly AvailableLanguage FR = new AvailableLanguage("FR");
-		public static readonly AvailableLanguage EN = new AvailableLanguage("EN");
+        public static string GetValue(string value)
+        {
+            if (data != null)
+                return data.obj.GetString(value);
+            return "";
+        }
+    }
 
-		private AvailableLanguage(string value)
-		{
-			Value = value;
-		}
+    [System.Serializable]
+    public sealed class AvailableLanguage
+    {
+        public static readonly AvailableLanguage FR = new AvailableLanguage("FR");
+        public static readonly AvailableLanguage EN = new AvailableLanguage("EN");
 
-		public string Value { get; private set; }
-	}
+        private AvailableLanguage(string value)
+        {
+            Value = value;
+        }
 
-//	public enum AvailableLanguage {
-//		FR,		// Français
-//		EN		// Anglais
-//	}
+        public string Value { get; private set; }
+    }
+
+    //	public enum AvailableLanguage {
+    //		FR,		// Français
+    //		EN		// Anglais
+    //	}
 
 }
