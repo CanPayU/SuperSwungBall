@@ -69,7 +69,8 @@ namespace GameScene
         {
             get
             {
-                arrivalPointPasse = new Vector3(menuController.Get_CoordsPasse[0], 0.2f, menuController.Get_CoordsPasse[1]);
+				if (arrivalPointPasse == Vector3.zero)
+                	arrivalPointPasse = new Vector3(menuController.Get_CoordsPasse[0], 0.2f, menuController.Get_CoordsPasse[1]);
                 return arrivalPointPasse;
             }
             set { arrivalPointPasse = value; }
@@ -223,6 +224,7 @@ namespace GameScene
         }
 		protected void calculateArrivalPoint()
 		{
+			arrivalPointPasse = new Vector3(menuController.Get_CoordsPasse[0], 0.2f, menuController.Get_CoordsPasse[1]);
 			arrivalPoint = new Vector3(menuController.Get_Coordsdeplacement[0], transform.position.y, menuController.Get_Coordsdeplacement[1]);
 		}
         public virtual void updateValuesPlayer(Color c) //Activation clic boutton

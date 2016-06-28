@@ -35,10 +35,10 @@ namespace GameScene.Replay {
 			//		Debug.Log(this.makePass + " -- " + transform.position);
 			//		GameObject.Find("Ball").GetComponent<BallController>().ExecutePasse();
 			//	}
-					
-			//}
 
-			if (phaseAnimation && this.makePass && transform.position == this.posPass) {
+			//}
+			var dist = Vector3.Distance(transform.position, this.posPass);
+			if (phaseAnimation && this.makePass && dist < 0.1) {
 				Debug.Log("Fait la passe");
 				GameObject.Find("Ball").GetComponent<BallController>().ExecutePasse();
 				this.makePass = false; // Passe faite
