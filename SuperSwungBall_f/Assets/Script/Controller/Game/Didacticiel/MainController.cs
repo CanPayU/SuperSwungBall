@@ -83,7 +83,7 @@ namespace GameScene.Didacticiel
         // Use this for initialization
         void Start()
         {
-            this.player1_prefab = Resources.Load("Prefabs/Solo/D_01_itectori") as GameObject;
+            this.player1_prefab = Resources.Load("Prefabs/Didacticiel/Player_1") as GameObject;
             this.player2_prefab = Resources.Load("Prefabs/Didacticiel/Player_2") as GameObject;
 
             // -- Renderers / Collider
