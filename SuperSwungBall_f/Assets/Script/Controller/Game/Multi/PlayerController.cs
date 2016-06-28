@@ -11,6 +11,28 @@ namespace GameScene.Multi
 {
 	public class PlayerController : BasicPlayerController
 	{
+
+
+		private static int countData = 0;
+
+		private void incrementData()
+		{
+			countData++;
+			if (countData >= 5)
+			{
+				Caller.StartAnimation();
+				countData = 0;
+			}
+		}
+
+
+
+
+
+
+
+
+
 		private ReplayController replayController;
 
 		public PlayerController(){
@@ -28,10 +50,15 @@ namespace GameScene.Multi
 		}
 
 		// -- Event
+		public override void OnEndTimer()
+		{
+			SyncValues();
+		}
+
 		public override void OnStartAnimation(){
 			PlayerAction action = new PlayerAction (0, this.PointDeplacement, this.Player.Button_Values);
 			this.replayController.setPlayerAction (this.Player, action);
-			SyncValues ();
+			start_Anim(false);
 		}
 
 		public override bool passe(ref Vector3 pointPasse)
@@ -60,7 +87,7 @@ namespace GameScene.Multi
 			player_values.Add("BtnValues", this.Player.Button_Values);
 
 			view.RPC("GetMyParam", PhotonTargets.Others, view.viewID, (byte[])ObjectToByteArray(player_values));
-			start_Anim(false);
+			//start_Anim(false);
 		}
 
 		[PunRPC]
@@ -72,7 +99,7 @@ namespace GameScene.Multi
 			this.PointDeplacement = deserialize_vector3((float[])values["PointDep"]);
 			this.PointPasse = deserialize_vector3((float[])(values["PointPasse"]));
 			this.Player.Button_Values = (List<string>)(values["BtnValues"]);
-			start_Anim(false);
+			incrementData();
 		}
 
 		#region Serialization

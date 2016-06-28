@@ -10,6 +10,8 @@ namespace GameKit {
 
 		// ============== GlobalEvent
 
+		/// <summary> Appelé lorsque le timer se termine. </summary>
+		void OnEndTimer();
 
 		/// <summary> Appelé lorsque la phase d'annimation débute. </summary>
 		void OnStartAnimation();

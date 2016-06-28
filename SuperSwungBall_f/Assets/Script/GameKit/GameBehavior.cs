@@ -34,10 +34,11 @@ namespace GameKit
                 this.listener.StartListening();
         }
 
-        ///
-        /// Event
-        ///
+		///
+		/// Event
+		///
 
+		public virtual void OnEndTimer() { }
         public virtual void OnStartAnimation() { }
         public virtual void OnStartReflexion() { }
         public virtual void OnGoal(GoalController g) { }
@@ -62,6 +63,11 @@ namespace GameKit
             {
                 this.parent = parent;
             }
+
+			internal void EndTimer()
+			{
+				callListeners("OnEndTimer", null, EventType.Global);
+			}
 
             internal void StartAnimation()
             {

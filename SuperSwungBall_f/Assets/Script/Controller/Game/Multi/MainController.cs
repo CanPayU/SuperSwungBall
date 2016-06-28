@@ -72,7 +72,7 @@ namespace GameScene.Multi
 		[PunRPC]
 		private void start_annim()
 		{
-			Caller.StartAnimation ();
+			Caller.EndTimer ();
 		}
 
 
