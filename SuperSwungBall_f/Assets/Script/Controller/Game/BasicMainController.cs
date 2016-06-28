@@ -128,7 +128,7 @@ namespace GameScene
 		public override void OnStartAnimation(){
 			Debug.Log ("OnStartAnimation");
 
-			this.time = new Timer (10.0F, end_time);
+			this.time = new Timer (8.0F, end_time);
 			this.annim_started = true;
 			this.time.start ();
 		}
@@ -136,7 +136,7 @@ namespace GameScene
 			Debug.Log ("Start Reflexion");
 
 			this.annim_started = false;
-			this.time = new Timer(15.0F, end_time);
+			this.time = new Timer(60.0F, end_time);
 			this.time.start();
 		}
 		public override void OnEndGame(GameScene.Multi.End type) {

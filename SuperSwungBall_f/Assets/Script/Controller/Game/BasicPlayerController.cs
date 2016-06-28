@@ -221,7 +221,10 @@ namespace GameScene
         {
             selection.enabled = false;
         }
-
+		protected void calculateArrivalPoint()
+		{
+			arrivalPoint = new Vector3(menuController.Get_Coordsdeplacement[0], transform.position.y, menuController.Get_Coordsdeplacement[1]);
+		}
         public virtual void updateValuesPlayer(Color c) //Activation clic boutton
         {
             menuController.update_Color(c); //change la couleur des trois bouttons "valeur"

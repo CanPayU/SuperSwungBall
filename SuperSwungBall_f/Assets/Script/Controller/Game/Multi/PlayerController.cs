@@ -23,6 +23,7 @@ namespace GameScene.Multi
 				Caller.StartAnimation();
 				countData = 0;
 			}
+			Debug.Log(countData);
 		}
 
 
@@ -45,6 +46,7 @@ namespace GameScene.Multi
 		// -- Event
 		public override void OnEndTimer()
 		{
+			calculateArrivalPoint();
 			SyncValues();
 		}
 
