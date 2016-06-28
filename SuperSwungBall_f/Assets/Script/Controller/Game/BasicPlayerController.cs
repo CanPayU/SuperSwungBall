@@ -78,7 +78,8 @@ namespace GameScene
         {
             get
             {
-                arrivalPoint = new Vector3(menuController.Get_Coordsdeplacement[0], transform.position.y, menuController.Get_Coordsdeplacement[1]);
+				if (arrivalPoint == Vector3.zero)
+              		arrivalPoint = new Vector3(menuController.Get_Coordsdeplacement[0], transform.position.y, menuController.Get_Coordsdeplacement[1]);
                 return arrivalPoint;
             }
             set { arrivalPoint = value; }

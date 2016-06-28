@@ -112,7 +112,7 @@ namespace GameScene.Replay
 	}
 
 	[System.Serializable]
-	public class Vector3Serializer
+	public struct Vector3Serializer
 	{
 		public float x;
 		public float y;

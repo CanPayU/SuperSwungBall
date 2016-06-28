@@ -26,13 +26,6 @@ namespace GameScene.Multi
 		}
 
 
-
-
-
-
-
-
-
 		private ReplayController replayController;
 
 		public PlayerController(){
@@ -57,7 +50,7 @@ namespace GameScene.Multi
 
 		public override void OnStartAnimation(){
 			PlayerAction action = new PlayerAction (0, this.PointDeplacement, this.Player.Button_Values);
-			this.replayController.setPlayerAction (this.Player, action);
+			this.replayController.setPlayerAction(this.Player, action);
 			start_Anim(false);
 		}
 

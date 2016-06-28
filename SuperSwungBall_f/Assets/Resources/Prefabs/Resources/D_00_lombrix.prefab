@@ -164,7 +164,7 @@ GameObject:
   - 4: {fileID: 410698}
   - 95: {fileID: 9576798}
   m_Layer: 0
-  m_Name: basic1
+  m_Name: D_00_lombrix
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
