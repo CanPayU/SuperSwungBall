@@ -22,7 +22,7 @@ namespace GameScene.Replay {
 		{
 			this.ballPrefab = Resources.Load("Prefabs/Resources/Ball") as GameObject;
 			this.playerController = typeof(GameScene.Replay.PlayerController);
-			this.replay = SaveLoad.load_replay("replay.txt");//(ApplicationModel.replayName);
+			this.replay = SaveLoad.load_replay(ApplicationModel.replayName);
 			this.replay.resetActualValue ();
 			Game.Instance = this.replay.Game;
 			base.Start ();

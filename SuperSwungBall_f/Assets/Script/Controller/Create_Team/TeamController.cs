@@ -108,7 +108,7 @@ namespace Create_Team
 				else
 					sum += players [i].Ducat;
 			}
-			float value = (sum*10) / 25;
+			float value = (sum*10) / 30;
 			ducat_stat.valueWithColor(value, (sum*10).ToString());
 			return (value <= 1f);
 		}
