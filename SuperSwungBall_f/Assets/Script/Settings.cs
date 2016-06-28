@@ -85,20 +85,34 @@ public class Settings
         // ----- Default Team FOR DEBUG
         string[] def_sound = new string[] { "Musics/Team/PSG/Allez", "Musics/Team/PSG/Clap" };
         Team psg = new Team("PSG", compo_psg, def_sound, "psg");
-        psg.add_player(new Player(4, 6, 10, 4, "Lombrix"));
-        psg.add_player(new Player(7, 4, 4, 8, "GPasDNom"));
+
+        psg.add_player(new Player(4, 6, 10, 4, "Lombrix", "D_00_lombrix"));
+		psg.add_player(new Player(1, 4, 6, 10, "Itectori", "D_01_itectori"));
+		psg.add_player(new Player(3, 2, 10, 7, "PlayWithCube", "D_02_pwc"));
+        psg.add_player(new Player(7, 4, 4, 8, "GPasDNom", "D_03_gpasdnom"));
+
+		//psg.add_player(new Player(4, 6, 10, 4, "Lombrix"));
+		//psg.add_player(new Player(1, 4, 6, 10, "Itectori"));
+		//psg.add_player(new Player(3, 2, 10, 7, "PlayWithCube"));
+		//psg.add_player(new Player(7, 4, 4, 8, "GPasDNom"));
+
         psg.add_player(new Player(1, 1, 6, 8, "Epitechien"));
-        psg.add_player(new Player(3, 2, 10, 7, "PlayWithCube"));
-        psg.add_player(new Player(1, 4, 6, 10, "Itectori"));
         default_team.Add("psg", psg);
 
         def_sound = new string[] { };
         Team fr = new Team("France", compo_fr, def_sound, "fr");
-        fr.add_player(new Player(1, 4, 6, 10, "Itectori"));
-        fr.add_player(new Player(3, 2, 10, 7, "PlayWithCube"));
+
+		fr.add_player(new Player(4, 6, 10, 4, "Lombrix", "D_00_lombrix"));
+        fr.add_player(new Player(1, 4, 6, 10, "Itectori", "D_01_itectori"));
+        fr.add_player(new Player(3, 2, 10, 7, "PlayWithCube", "D_02_pwc"));
+		fr.add_player(new Player(7, 4, 4, 8, "GPasDNom", "D_03_gpasdnom"));
+
+		//fr.add_player(new Player(4, 6, 10, 4, "Lombrix"));
+		//fr.add_player(new Player(1, 4, 6, 10, "Itectori"));
+		//fr.add_player(new Player(3, 2, 10, 7, "PlayWithCube"));
+		//fr.add_player(new Player(7, 4, 4, 8, "GPasDNom"));
+
         fr.add_player(new Player(8, 7, 5, 7, "Epiteen"));
-        fr.add_player(new Player(7, 4, 4, 8, "GPasDNom"));
-        fr.add_player(new Player(4, 6, 10, 4, "Lombrix"));
         default_team.Add("fr", fr);
         // ------------------
         selected_team = fr;
@@ -107,10 +121,10 @@ public class Settings
     public void ResetDefaultPlayer()
     {
         this.default_player = new Dictionary<string, Player>();
-        default_player.Add("lombrix", new Player(4, 6, 10, 4, "Lombrix"));
-        default_player.Add("itec", new Player(1, 4, 6, 10, "Itectori"));
-        default_player.Add("gpdn", new Player(7, 4, 4, 8, "GPasDNom"));
-        default_player.Add("pwc", new Player(3, 2, 10, 7, "PlayWithCube"));
+        default_player.Add("lombrix", new Player(4, 6, 10, 4, "Lombrix", "D_00_lombrix"));
+        default_player.Add("itec", new Player(1, 4, 6, 10, "Itectori", "D_01_itectori"));
+		default_player.Add("pwc", new Player(3, 2, 10, 7, "PlayWithCube", "D_02_pwc"));
+        default_player.Add("gpdn", new Player(7, 4, 4, 8, "GPasDNom", "D_03_gpasdnom"));
         default_player.Add("ept", new Player(1, 1, 6, 8, "Epitechien"));
         default_player.Add("epta", new Player(8, 7, 8, 9, "Epiteen"));
     }

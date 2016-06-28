@@ -128,8 +128,10 @@ namespace GameScene.Multi
 				GameObject play1 = Resources.Load("Prefabs/Solo/" + player_t1.UID) as GameObject;
 				if (play1 == null)
 					play1 = Instantiate(player2_prefab, new Vector3(posX, 1F, -posY), Quaternion.identity) as GameObject;
-				else
-					play1 = Instantiate (play1, new Vector3(posX, 1F, -posY), Quaternion.identity) as GameObject;
+				else {
+					play1 = Instantiate(play1, new Vector3(posX, 1F, -posY), Quaternion.identity) as GameObject;
+					play1.transform.eulerAngles = new Vector3(0, 180, 0);
+				}
 				player_t1.Team_id = 1;
 				player_t1.Name += "-" + (i);
 				play1.name = player_t1.Name + "-" + player_t1.Team_id;
