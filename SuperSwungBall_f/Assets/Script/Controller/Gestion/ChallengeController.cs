@@ -6,7 +6,7 @@ namespace Gestion
 {
 	public class ChallengeController : MonoBehaviour
 	{
-		private PhiManager manager; //inutile ?
+		//private PhiManager manager;
 		private Player player;
 
 		private GameObject swungMen;
@@ -30,7 +30,7 @@ namespace Gestion
 			this.defi_text = transform.Find("Defi").Find("Text").GetComponent<Text>();
 			this.name_text.text = this.player.Name;
 			this.defi_text.text = "Defi";
-			this.manager = GameObject.Find("Manager").GetComponent<PhiManager>();
+			//this.manager = GameObject.Find("Manager").GetComponent<PhiManager>();
 
 			InstantiateSwungMen ();
 			SetUpStats ();

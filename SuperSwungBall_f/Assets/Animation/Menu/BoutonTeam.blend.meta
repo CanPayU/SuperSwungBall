@@ -73,7 +73,7 @@ ModelImporter:
       name: Default Take
       takeName: Default Take
       firstFrame: 0
-      lastFrame: 0
+      lastFrame: 0.5
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

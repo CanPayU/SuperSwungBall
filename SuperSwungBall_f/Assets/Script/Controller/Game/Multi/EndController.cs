@@ -8,7 +8,7 @@ using GameKit;
 
 namespace GameScene.Multi
 {
-	public class EndController : GameBehavior
+    public class EndController : GameBehavior
     {
 
         [SerializeField]
@@ -31,21 +31,22 @@ namespace GameScene.Multi
         private bool win = false;
         private int score = 0;
 
-        private PhotonPlayer local_player;
+        //private PhotonPlayer local_player;
         private PhotonPlayer other_player;
 
-		private User ennemy;
+        private User ennemy;
 
-		public EndController(){
-			this.eventType = GameKit.EventType.Global;
-		}
+        public EndController()
+        {
+            this.eventType = GameKit.EventType.Global;
+        }
 
         // Use this for initialization
         void Start()
         {
             other_player = PhotonNetwork.otherPlayers[0];
-            local_player = PhotonNetwork.player;
-			ennemy = (User)other_player.allProperties ["User"];
+            //local_player = PhotonNetwork.player;
+            ennemy = (User)other_player.allProperties["User"];
         }
 
         public override void OnEndGame(End type)
@@ -53,19 +54,19 @@ namespace GameScene.Multi
             Game.Instance.isFinish = true;
             switch (type)
             {
-			case End.ABANDON:
-				OnAbandon();
-				break;
-			case End.TIME:
-				OnPointMax();
-                break;
+                case End.ABANDON:
+                    OnAbandon();
+                    break;
+                case End.TIME:
+                    OnPointMax();
+                    break;
             }
 
             if (PhotonNetwork.room.visible)
-			{
-				calculatePoint ();
-				if (this.win)
-					Sync(type != End.ABANDON);
+            {
+                calculatePoint();
+                if (this.win)
+                    Sync(type != End.ABANDON);
                 points_text += "" + score;
             }
             else
@@ -81,67 +82,77 @@ namespace GameScene.Multi
             panel.SetActive(true);
         }
 
-		private void calculatePoint(){
-			//int newPhi = User.Instance.phi;
-			if (!win)
-			{
-				if (ennemy.score > User.Instance.score) {
-					this.score = -50; //newPhi += 600;
-				}
-				else {
-					this.score = -150; //newPhi += 250;
-				}
-			}
-			else
-			{
-				if (ennemy.score > User.Instance.score) {
-					this.score = 200; //newPhi += 1200;
-				} else {
-					this.score = 60; //newPhi += 800;
-				}
-			}
-		}
-
-		private void Sync(bool respondAtEnnemy)
+        private void calculatePoint()
         {
-			HTTP.WinGame (Game.Instance.MyTeam.Points, ennemy.username, Game.Instance.EnnemyTeam.Points, (success) => {
-				if(respondAtEnnemy) {
-					PhotonView pv = PhotonView.Get(this);
-					pv.RPC("OnServerUpdated", PhotonTargets.Others);
-					DestroyPlayers();
-					Debug.Log("RPC sended and player destroyed");
-				}
-				btn_quit.SetActive(true);
-			});
+            //int newPhi = User.Instance.phi;
+            if (!win)
+            {
+                if (ennemy.score > User.Instance.score)
+                {
+                    this.score = -50; //newPhi += 600;
+                }
+                else
+                {
+                    this.score = -150; //newPhi += 250;
+                }
+            }
+            else
+            {
+                if (ennemy.score > User.Instance.score)
+                {
+                    this.score = 200; //newPhi += 1200;
+                }
+                else
+                {
+                    this.score = 60; //newPhi += 800;
+                }
+            }
         }
 
-		[PunRPC]
-		private void OnServerUpdated()
-		{
-			Debug.Log("RPC received and player destroyed");
-			HTTP.SyncUser ((success) => {
-				if (!success)
-					Debug.Log("Error Sync");
-				Debug.Log("User Synced");
-				btn_quit.SetActive(true);
-			});
-			DestroyPlayers();
-		}
+        private void Sync(bool respondAtEnnemy)
+        {
+            HTTP.WinGame(Game.Instance.MyTeam.Points, ennemy.username, Game.Instance.EnnemyTeam.Points, (success) =>
+            {
+                if (respondAtEnnemy)
+                {
+                    PhotonView pv = PhotonView.Get(this);
+                    pv.RPC("OnServerUpdated", PhotonTargets.Others);
+                    DestroyPlayers();
+                    Debug.Log("RPC sended and player destroyed");
+                }
+                btn_quit.SetActive(true);
+            });
+        }
+
+        [PunRPC]
+        private void OnServerUpdated()
+        {
+            Debug.Log("RPC received and player destroyed");
+            HTTP.SyncUser((success) =>
+            {
+                if (!success)
+                    Debug.Log("Error Sync");
+                Debug.Log("User Synced");
+                btn_quit.SetActive(true);
+            });
+            DestroyPlayers();
+        }
 
         void OnPhotonPlayerDisconnected(PhotonPlayer otherPlayer)
         {
             if (!Game.Instance.isFinish)
             {
-				Call.OnEndGame (End.ABANDON);
+                Call.OnEndGame(End.ABANDON);
             }
         }
 
-		private void OnAbandon() {
-			this.win = true;
-			this.status_text = "Victoire";
-			this.status_color = new Color(92f / 255f, 184f / 255f, 92f / 255f);
-			this.content_text = User.Instance.username + "\n VS \n" + this.ennemy.username + " - " + this.ennemy.score + " - Abandon";
-		}
+        private void OnAbandon()
+        {
+            this.win = true;
+            this.status_text = "Victoire";
+            this.status_color = new Color(92f / 255f, 184f / 255f, 92f / 255f);
+            this.content_text = User.Instance.username + "\n VS \n" + this.ennemy.username + " - " + this.ennemy.score + " - Abandon";
+        }
 
         private void OnPointMax()
         {
@@ -149,16 +160,16 @@ namespace GameScene.Multi
             int otherScore = Game.Instance.EnnemyTeam.Points;
             if (myScore > otherScore)
             {
-				this.win = true;
-				this.status_text = "Victoire";
-				this.status_color = new Color(92f / 255f, 184f / 255f, 92f / 255f);
+                this.win = true;
+                this.status_text = "Victoire";
+                this.status_color = new Color(92f / 255f, 184f / 255f, 92f / 255f);
             }
             else
             {
-				this.status_text = "Defaite";
-				this.status_color = new Color(212f / 255f, 85f / 255f, 83f / 255f);
+                this.status_text = "Defaite";
+                this.status_color = new Color(212f / 255f, 85f / 255f, 83f / 255f);
             }
-			this.content_text = User.Instance.username + "\n VS \n" + this.ennemy.username + " - " + this.ennemy.score + " - Abandon";
+            this.content_text = User.Instance.username + "\n VS \n" + this.ennemy.username + " - " + this.ennemy.score + " - Abandon";
         }
 
         private void DestroyPlayers()
@@ -171,7 +182,7 @@ namespace GameScene.Multi
 
         public void exit()
         {
-			FadingManager.Instance.Fade(scene);
+            FadingManager.Instance.Fade(scene);
         }
     }
 }

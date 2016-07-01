@@ -14,7 +14,7 @@ namespace GameScene.Replay
 		{
 			DrawDefaultInspector();
 
-			MainController myTarget = (MainController)target;
+			//MainController myTarget = (MainController)target;
 
 			EditorGUILayout.LabelField ("Replay Main");
 		}

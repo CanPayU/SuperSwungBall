@@ -11,7 +11,7 @@ namespace GameScene.Multi
 
         GameObject bonusInstance;
 
-        string[] bonus;
+        //string[] bonus;
         int count; //nb de bonus utilisées
         bool onReflexion;
         public MainBonusController()
@@ -22,7 +22,7 @@ namespace GameScene.Multi
         void Start()
         {
             count = 3;
-            bonus = new string[3];
+            //bonus = new string[3];
             onReflexion = false;
             bonusInstance = Instantiate(tripleBonus);
             myBonusController = bonusInstance.GetComponent<BonusController>();
@@ -53,7 +53,7 @@ namespace GameScene.Multi
         {
             count = 0;
             onReflexion = true;
-            bonus = myBonusController.setBonus();
+            //bonus = myBonusController.setBonus();
         }
         public override void OnStartAnimation()
         {

@@ -3314,7 +3314,8 @@ Prefab:
       propertyPath: m_LocalPosition.x
       value: -0.007
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11479976, guid: 53e01dbd34b44794bad0f63f468da40e, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 53e01dbd34b44794bad0f63f468da40e, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1471104134 stripped
@@ -4335,7 +4336,7 @@ Terrain:
   m_GameObject: {fileID: 1866692752}
   m_Enabled: 1
   serializedVersion: 3
-  m_TerrainData: {fileID: 15600000, guid: 2119e458681d5a244a589a562c0b0e34, type: 2}
+  m_TerrainData: {fileID: 0}
   m_TreeDistance: 2000
   m_TreeBillboardDistance: 5
   m_TreeCrossFadeLength: 0

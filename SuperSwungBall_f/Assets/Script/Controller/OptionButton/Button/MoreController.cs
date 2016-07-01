@@ -7,7 +7,7 @@ namespace OptionButton
     public class MoreController : MonoBehaviour
     {
 
-        private Text text;
+        //private Text text;
         private Button btn;
 
         private GameObject moreSettings; //inutile ?
@@ -16,7 +16,7 @@ namespace OptionButton
         void Start()
         {
             this.btn = gameObject.GetComponent<Button>();
-            this.text = transform.Find("Text").GetComponent<Text>();
+            //this.text = transform.Find("Text").GetComponent<Text>();
             this.moreSettings = Resources.Load("Prefabs/OptionButton/MoreSettings") as GameObject;
             if (this.btn != null)
             {
