@@ -61,16 +61,17 @@ namespace GameScene.Didacticiel
         Renderer RondBlanc; //rond blanc sur ce game object
         Timer time;
 
-        private string[,] tableau_1;
-        private string[,] tableau_2;
-        private string[,] tableau_3;
-        private string[,] tableau_4;
-        private string[,] tableau_5;
-        private string[,] tableau_6;
-        private string[,] tableau_7;
-        private string[,] tableau_8;
-        private string[,] tableau_9;
-        private float current_time;
+        private string[] tableau_1;
+        private string[] tableau_2;
+        private string[] tableau_3;
+        private string[] tableau_4;
+        private string[] tableau_5;
+        private string[] tableau_6;
+        private string[] tableau_7;
+        private string[] tableau_8;
+        private string[] tableau_9;
+        private bool text_started = false;
+        private int current_tableau;
         private int place;
         private int phase;
 
@@ -118,177 +119,176 @@ namespace GameScene.Didacticiel
             #region text
             phase = 1;
             place = 0;
-            current_time = 0;
-            //mettre "0" en temps pour que le message reste a l'ecran
+            current_tableau = 1;
 
             if (Language.GetValue("language") == "EN")
             {
-                tableau_1 = new string[,]
+                tableau_1 = new string[]
                 {
-                {"Welcome to the tutorial", "3" },
-                {"There I will teach you \n how to play SuperSwungBall","4.5" },
-                {"The aim is to score a touchdown \n behind the opponent's goal row","5" },
-                {"To perform it, \n each player controls his team of Swungmen","4.5" },
-                {"Let's start with the Swungmen's controls","3.5" }
+                    "Welcome to the tutorial, \n press 'Enter' to display the following text",
+                    "There I will teach you \n how to play SuperSwungBall" ,
+                    "The aim is to score a touchdown \n behind the opponent's goal row",
+                    "To perform it, \n each player controls his team of Swungmen",
+                    "Let's start with the Swungmen's controls"
                 };
 
-                tableau_2 = new string[,]
+                tableau_2 = new string[]
                 {
-                {"This is a Swungman, \n you can click on it in order to control it","4.5" },
-                {"Every Swungmen have four abilities \n we will discover step by step","5" },
-                {"First, the ability of displacement \n is represented by the blue color","5" },
-                {"Press the blue button 3 times to make him run \n as fast and as far as possible","6" },
-                {"You can click on the displacement zone (blue) \n to control its displacement","5.5" },
-                {"You can now move there \n and press 'space' to lauch the displacement","0" }
+                    "This is a Swungman, \n you can click on it in order to control it",
+                    "Every Swungmen have four abilities \n we will discover step by step",
+                    "First, the ability of displacement \n is represented by the blue color",
+                    "Press the blue button 3 times to make him run \n as fast and as far as possible",
+                    "You can click on the displacement zone (blue) \n to control its displacement",
+                    "You can now move there \n and press 'space' to lauch the displacement"
                 };
 
-                tableau_3 = new string[,]
+                tableau_3 = new string[]
                 {
-                {"Well, now we'll see \n how to recover the ball", "4"} ,
-                {"For this, \n you must at least have a ball-control point","5" },
-                {"Put 1 point in the mastery of the ball (in pink) \n and 2 points in the displacement","6" },
-                {"Now move to the ball \n ('Space' to start the displacement)","0" } }
-                ;
-
-                tableau_4 = new string[,]
-                {
-                {"We now have the ball, \n throw it somewhere","4" },
-                {"To throw the ball, \n you must at least have a ball-control point","5" },
-                {"Put 3 points of mastery in the pass (still pink) \n to make a pass as far as possible","6.5" },
-                {"Click in the pink zone and then move the pink dot \n to mark the location of the pass","6.5" },
-                {"You can start the action from now \n and press 'a' to make the pass","0" }
+                    "Well, now we'll see \n how to recover the ball" ,
+                    "For this, \n you must at least have a ball-control point",
+                    "Put 1 point in the mastery of the ball (in pink) \n and 2 points in the displacement",
+                    "Now move to the ball \n ('Space' to start the displacement)"
                 };
 
-                tableau_5 = new string[,]
+                tableau_4 = new string[]
                 {
-                {"What a pass! But take care, \n an enemy is coming","4" },
-                {"He took the ball and wants to go this way. \n We must stop him.","5" },
-                {"To engage in combat there is only one way: \n one of the two Swungmen must at least have tackle","7" },
-                {"He certainly don't want to fight since he has the ball, \n so we have to engage in combat!","7" },
-                {"Put two points in the tackle (green) \n and a point in the pass (to recover the ball if you tackle) \n and rush towards him","0" }
+                    "We now have the ball, \n throw it somewhere",
+                    "To throw the ball, \n you must at least have a ball-control point",
+                    "Put 3 points of mastery in the pass (still pink) \n to make a pass as far as possible",
+                    "Click in the pink zone and then move the pink dot \n to mark the location of the pass",
+                    "You can start the action from now \n and press 'a' to make the pass"
                 };
 
-                tableau_6 = new string[,]
+                tableau_5 = new string[]
                 {
-                {"There is a good tackle ! \n You went there so hard \n he ended down and has not finished its displacement","7.5" },
-                {"Normally when an enemy has ended down \n it is weakened for the next round","5.5" },
-                {"So I heal for the good of our training \n Easy life is for later","5.5" },
-                {"It's now your turn to defend yourself \n because you took the ball","5.5" },
-                {"It will surely try to tackle you \n to make you lose the ball","4.5" },
-                {"So put maximum points in your dodge capability \n (in yellow) and rush towards him","0" }
+                    "What a pass! But take care, \n an opponent is coming",
+                    "He took the ball and wants to go this way. \n We must stop him.",
+                    "To engage in combat there is only one way: \n one of the two Swungmen must at least have tackle",
+                    "He certainly don't want to fight since he has the ball, \n so we have to engage in combat!",
+                    "Put two points in the tackle (green) \n and a point in the pass (to recover the ball if you tackle) \n and rush towards him"
                 };
 
-                tableau_7 = new string[,]
+                tableau_6 = new string[]
                 {
-                {"As expected he engaged in combat and we won \n because we had more \" fighting force \" than him","7" },
-                {"The fighting force is the maximum value \n put in tackle OR dodging","5.5" },
-                {"You must then be careful \n how to match these points","4" },
-                {"Each character has different \n base stats in each mastery","5" },
-                {"To be familiar with these stats is therefore crucial \n to not be surprised by the result of a fight","7.5" },
-                {"Still, be careful not to do too much fighting \n because more fights you win, \n more you will be weakened for the next one","8.5" },
-                {"To do a pass to a teammate, \n even if it is behind you, \n can be a good way to pass through the enemy defense ","7.5" },
+                    "There is a good tackle ! \n You went there so hard \n he ended down and has not finished its displacement",
+                    "Normally when an opponent has ended down \n it is weakened for the next round",
+                    "So I heal for the good of our training \n Easy life is for later",
+                    "It's now your turn to defend yourself \n because you took the ball",
+                    "It will surely try to tackle you \n to make you lose the ball",
+                    "So put maximum points in your dodge capability \n (in yellow) and rush towards him"
                 };
 
-                tableau_8 = new string[,]
+                tableau_7 = new string[]
                 {
-                {"You now have all the keys \n to compare yourself to other players!","5" },
-                {"To prove that you really have the level to, \n you must pass a final test","5.5" },
-                {"You just have to score a touchdown","3" },
-                {"Five new Swungmen appeared, \n one is in your team, \n feel free to use it","6" },
-                {"You're free score the goal as you like \n it's time to put into practice what you have learned","0" }
+                    "As expected he engaged in combat and we won \n because we had more \" fighting force \" than him",
+                    "The fighting force is the maximum value \n put in tackle OR dodging",
+                    "You must then be careful \n how to match these points",
+                    "Each character has different \n base stats in each mastery",
+                    "To be familiar with these stats is therefore crucial \n to not be surprised by the result of a fight",
+                    "Still, be careful not to do too much fighting \n because more fights you win, \n more you will be weakened for the next one",
+                    "To do a pass to a teammate, \n even if it is behind you, \n can be a good way to pass through the opponent defense"
                 };
 
-                tableau_9 = new string[,]
+                tableau_8 = new string[]
                 {
-                {"Great one !","2" },
-                {"You've got a lot to learn to become the best \n anyways I see a great potential inside you, \n you will succeed","7" },
-                {"There it's your time to show \n that you are worth confronting the players \n serious things are finally starting!","7" },
-                {"Gl hf...","3" }
+                    "You now have all the keys \n to compare yourself to other players!",
+                    "To prove that you really have the level to, \n you must pass a final test",
+                    "You just have to score a touchdown",
+                    "Five new Swungmen appeared, \n one is in your team, \n feel free to use it",
+                    "You're free score the goal as you like \n it's time to put into practice what you have learned",
+                };
+
+                tableau_9 = new string[]
+                {
+                    "Great one !",
+                    "You've got a lot to learn to become the best \n anyways I see a great potential inside you, \n you will succeed",
+                    "There it's your time to show \n that you are worth confronting the players \n serious things are finally starting!",
+                    "Gl hf..."
                 };
             }//if langue
             else
             {
-                tableau_1 = new string[,]
+                tableau_1 = new string[]
                 {
-                {"Bienvenue dans le didacticiel", "3" },
-                {"C'est ici que je vais t'apprendre \n comment jouer a SuperSwungBall ","4.5" },
-                {"Le but du jeu est de marquer un touchdown \n derriere la ligne d'en-but adversaire ","5" },
-                {"Pour cela, chaque joueur controle \n les Swungmen de son equipe","4" },
-                {"Commencons par voir les controles \n d'un Swungman","3.5" }
+                    "Bienvenue dans le didacticiel, \n appuie sur 'Entrer pour afficher le texte suivant",
+                    "C'est ici que je vais t'apprendre \n comment jouer a SuperSwungBall",
+                    "Le but du jeu est de marquer un touchdown \n derriere la ligne d'en-but adversaire",
+                    "Pour cela, chaque joueur controle \n les Swungmen de son equipe",
+                    "Commencons par voir les controles \n d'un Swungman"
                 };
 
-                tableau_2 = new string[,]
+                tableau_2 = new string[]
                 {
-                {"Ca, c'est un Swungman, \n tu peux cliquer dessus pour le controler","4" },
-                {"Tous les Swungmen ont quatre capacites \n que nous decouvrirons petit a petit","5" },
-                {"Pour commencer, la capacites de deplacement \n est representee par la couleur bleu","5" },
-                {"Appuie sur le bouton bleu 3 fois pour le faire \n courir le plus vite et le plus loin possible","5.5" },
-                {"Tu peux cliquer sur la zone de deplacement (en bleu) \n pour controler son deplacement","5.5" },
-                {"Deplace le Swungman jusqu'ici \n et appuie sur 'Espace' pour lancer le deplacement","0" }
+                    "Ca, c'est un Swungman, \n tu peux cliquer dessus pour le controler",
+                    "Tous les Swungmen ont quatre capacites \n que nous decouvrirons petit a petit",
+                    "Pour commencer, la capacites de deplacement \n est representee par la couleur bleu",
+                    "Appuie sur le bouton bleu 3 fois pour le faire \n courir le plus vite et le plus loin possible",
+                    "Tu peux cliquer sur la zone de deplacement (en bleu) \n pour controler son deplacement",
+                    "Deplace le Swungman jusqu'ici \n et appuie sur 'Espace' pour lancer le deplacement"
                 };
 
-                tableau_3 = new string[,]
+                tableau_3 = new string[]
                 {
-                {"Bien, maintenant nous allons voir comment recuperer la balle", "4"} ,
-                {"Pour cela, \n il faut au moins un point de maitrise de la balle","5" },
-                {"Mets 1 point dans la maitrise de la balle (en rose) \n et 2 points dans la course","5" },
-                {"Deplace toi maintenant vers la balle, \n ('Espace' pour lancer le deplacement)","0" } }
-                ;
-
-                tableau_4 = new string[,]
-                {
-                {"Nous avons desormais la balle, \n envoyons-la quelque part","4" },
-                {"Pour envoyer la balle,\n il faut au moins un point de maitrise de la balle","5" },
-                {"Mets 3 points de maitrise dans la passe (toujours en rose) \n pour faire une passe le plus loin possible","6" },
-                {"Clique dans la zone rose, puis deplace le point rose \n pour marquer l'emplacement de la passe","5.5" },
-                {"Tu peux desormais lancer l'action \n et appuyer sur 'a' pour faire la passe","0" }
+                    "Bien, maintenant nous allons voir comment recuperer la balle",
+                    "Pour cela, \n il faut au moins un point de maitrise de la balle",
+                    "Mets 1 point dans la maitrise de la balle (en rose) \n et 2 points dans la course",
+                    "Deplace toi maintenant vers la balle, \n ('Espace' pour lancer le deplacement)"
                 };
 
-                tableau_5 = new string[,]
+                tableau_4 = new string[]
                 {
-                {"Quelle passe ! Mais attention a toi, \n un ennemi arrive","4" },
-                {"Il a recupere la balle et veut continuer son chemin. \n Nous devons l'en empecher","5" },
-                {"Pour engager un combat il n'y a qu'un seul moyen : \n il faut qu'au moins un des deux joueurs possede du tacle","6" },
-                {"Il n'a surement pas envie de se battre puisqu'il a la balle, \n c'est donc a nous d'engager le combat !","5.5" },
-                {"Mets deux points dans le tacle (en vert) \n et un point dans la passe (pour recuperer la balle si tu le tacles) \n et fonce vers lui","0" }
+                    "Nous avons desormais la balle, \n envoyons-la quelque part",
+                    "Pour envoyer la balle,\n il faut au moins un point de maitrise de la balle",
+                    "Mets 3 points de maitrise dans la passe (toujours en rose) \n pour faire une passe le plus loin possible",
+                    "Clique dans la zone rose, puis deplace le point rose \n pour marquer l'emplacement de la passe",
+                    "Tu peux desormais lancer l'action \n et appuyer sur 'a' pour faire la passe"
                 };
 
-                tableau_6 = new string[,]
+                tableau_5 = new string[]
                 {
-                {"En voila un bon tacle ! \n Tu y es alle tellement fort \n qu'il a fini a terre et n'a pas termine son deplacement","6" },
-                {"En temps normal quand un ennemi fini a terre \n il est affaiblit pour le prochain tour","5.5" },
-                {"Je le soigne donc pour le bien de notre entrainement. \n La belle vie c'est pour plus tard","5.5" },
-                {"Mais desormais ca va etre a toi de te defendre \n car tu as recupere la balle","5" },
-                {"Il va surement essayer de te tacler \n pour te faire perdre la balle","4.5" },
-                {"Mets donc un maximum de points dans ta capacite d'esquive \n (en jaune) et fonce vers lui","0" }
+                    "Quelle passe ! Mais attention a toi, \n un adversaire arrive",
+                    "Il a recupere la balle et veut continuer son chemin. \n Nous devons l'en empecher",
+                    "Pour engager un combat il n'y a qu'un seul moyen : \n il faut qu'au moins un des deux joueurs possede du tacle",
+                    "Il n'a surement pas envie de se battre puisqu'il a la balle, \n c'est donc a nous d'engager le combat !",
+                    "Mets deux points dans le tacle (en vert) \n et un point dans la passe (pour recuperer la balle si tu le tacles) \n et fonce vers lui"
                 };
 
-                tableau_7 = new string[,]
+                tableau_6 = new string[]
                 {
-                {"Comme prevu il a engage le combat et nous avons gagne \n car nous avions plus de \"force de combat\" que lui","6" },
-                {"La force de combat c'est la valeur maximale \n mise dans le tacle OU l'esquive ","5" },
-                {"Il faut donc faire attention a bien agencer ces points","4" },
-                {"Chaque personnage a des stats de base \n differentes dans chaque maitrise","5" },
-                {"Bien connaitre ces stats est donc primordiale \n pour ne pas etre surpris de l'issu d'un combat","5.5" },
-                {"Fait quand meme attention a ne pas trop abuser des combats \n car plus tu gagnes de combats, \n plus tu seras affaibli pour le prochain","7.5" },
-                {"Faire la passe a un coequipier, \n meme s'il est derriere toi, \n peux ainsi etre un bon moyen de passer la defense ennemi","6.5" },
+                    "En voila un bon tacle ! \n Tu y es alle tellement fort \n qu'il a fini a terre et n'a pas termine son deplacement",
+                    "En temps normal quand un adversaire fini a terre \n il est affaiblit pour le prochain tour",
+                    "Je le soigne donc pour le bien de notre entrainement. \n La belle vie c'est pour plus tard",
+                    "Mais desormais ca va etre a toi de te defendre \n car tu as recupere la balle",
+                    "Il va surement essayer de te tacler \n pour te faire perdre la balle",
+                    "Mets donc un maximum de points dans ta capacite d'esquive \n (en jaune) et fonce vers lui"
                 };
 
-                tableau_8 = new string[,]
+                tableau_7 = new string[]
                 {
-                {"Tu as desormais toutes les armes en main \n pour te confronter aux autres joueurs !","5" },
-                {"Pour prouver que tu es vraiment a la hauteur, \n tu dois passer une ultime epreuve","5" },
-                {"Tu dois simplement marquer un touchedown","3" },
-                {"J'ai fait apparaitre cinq nouveaux Swungman, \n dont un est dans ton equipe, \n libre a toi de l'utiliser","6" },
-                {"Tu es libre de marquer le but comme tu veux \n c'est l'heure de mettre en pratique tout ce que tu as appris","0" }
+                    "Comme prevu il a engage le combat et nous avons gagne \n car nous avions plus de \"force de combat\" que lui",
+                    "La force de combat c'est la valeur maximale \n mise dans le tacle OU l'esquive ",
+                    "Il faut donc faire attention a bien agencer ces points",
+                    "Chaque personnage a des stats de base \n differentes dans chaque maitrise",
+                    "Bien connaitre ces stats est donc primordiale \n pour ne pas etre surpris de l'issu d'un combat",
+                    "Fait quand meme attention a ne pas trop abuser des combats \n car plus tu gagnes de combats, \n plus tu seras affaibli pour le prochain",
+                    "Faire la passe a un coequipier, \n meme s'il est derriere toi, \n peux ainsi etre un bon moyen de passer la defense adversaire",
                 };
 
-                tableau_9 = new string[,]
+                tableau_8 = new string[]
                 {
-                {"Super but !","2" },
-                {"Il te reste beaucoup a apprendre pour devenir le meilleur \n mais je vois en toi un grand potentiel, tu vas reussir","6.5" },
-                {"Il est temps de montrer ce que tu vaux en affrontant des joueurs ! \n les choses serieuses commencent enfin","6" },
-                {"Bonne chance...","3" }
+                    "Tu as desormais toutes les armes en main \n pour te confronter aux autres joueurs !",
+                    "Pour prouver que tu es vraiment a la hauteur, \n tu dois passer une ultime epreuve",
+                    "Tu dois simplement marquer un touchedown",
+                    "J'ai fait apparaitre cinq nouveaux Swungman, \n dont un est dans ton equipe, \n libre a toi de l'utiliser",
+                    "Tu es libre de marquer le but comme tu veux \n c'est l'heure de mettre en pratique tout ce que tu as appris"
+                };
+
+                tableau_9 = new string[]
+                {
+                    "Super but !",
+                    "Il te reste beaucoup a apprendre pour devenir le meilleur \n mais je vois en toi un grand potentiel, tu vas reussir",
+                    "Il est temps de montrer ce que tu vaux en affrontant des joueurs ! \n les choses serieuses commencent enfin",
+                    "Bonne chance..."
                 };
             }// else langue
             #endregion
@@ -300,7 +300,8 @@ namespace GameScene.Didacticiel
             switch (phase)
             {
                 case 1:
-                    text(tableau_1);
+                    if (!text_started)
+                        text();
                     break;
 
                 case 2: //creation du player + player2(mais il n'est pas disponible pour le moment) & changement emplacement du texte & 
@@ -329,7 +330,8 @@ namespace GameScene.Didacticiel
                     break;
 
                 case 3:
-                    text(tableau_2);
+                    if (!text_started)
+                        text();
                     break;
 
                 case 4: //assignation des 4 bouttons + 3 couleurs & seulement boutton course dispo & fleches main + rond blanc visibles
@@ -356,7 +358,8 @@ namespace GameScene.Didacticiel
                 //5 = collision main & activation maitrise de la balle
 
                 case 6:
-                    text(tableau_3);
+                    if (!text_started)
+                        text();
                     break;
 
                 case 7: //balle visile & main sur la ball (c'est juste du visuel)
@@ -376,13 +379,15 @@ namespace GameScene.Didacticiel
                     break;
 
                 case 9:
-                    text(tableau_4);
+                    if (!text_started)
+                        text();
                     break;
 
                 //10 = passe : collision balle & activation esquive + desactivation des autres & creation 5 joueurs adverse (1 seul visilbe) & 3 courses pour le joueur
 
                 case 11:
-                    text(tableau_5);
+                    if (!text_started)
+                        text();
                     break;
 
                 //12 = deplacement joueur adverse & tacle par le player
@@ -400,14 +405,15 @@ namespace GameScene.Didacticiel
                     break;
 
                 case 14:
-                    text(tableau_6);
+                    if (!text_started)
+                        text();
                     break;
 
                 //15 = deplacement joueur adverse & esquive reussie par notre joueur
 
                 case 16:
-                    if (!annim_started)
-                        text(tableau_7);
+                    if (!annim_started && !text_started)
+                        text();
                     break;
 
                 case 17: //tout les bouttons sont visibles pour le player & le player2 est la + il a la balle & changement de position player + adversaires
@@ -432,13 +438,15 @@ namespace GameScene.Didacticiel
                     break;
 
                 case 18:
-                    text(tableau_8);
+                    if (!text_started)
+                        text();
                     break;
 
                 //19 = marquer un but
 
                 case 20:
-                    text(tableau_9);
+                    if (!text_started)
+                        text();
                     break;
 
                 case 21:
@@ -446,51 +454,70 @@ namespace GameScene.Didacticiel
                     break;
             } //switch
             time.update();
-            if (Input.GetKeyDown(KeyCode.Space) && !annim_started)
+            if (Input.GetKeyDown(KeyCode.Space) && !text_started && !annim_started)
             {
                 start_annim();
             }
+
+            if (Input.GetKeyDown(KeyCode.Return) && text_started && !annim_started)
+            {
+                place++;
+                text();
+            }
         } //update
 
+        void next_phrase()
+        {
+
+        }
 
         // -- Text
-        void text(string[,] tableau)
+        void text()
         {
-            float temps = float.Parse(tableau[place, 1]);
-
-            if (place == 0 && current_time == 0) // premier passage ? -> changer direct le texte
-                message(tableau);
-
-            if (temps == 0) // message qui reste a l'ecran ? laisser le texte a l'ecran et passer a la phase suivante
+            if (place == 0) // premier passage ? -> changer direct le texte et passer en mode texte
             {
-                message(tableau);
-                phase++;
-                place = 0;
-                current_time = 0;
+                text_started = true;
             }
-            else if (current_time < temps) // temps pas atteint ? -> continuer a afficher
-                current_time += Time.deltaTime;
-            else // temps atteint ? -> reinitialiser le temps et voir si on continue de lire le tableau
+            if (get_tableau().Length == place) //.GetLongLength(0) == place + 1 dernier passage ->
             {
-                current_time = 0;
-                if (tableau.GetLongLength(0) == place + 1) // dernier passage-> reinitialiser le texte et passer a la phase suivante
-                {
-                    screentext.text = "";
-                    screetext2.text = "";
-                    phase++;
-                    place = 0;
-                }
-                else // sinon passer au message suivant
-                {
-                    place += 1;
-                    message(tableau);
-                }
+                //screentext.text = "";
+                //screetext2.text = "";
+                place = 0;
+                text_started = false;
+                current_tableau++;
+                phase++;
+            }
+            else
+            {
+                screentext.text = get_tableau()[place];
+                screetext2.text = get_tableau()[place];
             }
         }
-        void message(string[,] tableau)
+        string[] get_tableau()
         {
-            screentext.text = tableau[place, 0];
-            screetext2.text = tableau[place, 0];
+            switch (current_tableau)
+            {
+                case 1:
+                    return tableau_1;
+                case 2:
+                    return tableau_2;
+                case 3:
+                    return tableau_3;
+                case 4:
+                    return tableau_4;
+                case 5:
+                    return tableau_5;
+                case 6:
+                    return tableau_6;
+                case 7:
+                    return tableau_7;
+                case 8:
+                    return tableau_8;
+                case 9:
+                    return tableau_9;
+                default:
+                    throw new NotImplementedException();
+            }
         }
         // --
 
@@ -604,7 +631,7 @@ namespace GameScene.Didacticiel
             if (phase == 19) //le seul moment ou on a besoin du player2
                 MyPlayer2_Controller.start_Anim();
 
-            if (EnemyPlayer_Controller != null)
+            if (EnemyPlayer_Controller)
             {
                 if (phase == 12)
                 {//il se dirige vers le joueur #LaMeilleurIA
@@ -627,7 +654,7 @@ namespace GameScene.Didacticiel
                     update_Stats(EnemyPlayer_Controller, cTacle, cCourse, cEsquive);
                 }
 
-                //ennemi 2
+                //adversaire 2
                 if (EnemyPlayer_Controller2 && phase == 19)
                 {
                     diriger_vers_player1(EnemyPlayer_Controller2, 0, 0, 2); //il se dirige vers le joueur1 #LaMeilleurIA
@@ -635,7 +662,7 @@ namespace GameScene.Didacticiel
                     EnemyPlayer_Controller2.start_Anim(false);
                 }
 
-                //ennemi 3
+                //adversaire 3
                 if (EnemyPlayer_Controller3 && phase == 19)
                 {
                     diriger_vers_player2(EnemyPlayer_Controller3, 0, 0, 2); //il se dirige vers le joueur2 #LaMeilleurIA
@@ -643,7 +670,7 @@ namespace GameScene.Didacticiel
                     EnemyPlayer_Controller3.start_Anim(false);
                 }
 
-                //ennemi 4
+                //adversaire 4
                 if (EnemyPlayer_Controller4 && phase == 19)
                 {
                     diriger_vers_player1(EnemyPlayer_Controller4, 1, 0, 0); //il se dirige vers le joueur1 #LaMeilleurIA
@@ -651,19 +678,18 @@ namespace GameScene.Didacticiel
                     EnemyPlayer_Controller4.start_Anim(false);
                 }
 
-                //ennemi 5
+                //adversaire 5
                 if (EnemyPlayer_Controller5 && phase == 19)
                 {
                     diriger_vers_player1(EnemyPlayer_Controller5, -1, 0, 0); //il se dirige vers le joueur1 #LaMeilleurIA
                     update_Stats(EnemyPlayer_Controller5, cTacle, cCourse, cCourse);
                     EnemyPlayer_Controller5.start_Anim(false);
                 }
-                EnemyPlayer_Controller.start_Anim(false); //animation du joueur ennemi
+                EnemyPlayer_Controller.start_Anim(false); //animation du joueur adversaire
             }
         }
         public override void OnSucceedAttack(Player pl)
         {
-            Debug.Log("attack player succeed : " + pl);
             if (pl == play_t0 && phase == 12)
                 phase++;
         }
@@ -676,7 +702,6 @@ namespace GameScene.Didacticiel
 
         public void update_score()
         {
-            Debug.Log("update score + phase = " + phase);
             ball.transform.SetParent(myPlayer.transform.GetChild(2).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0).transform);
             ball.transform.localPosition = new Vector3(-0.32f, 0.21f, -0.38f);
             ball.transform.localScale = new Vector3(1, 1, 1);
