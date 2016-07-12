@@ -5,18 +5,20 @@ namespace Menu
 {
     public class ChoiceController : MonoBehaviour
     {
-        private Transform trans;
         private GameObject ball;
-        public RaycastHit hitP;
+        private Transform trans;
 
         private GameObject current_player;
 
-        public float journeyTime = 1.0F;
+        private float journeyTime = 1.0F;
         private float startTime;
 
         private Vector3 center;
         private Vector3 riseRelCenter;
         private Vector3 setRelCenter;
+
+        private GameObject main_Camera;
+        private GameObject support_Ball;
 
         // Use this for initialization
         void Start()
@@ -30,7 +32,9 @@ namespace Menu
             ball = gameObject;
             trans = ball.GetComponent<Transform>();
             current_player = null;
-            hitP.point = transform.position;
+
+            main_Camera = GameObject.Find("Main Camera");
+            support_Ball = GameObject.Find("Support_Ball");
         }
 
         // Update is called once per frame
@@ -56,7 +60,7 @@ namespace Menu
 
         private void moovingToPoint()
         {
-			if (Input.GetKeyDown(KeyCode.Mouse0) && ApplicationModel.BackgroundSceneActionAllowed) // clic droit
+            if (Input.GetKeyDown(KeyCode.Mouse0) && ApplicationModel.BackgroundSceneActionAllowed) // clic droit
             {
                 RaycastHit hit;
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); // recuperation de la pos
@@ -67,37 +71,35 @@ namespace Menu
                     if (gm.tag == "Play" && gm != current_player) // sur un boutton Menu ? (ici Play)
                     {
                         // -- Désactivation des boutons de choix de team
-                        Unactive_ButtonTeam(false);
+                        setActive_ButtonTeam(false);
                         // --
                         trans.LookAt(hit.point);
-                        hitP = hit;
                         current_player = gm;
 
                         startTime = Time.time;
-                        center = (hitP.point + trans.position) * 0.5F;
-                        center -= new Vector3(0, 1, 0);
-                        setRelCenter = hitP.point - center;
+                        center = (hit.point + trans.position ) * 0.5F - new Vector3(0, 1, 0) + new Vector3(0, 0.5F, 0);
+
+                        setRelCenter = hit.point - center;
                         riseRelCenter = trans.position - center;
                     }
                 }
             }
             float fracComplete = (Time.time - startTime) / journeyTime;
             transform.position = Vector3.Slerp(riseRelCenter, setRelCenter, fracComplete) + center;
+            if (current_player == support_Ball)
+            {
+                setActive_ButtonTeam(true);
+                ball.transform.LookAt(main_Camera.transform);
+                ball.transform.eulerAngles = Quaternion.Euler(0, -90, 0) * ball.transform.eulerAngles;//* ball.transform.position;
+            }
 
-        }
-
-
-        void moveCurve()
-        {
-            float fracComplete = (Time.time - startTime) / journeyTime;
-            transform.position = Vector3.Slerp(riseRelCenter, setRelCenter, fracComplete) + center;
         }
 
         /// <summary>
         /// Unactives the button team.
         /// </summary>
         /// <param name="enabled">If set to <c>true</c> enabled.</param>
-        private void Unactive_ButtonTeam(bool enabled)
+        private void setActive_ButtonTeam(bool enabled)
         {
             foreach (Transform child in transform)
             {
