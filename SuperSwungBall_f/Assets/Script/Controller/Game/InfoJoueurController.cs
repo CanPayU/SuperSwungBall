@@ -58,6 +58,9 @@ namespace GameScene
             }
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             Physics.Raycast(ray, out hit, 100);
+            Debug.Log(Input.GetMouseButtonDown(0));
+            Debug.Log(!hit.Equals(null));
+            Debug.Log(hit.collider.gameObject.tag != "Player");
             if (Input.GetMouseButtonDown(0) && !hit.Equals(null) && hit.collider.gameObject.tag != "Player") //s'active au clic en dehors d'un player
             {
                 Close();

@@ -19,6 +19,8 @@ namespace GameScene.Didacticiel
         private Text screentext;
         [SerializeField]
         private Text screetext2;
+        [SerializeField]
+        private Text entertext;
 
         private GameObject player1_prefab;
         private GameObject player2_prefab;
@@ -61,6 +63,7 @@ namespace GameScene.Didacticiel
         Renderer RondBlanc; //rond blanc sur ce game object
         Timer time;
 
+        private string langue;
         private string[] tableau_1;
         private string[] tableau_2;
         private string[] tableau_3;
@@ -122,6 +125,15 @@ namespace GameScene.Didacticiel
             current_tableau = 1;
 
             if (Language.GetValue("language") == "EN")
+                langue = "anglais";
+            else if (Language.GetValue("language") == "FR")
+                langue = "français";
+            else
+                langue = "autre";
+
+            Debug.Log(langue);
+
+            if (langue == "anglais")
             {
                 tableau_1 = new string[]
                 {
@@ -201,16 +213,16 @@ namespace GameScene.Didacticiel
                 tableau_9 = new string[]
                 {
                     "Great one !",
-                    "You've got a lot to learn to become the best \n anyways I see a great potential inside you, \n you will succeed",
+                    "You've got a lot to learn to become the best \n anyway I can see a great potential inside of you, \n you will succeed",
                     "There it's your time to show \n that you are worth confronting the players \n serious things are finally starting!",
                     "Gl hf..."
                 };
-            }//if langue
-            else
+            }//anglais
+            else if (langue == "français")
             {
                 tableau_1 = new string[]
                 {
-                    "Bienvenue dans le didacticiel, \n appuie sur 'Entrer pour afficher le texte suivant",
+                    "Bienvenue dans le didacticiel, \n appuie sur 'Entrer' pour afficher le texte suivant",
                     "C'est ici que je vais t'apprendre \n comment jouer a SuperSwungBall",
                     "Le but du jeu est de marquer un touchdown \n derriere la ligne d'en-but adversaire",
                     "Pour cela, chaque joueur controle \n les Swungmen de son equipe",
@@ -285,12 +297,15 @@ namespace GameScene.Didacticiel
 
                 tableau_9 = new string[]
                 {
-                    "Super but !",
+                    "Super touchdown !",
                     "Il te reste beaucoup a apprendre pour devenir le meilleur \n mais je vois en toi un grand potentiel, tu vas reussir",
                     "Il est temps de montrer ce que tu vaux en affrontant des joueurs ! \n les choses serieuses commencent enfin",
                     "Bonne chance..."
                 };
-            }// else langue
+            }//français
+            else
+                throw new NotImplementedException();
+            //autre ?
             #endregion
             // --
         }
@@ -477,11 +492,16 @@ namespace GameScene.Didacticiel
             if (place == 0) // premier passage ? -> changer direct le texte et passer en mode texte
             {
                 text_started = true;
+                if (langue == "anglais")
+                    entertext.text = "Press enter";
+                if (langue == "français")
+                    entertext.text = "Appuyer sur 'entrer'";
             }
             if (get_tableau().Length == place) //.GetLongLength(0) == place + 1 dernier passage ->
             {
                 //screentext.text = "";
                 //screetext2.text = "";
+                entertext.text = "";
                 place = 0;
                 text_started = false;
                 current_tableau++;

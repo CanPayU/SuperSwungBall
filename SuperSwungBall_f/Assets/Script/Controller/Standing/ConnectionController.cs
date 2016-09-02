@@ -52,6 +52,20 @@ namespace Standing
             }
         }
 
+        public void hors_ligne()
+        {
+            this.validated = true;
+            connect.interactable = false;
+            User.Instance.email = "email@email.com";
+            User.Instance.id = 1;
+            User.Instance.is_connected = true;
+            User.Instance.phi = 500000;
+            User.Instance.score = 0;
+            User.Instance.username = "Test";
+            SaveLoad.save_user();
+            FadingManager.Instance.Fade();
+        }
+
         public void check_login()
         {
             this.validated = true;

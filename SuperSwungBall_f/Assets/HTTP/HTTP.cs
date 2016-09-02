@@ -11,14 +11,14 @@ using Boomlagoon.JSON;
 public static class HTTP
 {
 
-	private const string HOST_DOMAIN_BASIC = "http://ssb.trendspotlight.fr/";
+	//private const string HOST_DOMAIN_BASIC = "http://ssb.trendspotlight.fr/";
 	//private const string HOST_DOMAIN_BASIC = "http://ssb.shost.ca/";
-	//private const string HOST_DOMAIN_BASIC = "http://localhost:8888/SuperSwungBall/";
+	private const string HOST_DOMAIN_BASIC = "http://localhost:8888/SuperSwungBall/";
 
 	/// <summary> Nom de domaine principale  </summary>
-	private const string HOST_DOMAIN = "http://ssb.trendspotlight.fr/API/";
+	//private const string HOST_DOMAIN = "http://ssb.trendspotlight.fr/API/";
     //private const string HOST_DOMAIN = "http://ssb.shost.ca/API/";
-    //private const string HOST_DOMAIN = "http://localhost:8888/SuperSwungBall/web/app_dev.php/API/";
+    private const string HOST_DOMAIN = "http://localhost:8888/SuperSwungBall/web/app_dev.php/API/";
 
     /// <summary> Key d'authentification  </summary>
     private const string PRIVATE_KEY = "dcbcd1627918a87ea8fc20c379c83c95";
