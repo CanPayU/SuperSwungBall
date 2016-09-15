@@ -11,12 +11,12 @@ using Boomlagoon.JSON;
 public static class HTTP
 {
 
-	//private const string HOST_DOMAIN_BASIC = "http://ssb.trendspotlight.fr/";
-	//private const string HOST_DOMAIN_BASIC = "http://ssb.shost.ca/";
-	private const string HOST_DOMAIN_BASIC = "http://localhost:8888/SuperSwungBall/";
+    //private const string HOST_DOMAIN_BASIC = "http://ssb.trendspotlight.fr/";
+    //private const string HOST_DOMAIN_BASIC = "http://ssb.shost.ca/";
+    private const string HOST_DOMAIN_BASIC = "http://localhost:8888/SuperSwungBall/";
 
-	/// <summary> Nom de domaine principale  </summary>
-	//private const string HOST_DOMAIN = "http://ssb.trendspotlight.fr/API/";
+    /// <summary> Nom de domaine principale  </summary>
+    //private const string HOST_DOMAIN = "http://ssb.trendspotlight.fr/API/";
     //private const string HOST_DOMAIN = "http://ssb.shost.ca/API/";
     private const string HOST_DOMAIN = "http://localhost:8888/SuperSwungBall/web/app_dev.php/API/";
 
@@ -41,46 +41,46 @@ public static class HTTP
         if (status == "success")
         {
             JSONObject user = response.GetObject("user");
-			User.Instance.update(user);
-			completion(true);
+            User.Instance.update(user);
+            completion(true);
         }
         else
-			completion(false);
+            completion(false);
     }
 
-	/// <summary> Envoie un code aux devices pour se connecter </summary>
-	/// <param name="username">Username de l'utilisateur</param>
-	/// <param name="completion">Fonction éxecuté lors de la réception param : <bool></param>
-	public static void AuthDeviceAsk(string username, Action<bool> completion)
-	{
-		string url = HOST_DOMAIN + "authDevice/ask/" + username + "/" + SystemInfo.deviceName + "/" + PRIVATE_KEY;
-		HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-		JSONObject response = execute(request);
+    /// <summary> Envoie un code aux devices pour se connecter </summary>
+    /// <param name="username">Username de l'utilisateur</param>
+    /// <param name="completion">Fonction éxecuté lors de la réception param : <bool></param>
+    public static void AuthDeviceAsk(string username, Action<bool> completion)
+    {
+        string url = HOST_DOMAIN + "authDevice/ask/" + username + "/" + SystemInfo.deviceName + "/" + PRIVATE_KEY;
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+        JSONObject response = execute(request);
 
-		string status = response.GetString("status");
-		completion(status == "success");
-	}
+        string status = response.GetString("status");
+        completion(status == "success");
+    }
 
-	/// <summary> Vérifie si le code est valid </summary>
-	/// <param name="username">Username de l'utilisateur</param>
-	/// <param name="code">Code a 4 chiffre envoyé sur la device</param>
-	/// <param name="completion">Fonction éxecuté lors de la réception param : <bool></param>
-	public static void AuthDeviceReply(string username, string code, Action<bool> completion)
-	{
-		string url = HOST_DOMAIN + "authDevice/reply/" + username + "/" + code + "/" + PRIVATE_KEY;
-		HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-		JSONObject response = execute(request);
+    /// <summary> Vérifie si le code est valid </summary>
+    /// <param name="username">Username de l'utilisateur</param>
+    /// <param name="code">Code a 4 chiffre envoyé sur la device</param>
+    /// <param name="completion">Fonction éxecuté lors de la réception param : <bool></param>
+    public static void AuthDeviceReply(string username, string code, Action<bool> completion)
+    {
+        string url = HOST_DOMAIN + "authDevice/reply/" + username + "/" + code + "/" + PRIVATE_KEY;
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+        JSONObject response = execute(request);
 
-		string status = response.GetString("status");
-		if (status == "success")
-		{
-			JSONObject user = response.GetObject("user");
-			User.Instance.update(user);
-			completion(true);
-		}
-		else
-			completion(false);
-	}
+        string status = response.GetString("status");
+        if (status == "success")
+        {
+            JSONObject user = response.GetObject("user");
+            User.Instance.update(user);
+            completion(true);
+        }
+        else
+            completion(false);
+    }
 
     /// <summary>
     /// Get les informations sur le serveur
@@ -104,9 +104,9 @@ public static class HTTP
         if (status == "success")
         {
             JSONObject userjson = response.GetObject("user");
-			User.Instance.update(userjson, true);
-			SaveLoad.save_user ();
-			completion(true);
+            User.Instance.update(userjson, true);
+            SaveLoad.save_user();
+            completion(true);
         }
         else
         {
@@ -196,34 +196,34 @@ public static class HTTP
         {
             completion(false, null);
         }
-	}
+    }
 
 
-	/// <summary> Get les replays sur le serveur  </summary>
-	public static void Replays(Action<bool, JSONArray> completion)
-	{
-		User user = User.Instance;
-		if (!user.is_connected)
-		{
-			completion(false, null);
-			return;
-		}
+    /// <summary> Get les replays sur le serveur  </summary>
+    public static void Replays(Action<bool, JSONArray> completion)
+    {
+        User user = User.Instance;
+        if (!user.is_connected)
+        {
+            completion(false, null);
+            return;
+        }
 
-		string url = HOST_DOMAIN + "unity/replays/" + user.username + "/" + user.id + "/" + PRIVATE_KEY;
-		HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-		JSONObject response = execute(request);
+        string url = HOST_DOMAIN + "unity/replays/" + user.username + "/" + user.id + "/" + PRIVATE_KEY;
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+        JSONObject response = execute(request);
 
-		string status = response.GetString("status");
-		if (status == "success")
-		{
-			JSONArray json = response.GetArray("replays");
-			completion(true, json);
-		}
-		else
-		{
-			completion(false, null);
-		}
-	}
+        string status = response.GetString("status");
+        if (status == "success")
+        {
+            JSONArray json = response.GetArray("replays");
+            completion(true, json);
+        }
+        else
+        {
+            completion(false, null);
+        }
+    }
 
     /// <summary> Indique l'achat sur le serveur - Doit etre co  </summary>
     public static void BuySM(string uid, Action<bool> completion)
@@ -247,83 +247,88 @@ public static class HTTP
         }
         else
         {
-			Debug.LogError("Error Sync : " + url);
+            Debug.LogError("Error Sync : " + url);
             completion(false);
         }
-	}
+    }
 
-	/// <summary> Indique la fin d'une game gagné - Doit etre co  </summary>
-	public static void WinGame(int point, string ennemyUsername, int ennemyPoint, Action<bool> completion)
-	{
-		User user = User.Instance;
-		if (!user.is_connected)
-		{
-			completion(false);
-			return;
-		}
+    /// <summary> Indique la fin d'une game gagné - Doit etre co  </summary>
+    public static void WinGame(int point, string ennemyUsername, int ennemyPoint, Action<bool> completion)
+    {
+        User user = User.Instance;
+        if (!user.is_connected)
+        {
+            completion(false);
+            return;
+        }
 
-		//unity/gameEnd/{winnerUsername}/{winnerPoint}/{loserPoint}/{loserUsername}/{key}
-		string url = HOST_DOMAIN + "unity/gameEnd/" + user.username + "/" + point + "/" + ennemyPoint + "/" + ennemyUsername + "/" + PRIVATE_KEY;
-		HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-		JSONObject response = execute(request);
-		string status = response.GetString("status");
-		if (status == "success")
-		{
-			JSONObject jsonChallenge = response.GetObject("challengeUnlocked");
-			bool unlocked = jsonChallenge.GetBoolean ("status");
-			if (unlocked) {
-				ApplicationModel.ChallengeCompleted = jsonChallenge.GetArray ("values");
-			}
-			JSONObject jsonUpdate = response.GetObject("user");
-			User.Instance.update(jsonUpdate, unlocked);
+        //unity/gameEnd/{winnerUsername}/{winnerPoint}/{loserPoint}/{loserUsername}/{key}
+        string url = HOST_DOMAIN + "unity/gameEnd/" + user.username + "/" + point + "/" + ennemyPoint + "/" + ennemyUsername + "/" + PRIVATE_KEY;
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+        JSONObject response = execute(request);
+        string status = response.GetString("status");
+        if (status == "success")
+        {
+            JSONObject jsonChallenge = response.GetObject("challengeUnlocked");
+            bool unlocked = jsonChallenge.GetBoolean("status");
+            if (unlocked)
+            {
+                ApplicationModel.ChallengeCompleted = jsonChallenge.GetArray("values");
+            }
+            JSONObject jsonUpdate = response.GetObject("user");
+            User.Instance.update(jsonUpdate, unlocked);
 
-			string gameId = response.GetObject ("game").GetNumber ("id").ToString();
-			string fileName = (Application.persistentDataPath + "/replay.txt");
-			string uri = HOST_DOMAIN_BASIC + "upload_replay.php";
-			NameValueCollection values = new NameValueCollection();
-			values.Add("winner", user.username);
-			values.Add("looser", ennemyUsername);
-			values.Add("gameId", gameId);
-			uploadFile (values, uri, fileName);
+            string gameId = response.GetObject("game").GetNumber("id").ToString();
+            string fileName = (Application.persistentDataPath + "/replay.txt");
+            string uri = HOST_DOMAIN_BASIC + "upload_replay.php";
+            NameValueCollection values = new NameValueCollection();
+            values.Add("winner", user.username);
+            values.Add("looser", ennemyUsername);
+            values.Add("gameId", gameId);
+            uploadFile(values, uri, fileName);
 
-			completion(true);
-		}
-		else
-		{
-			Debug.LogError("Error Sync : " + url);
-			completion(false);
-		}
-	}
+            completion(true);
+        }
+        else
+        {
+            Debug.LogError("Error Sync : " + url);
+            completion(false);
+        }
+    }
 
-	public static void downloadFile(string relativePath, string fileName, string relativeDestination) {
-		string remoteUri = HOST_DOMAIN_BASIC + relativePath;
-		string folderDestination = (Application.persistentDataPath + relativeDestination);
-		if (!Directory.Exists (folderDestination)) {
-			try {
-				Directory.CreateDirectory (Application.persistentDataPath + relativeDestination);
-			}
-			catch (Exception e) 
-			{
-				Console.WriteLine("The process failed: {0}", e.ToString());
-			} 
-		}
-		WebClient myWebClient = new WebClient();
+    public static void downloadFile(string relativePath, string fileName, string relativeDestination)
+    {
+        string remoteUri = HOST_DOMAIN_BASIC + relativePath;
+        string folderDestination = (Application.persistentDataPath + relativeDestination);
+        if (!Directory.Exists(folderDestination))
+        {
+            try
+            {
+                Directory.CreateDirectory(Application.persistentDataPath + relativeDestination);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("The process failed: {0}", e.ToString());
+            }
+        }
+        WebClient myWebClient = new WebClient();
 
-		string myStringWebResource = remoteUri + fileName;
-		string fileDestionation = folderDestination + fileName;
-		myWebClient.DownloadFile(myStringWebResource, fileDestionation);		
+        string myStringWebResource = remoteUri + fileName;
+        string fileDestionation = folderDestination + fileName;
+        myWebClient.DownloadFile(myStringWebResource, fileDestionation);
 
-		Debug.Log ("File downloaded to : " + fileDestionation);
-	}
+        Debug.Log("File downloaded to : " + fileDestionation);
+    }
 
-	public static void uploadFile(NameValueCollection getParamters, string uri, string fileName){
+    public static void uploadFile(NameValueCollection getParamters, string uri, string fileName)
+    {
 
-		WebClient myWebClient = new WebClient();
-		myWebClient.QueryString = getParamters;
-		byte[] responseArray = myWebClient.UploadFile(uri, "POST", fileName);
-		string result = System.Text.Encoding.UTF8.GetString(responseArray);
-		Debug.Log ("File uploaded : " + result);
-	}
+        WebClient myWebClient = new WebClient();
+        myWebClient.QueryString = getParamters;
+        byte[] responseArray = myWebClient.UploadFile(uri, "POST", fileName);
+        string result = System.Text.Encoding.UTF8.GetString(responseArray);
+        Debug.Log("File uploaded : " + result);
+    }
 
     /// <summary>
     /// Execute les requêtes et renvoie le JSON

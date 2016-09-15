@@ -66,20 +66,20 @@ public class ClientManager : MonoBehaviour, IClientListener
     }
     public void OnReceiveInvitation(string username, int id, string roomID)
     {
-		Notification.Alert( "Invitation recue", "Tu as recu une invitation à jouer de " + username, (success) =>
-        {
-			if (success)
-            {
-				ApplicationModel.NetState = Network.NetSate.InviteByFriend;
-				ApplicationModel.RoomID = roomID;
-				FadingManager.Instance.Fade("network");
-            }
-            else
-            {
-                Debug.Log("Encore un homme sans couille");
+        Notification.Alert("Invitation recue", "Tu as recu une invitation à jouer de " + username, (success) =>
+       {
+           if (success)
+           {
+               ApplicationModel.NetState = Network.NetSate.InviteByFriend;
+               ApplicationModel.RoomID = roomID;
+               FadingManager.Instance.Fade("network");
+           }
+           else
+           {
+               Debug.Log("Encore un homme sans couille");
                 // Retouner InviteRejected ? 
             }
-        });
+       });
     }
     public void OnReceiveMessage(string message)
     {

@@ -131,7 +131,7 @@ public class TeamButtonController : MonoBehaviour
             var selected_t = teams_[index];
             Settings.Instance.Selected_Team = selected_t;
             team_name.text = selected_t.Name;
-			SaveLoad.save_setting ();
+            SaveLoad.save_setting();
         }
     }
 

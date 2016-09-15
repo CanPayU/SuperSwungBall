@@ -11,7 +11,7 @@ using System.Threading;
 
 public class Client
 {
-	private const string HOST = "91.134.140.117";//"127.0.0.1";//"91.134.140.117";
+    private const string HOST = "91.134.140.117";//"127.0.0.1";//"91.134.140.117";
     private const int PORT = 5821;
     private int BUFFERSIZE = 1024;
     private const int BUFFER_SIZE = 1024;
@@ -38,8 +38,8 @@ public class Client
     {
         this.listeners = new List<IClientListener>();
         this.listeners.Add(listener);
-		this.username = User.Instance.username;
-		this.id = User.Instance.id;
+        this.username = User.Instance.username;
+        this.id = User.Instance.id;
         this.state = SocketState.DISCONNECTED;
     }
 

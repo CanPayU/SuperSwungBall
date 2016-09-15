@@ -10,12 +10,12 @@ using ExitGames.Client.Photon;
 
 namespace Network
 {
-	public enum NetSate
-	{
-		Default,
-		InviteFriend,
-		InviteByFriend
-	}
+    public enum NetSate
+    {
+        Default,
+        InviteFriend,
+        InviteByFriend
+    }
 
     public class NetworkController : MonoBehaviour
     {
@@ -62,14 +62,14 @@ namespace Network
 
         void OnConnectedToMaster()
         {
-			if (ApplicationModel.NetState == NetSate.Default)
+            if (ApplicationModel.NetState == NetSate.Default)
             {
                 Debug.Log("JoinRandomRoom");
                 PhotonNetwork.JoinRandomRoom(); // création de la room
                 return;
             }
-			Debug.Log("JoinNanRandomRoom : " + ApplicationModel.NetState);
-			string RoomID = ApplicationModel.RoomID;
+            Debug.Log("JoinNanRandomRoom : " + ApplicationModel.NetState);
+            string RoomID = ApplicationModel.RoomID;
             if (RoomID != null)
                 this.room_name = RoomID;
             else
@@ -78,12 +78,12 @@ namespace Network
                 return;
             }
 
-			if (ApplicationModel.NetState == NetSate.InviteFriend)
+            if (ApplicationModel.NetState == NetSate.InviteFriend)
             {
-                RoomOptions roomOptions = new RoomOptions() { isVisible = false, maxPlayers = 2 }; // isVisible Random can join or not (ici non)
+                RoomOptions roomOptions = new RoomOptions() { IsVisible = false /*isVisible = false*/ , MaxPlayers = 2 /*maxPlayers = 2*/}; // isVisible Random can join or not (ici non)
                 PhotonNetwork.JoinOrCreateRoom(this.room_name, roomOptions, TypedLobby.Default);
             }
-			else if (ApplicationModel.NetState == NetSate.InviteByFriend)
+            else if (ApplicationModel.NetState == NetSate.InviteByFriend)
             {
                 PhotonNetwork.JoinRoom(this.room_name);
             }
@@ -92,11 +92,11 @@ namespace Network
         }
         void OnPhotonJoinRoomFailed()
         {
-			Notification.Create(NotificationType.Slide, "Room introuvable : " + this.room_name, null);
+            Notification.Create(NotificationType.Slide, "Room introuvable : " + this.room_name, null);
         }
         void OnPhotonRandomJoinFailed()
         {
-            RoomOptions roomOptions = new RoomOptions() { isVisible = true, maxPlayers = 2 }; // isVisible Random can join or not (ici oui)
+            RoomOptions roomOptions = new RoomOptions() { IsVisible = false /*isVisible = false*/ , MaxPlayers = 2 /*maxPlayers = 2*/}; // isVisible Random can join or not (ici oui)
             PhotonNetwork.JoinOrCreateRoom(room_name, roomOptions, TypedLobby.Default);
         }
         void OnJoinedRoom()
@@ -104,28 +104,28 @@ namespace Network
             this.client.JoinRoom(this.room_name);
             if (PhotonNetwork.playerList.Length > 1)
             {
-				ApplicationModel.TypeToInstanciate = GameType.Multi;
-				FadingManager.Instance.Fade(scene);
+                ApplicationModel.TypeToInstanciate = GameType.Multi;
+                FadingManager.Instance.Fade(scene);
             }
         }
         void OnPhotonPlayerConnected(PhotonPlayer other)
         {
             if (PhotonNetwork.playerList.Length > 1)
-			{
-				ApplicationModel.TypeToInstanciate = GameType.Multi;
-				FadingManager.Instance.Fade(scene);
+            {
+                ApplicationModel.TypeToInstanciate = GameType.Multi;
+                FadingManager.Instance.Fade(scene);
             }
         }
 
         void OnGUI()
         {
             string info = PhotonNetwork.connectionStateDetailed.ToString();
-			if (PhotonNetwork.inRoom)
+            if (PhotonNetwork.inRoom)
                 info += " - " + room_name;
             info_network.text = info;
 
             info = "Connexion";
-			if (PhotonNetwork.inRoom)
+            if (PhotonNetwork.inRoom)
             {
                 info = "Joueur trouve : " + (PhotonNetwork.room.playerCount - 1) + "\n";
                 if (PhotonNetwork.playerList.Length > 1)

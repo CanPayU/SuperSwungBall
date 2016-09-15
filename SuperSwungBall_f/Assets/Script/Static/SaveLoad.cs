@@ -77,7 +77,7 @@ public static class SaveLoad
         {
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open(Application.persistentDataPath + "/settings.txt", FileMode.Open);
-			Debug.Log (file);
+            Debug.Log(file);
             try
             {
                 SaveLoad.setting = (Settings)bf.Deserialize(file);
@@ -96,51 +96,51 @@ public static class SaveLoad
         }
         else
         {
-//            BinaryFormatter bf = new BinaryFormatter();
-//            TextAsset asset = Resources.Load("settings") as TextAsset;
-//            Stream file = new MemoryStream(asset.bytes);
-//            SaveLoad.setting = (Settings)bf.Deserialize(file);
-			Settings.Instance = new Settings();
-//            file.Close();
+            //            BinaryFormatter bf = new BinaryFormatter();
+            //            TextAsset asset = Resources.Load("settings") as TextAsset;
+            //            Stream file = new MemoryStream(asset.bytes);
+            //            SaveLoad.setting = (Settings)bf.Deserialize(file);
+            Settings.Instance = new Settings();
+            //            file.Close();
             save_setting();
         }
     }
 
 
-	// -- Encore en phase de développement
+    // -- Encore en phase de développement
 
-	public static Replay replay;
+    public static Replay replay;
 
-	public static void save_replay(Replay replay)
-	{
-		Debug.Log("save_replay " + Application.persistentDataPath);
-		SaveLoad.replay = replay;
-		BinaryFormatter bf = new BinaryFormatter();
-		FileStream file = File.Create(Application.persistentDataPath + "/replay.txt");
-		bf.Serialize(file, replay);
-		file.Close();
-	}
-	public static Replay load_replay(string name)
-	{
-		Debug.Log("load_replay " + Application.persistentDataPath);
-		if (File.Exists(Application.persistentDataPath + "/replay/"+name))
-		{
-			BinaryFormatter bf = new BinaryFormatter();
-			FileStream file = File.Open(Application.persistentDataPath + "/replay/"+name, FileMode.Open);
-			try
-			{
-				SaveLoad.replay = (Replay)bf.Deserialize(file);
-			}
-			catch (System.Exception)
-			{
-				Debug.LogError("Erreur lors de la désérialisation");
-				return null;
-			}
-			file.Close();
-			return SaveLoad.replay;
-		}
-		return null;
-	}
+    public static void save_replay(Replay replay)
+    {
+        Debug.Log("save_replay " + Application.persistentDataPath);
+        SaveLoad.replay = replay;
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Create(Application.persistentDataPath + "/replay.txt");
+        bf.Serialize(file, replay);
+        file.Close();
+    }
+    public static Replay load_replay(string name)
+    {
+        Debug.Log("load_replay " + Application.persistentDataPath);
+        if (File.Exists(Application.persistentDataPath + "/replay/" + name))
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open(Application.persistentDataPath + "/replay/" + name, FileMode.Open);
+            try
+            {
+                SaveLoad.replay = (Replay)bf.Deserialize(file);
+            }
+            catch (System.Exception)
+            {
+                Debug.LogError("Erreur lors de la désérialisation");
+                return null;
+            }
+            file.Close();
+            return SaveLoad.replay;
+        }
+        return null;
+    }
 
 
 

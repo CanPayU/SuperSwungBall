@@ -36,10 +36,10 @@ namespace GameScene.Multi
                 RaycastHit hit;
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 Physics.Raycast(ray, out hit, 100);
-                if(hit.collider.tag == "Player")
+                if (hit.collider.tag == "Player")
                 {
                     BasicPlayerController myPlayerController = hit.collider.gameObject.GetComponent<BasicPlayerController>();
-                    if(myPlayerController.IsMine)
+                    if (myPlayerController.IsMine)
                     {
                         //myPlayerController.bonus(bonus[count]);
                         count++;
@@ -57,7 +57,7 @@ namespace GameScene.Multi
         }
         public override void OnStartAnimation()
         {
-            for(int i = 1; i < 4; i++)
+            for (int i = 1; i < 4; i++)
             {
                 myBonusController.destroyBonus(i);
             }

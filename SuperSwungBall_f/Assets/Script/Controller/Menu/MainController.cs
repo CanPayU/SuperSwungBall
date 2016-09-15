@@ -14,7 +14,7 @@ namespace Menu
         {
             time = new Timer(60.0F, Inactive);
             time.start();
-			checkChallengeCompleted ();
+            checkChallengeCompleted();
         }
 
         // Update is called once per frame
@@ -30,25 +30,27 @@ namespace Menu
 
         void Inactive()
         {
-			FadingManager.Instance.Fade("standing");
+            FadingManager.Instance.Fade("standing");
         }
 
-		private void checkChallengeCompleted(){
-			JSONArray challenges = ApplicationModel.ChallengeCompleted;
+        private void checkChallengeCompleted()
+        {
+            JSONArray challenges = ApplicationModel.ChallengeCompleted;
 
-			if (challenges == null || challenges.Length < 1)
-				return;
+            if (challenges == null || challenges.Length < 1)
+                return;
 
-			JSONObject obj = challenges [0].Obj;
-			challenges.Remove (0);
+            JSONObject obj = challenges[0].Obj;
+            challenges.Remove(0);
 
-			string swName = obj.GetObject ("swungMan").GetString("name");
-			string text = obj.GetString ("text");
-			string title = "Nouveau défi débloqué !";
-			string content = text + "\n" + "Vous avez obtenu un nouveau SwungMan : " + swName + "\n" + "Rendez-vous dans la boutique pour en savoir plus !";
-			Notification.SimpleAlert (title, content, force: true, completion: () => {
-				checkChallengeCompleted();
-			});
-		}
+            string swName = obj.GetObject("swungMan").GetString("name");
+            string text = obj.GetString("text");
+            string title = "Nouveau défi débloqué !";
+            string content = text + "\n" + "Vous avez obtenu un nouveau SwungMan : " + swName + "\n" + "Rendez-vous dans la boutique pour en savoir plus !";
+            Notification.SimpleAlert(title, content, force: true, completion: () =>
+            {
+                checkChallengeCompleted();
+            });
+        }
     }
 }

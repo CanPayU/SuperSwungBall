@@ -17,27 +17,28 @@ namespace Standing
         private bool authenticate;
         private bool sync_ended;
 
-		public MainController(){
-		}
+        public MainController()
+        {
+        }
 
         // Use this for initialization
         void Awake()
         {
             //SaveLoad.save_user ();
-			//SaveLoad.save_setting ();
-			SaveLoad.load_settings();
-			this.authenticate = SaveLoad.load_user();
-			TranslateKit.Language.LoadLanguage (Settings.Instance.SelectedLanguage);
+            //SaveLoad.save_setting ();
+            SaveLoad.load_settings();
+            this.authenticate = SaveLoad.load_user();
+            TranslateKit.Language.LoadLanguage(Settings.Instance.SelectedLanguage);
 
-//			string gameId = "3";
-//			string fileName = (Application.persistentDataPath + "/replay.txt");
-//			string uri ="http://ssb.trendspotlight.fr/upload_replay.php";
-//			NameValueCollection values = new NameValueCollection();
-//			values.Add("winner", "antoine");
-//			values.Add("looser", "ennemy");
-//			values.Add("gameId", gameId);
-//
-//			HTTP.uploadFile (values, uri, fileName);
+            //			string gameId = "3";
+            //			string fileName = (Application.persistentDataPath + "/replay.txt");
+            //			string uri ="http://ssb.trendspotlight.fr/upload_replay.php";
+            //			NameValueCollection values = new NameValueCollection();
+            //			values.Add("winner", "antoine");
+            //			values.Add("looser", "ennemy");
+            //			values.Add("gameId", gameId);
+            //
+            //			HTTP.uploadFile (values, uri, fileName);
 
             if (this.authenticate)
             {
@@ -52,7 +53,7 @@ namespace Standing
         // Update is called once per frame
         void Update()
         {
-			if (Input.anyKeyDown && !Input.GetKey(KeyCode.LeftControl))
+            if (Input.anyKeyDown && !Input.GetKey(KeyCode.LeftControl))
             {
 
                 if (!this.authenticate)
@@ -63,7 +64,7 @@ namespace Standing
                 }
 
                 if (this.sync_ended)
-					FadingManager.Instance.Fade();
+                    FadingManager.Instance.Fade();
             }
         }
 

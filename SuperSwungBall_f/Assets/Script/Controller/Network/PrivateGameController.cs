@@ -37,7 +37,7 @@ public class PrivateGameController : MonoBehaviour
     {
         if (!join)
         {
-            RoomOptions roomOptions = new RoomOptions() { isVisible = false, maxPlayers = 2 }; // isVisible Random can join or not (ici non)
+            RoomOptions roomOptions = new RoomOptions() { IsVisible = false /*isVisible = false*/ , MaxPlayers = 2 /*maxPlayers = 2*/ }; // isVisible Random can join or not (ici non)
             PhotonNetwork.JoinOrCreateRoom(room_name, roomOptions, TypedLobby.Default);
         }
         else
@@ -51,14 +51,14 @@ public class PrivateGameController : MonoBehaviour
     {
         if (PhotonNetwork.playerList.Length > 1)
         {
-			FadingManager.Instance.Fade(scene);
+            FadingManager.Instance.Fade(scene);
         }
     }
     void OnPhotonPlayerConnected(PhotonPlayer other)
     {
         if (PhotonNetwork.playerList.Length > 1)
         {
-			FadingManager.Instance.Fade(scene);
+            FadingManager.Instance.Fade(scene);
         }
 
     }

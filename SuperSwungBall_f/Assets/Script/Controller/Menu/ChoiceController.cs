@@ -77,7 +77,7 @@ namespace Menu
                         current_player = gm;
 
                         startTime = Time.time;
-                        center = (hit.point + trans.position ) * 0.5F - new Vector3(0, 1, 0) + new Vector3(0, 0.5F, 0);
+                        center = (hit.point + trans.position) * 0.5F - new Vector3(0, 1, 0) + new Vector3(0, 0.5F, 0);
 
                         setRelCenter = hit.point - center;
                         riseRelCenter = trans.position - center;
@@ -90,7 +90,7 @@ namespace Menu
             {
                 setActive_ButtonTeam(true);
                 ball.transform.LookAt(main_Camera.transform);
-                ball.transform.eulerAngles = Quaternion.Euler(0, -90, 0) * ball.transform.eulerAngles;//* ball.transform.position;
+                ball.transform.eulerAngles = Quaternion.Euler(0, -90, 0) * ball.transform.eulerAngles + ball.transform.position;
             }
 
         }

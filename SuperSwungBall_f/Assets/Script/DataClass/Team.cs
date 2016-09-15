@@ -32,35 +32,35 @@ public class Team
         players = new Dictionary<int, Player>();
     }
 
- //   public void start_move_players() // Va disparaitre une fois les events implentés
- //   {
- //       foreach (KeyValuePair<int, Player> player in players)
- //       {
- //           BasicPlayerController controller = player.Value.Gm.GetComponent<BasicPlayerController>();
- //           if (PhotonNetwork.inRoom)
- //           {
- //               controller.SyncValues();
- //           }
- //           else
- //           {
- //               controller.start_Anim();
- //           }
- //       }
- //   }
-	//public void end_move_players() // Va disparaitre une fois les events implentés
- //   {
- //       foreach (KeyValuePair<int, Player> player in players)
- //       {
- //           if (PhotonNetwork.inRoom)
- //           {
- //               player.Value.Gm.GetComponent<PlayerController>().end_Anim();
- //           }
- //           else
- //           {
- //               player.Value.Gm.GetComponent<PlayerController>().end_Anim();
- //           }
- //       }
- //   }
+    //   public void start_move_players() // Va disparaitre une fois les events implentés
+    //   {
+    //       foreach (KeyValuePair<int, Player> player in players)
+    //       {
+    //           BasicPlayerController controller = player.Value.Gm.GetComponent<BasicPlayerController>();
+    //           if (PhotonNetwork.inRoom)
+    //           {
+    //               controller.SyncValues();
+    //           }
+    //           else
+    //           {
+    //               controller.start_Anim();
+    //           }
+    //       }
+    //   }
+    //public void end_move_players() // Va disparaitre une fois les events implentés
+    //   {
+    //       foreach (KeyValuePair<int, Player> player in players)
+    //       {
+    //           if (PhotonNetwork.inRoom)
+    //           {
+    //               player.Value.Gm.GetComponent<PlayerController>().end_Anim();
+    //           }
+    //           else
+    //           {
+    //               player.Value.Gm.GetComponent<PlayerController>().end_Anim();
+    //           }
+    //       }
+    //   }
 
     public bool add_player(Player player)
     {

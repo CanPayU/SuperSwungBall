@@ -383,9 +383,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02d148d0890b2d44dbdf7f1c1b39a499, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ChatAppId: 
+  ChatAppId: 8aea374c-5f16-416e-841e-f26aaf71dd79
   ChannelsToJoinOnConnect:
   - main
+  - p2p
+  - t2t
   HistoryLengthToFetch: 0
   DemoPublishOnSubscribe: 1
   GuiRect:

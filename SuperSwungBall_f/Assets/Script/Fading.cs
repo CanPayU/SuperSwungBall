@@ -44,11 +44,19 @@ public class Fading : MonoBehaviour
         return fadeSpeed;
     }
 
+    void start()
+    {
+        SceneManager.sceneLoaded += (scene, loadingMode) =>
+        {
+            StartCoroutine(ChangeLevel());
+        };
+    }
+    /*
     void OnLevelWasLoaded(int level)
     {
         StartCoroutine(ChangeLevel());
     }
-
+    */
     IEnumerator ChangeLevel()
     {
         float fadeTime = GameObject.Find("GM_Fade").GetComponent<Fading>().BeginFade(-1);

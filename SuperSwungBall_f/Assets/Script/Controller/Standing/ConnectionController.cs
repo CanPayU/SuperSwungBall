@@ -28,26 +28,28 @@ namespace Standing
             {
                 OnChange(false);
             });
-			username.Select ();
+            username.Select();
         }
 
-		void Update(){
-			if (Input.GetKeyDown (KeyCode.Tab)) {
-				Debug.Log ("Press Tab");
-				if (username.isFocused)
-					password.Select ();
-				else if (password.isFocused)
-					check_login ();
-			}
-		}
+        void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Tab))
+            {
+                Debug.Log("Press Tab");
+                if (username.isFocused)
+                    password.Select();
+                else if (password.isFocused)
+                    check_login();
+            }
+        }
 
         private void OnChange(bool all)
         {
             if (this.validated)
-			{
-				connect.colors = Colors.Block.Blue;
-				if (all) 
-					withoutPass.colors = Colors.Block.Blue;
+            {
+                connect.colors = Colors.Block.Blue;
+                if (all)
+                    withoutPass.colors = Colors.Block.Blue;
                 this.validated = false;
             }
         }
@@ -69,17 +71,19 @@ namespace Standing
         public void check_login()
         {
             this.validated = true;
-			connect.interactable = false;
-			Debug.Log ("false");
+            connect.interactable = false;
+            Debug.Log("false");
             HTTP.Authenticate(username.text, password.text, (success) =>
             {
-                if (success) {
+                if (success)
+                {
                     SaveLoad.save_user();
-					FadingManager.Instance.Fade();
+                    FadingManager.Instance.Fade();
                 }
-                else {
-					connect.interactable = true;
-					connect.colors = Colors.Block.Red;
+                else
+                {
+                    connect.interactable = true;
+                    connect.colors = Colors.Block.Red;
                 }
             });
         }
@@ -90,14 +94,14 @@ namespace Standing
             HTTP.AuthDeviceAsk(username.text, (success_ask) =>
             {
                 if (success_ask)
-					Notification.Text("Code de confirmation", "Entrez le code recus sur votre mobile", force: true, completion: (text) =>
+                    Notification.Text("Code de confirmation", "Entrez le code recus sur votre mobile", force: true, completion: (text) =>
                     {
-						HTTP.AuthDeviceReply(username.text, text, (success_reply) =>
+                        HTTP.AuthDeviceReply(username.text, text, (success_reply) =>
                         {
                             if (success_reply)
                             {
                                 SaveLoad.save_user();
-								FadingManager.Instance.Fade();
+                                FadingManager.Instance.Fade();
                             }
                             else
                             {

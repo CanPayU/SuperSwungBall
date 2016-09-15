@@ -4,23 +4,25 @@ using System.Collections;
 
 namespace OptionButton
 {
-	public class QuitController : MonoBehaviour 
-	{
-		private Button btn;
-		// Use this for initialization
-		void Start () {
-			this.btn = gameObject.GetComponent<Button> ();
-			if (this.btn != null)
-			{
-				this.btn.onClick.AddListener(delegate ()
-					{
-						OnQuit();
-					});
-			}
-		}
+    public class QuitController : MonoBehaviour
+    {
+        private Button btn;
+        // Use this for initialization
+        void Start()
+        {
+            this.btn = gameObject.GetComponent<Button>();
+            if (this.btn != null)
+            {
+                this.btn.onClick.AddListener(delegate ()
+                    {
+                        OnQuit();
+                    });
+            }
+        }
 
-		private void OnQuit () {
-			Application.Quit ();
-		}
-	}
+        private void OnQuit()
+        {
+            Application.Quit();
+        }
+    }
 }

@@ -69,8 +69,8 @@ namespace GameScene
         {
             get
             {
-				if (arrivalPointPasse == Vector3.zero)
-                	arrivalPointPasse = new Vector3(menuController.Get_CoordsPasse[0], 0.2f, menuController.Get_CoordsPasse[1]);
+                if (arrivalPointPasse == Vector3.zero)
+                    arrivalPointPasse = new Vector3(menuController.Get_CoordsPasse[0], 0.2f, menuController.Get_CoordsPasse[1]);
                 return arrivalPointPasse;
             }
             set { arrivalPointPasse = value; }
@@ -79,8 +79,8 @@ namespace GameScene
         {
             get
             {
-				if (arrivalPoint == Vector3.zero)
-              		arrivalPoint = new Vector3(menuController.Get_Coordsdeplacement[0], transform.position.y, menuController.Get_Coordsdeplacement[1]);
+                if (arrivalPoint == Vector3.zero)
+                    arrivalPoint = new Vector3(menuController.Get_Coordsdeplacement[0], transform.position.y, menuController.Get_Coordsdeplacement[1]);
                 return arrivalPoint;
             }
             set { arrivalPoint = value; }
@@ -222,11 +222,11 @@ namespace GameScene
         {
             selection.enabled = false;
         }
-		protected void calculateArrivalPoint()
-		{
-			arrivalPointPasse = new Vector3(menuController.Get_CoordsPasse[0], 0.2f, menuController.Get_CoordsPasse[1]);
-			arrivalPoint = new Vector3(menuController.Get_Coordsdeplacement[0], transform.position.y, menuController.Get_Coordsdeplacement[1]);
-		}
+        protected void calculateArrivalPoint()
+        {
+            arrivalPointPasse = new Vector3(menuController.Get_CoordsPasse[0], 0.2f, menuController.Get_CoordsPasse[1]);
+            arrivalPoint = new Vector3(menuController.Get_Coordsdeplacement[0], transform.position.y, menuController.Get_Coordsdeplacement[1]);
+        }
         public virtual void updateValuesPlayer(Color c) //Activation clic boutton
         {
             menuController.update_Color(c); //change la couleur des trois bouttons "valeur"

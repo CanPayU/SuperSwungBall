@@ -187,7 +187,8 @@ public class Player
         {
             if (ducat > -1)
                 return ducat;
-            else {
+            else
+            {
                 calculateDucat();
                 return ducat;
             }

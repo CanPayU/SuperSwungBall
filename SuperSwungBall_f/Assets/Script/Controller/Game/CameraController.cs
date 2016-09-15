@@ -5,7 +5,7 @@ using GameKit;
 
 namespace GameScene
 {
-	public class CameraController : GameBehavior
+    public class CameraController : GameBehavior
     {
 
         private Vector3 POSITION_INITIALE = new Vector3(20, 35, 0); // constante position phase de reflexion
@@ -17,10 +17,11 @@ namespace GameScene
         private float speed;
         GameObject ball; // pour suivre le mouvement de la balle
 
-		public CameraController(){
-			this.eventType = GameKit.EventType.Global;
-		}
-			
+        public CameraController()
+        {
+            this.eventType = GameKit.EventType.Global;
+        }
+
         void Start()
         {
             speed = 10;
@@ -38,7 +39,7 @@ namespace GameScene
             else
             {
                 transform.position = Vector3.MoveTowards(transform.position, POSITION_INITIALE, Time.deltaTime * speed);
-                transform.LookAt(new Vector3(3,0,0));
+                transform.LookAt(new Vector3(3, 0, 0));
             }
         }
 
@@ -55,16 +56,18 @@ namespace GameScene
             speed = 20;
         }
 
-		public override void OnStartAnimation(){
-			this.animation = true;
-			this.speed = 1;
+        public override void OnStartAnimation()
+        {
+            this.animation = true;
+            this.speed = 1;
             posRelative = new Vector3(12, 5, 0);
             transform.position = new Vector3(ball.transform.position.x, 0, ball.transform.position.z) + posRelative;
         }
-		public override void OnStartReflexion(){
-			this.animation = false;
-			this.speed = 20;
-		}
+        public override void OnStartReflexion()
+        {
+            this.animation = false;
+            this.speed = 20;
+        }
         public override void OnGoal(GoalController goal)
         {
             speed = 3;

@@ -54,9 +54,9 @@ public class DebugManager : Singleton<DebugManager>
 
         // -- MusicManager
         if (Input.GetKeyDown(KeyCode.C))
-			MusicManager.Instance.Stop_Music();
+            MusicManager.Instance.Stop_Music();
         if (Input.GetKeyDown(KeyCode.F))
-			MusicManager.Instance.Clip = "Musics/Team/PSG/Allez Paris [classic]";
+            MusicManager.Instance.Clip = "Musics/Team/PSG/Allez Paris [classic]";
 
         // -- NotificationState
         if (Input.GetKeyDown(KeyCode.W))
@@ -70,21 +70,21 @@ public class DebugManager : Singleton<DebugManager>
         if (Input.GetKeyDown(KeyCode.I))
         {
             User u = User.Instance;
-			Debug.Log("UserInfo : username:" + u.username + " - id:" + u.id + " - phi:" + u.phi);
-			Settings s = Settings.Instance;
-			Debug.Log("TeamInfo : default:" + s.Default_Team.ToStringFull());
+            Debug.Log("UserInfo : username:" + u.username + " - id:" + u.id + " - phi:" + u.phi);
+            Settings s = Settings.Instance;
+            Debug.Log("TeamInfo : default:" + s.Default_Team.ToStringFull());
         }
 
 
-		if (Input.GetKeyDown (KeyCode.T))
-			StartCoroutine (FadingManager.Instance.FadeInAsync ());
-		if (Input.GetKeyDown (KeyCode.O))
-			StartCoroutine (FadingManager.Instance.FadeOutAsync ());
+        if (Input.GetKeyDown(KeyCode.T))
+            StartCoroutine(FadingManager.Instance.FadeInAsync());
+        if (Input.GetKeyDown(KeyCode.O))
+            StartCoroutine(FadingManager.Instance.FadeOutAsync());
 
-		if (Input.GetKeyDown (KeyCode.S))
-			AudioListener.volume = 0f;
-		if (Input.GetKeyDown (KeyCode.M))
-			AudioListener.volume = 1f;
+        if (Input.GetKeyDown(KeyCode.S))
+            AudioListener.volume = 0f;
+        if (Input.GetKeyDown(KeyCode.M))
+            AudioListener.volume = 1f;
     }
 #endif
 }
